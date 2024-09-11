@@ -1,0 +1,49 @@
+﻿@model MvcUMS.Models.Course
+@{
+    ViewBag.Title = "Course";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <fieldset>
+
+        <legend>Course Detail</legend>
+        @Html.HiddenFor(model => model.CourseId)
+        <table style="width:100%">
+            <tr>
+                <td style="padding:20px"><b>Course Code </b></td>
+                <td>
+                    @Html.DisplayFor(model => model.CourseId)
+                   
+                </td>
+            <tr>
+            <tr>
+                <td style="padding:20px"><b>Course Title</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.CourseTitle)
+                   
+                </td>
+                </tr>
+            <tr>
+                <td style="padding:20px"><b>Class</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.Semester)
+
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px"><b>Group</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.Department)
+                 
+                </td>
+            </tr>
+          
+
+       
+        </table>
+    </fieldset>
+

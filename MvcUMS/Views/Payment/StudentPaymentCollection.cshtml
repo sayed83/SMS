@@ -1,0 +1,513 @@
+﻿@model List<MvcUMS.Models.PaymentTypeViewModel>
+@{
+    ViewBag.Title = "StudentPaymentCallection";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+
+            <div class="portlet-body form">
+
+                @using (Html.BeginForm("StudentPaymentCollection", "Payment", FormMethod.Post))
+                {
+
+                    <div class="form-horizontal">
+                        <input type="hidden" name="StudentId" value="@ViewBag.StudentId" />
+
+                        <table class="table table-bordered">
+
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m[i].IsChecked, new { id = "chk_" + i, @class = "check" })
+
+
+                                        @Html.Label(Model[i].PaymentType)
+
+                                        @Html.HiddenFor(m => m[i].Id)
+                                    </td>
+                                    <td>
+                                        <div class="form-inline">
+                                            @Html.TextBoxFor(m => m[i].Amount, null, new { @class = "form-control TxtVal", id = "txt_" + i })
+                                            @if (Model[i].PaymentType == "Monthly Fee")
+                                            {
+                                                @Html.DropDownList("noMonth", ViewBag.MonthList as IEnumerable<SelectListItem>, new { @class = "multiselect", multiple = "multiple" })
+                                                @Html.TextBox("MonthlyFeesToPay", null, new { @class = "form-control" })
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <th>Total Amount</th>
+                                <td>
+                                    @Html.TextBox("TotalAmount", 0, new { @class = "form-control Numeric" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Payable</th>
+                                <td>
+                                    @Html.TextBox("TotalSemesterFees", 0, new { @class = "form-control Numeric" })
+                                </td>
+                            </tr>
+
+                            <tr id="cashDiv">
+                                <th>Total Payment</th>
+                                <td> @Html.TextBox("PaidAmount", 0, new { @class = "form-control Numeric InvQty", id = "InvQty1" })</td>
+                            </tr>
+                            <tr>
+                                <th>Due Amount</th>
+                                <td> @Html.TextBox("Due", null, new { @class = "form-control Numeric", id = "Due", @readonly = true })</td>
+                            </tr>
+                            <tr>
+                                <th>Payment Method</th>
+                                <td> @Html.DropDownList("PaymentMethodId", ViewBag.PaymentMethodList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control form-filter input-sm", required = "Required" })</td>
+                            </tr>
+                            <tr class="bankInfo" style="display:none">
+                                <th>Bank Name</th>
+                                <td> @Html.DropDownList("BankId", ViewBag.BankList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control form-filter input-sm" })</td>
+                            </tr>
+                            <tr class="bankInfo" style="display:none">
+                                <th>Check No</th>
+                                <td>@Html.TextBox("CheckNo", null, new { @class = "form-control Numeric", placeholder = "Enter Check Number" })</td>
+                            </tr>
+                            <tr class="bankInfo" style="display:none">
+                                <th>Check Date</th>
+                                <td>@Html.TextBox("CheckDate", null, new { @class = "form-control datepicker", placeholder = "Enter Check Date" })</td>
+                            </tr>
+                            <tr>
+                                <th>Payment Date</th>
+                                <td>@Html.TextBox("PaymentDate", null, "{0:mm/dd/yyyy}", new { @class = "form-control datepicker", required = "Required" })</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" style="padding-left:40%"><input type="submit" value="Save" id="btnStdPayment" class="btn btn-success" /></td>
+                            </tr>
+                        </table>
+
+
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $('#noMonth').multiselect();
+        $("#noMonth").on('change', function () {
+            var sel = $("#noMonth").val();
+            $.each(sel, function (key, value) {
+                var myIndex = key + 1;
+                var mTotal = 0;
+                mTotal = myIndex * parseInt($('#txt_1').val());
+                $('#MonthlyFeesToPay').val(mTotal);
+            });
+
+        });
+
+        $(function () {
+            $("#PaymentDate").datepicker(
+                {
+                    dateFormat: 'dd/mm/yyyy',
+                    changeMonth: true,
+                    changeYear: true
+                });
+        });
+
+        $('#PaymentMethodId').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            var valueSelected = optionSelected.val();
+            if (valueSelected == 1) {
+                $(".bankInfo").hide();
+            }
+            else {
+                $(".bankInfo").show();
+            }
+        });
+
+        var total = 0;
+        $('input:checkbox').on('change', function () {
+            var sum = 0;
+
+
+            $('.check').each(function (i) {
+                if ($("#chk_" + i).is(":checked")) {
+                    if (i == 1)
+                        sum = sum + parseFloat($("#MonthlyFeesToPay").val());
+                    else
+                        sum = sum + parseFloat($("#txt_" + i).val());
+
+                }
+
+
+            });
+
+            $("#TotalAmount").val(sum.toFixed(2));
+            $("#TotalSemesterFees").val(sum.toFixed(2));
+            total = sum;
+
+
+        });
+
+        $('.InvQty').keyup(function () {
+
+            var due = 0;
+            var val2 = 0;
+            $("input[id^='InvQty']").each(function () {
+                if ($(this).val().length != 0) {
+                    val2 = val2 + parseFloat($(this).val())  // need to parse int and float avoiding NaN
+                    due = total - val2;
+                }
+            });
+
+            $('#Due').val(due.toFixed(2));
+        });
+
+    </script>
+  
+
+
+    @*<script type="text/javascript">
+
+            $(function () {
+                $("#PaymentDate").datepicker(
+                    {
+                        dateFormat: 'dd/mm/yyyy',
+                        changeMonth: true,
+                        changeYear: true
+                    });
+            });
+
+            $('#noMonth').multiselect({
+                includeSelectAllOption: true
+            });
+
+            $("#noMonth").on('change', function () {
+                var sel = $("#noMonth").val();
+                $.each(sel, function (key, value) {
+                    var myIndex = key + 1;
+                    var total = 0;
+                    total = myIndex * parseInt($('#txt_3').val());
+                    $('#MonthlyFeesToPay').val(total);
+                    //alert(key); // should come the text of each one
+                });
+
+            });
+
+            var total = 0;
+            var SumTotal = 0;
+            var gSumTotal = 0;
+
+            $(function () {
+                $('.multiselect').prop('disabled', true);
+                $("#txt_0,#txt_1,#txt_3,#MonthlyFeesToPay,#txt_2,#txt_4,#txt_5,#txt_6,#txt_8,#PaidAmount,#TotalAmount,#TotalSemesterFees,#Due").attr('readonly', true);
+                $("#txt_0,#txt_1,#MonthlyFeesToPay,#SemesterFeesToPay,#txt_3,#txt_2,#txt_4,#txt_5,#txt_6,#txt_8,#PaidAmount").keypress(function (event) {
+
+                    if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                        return true;
+
+                    else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                        event.preventDefault();
+
+                });
+
+
+            });
+
+            $('#chk_0').change(function () {
+
+                $("#txt_0").prop("disabled", !$(this).is(':checked'));
+                $("#txt_0").val();
+            });
+
+            $('#chk_1').change(function () {
+
+                $("#txt_1").prop("disabled", !$(this).is(':checked'));
+                $("#txt_1").val();
+            });
+
+            $('#chk_3').change(function () {
+
+                $("#noMonth").prop("disabled", !$(this).is(':checked'));
+                $(".multiselect").prop("disabled", !$(this).is(':checked'));
+                //$('.multiselect').prop('disabled', false);
+                $("#MonthlyFeesToPay").val(0);
+            });
+
+
+
+            $('#chk_2').change(function () {
+
+                $("#txt_2").prop("disabled", !$(this).is(':checked'));
+
+                $("#txt_2").val();
+            });
+
+            $('#chk_4').change(function () {
+                $("#txt_4").attr('readonly', false);
+                //$("#ExamFees").prop("disabled", !$(this).is(':checked'));
+                $("#txt_4").val(0);
+            });
+            $('#chk_5').change(function () {
+                $("#txt_5").attr('readonly', false);
+                //$("#BooksOthers").prop("disabled", !$(this).is(':checked'));
+                $("#txt_5").val(0);
+            });
+            $('#chk_6').change(function () {
+                $("#txt_6").attr('readonly', false);
+                $("#txt_6").val(0);
+            });
+
+            $('#chk_8').change(function () {
+                $("#txt_8").attr('readonly', false);
+                $("#txt_8").val(0);
+            });
+
+                $('#chk_1').change(function () {
+                    if ($(this).is(":checked")) {
+                        $(".table tr:nth-child(7)").css({
+                            'visibility': 'visible'
+                        });
+                        $(".table tr:nth-child(7) td").css({
+                            'padding': '8px'
+                        });
+
+                        $('#chk_8').change(function () {
+                            $("#txt_8").attr('readonly', false);
+                            $("#txt_8").val(0);
+                        });
+                    }
+                    else {
+                        $(".table tr:nth-child(7)").css({
+                            'visibility': 'hidden'
+                        });
+
+                        $('#chk_8').attr('checked', false);
+                            $("#txt_8").attr('readonly', true);
+                            $("#txt_8").val(0);
+
+                    }
+
+                });
+
+
+
+
+
+
+
+            var totalSemesterFee = parseFloat($("#TotalSemesterFees").val());
+
+            var admissionFeeWs = parseFloat($("#txt_1").val());
+
+
+
+            $("#chk_0,#chk_1,#noMonth,#chk_2,#chk_3,#chk_4,#chk_5,#chk_6,#chk_8").change(function () {
+                var admission = 0;
+                var monthly = 0;
+                var semester = 0;
+                var exam = 0;
+                var book = 0;
+                var late = 0;
+                var partial = 0;
+                var textCash = 0;
+                var discount = 0;
+                var dueamount = 0;
+
+                var totalPayable = 0;
+                var admissionFee = 0;
+                var semesterFee = 0;
+
+                if ($("#chk_3").is(":checked")) {
+                    monthly = parseFloat($("#MonthlyFeesToPay").val());
+
+                }
+
+                if ($("#chk_0").is(":checked")) {
+                    admission = parseFloat($("#txt_0").val());
+
+                }
+
+                if ($("#chk_1").is(":checked")) {
+                    admission = parseFloat($("#txt_1").val());
+
+                }
+
+                if ($("#chk_2").is(":checked")) {
+                    semester = parseFloat($("#txt_2").val());
+                }
+
+                if ($("#chk_4").is(":checked")) {
+                    exam = parseFloat($("#txt_4").val());
+                }
+                if ($("#chk_5").is(":checked")) {
+                    book = parseFloat($("#txt_5").val());
+                }
+
+                if ($("#chk_6").is(":checked")) {
+                    late = parseFloat($("#txt_6").val());
+                }
+
+                if ($("#chk_8").is(":checked")) {
+                    discount = parseFloat($("#txt_8").val());
+
+                }
+
+
+
+                SumTotal = admission + semester + monthly + exam + book + late;
+                totalPayable = (totalSemesterFee + exam + book + late) - discount;
+
+
+                gSumTotal = totalPayable - discount;
+                textCash = SumTotal;
+
+
+                if (gSumTotal > 0 && textCash <= gSumTotal) {
+                    if (textCash <= gSumTotal) {
+                        dueamount = gSumTotal - SumTotal;
+                    }
+                    else {
+                        alert("please insert valid amount");
+                        $("#PaidAmount").val(0);
+                    }
+                }
+                else {
+                    dueamount = gSumTotal - SumTotal;
+
+                }
+
+
+
+                $("#TotalSemesterFees").val(totalPayable.toFixed(2));
+                $("#PaidAmount").val(SumTotal.toFixed(2));
+                $("#Due").val(dueamount.toFixed(2))
+
+            });
+
+            var admissionFee = 0;
+            var semesterFee = 0;
+            $("#txt_4,#txt_5,#txt_6,#PaidAmount,#txt_8").keyup(function () {
+
+                var admission = 0;
+                var monthly = 0;
+                var gMonthly = 0;
+                var semester = 0;
+                var exam = 0;
+                var book = 0;
+                var late = 0;
+                var partial = 0;
+                var textCash = 0;
+                var dueamount = 0;
+                var discount = 0;
+                var totalPayable = 0;
+
+
+
+                if ($("#chk_3").is(":checked")) {
+                    monthly = parseFloat($("#MonthlyFeesToPay").val());
+                }
+
+                if ($("#chk_1").is(":checked")) {
+                    admission = parseFloat($("#txt_1").val());
+                }
+
+                if ($("#chk_2").is(":checked")) {
+                    semester = parseFloat($("#txt_2").val());
+                }
+
+                if ($("#chk_4").is(":checked")) {
+                    exam = parseFloat($("#txt_4").val());
+                }
+                if ($("#chk_5").is(":checked")) {
+                    book = parseFloat($("#txt_5").val());
+                }
+
+
+                if ($("#chk_6").is(":checked"))
+                    late = parseFloat($("#txt_6").val());
+
+
+                if ($("#chk_8").is(":checked")) {
+                    discount = parseFloat($("#txt_8").val());
+
+                }
+
+
+
+                SumTotal = admission + semester + monthly + exam + book + late;
+                totalPayable = (totalSemesterFee + exam + book + late) - discount;
+
+
+                if ($("#PaidAmount").val().length > 0)
+                    textCash = parseFloat($("#PaidAmount").val());
+                gSumTotal = totalPayable;
+                textCash = SumTotal;
+
+
+                if (gSumTotal > 0 && textCash <= gSumTotal) {
+                    if (textCash <= gSumTotal) {
+                        dueamount = gSumTotal - SumTotal;
+                    }
+                    else {
+                        alert("please insert valid amount");
+                        $("#PaidAmount").val(0);
+                    }
+                }
+                else {
+                    dueamount = gSumTotal - SumTotal;
+
+                }
+
+                $("#TotalSemesterFees").val(totalPayable.toFixed(2));
+                $("#PaidAmount").val(SumTotal.toFixed(2));
+                $("#Due").val(dueamount.toFixed(2));
+            });
+
+
+            $('#txt_8').keyup(function () {
+
+                if (semesterId == 1) {
+                    if (admissionFee == 0) {
+                        $("#txt_1").val();
+                    }
+                    else {
+                        $("#txt_1").val(admissionFee.toFixed(2));
+                    }
+                }
+                else {
+                    if (semesterFee == 0) {
+                        $("#txt_2").val();
+                    }
+                    else {
+                        $("#txt_2").val(semesterFee.toFixed(2));
+                    }
+
+                }
+            });
+
+            $('#PaymentMethodId').change(function () {
+                var optionSelected = $(this).find("option:selected");
+                var valueSelected = optionSelected.val();
+                if (valueSelected == 1) {
+                    $(".bankInfo").hide();
+                }
+                else {
+                    $(".bankInfo").show();
+                }
+            });
+
+
+        </script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+}

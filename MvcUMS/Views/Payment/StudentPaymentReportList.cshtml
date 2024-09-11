@@ -1,0 +1,40 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "PaymentReportsList";
+    Layout = null;
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Due Report</h5>
+        <div class="heading-elements">
+            <a href="@Url.Action("StudentDuePrint","payment", new { Department = ViewBag.dptId, Semester = ViewBag.semester, Section = ViewBag.section })" class="btn btn-default btn-xs heading-btn" target="_blank"><i class="icon-printer position-left"></i>  Print</a>
+        </div>
+    </div>
+
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    @foreach (System.Data.DataColumn col in Model.Columns)
+                    {
+                        <th>@col.ColumnName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (System.Data.DataRow row in Model.Rows)
+                {
+                    <tr>
+                        @foreach (System.Data.DataColumn col in Model.Columns)
+                        {
+                            <td>@row[col.ColumnName]</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+</div>
+
+@Scripts.Render("~/bundles/partialJs")

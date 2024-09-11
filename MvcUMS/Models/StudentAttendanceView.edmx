@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UMSModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Sp_studentAttendance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="UMSModel2StoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UMSModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UMSEntities2" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Sp_studentAttendance" ReturnType="Collection(UMSModel2.Sp_studentAttendance_Result)" />
+        </EntityContainer>
+        <ComplexType Name="Sp_studentAttendance_Result">
+          <Property Type="String" Name="Std_id" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Std_FName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Std_MName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Std_LName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CourseTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CourseId" Nullable="true" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UMSModel2StoreContainer" CdmEntityContainer="UMSEntities2" >
+          <FunctionImportMapping FunctionImportName="Sp_studentAttendance" FunctionName="UMSModel2.Store.Sp_studentAttendance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UMSModel2.Sp_studentAttendance_Result">
+                <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+                <ScalarProperty Name="Std_FName" ColumnName="Std_FName" />
+                <ScalarProperty Name="Std_MName" ColumnName="Std_MName" />
+                <ScalarProperty Name="Std_LName" ColumnName="Std_LName" />
+                <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

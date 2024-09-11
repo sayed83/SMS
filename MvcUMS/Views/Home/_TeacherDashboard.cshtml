@@ -1,0 +1,39 @@
+﻿@model MvcUMS.Models.stuffFullDetails
+@{
+    ViewBag.Title = "Home";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+
+        <!-- User thumbnail -->
+        <div class="thumbnail">
+            <ul class="media-list">
+
+                <li class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                            <img src="~/uploads/@Html.DisplayFor(model => model.Stuff.Image)" alt="Student Image" style="width:200px;height:200px;padding:20px" />
+                            @*<img style="width:200px;height:200px;padding:20px" src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder.jpg" alt="">*@
+                        </a>
+                    </div>
+
+                    <div class="media-body" style="padding-top:20px">
+                        <h4 class="text-semibold no-margin">@Model.Stuff.FirstName @Model.Stuff.LastName</h4>
+                        <div class="media-heading text-semibold">User Name: @Model.Stuff.UserName</div>
+                        <div class="media-heading text-semibold">Email: @Model.Stuff.Email</div>
+                        <div class="media-heading text-semibold">Designation: @Model.Designition.DesName </div>
+                        <div class="text-left">
+                            
+                            @Html.ActionLink("View Profile", "Details","Stuff", new { id = Model.Stuff.Id }, new { @class = "btn bg-teal-400 btn-labeled btn-labeled-right" })
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

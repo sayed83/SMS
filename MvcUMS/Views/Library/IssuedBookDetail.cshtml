@@ -1,0 +1,79 @@
+﻿@model List<MvcUMS.Models.bookbookissuestudent>
+
+@{
+    ViewBag.Title = "IssuedBookDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />*@
+
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Search Result</h5>
+
+    </div>
+
+    <div class="panel-body">
+
+    </div>
+    <div class="table-responsive">
+        <table class="table datatable-save-state datatable-basic">
+            <thead>
+
+                <tr>
+
+                    <th>Book Code</th>
+                    <th>Book Name</th>
+
+                    <th>Issued Date</th>
+
+                    <th>Submission Date</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.BookIssue.BookId
+                        </td>
+                        <td>
+                            @item.Book.BookName
+
+                        </td>
+                        <td>
+                            @item.BookIssue.IssuedDate.ToShortDateString()
+
+                        </td>
+
+                        <td>
+                            @item.BookIssue.SubmissionDate.ToShortDateString()
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@Html.ActionLink("Back", "SearchIssuedBook", new { @class = "btn btn-success" })
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

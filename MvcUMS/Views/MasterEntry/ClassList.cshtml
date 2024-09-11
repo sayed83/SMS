@@ -1,0 +1,182 @@
+﻿@model IEnumerable<MvcUMS.Models.Semester>
+
+@{
+    ViewBag.Title = "ClassList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var t = 1;
+}
+
+<style>
+    .dataTables_length {
+        float: right;
+        display: inline-block;
+        margin: 15px 20px 20px 20px !important;
+    }
+
+    .dataTables_filter {
+        position: relative;
+        display: block;
+        float: left;
+        margin: 15px 0 20px 20px !important;
+    }
+
+    .dataTables_info {
+        float: left;
+        padding: 8px 20px !important;
+        margin-bottom: 20px;
+    }
+
+    .panel > .dataTables_wrapper .table-bordered {
+        border-top: 1px solid #ddd !important;
+        border-bottom: 1px solid #ddd !important;
+        margin-bottom: 10px;
+    }
+
+
+    .dataTables_filter input {
+        margin-left: 8px;
+    }
+</style>
+
+
+    <div class="panel panel-flat">
+
+        <div class="panel-heading">
+            <h5 class="panel-title">
+                Class/Program List
+                <span class="pull-right"><input type="button" value="Add Class/Program" class="btn btn-sm btn-info" data-toggle="modal" data-target="#AddNewClassDialog" id="btnAddNewClass" /></span>
+            </h5>
+        </div>
+
+        <div class="panel-body">
+        </div>
+
+        <table class="table table-bordered table-striped" id="ClassList">
+            <thead>
+                <tr>
+                    <th>
+                        SL
+                    </th>
+                    <th>
+                        Class/Program
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @t
+                        </td>
+                        <td>
+                            @item.Semester_name
+                        </td>
+                        <td>
+                            <ul class="icons-list">
+                                <li>
+                                <a href="@Url.Action("ClassEdit", new { id=item.Id })" class="btn btn-sm" data-toggle="modal" data-target="#EditClassDialog">
+                                    <i class="icon-pencil7">
+                                        </i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ClassDelete", new { id=item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">
+                                    <i class="icon-trash"></i>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                           
+                        </td>
+                    </tr>
+                    t++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+<div id="AddNewClassDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">New Class/Program</h5>
+                    </div>
+
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("NewClassEntry", "MasterEntry", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+                        {
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Class/Program Name:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBox("ClassName", null, new { @class = "form-control", placeholder = "Class/Program Name", required = true })
+                                </div>
+                            </div>
+
+                            <div class="text-right">
+                                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Save</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-block btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EditClassDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+
+    </div>
+</div>
+
+@{
+    var message = TempData["success"] ?? string.Empty;
+}
+
+@section scripts{
+
+<script>
+    $("#ClassList").DataTable();
+
+</script>
+
+<script type="text/javascript">
+    var message = '';
+    if (message)
+        alert(message);
+</script>
+
+}
+
+
+
+
+

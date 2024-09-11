@@ -1,0 +1,232 @@
+﻿@model IEnumerable<MvcUMS.Models.stuffFullDetails>
+
+@*<link href="~/Content/PagedList.css" rel="stylesheet" />*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("EmployeeSalary", "Stuff", FormMethod.Get, new { @class = "form-horizontal" }))
+        {
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Staff  List</h5>
+                </div>
+
+                <div class="panel-body">
+
+
+                    @*<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>*@
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Department:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Designation:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Designition", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email/Mobile:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Search_Data", null, new { @class = "form-control", placeholder = "Enter Stuff Name or email or Mobile No" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="text-right">
+
+                        <button type="submit" id="btnSearch" class="btn bg-slate-700"><strong>Search</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Employee Salary List
+        </h5>
+    </div>
+
+     <table class="table datatable-save-state datatable-basic-employee-salary">
+            <thead>
+
+                <tr>
+                    <th>SL</th>
+                    <th>Stuff Name</th>
+                    <th>Designation</th>
+                    <th>Mobile No</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                {
+                    <tr>
+                        <td>
+                            @item.Index
+                        </td>
+                        
+                        <td>@item.Data.Stuff.FirstName &nbsp;@item.Data.Stuff.LastName</td>
+                        <td>@item.Data.Designition.DesName</td>
+                        <td>@item.Data.Stuff.ContactNo</td>
+                        <td>@item.Data.Stuff.Email</td>
+                        <td>@item.Data.StuffDepartment.DepartmentName</td>
+                        <td>
+                            <a href="#" data-toggle="modal" class="btn btn-xs" data-target="#PaySalaryDialog" onclick="PaySalary('@item.Data.Stuff.Id')">Pay</a>
+                            @*<a href="@Url.Action("Salary", new { id=item.Data.Stuff.Id })" class="btn btn-xs btn-dange" data-toggle='modal' data-target='#PaySalaryDialog' onclick='PaySalary(@item.Data.Stuff.Id)'>Pay</a>*@
+                               @*@Html.ActionLink("Pay", "Salary", new { id = item.Data.Stuff.Id }, new { @class = "btn btn-success", data_toggle = "modal", data_target = "#PaySalaryDialog", onclick = "EditSection(item.Data.Stuff.Id)" })*@
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+</div>
+
+
+
+<div id="PaySalaryDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="PayPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+@*<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+@*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+
+<script type="text/javascript">
+    function PaySalary(Id) {
+        $.ajax({
+            type: "GET",
+            data: { id: Id },
+            url: '@Url.Action("Salary", "Stuff")',
+
+            success: function (result) {
+                $('#PayPartial').html(result);
+
+            }
+        });
+    }
+</script>
+
+    <script type="text/javascript">
+        $(function () {
+      
+            $("#Search_Data").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Stuff/getStuff",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item, value: item };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+          
+
+
+            $("#Department").change(function () {
+
+                if ($("#Department option:selected").val() == '') {
+                    $("#Designition").empty();
+                    return false;
+                }
+                else {
+
+                    $.ajax({
+
+                        type: 'POST',
+
+                        url: '@Url.Action("getDesignition")',
+
+                        dataType: 'json',
+
+                        data: { id: $("#Department").val() },
+
+                        success: function (Data) {
+
+                            var markup = "<option value=''>Select</option>";
+                            for (var x = 0; x < Data.length; x++) {
+                                markup += "<option Value='" + Data[x].Value + "'>" + Data[x].Text + "</option>";
+                            }
+
+                            $("#Designition").html(markup).show();
+
+                        },
+
+                        error: function (ex) {
+
+                            alert('Failed to retrieve cities.' + ex);
+
+                        }
+
+                    });
+                }
+
+            });
+
+           
+
+        });
+
+    </script>
+
+}

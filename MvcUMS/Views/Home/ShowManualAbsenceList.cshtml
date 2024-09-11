@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<MvcUMS.Models.ShowStdAttendence>
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Manual Absence List <span class="text-danger">@TempData["success"]</span>
+            <span class="pull-right">
+                <button type="submit" id="btnSentAbsenceSms" class="btn bg-blue-300  pull-right"><strong>Send SMS</strong> <i class="icon-arrow-right14"></i></button>
+            </span>
+        </h5>
+
+    </div>
+
+    <div class="table-responsive">
+        <table class="table datatable-save-state datatable-basic">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }).OrderBy(a => a.Data.rollNo))
+                {
+                    <tr>
+                        <td>@(item.Data.Type == "teacher" ? item.Index.ToString() : item.Data.StdId)</td>
+                        <td>@(item.Data.Type == "teacher" ? item.Data.StuffName : item.Data.StdName)</td>
+                        <td>@item.Data.ContactNo</td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $("#btnSentAbsenceSms").click(function () {
+        $.ajax({
+            type: "POST",
+            data: {},
+            url: '@Url.Action("AbsenceSendSMS", "Home")',
+            success: function (d) {
+                alert('Successfully Send.');
+            }
+        });
+    });
+</script>
+

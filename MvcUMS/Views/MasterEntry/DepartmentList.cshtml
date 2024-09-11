@@ -1,0 +1,216 @@
+﻿@model IEnumerable<MvcUMS.Models.Department>
+
+@{
+    ViewBag.Title = "Department List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var t = 1;
+}
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+<style>
+    .dataTables_length {
+        float: right;
+        display: inline-block;
+        margin: 15px 20px 20px 20px !important;
+    }
+
+    .dataTables_filter {
+        position: relative;
+        display: block;
+        float: left;
+        margin: 15px 0 20px 20px !important;
+    }
+
+    .dataTables_info {
+        float: left;
+        padding: 8px 20px !important;
+        margin-bottom: 20px;
+    }
+
+    .panel > .dataTables_wrapper .table-bordered {
+        border-top: 1px solid #ddd !important;
+        border-bottom: 1px solid #ddd !important;
+        margin-bottom: 10px;
+    }
+
+
+    .dataTables_filter input {
+        margin-left: 8px;
+    }
+</style>
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Department List
+            <span class="pull-right"><input type="button" value="Add Department" class="btn btn-sm btn-info" data-toggle="modal" data-target="#AddDepartmentDialog" id="btnAddNewClass" /></span>
+        </h5>
+    </div>
+
+    <div class="panel-body">
+    </div>
+
+    <table class="table table-bordered table-striped" id="SectionList">
+        <thead>
+            <tr>
+                <th>
+                    SL
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @t
+                    </td>
+                    <td>
+                        @item.Dep_name
+                        
+                    </td>
+                    <td>
+                        <ul class="icons-list">
+                            <li><a href='#' data-toggle='modal' class="btn btn-xs" data-target='#EditDeptDialog' onclick='EditDept(@item.Id)'><i class="icon-pencil7"></i></a></li>
+                            <li>
+                                <a href="@Url.Action("DeptDelete", new { id = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?')"><i class="icon-trash"></i></a>
+                            </li>
+
+                        </ul>
+
+                    </td>
+                </tr>
+                        t++;
+            }
+
+        </tbody>
+    </table>
+
+
+</div>
+
+<div id="AddDepartmentDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">New Department</h5>
+                    </div>
+
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("DeptEntry", "MasterEntry", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+                        {
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Department Name:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBox("deptName", null, new { @class = "form-control", placeholder = "Department Name", required = true })
+                                </div>
+                            </div>
+
+
+                            <div class="text-right">
+                                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Save</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EditDeptDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="DeptPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@{
+    var message = TempData["success"] ?? string.Empty;
+}
+
+@section scripts{
+
+    
+
+
+    <script type="text/javascript">
+
+        function EditDept(Id) {
+            $.ajax({
+                type: "GET",
+                data: { id: Id },
+                url: '@Url.Action("DeptEdit", "MasterEntry")',
+
+                success: function (result) {
+                    $('#DeptPartial').html(result);
+
+                }
+            });
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        var message = '';
+        if (message)
+            alert(message);
+    </script>
+
+
+
+}
+
+
+
+
+

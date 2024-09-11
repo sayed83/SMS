@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MvcUMS.Models.Sp_StdAdvanceSearc_Result>
+
+@{
+    ViewBag.Title = "SearchStudentPaymentList";
+    Layout = null;
+    int p = 1;
+}
+
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student List For Payment</h5>
+    </div>
+    <table class="table datatable-basic">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Group</th>
+                <th>Section</th>
+                <th>Roll</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Std_id</td>
+                    <td>@item.Std_FName &nbsp; @item.Std_MName &nbsp; @item.Std_LName</td>
+                    <td>@item.Semester</td>
+                    <td>@item.Department</td>
+                    <td>@item.Section</td>
+                    <td>@item.RollNo</td>
+                    <td>
+                       <div class="btn-group">
+                           @Html.ActionLink("Payment", "StudentPaymentCollection", "Payment", new { id = item.Id, Semester = ViewBag.Semester }, new { @class = "btn btn-success btn-xs", style = "padding:5px" })
+                            @Html.ActionLink("Payment View", "StdPaymentDetailsShow", "Payment", new { id = item.Id }, new { @class = "btn btn-info btn-xs", style = "padding:5px" })
+                           @Html.ActionLink("Payment Report", "PaymentReportsShow", "Payment", new { id = item.Id }, new { @class = "btn btn-primary btn-xs", style = "padding:5px" })
+                       </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+@Scripts.Render("~/bundles/partialJs")
+
+

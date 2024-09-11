@@ -1,0 +1,94 @@
+﻿@model MvcEnergyPac.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h3>Register</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                <span class="help-block"> @Html.ValidationMessageFor(a => a.UserName) </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">UserName</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                <span class="help-block"> @Html.ValidationMessageFor(a => a.UserName) </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Password</label>
+                            <div class="col-md-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                <span class="help-inline"> @Html.ValidationMessageFor(a => a.Password) </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Confirm Password</label>
+                            <div class="col-md-9">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                <span class="help-inline"> @Html.ValidationMessageFor(a => a.ConfirmPassword) </span>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            <label class="col-md-3 control-label">Designation</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.Designation, new { @class = "form-control" })
+                                <span class="help-inline"> @Html.ValidationMessageFor(a => a.Designation) </span>
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">School</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(a => a.SchoolId, ViewBag.SchoolId as SelectList, "Select", new { @class = "form-control" })
+                                <span class="help-inline"> @Html.ValidationMessageFor(a => a.SchoolId) </span>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            <label class="col-md-3 control-label">Phone</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                                <span class="help-inline"> @Html.ValidationMessageFor(a => a.Phone) </span>
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">User Role</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(a => a.role, ViewBag.userRole as SelectList, "Select", new { @class = "form-control" })
+                                <span class="help-inline"> @Html.ValidationMessageFor(a => a.role) </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .icons-list > li > a > i {
+        top: 15px!important;
+        font-size: 65px!important;
+    }
+
+    h2, .h2 {
+        font-size: 50px!important;
+        font-weight:bold;
+    }
+
+    .fc-basic-view tbody .fc-row {
+        min-height: 40px;
+        min-width: 40px;
+    }
+
+    .fc-view > table {
+        min-width: 509px;
+    }
+
+    .fc-view-container {
+        max-height: 255px;
+        overflow: hidden;
+        width: 509px;
+        border-bottom:1px solid #ddd;
+    }
+
+    .attendance-chart {
+        min-height: 438px;
+        background: #fff;
+        border: 1px solid #ddd;
+    }
+
+</style>
+
+@if (User.IsInRole("Admin")|| User.IsInRole("SuperAdmin"))
+{ 
+    @Html.Partial("_AdminDashboard")
+}
+else if (User.IsInRole("Teacher"))
+{
+    Html.RenderAction("_TeacherDashboard", "Home");
+}
+else if (User.IsInRole("Student"))
+{  
+    Html.RenderAction("_StudentDashboard", "Home");
+}
+
+
+
+@section Scripts {
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script>
+ 
+        $(document).ready(function () {
+
+            $('.fullcalendar-event-colors').fullCalendar('today', 'contentHeight: 300');
+
+            var chartData = null;
+            var fullDate = new Date();
+            var twoDigitMonth = (fullDate.getMonth() + 1) + "";
+            if (twoDigitMonth.length == 1) twoDigitMonth = "0" + twoDigitMonth;
+            var twoDigitDate = fullDate.getDate() + "";
+            if (twoDigitDate.length == 1) twoDigitDate = "0" + twoDigitDate;
+            var currentDate = fullDate.getFullYear() + "/" + twoDigitMonth + "/" + twoDigitDate;
+            $.ajax({
+                url: '/Home/getdatachart',
+                type: 'Get',
+                dataType: 'json',
+                data: { da: currentDate },
+                success: function (d) {
+                    chartData = d;
+                    drawChart(chartData);
+                },
+                error: function () { alert('Data Error!'); }
+            })
+
+        });
+
+        function drawChart(d) {
+
+            var chartData = d;
+            var data = null;
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Class');
+            data.addColumn('number', 'Total Present');
+            data.addColumn('number', 'Total Student');
+                 
+            for (var i = 0; i < chartData.length ; i++) {
+                data.addRow([chartData[i][0], parseInt(chartData[i][1]), parseInt(chartData[i][2])]);
+            }
+
+            var options = {
+                title: 'Daily Student Attendence',
+                legend: 'bottom',
+                hAxis: {
+                    title: 'Class', titleTextStyle: { color: 'red' }
+                },
+                vAxis: {
+                    minValue: 0,
+                    maxValue: 20,
+                    title: 'Total Student'
+                },
+                series: {
+                    0: { targetAxisIndex: 0 },
+                    1: { targetAxisIndex: 1 },
+                    2: { targetAxisIndex: 1 }
+                },
+                chartArea:
+                    {
+                        left: 30, top: 50, width: '800px', height: '350px'
+                    },
+                animation: {
+                    duration: 1000
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('visualization'));
+            chart.draw(data, options);
+        }
+
+        google.load('visualization', '1', { packages: ['corechart'] });
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

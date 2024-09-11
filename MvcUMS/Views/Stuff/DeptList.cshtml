@@ -1,0 +1,181 @@
+﻿@model IEnumerable<MvcUMS.Models.StuffDepartment>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Stuff Department List
+            <span class="pull-right"><input type="button" value="Add Department" class="btn btn-sm btn-info" data-toggle="modal" data-target="#AddDeptDialog" id="btnAddNewClass" /></span>
+        </h5>
+    </div>
+
+    <div class="panel-body">
+    </div>
+    <table class="table  datatable-button-print-basic table-striped">
+        <thead>
+            <tr class="table_header">
+                <th>SL</th>
+                <th>Department Name</th>
+                <th class="noExport">Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+            {
+                <tr>
+                    <td>
+                        @item.Index
+                    </td>
+                    <td>@item.Data.DepartmentName</td>
+                    <td>
+                        <ul class="icons-list">
+                            <li><a href='#' data-toggle='modal' class="btn btn-xs" data-target='#EditDeptDialog' onclick='EditDept(@item.Data.DepartmentId)'><i class="icon-pencil7"></i></a></li>
+                            <li>
+                                <a href="@Url.Action("DeptDelete", new { id = item.Data.DepartmentId})" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');"><i class="icon-trash"></i></a>
+                            </li>
+
+                        </ul>
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+<div id="AddDeptDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">New Department</h5>
+                    </div>
+
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("CreateDept", "Stuff", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+                        {
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Department Name:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBox("DepartmentName", null, new { @class = "form-control", placeholder = "Deparmtment Name", required = true })
+                                </div>
+                            </div>
+
+
+                            <div class="text-right">
+                                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Save</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="EditDeptDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="DeptPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+
+
+<script type="text/javascript">
+
+    function EditDept(Id) {
+        $.ajax({
+            type: "GET",
+            data: { id: Id },
+            url: '@Url.Action("DeptEdit", "Stuff")',
+
+            success: function (result) {
+                $('#DeptPartial').html(result);
+
+            }
+        });
+    }
+
+        $(function () {
+
+        $('.datatable-button-print-basic').DataTable({
+
+            buttons: [
+                {
+                    extend: 'print',
+                    text: '<i class="icon-printer position-left"></i> Print table',
+                    className: 'btn bg-blue',
+                    title: 'Stuff Department List',
+                    customize: function (win) {
+
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ]
+        });
+
+
+    });
+    
+
+
+
+</script>
+
+}

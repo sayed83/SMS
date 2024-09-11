@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AdmissionDataSet" targetNamespace="http://tempuri.org/AdmissionDataSet.xsd" xmlns:mstns="http://tempuri.org/AdmissionDataSet.xsd" xmlns="http://tempuri.org/AdmissionDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AdmissionDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="AdmissionDataSet" msprop:Generator_UserDSName="AdmissionDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Admission" msprop:Generator_TableClassName="AdmissionDataTable" msprop:Generator_TableVarName="tableAdmission" msprop:Generator_TablePropName="Admission" msprop:Generator_RowDeletingName="AdmissionRowDeleting" msprop:Generator_RowChangingName="AdmissionRowChanging" msprop:Generator_RowEvHandlerName="AdmissionRowChangeEventHandler" msprop:Generator_RowDeletedName="AdmissionRowDeleted" msprop:Generator_UserTableName="Admission" msprop:Generator_RowChangedName="AdmissionRowChanged" msprop:Generator_RowEvArgName="AdmissionRowChangeEvent" msprop:Generator_RowClassName="AdmissionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:string" minOccurs="0" />
+              <xs:element name="af" msprop:Generator_ColumnVarNameInTable="columnaf" msprop:Generator_ColumnPropNameInRow="af" msprop:Generator_ColumnPropNameInTable="afColumn" msprop:Generator_UserColumnName="af" type="xs:string" minOccurs="0" />
+              <xs:element name="df" msprop:Generator_ColumnVarNameInTable="columndf" msprop:Generator_ColumnPropNameInRow="df" msprop:Generator_ColumnPropNameInTable="dfColumn" msprop:Generator_UserColumnName="df" type="xs:string" minOccurs="0" />
+              <xs:element name="lif" msprop:Generator_ColumnVarNameInTable="columnlif" msprop:Generator_ColumnPropNameInRow="lif" msprop:Generator_ColumnPropNameInTable="lifColumn" msprop:Generator_UserColumnName="lif" type="xs:string" minOccurs="0" />
+              <xs:element name="laf" msprop:Generator_ColumnVarNameInTable="columnlaf" msprop:Generator_ColumnPropNameInRow="laf" msprop:Generator_ColumnPropNameInTable="lafColumn" msprop:Generator_UserColumnName="laf" type="xs:string" minOccurs="0" />
+              <xs:element name="trs" msprop:Generator_ColumnVarNameInTable="columntrs" msprop:Generator_ColumnPropNameInRow="trs" msprop:Generator_ColumnPropNameInTable="trsColumn" msprop:Generator_UserColumnName="trs" type="xs:string" minOccurs="0" />
+              <xs:element name="saf" msprop:Generator_ColumnVarNameInTable="columnsaf" msprop:Generator_ColumnPropNameInRow="saf" msprop:Generator_ColumnPropNameInTable="safColumn" msprop:Generator_UserColumnName="saf" type="xs:string" minOccurs="0" />
+              <xs:element name="ca" msprop:Generator_ColumnVarNameInTable="columnca" msprop:Generator_ColumnPropNameInRow="ca" msprop:Generator_ColumnPropNameInTable="caColumn" msprop:Generator_UserColumnName="ca" type="xs:string" minOccurs="0" />
+              <xs:element name="bp" msprop:Generator_ColumnVarNameInTable="columnbp" msprop:Generator_ColumnPropNameInRow="bp" msprop:Generator_ColumnPropNameInTable="bpColumn" msprop:Generator_UserColumnName="bp" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,275 @@
+﻿@model MvcUMS.Models.ViewModels.InvoiceDetailsViewModel
+@{
+    ViewBag.Title = "InvoiceView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int t = 1;
+}
+
+
+
+
+<style>
+    .invoice {
+        margin: 0 auto;
+        border: 2px solid;
+    }
+    .inv-logo {
+        display: inline;
+        position: relative;
+        left: 295px;
+        top: -4px;
+    }
+
+    div#InvicePrintArea {
+        padding: 10px;
+    }
+</style>
+
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h6 class="panel-title">Student invoice</h6>
+        <div class="heading-elements">
+            <button type="button" id="printInvoice" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+        </div>
+    </div>
+    <div id="InvicePrintArea">
+        @for (int i = 1; i <= 2; i++)
+        {
+
+            <div class="invoice  @(@i == 2 ? "duplicate" : "show")">
+                <div class="row">
+                    <div class="col-xs-3 invoice-logo-space">
+                        <img src="~/uploads/@Model.SchoolViewModel.Logo" class="inv-logo img-responsive" alt="" width="80" height="100" />
+                        <p class="invoice-sl">INV: @Model.InvoiceNo</p>
+
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="invoice-heading">
+                            <h2>@Model.SchoolViewModel.SchoolName</h2>
+                            <p>@Model.SchoolViewModel.Address</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <p class="invoice-date">Date:@DateTime.Now.ToShortDateString()</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p class="invoice-stdName">Student Name: @Model.StudentName <span class="pull-right">ID: @Model.Id </span> </p>
+
+                        <div class="std-info">
+                            <p>
+                                <span><strong>Address:</strong> @Model.Address </span>
+                                <span>.......</span>
+                                <span><strong></strong></span>
+                                <span class="pull-right"><strong>Session: </strong>@Model.Session</span>
+                            </p>
+                            <p>Mobile No:@Model.Mobile</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Payment Type</th>
+                                    <th>Month</th>
+                                    <th class="col-sm-1">Amount</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{ t = 1;}
+                                @foreach (var pType in Model.PaymentTypeList)
+                            {
+                            <tr>
+                                <td>@t</td>
+                                <td>
+                                    <h6 class="no-margin">@pType.PaymentType</h6>
+                                </td>
+                                <td>
+                                    @if (pType.PayMonths != null)
+                                        {
+
+                                            foreach (var item in pType.PayMonths)
+                                            {
+                                                if (item != null)
+                                                {
+                                        @item.MonthName@((pType != Model.PaymentTypeList.Last()) ? "," : "")
+
+                                                }
+
+                                            }
+
+                                        }
+                                </td>
+                                <td>@pType.Amount</td>
+
+                            </tr>
+                                { t++; }
+                            }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xs-12 pull-right invoice-block">
+                        
+                        <a href='#' id="InvAddNew" data-toggle='modal' class="btn btn-primary btn-xs text-left btn-labeled" data-target='#EditPaymentTypeDialog' onclick='EditPaymentType("@Model.Id")'><i class="icon-add-to-list"></i>Add New</a>
+                        <ul class="list-unstyled amounts pull-right">
+                            <li>
+                                <strong>Total Amount:</strong> @Model.TotalAmount
+                            </li>
+                            <li>
+                                <strong>Paid Amount:</strong> @Model.PaidAmount
+                            </li>
+                            <li>
+                                <strong>Due Amount:</strong> @Model.DueAmount
+                        </li>
+                    </ul>
+
+                    <p class="in-words"><strong>Total Paid In words:</strong> @ViewBag.words Only</p>
+                    <div class="authorize-student">
+                        Authorized Signature
+                    </div>
+                    <div class="authorize">
+                        Student/Guardian Signature
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+            <p class="printed-by p-Hide">Printed By: @ViewBag.User @DateTime.Now</p>
+        }
+        </div>
+  
+    </div>
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h6 class="panel-title">Collection List</h6>
+        <div class="heading-elements">
+            <a href='#' data-toggle='modal' class="btn btn-success btn-labeled" data-target='#PaymentCollectionDialog' onclick='GetPaymentCollection("@Model.Id")'><i class="icon-paypal"></i>Collection</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-xxs table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th class="col-sm-3">Payment Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var collection in Model.Collections)
+                {
+                    <tr>
+                        <td>
+                            <h6 class="no-margin">@collection.PayDate</h6>
+                        </td>
+                        <td>
+                            @collection.Amount
+                        </td>
+                        <td>@collection.PaymentMehtod</td>
+
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div id="EditPaymentTypeDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="EditPaymentTypeDialogPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="PaymentCollectionDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="PaymentCollectionPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $("#printInvoice").click(function () {
+            $("#InvicePrintArea").printThis();
+        });
+
+        function EditPaymentType(Id) {
+            $.ajax({
+                type: "GET",
+                data: { id: Id },
+                url: '@Url.Action("EditPaymentType", "Payment")',
+
+                success: function (result) {
+                    $('#EditPaymentTypeDialogPartial').html(result);
+
+                }
+            });
+        }
+
+        function GetPaymentCollection(Id) {
+            $.ajax({
+                type: "GET",
+                data: { id: Id },
+                url: '@Url.Action("PaymentCollection", "Payment")',
+
+                success: function (result) {
+                    $('#PaymentCollectionPartial').html(result);
+
+                }
+            });
+        }
+    </script>
+}

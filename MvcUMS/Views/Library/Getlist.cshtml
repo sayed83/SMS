@@ -1,0 +1,76 @@
+﻿@model List<MvcUMS.Models.BookIssue>
+
+
+@{
+    Layout = null;
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+}
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title"> Details</h5>
+
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            @grid.GetHtml(
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+                grid.Column(header: "Serial No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                                                                                                                       grid.Column(columnName: "StudentId", header: "Student Id"),
+                                                                                                                       grid.Column(columnName: "BookId", header: "Book Code"),
+                                                                                                                       grid.Column(columnName: "IssuedDate", header: "Issued Date", format: (item) => string.Format("{0:dd-MMM-yyyy}", item.IssuedDate)),
+                                                                                                                       grid.Column(columnName: "SubmissionDate", header: "Submission Date", format: (item) => string.Format("{0:dd-MMM-yyyy}", item.SubmissionDate))
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ))
+        </div>
+    </div>
+</div>
+    <br />
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            @*@Html.ActionLink(" Print  ", "printSalesList", null, new { @class = "btn btn-primary" })*@
+        </div>
+    </div>
+

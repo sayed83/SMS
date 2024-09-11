@@ -1,0 +1,209 @@
+﻿@model MvcUMS.Models.Exam
+
+@{
+    ViewBag.Title = "Exam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("Exam", "Common", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+        }))
+        {
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Exam Create</h2>
+                </div>
+
+                <div class="panel-body">
+
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+                    <div class="row">
+                        <div class=" col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Exam Type:</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("ExamType", null, "Select", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Class:</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group" style="display:none" id="group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Group:</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("Department", null, "Select", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Teacher:</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("StuffId", ViewBag.TeacherList as SelectList, "Select", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Subject:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBoxFor(model => model.CourseCode, new { @class = "form-control", id = "corsecode", placeholder = "Course Code" })
+                                    @Html.ValidationMessageFor(model => model.CourseCode)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Exam date:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBoxFor(model => model.Date, new { @class = "form-control", id = "ADMtext-box" })
+                                    @Html.ValidationMessageFor(model => model.Date)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Start Time:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBoxFor(model => model.StartTime, new { @class = "form-control", id = "starttime", placeholder = "Time" })
+                                    @Html.ValidationMessageFor(model => model.StartTime)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">End Time:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBoxFor(model => model.EndTime, new { @class = "form-control", id = "endtime", placeholder = "Time" })
+                                    @Html.ValidationMessageFor(model => model.EndTime)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-offset-1 col-lg-3 control-label">Type:</label>
+                                <div class="col-lg-8">
+                                    @* @Html.TextBoxFor(model => model.Type, new { @class = "form-control", placeholder = "Written,MCQ or Viva" })*@
+                                    @Html.DropDownList("Type", ViewBag.type as SelectList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Type)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="text-right">
+
+                        <button type="submit" id="btncreate" name="Command" class="btn bg-slate-700"><strong>Create</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+@{
+
+    Html.RenderAction("ExamsList", "Common", new { Page_No = ViewBag.Page_No, page = ViewBag.page });
+}
+
+
+@section Scripts {
+
+    <link href="~/Scripts/src/clockpicker.css" rel="stylesheet" />
+    <script src="~/Scripts/src/clockpicker.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+
+            $("#ADMtext-box").datepicker(
+                {
+                    dateFormat: 'yy/mm/dd',
+                    changeMonth: true,
+                    changeYear: true
+                });
+
+            $('#starttime,#endtime').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                donetext: 'Done',
+                autoclose: 'true'
+            });
+
+            $("#corsecode").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Common/getCourseCode",
+                        type: "POST",
+                        dataType: "json",
+
+                        data: { term: request.term, dep: $("#Department").val(), sem: $("#Semester").val() },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.CourseId, value: item.CourseId };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+
+
+        });
+
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

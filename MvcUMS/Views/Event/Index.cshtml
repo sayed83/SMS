@@ -1,0 +1,182 @@
+﻿@model List<MvcUMS.Models.Events>
+@using MvcUMS.Extensions;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .ui-datepicker {
+        z-index: 9999 !important;
+    }
+</style>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="panel panel-flat">
+
+        <div class="panel-heading">
+            <h5 class="panel-title">Event List</h5>
+
+        </div>
+
+        <table class="table datatable-button-print-basic table-striped">
+            <thead>
+                <tr class="table_header">
+                    <th>Event Name</th>
+                    <th>Event For</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th class="noExport">Photo</th>
+                    <th class="noExport">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.EventName</td>
+                        <td>@item.EventFor</td>
+
+                        <td>@item.OrganizeDate.ToShortDateString()</td>
+
+                        <td>@item.Description</td>
+                        <td><img src="~/uploads/@Html.DisplayFor(m=>item.Image)" alt="Student Image" height="60" width="50" /></td>
+                        <td>
+                            <ul class="icons-list">
+                                <li><a href='#' data-toggle='modal' class="btn btn-xs" data-target='#EventEditDialog' onclick='EditEvent("@item.Id")'><i class="icon-pencil7"></i></a></li>
+                                <li>
+                                    <a href="@Url.Action("Event_Delete", new { id = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm('Are you Sure want to delete?');"><i class="icon-trash"></i></a>
+                                </li>
+
+                            </ul>
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+    <div id="EventEditDialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body" id="EventPartial">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="panel panel-flat">
+
+        <div class="panel-heading">
+            <h5 class="panel-title">Event List</h5>
+
+        </div>
+
+        <table class="table datatable-button-print-basic table-striped">
+            <thead>
+
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event For</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                    <td>@item.EventName</td>
+                    <td>@item.EventFor</td>
+
+                    <td>@item.OrganizeDate.ToShortDateString()</td>
+
+                    <td>@item.Description</td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+
+    </div>
+}
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+
+        function EditEvent(Id) {
+            $.ajax({
+                type: "GET",
+                data: { id: Id },
+                url: '@Url.Action("EventEdit", "Event")',
+
+                success: function (result) {
+                    $('#EventPartial').html(result);
+
+                }
+            });
+        }
+
+        $(function () {
+
+            $('.datatable-button-print-basic').DataTable({
+
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: '<i class="icon-printer position-left"></i> Print table',
+                        className: 'btn bg-blue',
+                        title: 'Event Report',
+                        customize: function (win) {
+
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        },
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
+                    }
+                ]
+            });
+
+
+        });
+
+    </script>
+}
+

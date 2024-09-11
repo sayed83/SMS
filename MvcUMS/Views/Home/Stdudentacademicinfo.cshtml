@@ -1,0 +1,38 @@
+﻿@model MvcUMS.Models.CurrentAcademicInfo
+@{
+    Layout = null;
+}
+
+<!-- Both borders -->
+<h5 class="panel-title">Student Current Academic Information</h5>
+<div class="panel panel-flat">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Class</th>
+                    <th>Group</th>
+                    <th>Section</th>
+                    <th>Status</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="well text-center">
+                    <td>@Html.DisplayFor(model => model.RollNo)</td>
+                    <td>@Html.DisplayFor(model => model.Semester)</td>
+                    <td>@Html.DisplayFor(model => model.Department)</td>
+                    <td>@Html.DisplayFor(model => model.Section)</td>
+                    <td>@Html.DisplayFor(model => model.Status)</td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<!-- /both borders -->

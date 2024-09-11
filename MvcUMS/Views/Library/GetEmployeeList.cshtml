@@ -1,0 +1,108 @@
+﻿@model List<MvcUMS.Models.stuffbookissue>
+@{
+    Layout = null;
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+}
+<style>
+    .webgrid-table {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />
+<h2>Employee Details</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-responsive pagesize webgrid-table " id="tablesorter">
+            <tr class="webgrid-header">
+                <th style="text-align:center">
+                    Employee Code 
+                </th>
+                <th style="text-align:center">
+                    Book Code
+                </th>
+
+                <th style="text-align:center">
+                    IssuedDate
+                </th>
+                <th style="text-align:center">
+                    SubmissionDate
+                </th>
+              
+
+            </tr>
+      
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+
+                        @item.Stuff.MemberCode
+                    </td>
+                    <td style="text-align:center">
+                        @item.BookIssue.BookId
+
+                    </td>
+                    <td style="text-align:center">
+                        @item.BookIssue.IssuedDate.ToShortDateString()
+
+                    </td>
+
+                    <td style="text-align:center">
+                        @item.BookIssue.SubmissionDate.ToShortDateString()
+
+                    </td>
+                   
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

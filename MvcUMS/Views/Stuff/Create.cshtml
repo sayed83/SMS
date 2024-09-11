@@ -1,0 +1,553 @@
+﻿@model MvcUMS.Models.Stuff
+
+@{
+    ViewBag.Title = "Employee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var message = TempData["saved"] ?? string.Empty;
+}
+
+
+
+       @using (Html.BeginForm("Create", "Stuff", FormMethod.Post,
+                new
+                {
+                    @class = "form-horizontal",
+                    enctype = "multipart/form-data"
+                }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Employee Registration</h5>
+                    
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend class="text-semibold"><i class="icon-reading position-left"></i> Personal details</legend>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Your name:</label>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.ValidationMessageFor(model => model.FirstName)
+                                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", id = "text-box", placeholder = "First Name" })
+                                              
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                @Html.ValidationMessageFor(model => model.LastName)
+                                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", id = "text-box", placeholder = "Last Name" })
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Father Name:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.FatherName)
+                                        @Html.TextBoxFor(model => model.FatherName, new { @class = "form-control", id = "text-box", placeholder = "Father Name" })
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Mother Name:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.MotherName)
+                                        @Html.TextBoxFor(model => model.MotherName, new { @class = "form-control", id = "text-box", placeholder = "Mother Name" })
+                                     
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Email:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.Email)
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", id = "email", placeholder = "Email  Address" })
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">User Name:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.UserName)
+                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", id = "username", placeholder = "Email  Address" })
+                                      
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Password:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.Password)
+
+                                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "password", placeholder = "Password" })
+                                    </div>
+                               </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Confirm Password:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+
+                                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", id = "confirm-pass", placeholder = "Confirm Password" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Phone #:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.ContactNo)
+                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control", id = "text-box", placeholder = "Contact No", @maxlength = "11" })
+                                     
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Birth Date:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                            @Html.ValidationMessageFor(model => model.DOB)
+                                            @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", id = "dobbox", placeholder = "Date of Birth", required = true })
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">NID #:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.NID)
+                                        @Html.TextBoxFor(model => model.NID, new { @class = "form-control", id = "nid", placeholder = "National ID" })
+                                     
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Gender:</label>
+                                    <div class="col-lg-9">
+                                        <label class="radio-inline">
+                                            @Html.ValidationMessageFor(model => model.Gender)
+                                            @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "styled" })
+                                        
+                                            Male
+                                        </label>
+
+                                        <label class="radio-inline">
+                                            @Html.ValidationMessageFor(model => model.Gender)
+                                            @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "styled" })
+                                          
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Join Date:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                            @Html.ValidationMessageFor(model => model.JoinDate)
+                                            @Html.TextBoxFor(model => model.JoinDate, new { @class = "form-control", id = "DBTxt-box", placeholder = "Date of Join" })
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Department:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.Department)
+                                        @Html.DropDownListFor(x => x.Department, ViewBag.Department as SelectList, "Select Department", new { @class = "select" })
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Proximate ID #:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.ProximateID)
+                                        @Html.TextBoxFor(model => model.ProximateID, new { @class = "form-control", id = "proxId", placeholder = "Proximate ID" })
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend class="text-semibold"><i class="icon-truck position-left"></i> Address details</legend>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Present Address:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.PresentAddress)
+                                        @Html.TextBoxFor(model => model.PresentAddress, new { @class = "form-control", id = "addtext-box", placeholder = "Present Address" })
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Country:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.CountryId)
+                                        @Html.DropDownListFor(model => model.CountryId, ViewBag.CountryList as SelectList, "Select Country", new { @class = "select", id = "country" })
+                                        
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Location:</label>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.ValidationMessageFor(model => model.StateDetils)
+                                                @Html.TextBoxFor(model => model.StateDetils, new { @class = "form-control mb-15", id = "addtext-box", placeholder = "State Name" })
+                                              
+                                                <div class="mb-15">
+                                                    @Html.ValidationMessageFor(model => model.UzId)
+                                                    @Html.TextBoxFor(model => model.UzId, new { @class = "form-control mb-15", id = "addtext-box", placeholder = "Upzilla Name" })
+                                                    @*@Html.DropDownListFor(model => model.UzId, new  SelectList(string.Empty,"Value","Text"), "Select Upzilla", new { @class = "select", id = "upzila" })*@
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-15">
+                                                    @Html.ValidationMessageFor(model => model.CityId)
+                                                    @Html.DropDownListFor(model => model.CityId,new  SelectList(string.Empty,"Value","Text"), "Select City", new { @class = "select", id = "city" })
+                                                   
+                                                </div>
+                                                <div class="mb-15">
+                                                    @Html.ValidationMessageFor(model => model.ZIPId)
+                                                    @Html.TextBoxFor(model => model.ZIPId, new { @class = "form-control mb-15", id = "addtext-box", placeholder = "Zip Code" })
+                                                    @*@Html.DropDownListFor(model => model.ZIPId, new SelectList(string.Empty, "Value", "Text"), "Select Zip Code", new { @class = "select", id = "zip" })*@
+
+
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Attach Photo:</label>
+                                    <div class="col-lg-9">
+                                     
+                                        @Html.TextBoxFor(model => model.picture, new {@class="file-styled", type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Preview Photo:</label>
+                                    <div class="col-lg-9">
+                                        <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" id="ImgPrv" />
+                                      
+                                    </div>
+                                </div>
+                                
+                            </fieldset>
+                            
+                        </div>
+                    </div>
+                    <div class="text-left">
+
+                        @Html.ActionLink("Back to List", "Index")
+
+                    </div>
+                    <div class="text-right">
+                        <input type="submit" class="btn btn-info" value="Create" />
+                     
+                    </div>
+                </div>
+            </div>
+       }
+
+     
+        
+
+
+            
+
+
+
+@section Scripts {
+
+<script type="text/javascript">
+
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files[0].size < 1048576) {
+                    $("#ImgPrv").prop('src', e.target.result)
+                   .width(100)
+                   .height(100);
+                    $("#IMGTxt").val(input.value);
+                }
+                else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                    alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                }
+                else {
+                    alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                }
+
+
+
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+ </script>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#country").change(function () {
+            if ($("#country option:selected").val() == '')
+            {
+                $("#city").empty();
+                return false;
+            }
+            else {
+                //$("#city").empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetCity")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#country").val() },
+                   
+                    success: function (Data) {
+                      
+                        var markup = "<option value='0'>Select City</option>";
+                        for (var x = 0; x < Data.length; x++) {
+                            markup += "<option Value='" + Data[x].Value + "'>" + Data[x].Text + "</option>";
+                        }
+                       
+                        $("#city").html(markup).show();
+                       
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve cities.' + ex);
+
+                    }
+
+                });
+            }
+
+        });
+
+    });
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+
+        $("#cityt").change(function () {
+            if ($("#city option:selected").val() == '')
+            {
+                $("#upzila").empty();
+                return false;
+            }
+            else {
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetUpazila")',
+
+                    dataType: 'json',
+
+                    data: { idd:  $("#city").val() },
+
+                    success: function (Data) {
+
+                        var markups = "<option value='0'>Select Upazila</option>";
+                        for (var x = 0; x < Data.length; x++) {
+                            markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                        }
+                        $("#upzila").html(markups).show();
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve states.' + ex);
+
+                    }
+                });
+
+            }
+
+            return false;
+
+        })
+
+    });
+
+</script> 
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+
+        $("#dobbox,#DBTxt-box").datepicker(
+            {
+                dateFormat: 'mm/dd/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-70:+1"
+            });
+
+        $("#upzila").change(function () {
+
+         
+            if ($("#upzila option:selected").val() == '') {
+                $("#zip").empty();
+                return false;
+            }
+            else {
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetZIPCode")',
+
+                    dataType: 'json',
+
+                    data: { idd: $("#upzila").val() },
+
+                    success: function (Data) {
+
+                        var markups = "<option value='0'>Select Zip</option>";
+                        for (var x = 0; x < Data.length; x++) {
+                            markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                        } 
+                        $("#zip").html(markups).show();
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve states.' + ex);
+
+                    }
+
+                });
+            }
+
+            return false;
+
+        })
+
+    });
+
+</script> 
+    
+
+<script type="text/javascript">
+
+$(function() {
+    $('#nid').change(function() {
+        $.ajax({
+            url: '@Url.Action("GetData", "Stuff")',
+            type: 'GET',
+            cache: false,
+            data: {  nid: $('#nid').val() },
+            success: function (result) {
+                if (result == "1")
+                {
+                    alert('Alrady Used!');
+                }
+                else
+                {
+
+                }
+               
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+              
+            }
+        });
+        return false;
+    });
+});
+
+</script>
+
+<script type="text/javascript">
+
+$(function() {
+    $('#email').change(function () {
+        $.ajax({
+            url: '@Url.Action("GetData", "Stuff")',
+            type: 'GET',
+            cache: false,
+            data: { email: $('#email').val() },
+            success: function (result) {
+                if (result == "1")
+                {
+                    alert('Alrady Used!');
+                }
+                else
+                {
+
+                }
+
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+
+            }
+        });
+        return false;
+    });
+});
+
+</script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+    }

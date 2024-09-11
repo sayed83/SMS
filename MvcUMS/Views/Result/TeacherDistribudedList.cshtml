@@ -1,0 +1,67 @@
+﻿@model List<MvcUMS.Models.studentsubjectmarks>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = null;
+
+}
+
+@if (Model.Count() == 0)
+{
+    <label style="text-align:center"> No data available.</label>
+}
+else
+{
+    using (Html.BeginForm("SubjectMarks", "Result", FormMethod.Post))
+    {
+        <input type="hidden" name="Subjectid" id="Subjectid" value="@ViewBag.subject" />
+        <input type="hidden" name="examtype" id="examtype" value="@ViewBag.examnameid" />
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    Student List
+                </h5>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table datatable-button-print-basic table-striped">
+                    <thead>
+                        <tr class="table_header">
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>ClassTest</th>
+                            <th>Written</th>
+                            <th>MCQ</th>
+                            <th>Practical</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(model => model[i].studentid)
+                                    @Html.HiddenFor(model => model[i].studentid)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(model => model[i].stuentname)
+                                </td>
+                                <td>@Html.DisplayFor(model => model[i].ClassTest, new { @class = "form-control", id = "ct" })</td>
+                                <td>@Html.DisplayFor(model => model[i].Written, new { @class = "form-control", id = "sm" })</td>
+                                <td>@Html.DisplayFor(model => model[i].MCQ, new { @class = "form-control", id = "ot" })</td>
+                                <td>@Html.DisplayFor(model => model[i].Practical, new { @class = "form-control", id = "pc" })</td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+}

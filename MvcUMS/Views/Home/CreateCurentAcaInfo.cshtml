@@ -1,0 +1,221 @@
+﻿@model MvcUMS.Models.CurrentAcademicInfo
+
+@{
+    ViewBag.Title = "CreateCurentAcaInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+       @Html.Hidden("roll")
+       @using (Html.BeginForm("CreateCurentAcaInfo", "Home", FormMethod.Post,
+        new
+        {
+            @class = "form-horizontal"
+           
+        }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Std_id)
+            <input type="hidden" name="stdId" value="@ViewBag.Id"/>
+
+            <div class="panel panel-success">
+                <h3><strong>@TempData["Message"]</strong></h3>
+                <div class="panel-heading">
+                    <div class="panel-title">Create Current Academic Information</div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-md-offset-3 col-md-6">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Academic Year:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.TextBoxFor(item => item.AcademicYear, new { @class = "form-control  form-filter input-sm yearselect" })
+                                    @Html.ValidationMessageFor(model => model.Semester)
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Class:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.DropDownListFor(model => model.Semester, new SelectList(ViewBag.Semester, "Semester_name", "Semester_name"), "Select", new { @class = "form-control", id = "class" })
+                                    @Html.ValidationMessageFor(model => model.Semester)
+
+                                </div>
+                            </div>
+                            <div class="form-group" style="display:none" id="group">
+                                <label class="col-lg-3 control-label">Group:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.DropDownListFor(model => model.Department, new SelectList(ViewBag.Department, "Dep_name", "Dep_name"), "Select", new { @class = "form-control", })
+                                    @Html.ValidationMessageFor(model => model.Department)
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Section:</label>
+                                <div class="col-lg-9">
+
+                                    <select id="Section" name="Section" class="form-control" required><option value=""></option></select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Roll:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.TextBoxFor(model => Model.RollNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.RollNo)
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Registration No:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.TextBoxFor(model => Model.RegNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.RegNo)
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Proximate ID:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.TextBoxFor(model => Model.ProximateID, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ProximateID)
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Status:</label>
+                                <div class="col-lg-9">
+
+                                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Status, "Std_status", "Std_status"), "Select", new { @class = "form-control", })
+                                    @Html.ValidationMessageFor(model => model.Status)
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Password:</label>
+                                <div class="col-lg-9">
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "password", placeholder = "Password" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Confirm Password:</label>
+                                <div class="col-lg-9">
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", id = "confirm-pass", placeholder = "Confirm Password" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input class="btn btn-success" type="submit" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+   
+        }
+
+
+
+@section Scripts {
+<script src="/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/year-select.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $('.yearselect').yearselect();
+
+        $('#class').change(function () {
+
+            var s = $('#class').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $('#group').hide();
+            }
+
+        });
+        $("#class").change(function () {
+            var sem = $(this).val();
+
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        });
+
+
+        $("#Section").change(function () {
+            var sem = $("#class").val();
+            var sec = $(this).val();
+
+            $.ajax({
+                url: "/Home/GetRendomRollNo/",
+                data: { sem: sem, sec: sec },
+                success: function (data) {
+                    $("#RollNo").val(data);
+                    $("#roll").val(data)
+
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+    });
+    $("#RollNo").focusout(function () {
+        var sem = $("#class").val();
+        var sec = $("#Section").val();
+        var term = $(this).val();
+        $.ajax({
+            url: "/Home/CheckRollNo",
+            dataType: "json",
+            data: { sem: sem, sec: sec, term: term },
+            success: function (data) {
+                if (data != 0) {
+                    $("#RollNo").val($("#roll").val());
+                    $("#RollNo").focus();
+                    alert("Roll No Already Assign")
+                }
+            }
+        })
+    });
+</script>
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PaymentType>
+  <Payment ID="ExamFee" Name="Exam Fee"></Payment>
+    <Payment ID="MonthlyFee" Name="Monthly Fee"></Payment>
+      <Payment ID="HostelFee" Name="Hostel Fee"></Payment>
+        <Payment ID="LateFine" Name="Late Fine"></Payment>
+</PaymentType>

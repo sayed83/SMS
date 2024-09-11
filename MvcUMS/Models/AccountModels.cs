@@ -1,0 +1,212 @@
+﻿using MvcUMS.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Globalization;
+using System.Web;
+using System.Web.Security;
+
+namespace MvcEnergyPac.Models
+{
+    public class UsersContext : DbContext
+    {
+        public UsersContext()
+            : base("UMSConnection")
+        {
+        }
+
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<GuardianProfile> GuardianProfile { get; set; }
+        public DbSet<User_Registration> User_Registrations { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
+        public DbSet<webpages_Membership> webpages_Membership { get; set; }
+
+        public DbSet<ManagementProfile> ManagementProfile { get; set; }
+
+      
+    }
+
+    [Table("UserProfile")]
+    public class UserProfile
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public int? SchoolId { get; set; }
+    }
+    [Table("GuardianProfile", Schema = "destination")]
+    public class GuardianProfile
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int GuardianId { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+    }
+
+    [Table("ManagementProfile")]
+    public class ManagementProfile
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public string Email { get; set; }
+        public string Designation { get; set; }
+        public string Phone { get; set; }
+        public string Photo { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase image { get; set; }
+
+    }
+
+    public class webpages_Roles
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+    }
+
+    public class webpages_UsersInRoles
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
+    }
+
+    public class webpages_Membership
+    {
+        [Key]
+        public int UserId { get; set; }
+        public DateTime CreateDate { get; set; }
+        public Boolean IsConfirmed { get; set; }
+        public string ConfirmationToken { get; set; }
+        public Nullable<DateTime> LastPasswordFailureDate { get; set; }
+        public int PasswordFailuresSinceLastSuccess { get; set; }
+        public string Password { get; set; }
+        public DateTime PasswordChangedDate { get; set; }
+        public string PasswordSalt { get; set; }
+        public string PasswordVerificationToken { get; set; }
+        public Nullable<DateTime> PasswordVerificationTokenExpirationDate { get; set; }
+    }
+
+    //public class RegisterExternalLoginModel
+    //{
+    //    [Required]
+    //    [Display(Name = "User name")]
+    //    public string UserName { get; set; }
+
+    //    public string ExternalLoginData { get; set; }
+    //}
+
+    //public class LocalPasswordModel
+    //{
+    //    [Required]
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Current password")]
+    //    public string OldPassword { get; set; }
+
+    //    [Required]
+    //    [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "New password")]
+    //    public string NewPassword { get; set; }
+
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Confirm new password")]
+    //    [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+    //    public string ConfirmPassword { get; set; }
+    //}
+
+    public class LocalPasswordModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current password")]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+    public class LoginModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+    }
+
+    public class RegisterModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+        public int role { get; set; }
+
+        public string Name { get; set; }
+        public string Designation { get; set; }
+        public int SchoolId { get; set; }
+        public string Phone { get; set; }
+
+
+    }
+
+
+    public class ResetPasswordViewModel
+    {
+        public string Id { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+   
+
+    //public class ExternalLogin
+    //{
+    //    public string Provider { get; set; }
+    //    public string ProviderDisplayName { get; set; }
+    //    public string ProviderUserId { get; set; }
+    //}
+}

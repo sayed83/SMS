@@ -1,0 +1,278 @@
+﻿@model MvcUMS.Models.StuffPaymentDetails
+
+@{
+    ViewBag.Title = "StuffSalary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    label {
+        
+        float: right;
+    }
+</style>
+
+<div class="content-wrapper">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Forms</span> - Extended Controls</h4>
+            </div>
+
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="form_controls_extended.html">Forms</a></li>
+                <li class="active">Extended controls</li>
+            </ul>
+
+            <ul class="breadcrumb-elements">
+                <li><a href="#"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-offset-3  col-md-6">
+
+
+                @using (Html.BeginForm("stuffSalaryUpdate", "Stuff", FormMethod.Post,
+                new
+                {
+                    @class = "form-horizontal"
+
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.ValidationSummary(true)
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">Update Stuff Salary</h5>
+
+                        </div>
+
+                        <div class="panel-body">
+
+                            @Html.HiddenFor(a => a.StuffId, TempData["StuffId"])
+
+                            <fieldset>
+                                <legend class="text-semibold"><i class="icon-reading position-left"></i>Update Salary</legend>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Post:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(a => a.DesignitionId)
+                                        @Html.DropDownListFor(a => a.DesignitionId, ViewBag.Designition as SelectList, "Select", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Payment Schedule:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(a => a.PaymentShceduleId)
+                                        @Html.DropDownListFor(a => a.PaymentShceduleId, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Monthly", Value = "1" },
+                                           new SelectListItem() { Text = "Hourly", Value = "2"},
+                                           new SelectListItem() { Text = "Class Wise", Value = "3"}
+                                        }, "Select", new { @class = "form-control", id = "PShcedule" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Basic Salary:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            @Html.ValidationMessageFor(a => a.BasicSalary)
+                                            @Html.TextBoxFor(a => a.BasicSalary, new { @class = "form-control", id = "Basic" })
+                                            @Html.Label("", new { @id = "LBasic" })
+                                            <span class="input-group-addon">TK</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">House Rent:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(a => a.HouseRent, new { @class = "form-control", id = "House" })
+                                            
+                                            @Html.ValidationMessageFor(a => a.HouseRent)
+                                            <span class="input-group-addon"><i class=" icon-percent"></i></span>
+                                            @Html.Label(" ", new { @id = "LHouse" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Health:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(a => a.Health, new { @class = "form-control", id = "Health" })
+                                          
+                                            @Html.ValidationMessageFor(a => a.Health)
+                                            <span class="input-group-addon"><i class=" icon-percent"></i></span>
+                                            @Html.Label(" ", new { @id = "LHealth" })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Others:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(a => a.Others, new { @class = "form-control", id = "Others" })
+                                           
+                                            @Html.ValidationMessageFor(a => a.Others)
+                                            <span class="input-group-addon"><i class=" icon-percent"></i></span>
+                                            @Html.Label(" ", new { @id = "LOthers" })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Total Salary:</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(a => a.TotalSalry, new { @class = "form-control", id = "Total", readOnly = true })
+                                            @Html.Label("", new { @id = "LTotal" })
+                                            @Html.ValidationMessageFor(a => a.TotalSalry)
+                                            <span class="input-group-addon">TK</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+
+                    </div>
+
+                    <div class="text-right">
+                        <input type="submit" value="Update" id="btnSave" class="btn btn-info" />
+                        @*<button type="submit" class="btn btn-primary">Submit form <i class="icon-arrow-right14 position-right"></i></button>*@
+                    </div>
+                    
+                }
+                    </div>
+                </div>
+                
+
+
+
+                <!-- /input formatter -->
+                <!-- Footer -->
+                <div class="footer text-muted">
+                    &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+                </div>
+                <!-- /footer -->
+
+            </div>
+    <!-- /content area -->
+
+</div>
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+
+<script src="/Scripts/jquery-1.8.2.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#Basic,#House,#Health,#Others').keydown(function (e) {
+                if (e.shiftKey || e.ctrlKey || e.altKey) {
+                    e.preventDefault();
+                } else {
+                    var key = e.keyCode;
+                    if (!((key == 8) || (key == 46) || (key == 110) || (key >= 35 && key <= 40) || (key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+                        e.preventDefault();
+                    }
+                }
+            });
+            $('#Basic,#House,#Health,#Others').keyup(function () {
+                var total = 0;
+                if (!isNaN($("#Basic").val()) && $("#Basic").val().length != 0) {
+
+                    total = total + (parseFloat($("#Basic").val()));
+                }
+                if (!isNaN($("#House").val()) && $("#House").val().length != 0) {
+                    var c = parseFloat(($("#Basic").val() * $("#House").val())) / 100;
+                    $("#LHouse").html(c + " Tk");
+                    total = total + c;
+                }
+                if (!isNaN($("#Health").val()) && $("#Health").val().length != 0) {
+                    var c = parseFloat(($("#Basic").val() * $("#Health").val())) / 100;
+                    $("#LHealth").html(c + " Tk");
+                    total = total + c;
+                }
+                if (!isNaN($("#Others").val()) && $("#Others").val().length != 0) {
+                    var c = parseFloat(($("#Basic").val() * $("#Others").val())) / 100;
+                    $("#LOthers").html(c + " Tk");
+                    total = total + c;
+                }
+                $('#Total').val(total.toFixed(2));
+            });
+        });
+        $('#PShcedule').click(function () {
+            if ($("#PShcedule option:selected").val() != '') {
+                if ($("#PShcedule option:selected").val() == '2' || $("#PShcedule option:selected").val() == '3') {
+                    $("#House").val(0);
+                    $("#Health").val(0);
+                    $('#House').attr('readOnly', true);
+                    $('#Health').attr('readOnly', true);
+                }
+                else {
+                    $("#House").val('');
+                    $("#Health").val('');
+                    $('#House').attr('readOnly', false);
+                    $('#Health').attr('readOnly', false);
+                }
+            }
+            else {
+                $("#House").val('');
+                $("#Health").val('');
+                $('#House').attr('readOnly', false);
+                $('#Health').attr('readOnly', false);
+            }
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

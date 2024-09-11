@@ -1,0 +1,35 @@
+﻿@model MvcEnergyPac.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+        <div class="panel panel-flat">
+            <div class="panel-title">
+                <div class="panel-heading">
+                    <h6 class="panel-title">@ViewBag.Title</h6>
+                    <div class="heading-elements">
+                        <span class="heading-text">You're logged in as </span><span class="label bg-success heading-text"><strong>@User.Identity.Name</strong>.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <span style="color:red">@ViewBag.StatusMessage</span>
+                @if (ViewBag.HasLocalPassword)
+                {
+                    @Html.Partial("_ChangePasswordPartial")
+                }
+                else
+                {
+                    @Html.Partial("_SetPasswordPartial")
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

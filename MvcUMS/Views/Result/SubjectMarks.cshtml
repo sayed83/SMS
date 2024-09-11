@@ -1,0 +1,75 @@
+﻿@model MvcUMS.Models.SubjectMarks
+@{
+
+    Layout = null;
+}
+<style>
+    #ctmarks, #atmarks, #mtmarks, #fmarks {
+        width: 60%;
+        height: 30px;
+    }
+</style>
+@using (Html.BeginForm("SubjectMarks", "Result", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.Hidden("teacher", @TempData["teacher"])
+        
+        @Html.HiddenFor(model => model.StudentId)
+        @Html.HiddenFor(model => model.SubjectCode)
+        <table style="width:100%">
+            <tr>
+                <td style="padding:20px">Subject Code</td>
+                <td>
+                    @Html.DisplayFor(model => model.SubjectCode, new { @class = "form-control"})
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">Student Id</td>
+                <td>
+                    @Html.DisplayFor(model => model.StudentId, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">Class Test</td>
+                <td>
+                    @Html.TextBoxFor(model => model.ClassTest, new { @class = "form-control", id = "ctmarks" })
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">Attendence</td>
+                <td>
+                    @Html.TextBoxFor(model => model.Attendence, new { @class = "form-control", id = "atmarks" })
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">First Term</td>
+                <td>
+                    @Html.TextBoxFor(model => model.MidTerm, new { @class = "form-control", id = "mtmarks" })
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">Final</td>
+                <td>
+                    @Html.TextBoxFor(model => model.FinalMark, new { @class = "form-control", id = "fmarks" })
+                </td>
+            </tr>
+            <tr>
+
+                <td colspan="2" style="text-align:center;padding:20px">
+                    <button type="submit" id="btnUpdate" name="Command" value="Update" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <span class="ui-button-text">Update</span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+
+                <td colspan="2">
+                    @TempData["error"]
+                </td>
+            <tr>
+
+        </table>
+    </fieldset>
+}

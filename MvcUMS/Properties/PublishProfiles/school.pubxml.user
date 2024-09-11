@@ -1,0 +1,3499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\.net Preject\GloblaSoftSchool\MvcUMS\GlobalSoft</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/ActionMailer.Net.dll">
+      <publishTime>09/18/2016 13:39:36</publishTime>
+    </File>
+    <File Include="bin/ActionMailer.Net.Mvc.dll">
+      <publishTime>09/18/2016 13:39:36</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>04/09/2016 13:26:24</publishTime>
+    </File>
+    <File Include="bin/ASPSnippets.SmsAPI.dll">
+      <publishTime>06/27/2016 11:22:28</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.CrystalReports.Engine.dll">
+      <publishTime>10/19/2014 06:46:20</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportSource.dll">
+      <publishTime>10/19/2014 06:46:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.Shared.dll">
+      <publishTime>10/19/2014 06:46:22</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/de/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>09/18/2016 15:05:00</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/es/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/fr/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/it/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ja/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ko/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.Edm.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.OData.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.Common.dll">
+      <publishTime>05/12/2016 11:02:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.ProcessingObjectModel.DLL">
+      <publishTime>05/12/2016 11:02:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WebForms.DLL">
+      <publishTime>05/12/2016 11:02:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/09/2016 13:26:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/MvcSiteMapProvider.dll">
+      <publishTime>12/12/2016 12:54:10</publishTime>
+    </File>
+    <File Include="bin/MvcSiteMapProvider.WebActivator.dll">
+      <publishTime>12/12/2016 12:54:10</publishTime>
+    </File>
+    <File Include="bin/MvcUMS.dll">
+      <publishTime>08/24/2017 12:51:48</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>02/07/2017 15:28:12</publishTime>
+    </File>
+    <File Include="bin/PagedList.dll">
+      <publishTime>05/05/2016 18:32:20</publishTime>
+    </File>
+    <File Include="bin/PagedList.Mvc.dll">
+      <publishTime>05/05/2016 18:32:20</publishTime>
+    </File>
+    <File Include="bin/RestSharp.dll">
+      <publishTime>06/26/2016 15:09:50</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/ru/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>02/07/2017 15:28:14</publishTime>
+    </File>
+    <File Include="bin/System.Spatial.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>04/09/2016 13:26:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>02/07/2017 15:28:14</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.OData.dll">
+      <publishTime>04/09/2016 13:26:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>02/07/2017 15:28:14</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>04/09/2016 13:26:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>04/09/2016 13:26:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>04/09/2016 13:26:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>04/09/2016 13:26:18</publishTime>
+    </File>
+    <File Include="bin/Twilio.Api.dll">
+      <publishTime>06/26/2016 15:09:50</publishTime>
+    </File>
+    <File Include="bin/Twilio.Mvc.dll">
+      <publishTime>06/26/2016 15:29:30</publishTime>
+    </File>
+    <File Include="bin/Twilio.Twiml.dll">
+      <publishTime>06/26/2016 15:29:32</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>12/12/2016 12:54:10</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>04/09/2016 13:26:24</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.Data.dll">
+      <publishTime>07/09/2013 11:05:10</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.WebData.dll">
+      <publishTime>04/09/2016 13:26:20</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Spatial.resources.dll">
+      <publishTime>04/09/2016 13:26:22</publishTime>
+    </File>
+    <File Include="Content/CSS/autocomplete.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/CSS/dropdownliststyle.css">
+      <publishTime>09/28/2016 15:53:04</publishTime>
+    </File>
+    <File Include="Content/CSS/jquery-ui.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/CSS/reset.css">
+      <publishTime>09/06/2016 12:02:06</publishTime>
+    </File>
+    <File Include="Content/CSS/simple-sidebar.css">
+      <publishTime>09/03/2016 14:43:36</publishTime>
+    </File>
+    <File Include="Content/CSS/style.css">
+      <publishTime>09/06/2016 14:41:20</publishTime>
+    </File>
+    <File Include="Content/Custom.css">
+      <publishTime>08/09/2017 15:47:45</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/bootstrap.css">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/colors.css">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/components.css">
+      <publishTime>01/25/2017 12:11:50</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/core.css">
+      <publishTime>11/20/2016 13:09:16</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/fonts/fontawesome-webfont.eot">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/fonts/fontawesome-webfont.svg">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/fonts/fontawesome-webfont.ttf">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/fonts/fontawesome-webfont.woff">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/fonts/fontawesome-webfont.woff2">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/fonts/FontAwesome.otf">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/fontawesome/styles.min.css">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/glyphicons/glyphicons-halflings-regular.eot">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/glyphicons/glyphicons-halflings-regular.svg">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/glyphicons/glyphicons-halflings-regular.ttf">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/glyphicons/glyphicons-halflings-regular.woff">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/glyphicons/glyphicons-halflings-regular.woff2">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/icomoon/fonts/icomoon.eot">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/icomoon/fonts/icomoon.svg">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/icomoon/fonts/icomoon.ttf">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/icomoon/fonts/icomoon.woff">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/css/icons/icomoon/styles.css">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/150x150.jpg">
+      <publishTime>11/20/2016 17:50:08</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/backgrounds/boxed_bg.png">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/backgrounds/boxed_bg_retina.png">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/cover.jpg">
+      <publishTime>11/19/2016 16:12:10</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/global-soft.-2.jpg">
+      <publishTime>05/31/2017 12:35:20</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/global_tra.png">
+      <publishTime>06/04/2017 14:17:57</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/global_trans.png">
+      <publishTime>06/04/2017 14:17:03</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/ims_logo.png">
+      <publishTime>11/20/2016 13:31:02</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/ims_logo_2.png">
+      <publishTime>11/20/2016 13:34:22</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/login_cover.jpg">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/logo-url.png">
+      <publishTime>05/29/2017 13:40:53</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/logo.png">
+      <publishTime>05/29/2017 13:43:42</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/logo_dark.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/logo_demo.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/logo_light.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/placeholder-small.png">
+      <publishTime>11/24/2016 11:45:54</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/placeholder.jpg">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/pnotify/danger.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/pnotify/default.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/pnotify/info.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/pnotify/success.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/pnotify/warning.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/signature.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/ui/datepicker_trigger.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/images/ui/map_marker.png">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/c3/c3_advanced.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/c3/c3_axis.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/c3/c3_bars_pies.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/c3/c3_grid.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/c3/c3_lines_areas.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_advanced_hierarchical.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_advanced_histogram.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_advanced_simple_interaction.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_advanced_sortable_horizontal.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_advanced_sortable_vertical.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_advanced_stacked_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_basic_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_basic_horizontal.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_basic_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_basic_stacked_normalized.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_basic_tooltip.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/bars/bars_basic_vertical.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/chords/chord_arcs.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/chords/chord_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/chords/chord_chart.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/chords/chord_tweens.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_advanced_difference.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_advanced_missing.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_advanced_small_multiples.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_advanced_spline_transition.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_advanced_transitions.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_advanced_zoom.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic_area.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic_bivariate.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic_gradient.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic_multi_series.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/lines/lines_basic_stacked_nest.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/other/bubbles.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/other/streamgraph.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/other/treemap.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/other/waterfall.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/donut_arc_tween.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/donut_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/donut_entry_animation.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/donut_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/donut_multiple_nesting.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/donut_update.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/pie_arc_tween.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/pie_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/pie_entry_animation.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/pie_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/pie_multiple_nesting.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/pies/pie_update.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/sunburst/sunburst_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/sunburst/sunburst_combined.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/sunburst/sunburst_distortion.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/sunburst/sunburst_zoom.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/tree/tree_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/tree/tree_bracket.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/tree/tree_collapsible.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/tree/tree_dendrogram.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/tree/tree_dendrogram_radial.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/tree/tree_radial.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/venn/venn_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/venn/venn_colors.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/venn/venn_interactive.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/venn/venn_rings.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/venn/venn_tooltip.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/d3/venn/venn_weighted.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_horizontal.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_horizontal_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_horizontal_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_horizontal_stacked_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_horizontal_stacked_normalized.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_vertical.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_vertical_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_vertical_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_vertical_stacked_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/area/area_vertical_stacked_normalized.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_horizontal.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_horizontal_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_horizontal_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_horizontal_stacked_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_horizontal_stacked_normalized.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_vertical.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_vertical_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_vertical_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_vertical_stacked_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bars/bar_vertical_stacked_normalized.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bubble/bubble_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bubble/bubble_horizontal_lollipop.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bubble/bubble_lollipop_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bubble/bubble_matrix.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/bubble/bubble_vertical_lollipop.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_horizontal_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_horizontal_multiple_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_horizontal_single.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_horizontal_single_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_vertical_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_vertical_multiple_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_vertical_single.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/lines/line_vertical_single_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/pies/pie_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/pies/pie_bubble.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/pies/pie_legend.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/pies/pie_lollipop.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/pies/pie_matrix.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/pies/pie_scatter.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/rings/ring_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/rings/ring_bubble.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/rings/ring_concentric.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/rings/ring_lollipop.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/rings/ring_matrix.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/rings/ring_scatter.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/scatter/scatter_basic.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/scatter/scatter_horizontal_lollipop.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/scatter/scatter_lollipop_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/scatter/scatter_matrix.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/scatter/scatter_vertical_lollipop.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_horizontal_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_horizontal_multiple_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_horizontal_single.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_horizontal_single_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_vertical_multiple.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_vertical_multiple_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_vertical_single.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/dimple/step/step_vertical_single_grouped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/bars_tornados.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/candlesticks_others.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/columns_waterfalls.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/combinations.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/funnels_chords.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/lines_areas.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/pies_donuts.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/scatter.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/echarts/timeline_option.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bars/bar.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bars/bar_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bars/column.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bars/column_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bars/combo.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bars/histogram.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bubbles/bubble.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/bubbles/bubble_gradient.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/lines/area.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/lines/area_intervals.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/lines/area_stacked.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/lines/area_stepped.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/lines/lines.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/lines/line_intervals.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/other/candlestick.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/other/diff.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/other/geo.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/other/sankey.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/other/trendline.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/3d_exploded.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/donut.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/donut_exploded.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/donut_rotate.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_3d.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_diff_border.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_diff_invert.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_diff_opacity.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_diff_radius.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_exploded.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/pies/pie_rotate.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/scatter/scatter.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/charts/google/scatter/scatter_diff.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/app.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/app.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/bootstrap.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jasny_bootstrap.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/core.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/effects.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/full.min.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.af-ZA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.af.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.am-ET.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.am.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-AE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-BH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-DZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-EG.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-IQ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-JO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-KW.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-LB.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-LY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-MA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-OM.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-QA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-SA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-SY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-TN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar-YE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ar.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.arn-CL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.arn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.as-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.as.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.az-Cyrl-AZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.az-Cyrl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.az-Latn-AZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.az-Latn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.az.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ba-RU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ba.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.be-BY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.be.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bg-BG.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bg.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bn-BD.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bn-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bo-CN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bo.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.br-FR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.br.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bs-Cyrl-BA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bs-Cyrl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bs-Latn-BA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bs-Latn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.bs.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ca-ES.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ca.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.co-FR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.co.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.cs-CZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.cs.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.cy-GB.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.cy.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.da-DK.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.da.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.de-AT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.de-CH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.de-DE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.de-LI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.de-LU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.de.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.dsb-DE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.dsb.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.dv-MV.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.dv.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.el-GR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.el.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-029.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-AU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-BZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-CA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-GB.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-IE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-JM.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-MY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-NZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-PH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-SG.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-TT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-US.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-ZA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.en-ZW.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-AR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-BO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-CL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-CO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-CR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-DO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-EC.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-ES.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-GT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-HN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-MX.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-NI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-PA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-PE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-PR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-PY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-SV.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-US.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-UY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es-VE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.es.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.et-EE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.et.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.eu-ES.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.eu.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fa-IR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fa.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fi-FI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fi.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fil-PH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fil.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fo-FO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fo.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr-BE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr-CA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr-CH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr-FR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr-LU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr-MC.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fr.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fy-NL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.fy.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ga-IE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ga.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gd-GB.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gd.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gl-ES.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gsw-FR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gsw.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gu-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.gu.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ha-Latn-NG.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ha-Latn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ha.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.he-IL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.he.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hi-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hi.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hr-BA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hr-HR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hr.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hsb-DE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hsb.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hu-HU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hu.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hy-AM.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.hy.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.id-ID.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.id.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ig-NG.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ig.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ii-CN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ii.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.is-IS.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.is.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.it-CH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.it-IT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.it.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.iu-Cans-CA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.iu-Cans.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.iu-Latn-CA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.iu-Latn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.iu.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ja-JP.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ja.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ka-GE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ka.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kk-KZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kk.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kl-GL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.km-KH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.km.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kn-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ko-KR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ko.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kok-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.kok.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ky-KG.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ky.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lb-LU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lb.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lo-LA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lo.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lt-LT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lt.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lv-LV.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.lv.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mi-NZ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mi.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mk-MK.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mk.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ml-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ml.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mn-Cyrl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mn-MN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mn-Mong-CN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mn-Mong.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.moh-CA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.moh.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mr-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mr.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ms-BN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ms-MY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ms.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mt-MT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.mt.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nb-NO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nb.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ne-NP.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ne.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nl-BE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nl-NL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nn-NO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.no.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nso-ZA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.nso.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.oc-FR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.oc.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.or-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.or.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pa-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pa.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pl-PL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.prs-AF.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.prs.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ps-AF.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ps.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pt-BR.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pt-PT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.pt.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.qut-GT.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.qut.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.quz-BO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.quz-EC.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.quz-PE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.quz.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.rm-CH.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.rm.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ro-RO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ro.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ru-RU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ru.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.rw-RW.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.rw.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sa-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sa.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sah-RU.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sah.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.se-FI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.se-NO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.se-SE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.se.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.si-LK.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.si.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sk-SK.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sk.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sl-SI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sma-NO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sma-SE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sma.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.smj-NO.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.smj-SE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.smj.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.smn-FI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.smn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sms-FI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sms.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sq-AL.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sq.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Cyrl-BA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Cyrl-CS.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Cyrl-ME.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Cyrl-RS.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Cyrl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Latn-BA.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Latn-CS.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Latn-ME.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Latn-RS.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr-Latn.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sr.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sv-FI.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sv-SE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sv.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sw-KE.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.sw.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.syr-SY.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.syr.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ta-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ta.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.te-IN.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.te.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tg-Cyrl-TJ.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tg-Cyrl.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tg.js">
+      <publishTime>11/19/2016 16:12:12</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.th-TH.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.th.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tk-TM.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tk.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tn-ZA.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tn.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tr-TR.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tr.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tt-RU.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tt.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tzm-Latn-DZ.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tzm-Latn.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.tzm.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ug-CN.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ug.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uk-UA.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uk.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ur-PK.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.ur.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uz-Cyrl-UZ.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uz-Cyrl.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uz-Latn-UZ.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uz-Latn.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.uz.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.vi-VN.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.vi.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.wo-SN.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.wo.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.xh-ZA.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.xh.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.yo-NG.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.yo.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-CHS.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-CHT.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-CN.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-Hans.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-Hant.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-HK.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-MO.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-SG.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh-TW.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zh.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zu-ZA.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.culture.zu.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/cultures/globalize.cultures.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/globalize/globalize.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/interactions.min.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/touch.min.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/core/libraries/jquery_ui/widgets.min.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/basic/basic.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/basic/click_event.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/basic/coordinates.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/basic/geolocation.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/controls/adding_controls.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/controls/control_options.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/controls/control_positioning.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/controls/disable_ui.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/drawings/circles.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/drawings/polygons.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/drawings/polylines.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/drawings/rectangles.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/layers/bicycling.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/layers/fusion_tables.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/layers/traffic.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/layers/transit.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/markers/animation.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/markers/simple.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/markers/symbols_custom.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/google/markers/symbols_predefined.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/maps/vector/vector_maps_demo.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/components_modals.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/dashboard.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/datatables_basic.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/datatables_extension_buttons_print.js">
+      <publishTime>08/09/2017 17:00:59</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/extra_fullcalendar.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/form_checkboxes_radios.js">
+      <publishTime>06/11/2017 12:18:54</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/form_layouts.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/form_select2.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/pages/jqueryui_forms.js">
+      <publishTime>11/19/2016 16:12:14</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/extensions/mousewheel.min.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/forms/selects/bootstrap_multiselect.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/forms/selects/select2.min.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/forms/styling/switchery.min.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/forms/styling/uniform.min.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/loaders/blockui.min.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/loaders/pace.min.js">
+      <publishTime>11/19/2016 16:12:18</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/pickers/daterangepicker.js">
+      <publishTime>11/19/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/tables/datatables/datatables.min.js">
+      <publishTime>11/19/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/tables/extensions/buttons.min.js">
+      <publishTime>08/09/2017 11:03:52</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/tables/extensions/select.min.js">
+      <publishTime>08/09/2017 11:03:52</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/ui/fullcalendar/fullcalendar.min.js">
+      <publishTime>11/19/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/ui/moment/moment.min.js">
+      <publishTime>11/19/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/visualization/d3/d3.min.js">
+      <publishTime>11/19/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Content/dashboard_template/assets/js/plugins/visualization/d3/d3_tooltip.js">
+      <publishTime>11/19/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/css/style.css">
+      <publishTime>07/06/2017 16:25:58</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBold.eot">
+      <publishTime>07/06/2017 16:25:58</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBold.svg">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBold.ttf">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBold.woff">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBook.eot">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBook.svg">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBook.ttf">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueBook.woff">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueRegular.eot">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueRegular.svg">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueRegular.ttf">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/fonts/BebasNeueRegular.woff">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/2.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/3.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_blue%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_blue.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_blue_dark%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_blue_dark.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_information%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_information.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_nav%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_nav.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_select%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_arrow_select.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_blue.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_menu_trigger%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_menu_trigger.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_slider_nav%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_slider_nav.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_slider_nav_2%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_slider_nav_2.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_white%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_white.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_white_arrow%402x.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/bg_white_arrow.png">
+      <publishTime>07/06/2017 16:25:59</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/High-School-slider-6.jpg">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_close%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_close.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_contacts%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_contacts.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_form%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_form.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_information%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_information.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_place%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_place.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_place_2%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_place_2.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_social%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_social.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_time%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_time.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_time_2%402x.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/ico_time_2.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/kids-slider.jpg">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/logo.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/placeholder11.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/placeholder15.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/images/placeholder29.png">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/js/jquery-1.11.1.min.js">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/js/main.js">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/FrontTemplate/js/plugins.js">
+      <publishTime>07/06/2017 16:26:00</publishTime>
+    </File>
+    <File Include="Content/images/asc.gif">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/asc.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/bg.gif">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/bg.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/desc.gif">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/desc.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/first.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/hat.svg">
+      <publishTime>09/06/2016 11:47:02</publishTime>
+    </File>
+    <File Include="Content/images/last.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/next.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/images/prev.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/ajax-loader.gif">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/footer-social-icons.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/hero-image - Copy.jpg">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/hero-image-1.jpg">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/hero-image-2.jpg">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/hero-image.jpg">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/Image/logo.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/jquery.1.9.1.min.js">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/login.js">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/modernizr.js">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/platform.js">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Login/styles.css">
+      <publishTime>06/15/2016 16:38:42</publishTime>
+    </File>
+    <File Include="Content/menu.css">
+      <publishTime>09/03/2016 13:34:36</publishTime>
+    </File>
+    <File Include="Content/PagedList.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>11/20/2016 12:30:20</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_222222_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_454545_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_888888_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery-ui.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.accordion.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.all.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.autocomplete.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.base.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.button.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.core.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.datepicker.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.dialog.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.progressbar.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.resizable.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.selectable.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.slider.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.tabs.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.theme.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_222222_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_454545_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_888888_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery-ui.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.accordion.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.autocomplete.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.button.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.core.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.datepicker.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.dialog.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.progressbar.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.resizable.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.selectable.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.slider.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.tabs.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.theme.min.css">
+      <publishTime>06/08/2016 15:28:34</publishTime>
+    </File>
+    <File Include="dashboard/fonts/icomoon.eot">
+      <publishTime>08/10/2017 13:27:28</publishTime>
+    </File>
+    <File Include="dashboard/fonts/icomoon.svg">
+      <publishTime>08/10/2017 13:27:28</publishTime>
+    </File>
+    <File Include="dashboard/fonts/icomoon.ttf">
+      <publishTime>08/10/2017 13:27:28</publishTime>
+    </File>
+    <File Include="dashboard/fonts/icomoon.woff">
+      <publishTime>08/10/2017 13:27:28</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>04/09/2016 13:26:10</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>04/09/2016 13:26:10</publishTime>
+    </File>
+    <File Include="Images/accounting.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Accounts.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/ajax-loader.gif">
+      <publishTime>09/05/2016 18:19:44</publishTime>
+    </File>
+    <File Include="Images/banner.jpg">
+      <publishTime>09/06/2016 13:24:24</publishTime>
+    </File>
+    <File Include="Images/Courses.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/cps-logo.jpg">
+      <publishTime>02/05/2017 10:47:36</publishTime>
+    </File>
+    <File Include="Images/ee6dbb2f634dd34c12e7adf4c707d757.jpg">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Guardians.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/hostelandmase.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Library.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/login_cover.jpg">
+      <publishTime>08/10/2017 13:21:26</publishTime>
+    </File>
+    <File Include="Images/logo-url.jpg">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Massage.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/parentsStudents.jpg">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/reports.jpg">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/School-Results.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/schoolBus.jpg">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Student.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Students.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Teacher.jpg">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Images/Teachers.png">
+      <publishTime>05/16/2016 10:40:06</publishTime>
+    </File>
+    <File Include="Models/LoginModel.edmx.diagram">
+      <publishTime>04/09/2016 16:22:28</publishTime>
+    </File>
+    <File Include="Models/SearchModel.edmx.diagram">
+      <publishTime>12/20/2016 17:38:28</publishTime>
+    </File>
+    <File Include="Models/StudentAttendanceView.edmx.diagram">
+      <publishTime>05/16/2016 10:50:36</publishTime>
+    </File>
+    <File Include="Models/StudentModel.edmx.diagram">
+      <publishTime>12/19/2016 17:39:46</publishTime>
+    </File>
+    <File Include="Mvc.sitemap">
+      <publishTime>12/12/2016 17:41:54</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/07/2017 15:28:30</publishTime>
+    </File>
+    <File Include="Report/AdmissionDataSet.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/AdmissionDataSet.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/DailyReport.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/DailyReport.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_PaymentList.xsc">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_PaymentList.xss">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_StdPaymentDetail.xsc">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_StdPaymentDetail.xss">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_StudentPaymentPrint.xsc">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_StudentPaymentPrint.xss">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_TutionFees.xsc">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Ds_TutionFees.xss">
+      <publishTime>12/14/2016 11:44:14</publishTime>
+    </File>
+    <File Include="Report/DataSet/Expancedataset.xsc">
+      <publishTime>01/12/2017 12:56:28</publishTime>
+    </File>
+    <File Include="Report/DataSet/Expancedataset.xss">
+      <publishTime>01/12/2017 12:56:28</publishTime>
+    </File>
+    <File Include="Report/DataSet/Expense.xsc">
+      <publishTime>05/22/2017 10:55:15</publishTime>
+    </File>
+    <File Include="Report/DataSet/Expense.xss">
+      <publishTime>05/22/2017 10:55:15</publishTime>
+    </File>
+    <File Include="Report/DataSet/incomedataset.xsc">
+      <publishTime>01/12/2017 12:55:16</publishTime>
+    </File>
+    <File Include="Report/DataSet/incomedataset.xss">
+      <publishTime>01/12/2017 12:55:16</publishTime>
+    </File>
+    <File Include="Report/DataSet/LedgerReportData.xsc">
+      <publishTime>01/12/2017 17:58:18</publishTime>
+    </File>
+    <File Include="Report/DataSet/LedgerReportData.xss">
+      <publishTime>01/12/2017 17:58:18</publishTime>
+    </File>
+    <File Include="Report/DataSet/StudentPay.xsc">
+      <publishTime>06/18/2017 12:26:41</publishTime>
+    </File>
+    <File Include="Report/DataSet/StudentPay.xss">
+      <publishTime>06/18/2017 12:26:41</publishTime>
+    </File>
+    <File Include="Report/DataSet/StudentProfileReport.xsc">
+      <publishTime>01/25/2017 17:42:24</publishTime>
+    </File>
+    <File Include="Report/DataSet/StudentProfileReport.xss">
+      <publishTime>01/25/2017 17:42:24</publishTime>
+    </File>
+    <File Include="Report/Ds_StudentPayment.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/Ds_StudentPayment.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/Expance.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/Expance.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/FullResultDataSet.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/FullResultDataSet.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/PaymentReport.xsc">
+      <publishTime>06/20/2017 12:37:53</publishTime>
+    </File>
+    <File Include="Report/PaymentReport.xss">
+      <publishTime>06/20/2017 12:37:53</publishTime>
+    </File>
+    <File Include="Report/ScholarshipList.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/ScholarshipList.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/studentpaymentreport.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/studentpaymentreport.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/StudentResultDataSet.xsc">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/StudentResultDataSet.xss">
+      <publishTime>12/14/2016 11:26:18</publishTime>
+    </File>
+    <File Include="Report/StuffSalary.xsc">
+      <publishTime>06/13/2017 16:19:59</publishTime>
+    </File>
+    <File Include="Report/StuffSalary.xss">
+      <publishTime>06/13/2017 16:19:59</publishTime>
+    </File>
+    <File Include="Scripts/combodate.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/CustomValidation.js">
+      <publishTime>09/26/2016 12:08:08</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.4.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.18.custom.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.24.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.24.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.sumoselect.js">
+      <publishTime>09/28/2016 15:50:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery.sumoselect.min.js">
+      <publishTime>09/28/2016 15:50:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery.tablesorter.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.tablesorter.pager.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.2.0.debug.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.2.0.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>06/08/2016 15:27:58</publishTime>
+    </File>
+    <File Include="Scripts/src/clockpicker.css">
+      <publishTime>06/15/2016 13:18:42</publishTime>
+    </File>
+    <File Include="Scripts/src/clockpicker.js">
+      <publishTime>06/15/2016 13:18:42</publishTime>
+    </File>
+    <File Include="Scripts/src/standalone.css">
+      <publishTime>06/15/2016 13:18:42</publishTime>
+    </File>
+    <File Include="TimeEdit.cshtml">
+      <publishTime>07/05/2017 13:34:07</publishTime>
+    </File>
+    <File Include="TimeScheduleList.cshtml">
+      <publishTime>07/05/2017 13:34:07</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>06/01/2017 11:45:09</publishTime>
+    </File>
+    <File Include="Views/Account/Login1.cshtml">
+      <publishTime>02/05/2017 10:49:00</publishTime>
+    </File>
+    <File Include="Views/Account/Manage.cshtml">
+      <publishTime>06/01/2017 11:34:06</publishTime>
+    </File>
+    <File Include="Views/Account/ManagementDetails.cshtml">
+      <publishTime>06/07/2017 10:35:02</publishTime>
+    </File>
+    <File Include="Views/Account/Management_Create.cshtml">
+      <publishTime>06/07/2017 10:47:27</publishTime>
+    </File>
+    <File Include="Views/Account/Management_Edit.cshtml">
+      <publishTime>06/07/2017 10:25:15</publishTime>
+    </File>
+    <File Include="Views/Account/Management_List.cshtml">
+      <publishTime>06/06/2017 16:19:29</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>06/03/2017 15:00:31</publishTime>
+    </File>
+    <File Include="Views/Account/ResetPassword.cshtml">
+      <publishTime>06/22/2017 09:48:40</publishTime>
+    </File>
+    <File Include="Views/Account/UserCreation.cshtml">
+      <publishTime>05/07/2016 18:27:50</publishTime>
+    </File>
+    <File Include="Views/Account/_ChangePasswordPartial.cshtml">
+      <publishTime>06/01/2017 11:25:31</publishTime>
+    </File>
+    <File Include="Views/Account/_SetPasswordPartial.cshtml">
+      <publishTime>06/01/2017 11:07:53</publishTime>
+    </File>
+    <File Include="Views/Accounting/IncomeExapance.cshtml">
+      <publishTime>07/23/2017 14:38:30</publishTime>
+    </File>
+    <File Include="Views/Accounting/IncomeExpenseLedger.cshtml">
+      <publishTime>01/15/2017 13:20:32</publishTime>
+    </File>
+    <File Include="Views/Accounting/OpenningBalance.cshtml">
+      <publishTime>12/10/2016 16:12:20</publishTime>
+    </File>
+    <File Include="Views/Accounting/StudentPaymentCallection.cshtml">
+      <publishTime>06/20/2017 13:53:46</publishTime>
+    </File>
+    <File Include="Views/Common/BankCreation.cshtml">
+      <publishTime>08/09/2017 17:35:47</publishTime>
+    </File>
+    <File Include="Views/Common/BankEdit.cshtml">
+      <publishTime>08/09/2017 17:36:07</publishTime>
+    </File>
+    <File Include="Views/Common/BankList.cshtml">
+      <publishTime>08/09/2017 17:38:23</publishTime>
+    </File>
+    <File Include="Views/Common/Class.cshtml">
+      <publishTime>05/09/2016 11:17:58</publishTime>
+    </File>
+    <File Include="Views/Common/CourseAsignment.cshtml">
+      <publishTime>07/12/2016 18:33:34</publishTime>
+    </File>
+    <File Include="Views/Common/CourseCreate.cshtml">
+      <publishTime>09/03/2016 13:34:56</publishTime>
+    </File>
+    <File Include="Views/Common/CourseList.cshtml">
+      <publishTime>07/12/2016 18:29:12</publishTime>
+    </File>
+    <File Include="Views/Common/DetailCourse.cshtml">
+      <publishTime>12/10/2016 14:42:04</publishTime>
+    </File>
+    <File Include="Views/Common/DetailExam.cshtml">
+      <publishTime>12/10/2016 15:05:42</publishTime>
+    </File>
+    <File Include="Views/Common/Edit.cshtml">
+      <publishTime>12/05/2016 12:12:08</publishTime>
+    </File>
+    <File Include="Views/Common/EditCourse.cshtml">
+      <publishTime>07/12/2016 13:54:00</publishTime>
+    </File>
+    <File Include="Views/Common/EditExamType.cshtml">
+      <publishTime>06/07/2017 14:35:44</publishTime>
+    </File>
+    <File Include="Views/Common/Exam.cshtml">
+      <publishTime>06/03/2017 13:08:28</publishTime>
+    </File>
+    <File Include="Views/Common/ExamEdit.cshtml">
+      <publishTime>07/24/2017 10:55:00</publishTime>
+    </File>
+    <File Include="Views/Common/ExamList.cshtml">
+      <publishTime>06/08/2017 10:25:36</publishTime>
+    </File>
+    <File Include="Views/Common/ExamsList.cshtml">
+      <publishTime>08/08/2017 13:22:31</publishTime>
+    </File>
+    <File Include="Views/Common/Examtype.cshtml">
+      <publishTime>06/07/2017 12:12:19</publishTime>
+    </File>
+    <File Include="Views/Common/Expacncetype.cshtml">
+      <publishTime>07/25/2017 16:28:43</publishTime>
+    </File>
+    <File Include="Views/Common/ExpenseEdit.cshtml">
+      <publishTime>07/25/2017 16:41:14</publishTime>
+    </File>
+    <File Include="Views/Common/ExpenseList.cshtml">
+      <publishTime>08/09/2017 17:18:14</publishTime>
+    </File>
+    <File Include="Views/Common/GPAList.cshtml">
+      <publishTime>08/08/2017 12:28:31</publishTime>
+    </File>
+    <File Include="Views/Common/Index.cshtml">
+      <publishTime>07/03/2017 12:17:20</publishTime>
+    </File>
+    <File Include="Views/Common/PayAmountEdit.cshtml">
+      <publishTime>08/08/2017 16:03:13</publishTime>
+    </File>
+    <File Include="Views/Common/PaymentCreate.cshtml">
+      <publishTime>06/08/2017 13:07:43</publishTime>
+    </File>
+    <File Include="Views/Common/PaymentIndex.cshtml">
+      <publishTime>08/09/2017 17:06:07</publishTime>
+    </File>
+    <File Include="Views/Common/PaymentType.cshtml">
+      <publishTime>12/05/2016 13:42:52</publishTime>
+    </File>
+    <File Include="Views/Common/SchoolCreate.cshtml">
+      <publishTime>07/22/2017 11:31:40</publishTime>
+    </File>
+    <File Include="Views/Common/SchoolEdit.cshtml">
+      <publishTime>06/12/2017 14:16:33</publishTime>
+    </File>
+    <File Include="Views/Common/SchoolList.cshtml">
+      <publishTime>06/12/2017 14:17:14</publishTime>
+    </File>
+    <File Include="Views/Common/ScolarShipType.cshtml">
+      <publishTime>12/05/2016 13:44:00</publishTime>
+    </File>
+    <File Include="Views/Dashboard/_dashboard.cshtml">
+      <publishTime>12/04/2016 13:19:34</publishTime>
+    </File>
+    <File Include="Views/Event/Create.cshtml">
+      <publishTime>08/10/2017 11:01:46</publishTime>
+    </File>
+    <File Include="Views/Event/CreateDayRutine.cshtml">
+      <publishTime>07/25/2017 17:03:53</publishTime>
+    </File>
+    <File Include="Views/Event/CreateNotice.cshtml">
+      <publishTime>08/10/2017 11:09:35</publishTime>
+    </File>
+    <File Include="Views/Event/CreateRutine.cshtml">
+      <publishTime>12/11/2016 11:38:24</publishTime>
+    </File>
+    <File Include="Views/Event/DonationCreate.cshtml">
+      <publishTime>12/06/2016 16:33:08</publishTime>
+    </File>
+    <File Include="Views/Event/DonationEdit.cshtml">
+      <publishTime>12/10/2016 16:41:12</publishTime>
+    </File>
+    <File Include="Views/Event/DonationIndex.cshtml">
+      <publishTime>12/10/2016 16:31:14</publishTime>
+    </File>
+    <File Include="Views/Event/EditNotice.cshtml">
+      <publishTime>08/10/2017 11:25:03</publishTime>
+    </File>
+    <File Include="Views/Event/EventEdit.cshtml">
+      <publishTime>08/10/2017 10:52:12</publishTime>
+    </File>
+    <File Include="Views/Event/ExamRoutineList.cshtml">
+      <publishTime>05/27/2017 18:48:20</publishTime>
+    </File>
+    <File Include="Views/Event/Index.cshtml">
+      <publishTime>08/10/2017 10:34:20</publishTime>
+    </File>
+    <File Include="Views/Event/ListExamRoutine.cshtml">
+      <publishTime>06/04/2017 12:55:54</publishTime>
+    </File>
+    <File Include="Views/Event/Noticeboard.cshtml">
+      <publishTime>08/10/2017 11:22:44</publishTime>
+    </File>
+    <File Include="Views/Event/RotineList.cshtml">
+      <publishTime>07/25/2017 17:54:24</publishTime>
+    </File>
+    <File Include="Views/Event/ScholarshipList.cshtml">
+      <publishTime>12/10/2016 18:23:54</publishTime>
+    </File>
+    <File Include="Views/Event/Scolarship.cshtml">
+      <publishTime>08/08/2017 11:22:59</publishTime>
+    </File>
+    <File Include="Views/Event/ScolarShipDetail.cshtml">
+      <publishTime>12/10/2016 18:23:44</publishTime>
+    </File>
+    <File Include="Views/Event/ScolarshipSearchList.cshtml">
+      <publishTime>12/10/2016 18:16:04</publishTime>
+    </File>
+    <File Include="Views/Event/SearchExamRutine.cshtml">
+      <publishTime>07/24/2017 10:49:42</publishTime>
+    </File>
+    <File Include="Views/Event/SearchRutine.cshtml">
+      <publishTime>07/25/2017 17:19:15</publishTime>
+    </File>
+    <File Include="Views/Event/StudentDetails.cshtml">
+      <publishTime>06/06/2016 16:16:06</publishTime>
+    </File>
+    <File Include="Views/Event/TimeEdit.cshtml">
+      <publishTime>07/05/2017 13:35:40</publishTime>
+    </File>
+    <File Include="Views/Event/TimeScheduleList.cshtml">
+      <publishTime>07/05/2017 14:47:38</publishTime>
+    </File>
+    <File Include="Views/Event/TimeShedule.cshtml">
+      <publishTime>07/05/2017 13:48:16</publishTime>
+    </File>
+    <File Include="Views/Expance/EmployeeSalaryList.cshtml">
+      <publishTime>06/14/2017 11:37:08</publishTime>
+    </File>
+    <File Include="Views/Expance/ExpanceList.cshtml">
+      <publishTime>06/13/2017 14:31:18</publishTime>
+    </File>
+    <File Include="Views/Expance/ExpanceSearch.cshtml">
+      <publishTime>06/12/2017 12:44:56</publishTime>
+    </File>
+    <File Include="Views/Expance/Expandature.cshtml">
+      <publishTime>06/13/2017 14:44:03</publishTime>
+    </File>
+    <File Include="Views/Expance/SalarySearch.cshtml">
+      <publishTime>06/14/2017 11:37:51</publishTime>
+    </File>
+    <File Include="Views/Gardian/GurdianList.cshtml">
+      <publishTime>08/09/2017 15:48:53</publishTime>
+    </File>
+    <File Include="Views/Gardian/Index.cshtml">
+      <publishTime>06/08/2017 17:08:34</publishTime>
+    </File>
+    <File Include="Views/Home/AdvanceSearch.cshtml">
+      <publishTime>08/19/2017 18:34:36</publishTime>
+    </File>
+    <File Include="Views/Home/AdvanceSearchPartial.cshtml">
+      <publishTime>12/20/2016 17:22:48</publishTime>
+    </File>
+    <File Include="Views/Home/ChangeCurentAcaInfo.cshtml">
+      <publishTime>06/14/2017 16:52:34</publishTime>
+    </File>
+    <File Include="Views/Home/CreateCurentAcaInfo.cshtml">
+      <publishTime>07/20/2017 13:02:19</publishTime>
+    </File>
+    <File Include="Views/Home/dashboard.cshtml">
+      <publishTime>11/21/2016 12:34:48</publishTime>
+    </File>
+    <File Include="Views/Home/EditProximateId.cshtml">
+      <publishTime>08/08/2017 17:48:28</publishTime>
+    </File>
+    <File Include="Views/Home/FrontEvents.cshtml">
+      <publishTime>07/06/2017 17:36:38</publishTime>
+    </File>
+    <File Include="Views/Home/FrontGallery.cshtml">
+      <publishTime>07/06/2017 17:36:17</publishTime>
+    </File>
+    <File Include="Views/Home/FrontPage.cshtml">
+      <publishTime>07/06/2017 17:37:20</publishTime>
+    </File>
+    <File Include="Views/Home/Home.cshtml">
+      <publishTime>05/07/2016 19:11:40</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>05/30/2017 11:41:24</publishTime>
+    </File>
+    <File Include="Views/Home/notAuthorize.cshtml">
+      <publishTime>05/25/2017 10:53:15</publishTime>
+    </File>
+    <File Include="Views/Home/Payment.cshtml">
+      <publishTime>12/08/2016 13:53:46</publishTime>
+    </File>
+    <File Include="Views/Home/PaymentTypeView.cshtml">
+      <publishTime>10/01/2016 17:45:56</publishTime>
+    </File>
+    <File Include="Views/Home/PaymentView.cshtml">
+      <publishTime>06/05/2016 18:04:12</publishTime>
+    </File>
+    <File Include="Views/Home/Schoolinfo.cshtml">
+      <publishTime>01/25/2017 13:56:28</publishTime>
+    </File>
+    <File Include="Views/Home/SearchStudentPaymentList.cshtml">
+      <publishTime>02/05/2017 18:13:22</publishTime>
+    </File>
+    <File Include="Views/Home/ShowAbsenceList.cshtml">
+      <publishTime>07/26/2017 13:30:16</publishTime>
+    </File>
+    <File Include="Views/Home/ShowAttendanceList.cshtml">
+      <publishTime>07/18/2017 12:54:26</publishTime>
+    </File>
+    <File Include="Views/Home/showAttendence.cshtml">
+      <publishTime>07/29/2017 11:20:20</publishTime>
+    </File>
+    <File Include="Views/Home/ShowManualAttendanceList.cshtml">
+      <publishTime>07/29/2017 11:19:28</publishTime>
+    </File>
+    <File Include="Views/Home/stdAttendanceList.cshtml">
+      <publishTime>06/11/2017 12:26:30</publishTime>
+    </File>
+    <File Include="Views/Home/StdPaymentDetailsShow.cshtml">
+      <publishTime>05/22/2017 15:29:53</publishTime>
+    </File>
+    <File Include="Views/Home/Stdudentacademicinfo.cshtml">
+      <publishTime>01/25/2017 12:43:48</publishTime>
+    </File>
+    <File Include="Views/Home/StdViewPayment.cshtml">
+      <publishTime>06/11/2017 15:22:21</publishTime>
+    </File>
+    <File Include="Views/Home/Std_academic_info.cshtml">
+      <publishTime>08/08/2017 17:49:52</publishTime>
+    </File>
+    <File Include="Views/Home/std_attendence.cshtml">
+      <publishTime>08/16/2017 18:15:41</publishTime>
+    </File>
+    <File Include="Views/Home/StudentDetailsForPayment.cshtml">
+      <publishTime>12/11/2016 18:12:26</publishTime>
+    </File>
+    <File Include="Views/Home/StudentPass.cshtml">
+      <publishTime>06/11/2017 15:56:08</publishTime>
+    </File>
+    <File Include="Views/Home/StudentPayment.cshtml">
+      <publishTime>06/20/2017 13:57:29</publishTime>
+    </File>
+    <File Include="Views/Home/StudentPaymentEntry.cshtml">
+      <publishTime>12/12/2016 12:07:46</publishTime>
+    </File>
+    <File Include="Views/Home/StudentPEntry.cshtml">
+      <publishTime>12/11/2016 17:56:26</publishTime>
+    </File>
+    <File Include="Views/Home/StudentPreviousHistory.cshtml">
+      <publishTime>11/21/2016 18:30:06</publishTime>
+    </File>
+    <File Include="Views/Home/StudentSearch.cshtml">
+      <publishTime>08/16/2017 13:21:23</publishTime>
+    </File>
+    <File Include="Views/Home/Student_Edit.cshtml">
+      <publishTime>06/11/2017 16:24:35</publishTime>
+    </File>
+    <File Include="Views/Home/Student_entry.cshtml">
+      <publishTime>07/22/2017 11:31:19</publishTime>
+    </File>
+    <File Include="Views/Home/Student_list.cshtml">
+      <publishTime>08/09/2017 15:43:19</publishTime>
+    </File>
+    <File Include="Views/Home/UpdatePaymentSetup.cshtml">
+      <publishTime>12/17/2016 11:49:46</publishTime>
+    </File>
+    <File Include="Views/Home/ViewTutionMonth.cshtml">
+      <publishTime>10/01/2016 12:53:08</publishTime>
+    </File>
+    <File Include="Views/Home/_AdminDashboard.cshtml">
+      <publishTime>07/23/2017 14:28:45</publishTime>
+    </File>
+    <File Include="Views/Home/_StudentDashboard.cshtml">
+      <publishTime>06/04/2017 14:30:17</publishTime>
+    </File>
+    <File Include="Views/Home/_TeacherDashboard.cshtml">
+      <publishTime>06/04/2017 14:43:50</publishTime>
+    </File>
+    <File Include="Views/Inventory/Index.cshtml">
+      <publishTime>06/11/2017 16:09:13</publishTime>
+    </File>
+    <File Include="Views/Inventory/InventoryCreate.cshtml">
+      <publishTime>12/11/2016 17:37:52</publishTime>
+    </File>
+    <File Include="Views/Inventory/PurchaseInventory.cshtml">
+      <publishTime>12/11/2016 17:48:02</publishTime>
+    </File>
+    <File Include="Views/Inventory/PurchaseList.cshtml">
+      <publishTime>08/08/2017 18:22:39</publishTime>
+    </File>
+    <File Include="Views/Inventory/PurchaseReport.cshtml">
+      <publishTime>08/08/2017 18:13:43</publishTime>
+    </File>
+    <File Include="Views/Library/AutherCreatin.cshtml">
+      <publishTime>12/10/2016 15:19:02</publishTime>
+    </File>
+    <File Include="Views/Library/AutherList.cshtml">
+      <publishTime>12/10/2016 15:25:42</publishTime>
+    </File>
+    <File Include="Views/Library/BookActive.cshtml">
+      <publishTime>05/30/2016 13:27:46</publishTime>
+    </File>
+    <File Include="Views/Library/BookauCatagoryList.cshtml">
+      <publishTime>12/10/2016 15:28:12</publishTime>
+    </File>
+    <File Include="Views/Library/BookCatagoryList.cshtml">
+      <publishTime>12/10/2016 15:38:02</publishTime>
+    </File>
+    <File Include="Views/Library/BookSearch.cshtml">
+      <publishTime>08/09/2017 16:11:48</publishTime>
+    </File>
+    <File Include="Views/Library/CatagoryautherCreatin.cshtml">
+      <publishTime>07/23/2017 11:50:36</publishTime>
+    </File>
+    <File Include="Views/Library/CatagoryCreatin.cshtml">
+      <publishTime>12/10/2016 15:46:58</publishTime>
+    </File>
+    <File Include="Views/Library/CreateBook.cshtml">
+      <publishTime>07/23/2017 12:03:18</publishTime>
+    </File>
+    <File Include="Views/Library/EmployeeDetails.cshtml">
+      <publishTime>08/09/2017 16:59:41</publishTime>
+    </File>
+    <File Include="Views/Library/GetboookFromLibrary.cshtml">
+      <publishTime>12/08/2016 18:43:44</publishTime>
+    </File>
+    <File Include="Views/Library/GetEmployeeList.cshtml">
+      <publishTime>07/02/2016 10:20:22</publishTime>
+    </File>
+    <File Include="Views/Library/Getlist.cshtml">
+      <publishTime>12/08/2016 18:46:20</publishTime>
+    </File>
+    <File Include="Views/Library/IssuedBookDetail.cshtml">
+      <publishTime>12/05/2016 10:47:44</publishTime>
+    </File>
+    <File Include="Views/Library/LibraryBookSummaryForStudent.cshtml">
+      <publishTime>08/09/2017 16:20:29</publishTime>
+    </File>
+    <File Include="Views/Library/PurchaseBook.cshtml">
+      <publishTime>12/04/2016 15:44:10</publishTime>
+    </File>
+    <File Include="Views/Library/SearchBookCode.cshtml">
+      <publishTime>08/09/2017 16:06:27</publishTime>
+    </File>
+    <File Include="Views/Library/SearchIssuedBook.cshtml">
+      <publishTime>06/05/2017 11:33:44</publishTime>
+    </File>
+    <File Include="Views/Library/SearchStudentEmployeeList.cshtml">
+      <publishTime>08/09/2017 17:01:51</publishTime>
+    </File>
+    <File Include="Views/Library/StudentDetails.cshtml">
+      <publishTime>08/09/2017 16:59:39</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/ClassEdit.cshtml">
+      <publishTime>06/01/2017 16:03:52</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/ClassList.cshtml">
+      <publishTime>08/16/2017 16:27:58</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/CourseAssignList.cshtml">
+      <publishTime>07/23/2017 12:34:06</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/CourseList.cshtml">
+      <publishTime>06/01/2017 12:53:22</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/DepartmentList.cshtml">
+      <publishTime>06/11/2017 13:22:28</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/DeptEdit.cshtml">
+      <publishTime>06/11/2017 13:23:32</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/Index.cshtml">
+      <publishTime>05/16/2016 12:15:58</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/SectionEdit.cshtml">
+      <publishTime>06/08/2017 11:16:07</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/SectionList.cshtml">
+      <publishTime>07/24/2017 11:32:50</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/StatusEdit.cshtml">
+      <publishTime>07/22/2017 10:52:19</publishTime>
+    </File>
+    <File Include="Views/MasterEntry/StatusList.cshtml">
+      <publishTime>07/22/2017 10:53:18</publishTime>
+    </File>
+    <File Include="Views/Report/AdmissionReport.cshtml">
+      <publishTime>12/12/2016 17:56:06</publishTime>
+    </File>
+    <File Include="Views/Report/PaymentReport.cshtml">
+      <publishTime>06/18/2017 14:05:49</publishTime>
+    </File>
+    <File Include="Views/Report/Report.cshtml">
+      <publishTime>12/10/2016 17:18:08</publishTime>
+    </File>
+    <File Include="Views/Report/ReportList.cshtml">
+      <publishTime>06/26/2016 10:17:10</publishTime>
+    </File>
+    <File Include="Views/Result/EditGPA.cshtml">
+      <publishTime>08/08/2017 12:07:40</publishTime>
+    </File>
+    <File Include="Views/Result/FullResult.cshtml">
+      <publishTime>05/28/2017 13:00:06</publishTime>
+    </File>
+    <File Include="Views/Result/GPAType.cshtml">
+      <publishTime>08/08/2017 12:20:59</publishTime>
+    </File>
+    <File Include="Views/Result/MarksDistribution.cshtml">
+      <publishTime>12/14/2016 11:11:30</publishTime>
+    </File>
+    <File Include="Views/Result/ResultView.cshtml">
+      <publishTime>06/17/2017 13:48:02</publishTime>
+    </File>
+    <File Include="Views/Result/ShowResult.cshtml">
+      <publishTime>08/10/2017 13:15:24</publishTime>
+    </File>
+    <File Include="Views/Result/StudentList.cshtml">
+      <publishTime>08/09/2017 17:54:29</publishTime>
+    </File>
+    <File Include="Views/Result/SubjectMark.cshtml">
+      <publishTime>08/09/2017 17:55:52</publishTime>
+    </File>
+    <File Include="Views/Result/SubjectMarks.cshtml">
+      <publishTime>12/14/2016 11:11:30</publishTime>
+    </File>
+    <File Include="Views/Result/TeacherDistribudedList.cshtml">
+      <publishTime>08/09/2017 18:01:04</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/CanonicalHelperModel.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/MenuHelperModel.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/MetaRobotsHelperModel.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/SiteMapHelperModel.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/SiteMapNodeModel.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/SiteMapNodeModelList.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/SiteMapPathHelperModel.cshtml">
+      <publishTime>12/12/2016 12:54:20</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/SiteMapTitleHelperModel.cshtml">
+      <publishTime>12/12/2016 12:54:18</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>05/16/2016 10:31:46</publishTime>
+    </File>
+    <File Include="Views/Shared/View1.cshtml">
+      <publishTime>11/21/2016 12:51:18</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>07/23/2017 15:32:18</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutFront.cshtml">
+      <publishTime>07/06/2017 17:43:08</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginPartial.cshtml">
+      <publishTime>05/21/2017 14:47:04</publishTime>
+    </File>
+    <File Include="Views/Shared/_StudentMenu.cshtml">
+      <publishTime>06/04/2017 13:36:09</publishTime>
+    </File>
+    <File Include="Views/Shared/_TeacherMenu.cshtml">
+      <publishTime>06/04/2017 13:34:39</publishTime>
+    </File>
+    <File Include="Views/SMS/SendSms.cshtml">
+      <publishTime>05/24/2017 14:56:21</publishTime>
+    </File>
+    <File Include="Views/Stuff/Create.cshtml">
+      <publishTime>06/05/2017 11:06:34</publishTime>
+    </File>
+    <File Include="Views/Stuff/Delete.cshtml">
+      <publishTime>05/03/2016 16:57:00</publishTime>
+    </File>
+    <File Include="Views/Stuff/DeptEdit.cshtml">
+      <publishTime>07/22/2017 18:30:11</publishTime>
+    </File>
+    <File Include="Views/Stuff/DeptList.cshtml">
+      <publishTime>08/09/2017 16:00:01</publishTime>
+    </File>
+    <File Include="Views/Stuff/DesignationEdit.cshtml">
+      <publishTime>06/08/2017 15:56:08</publishTime>
+    </File>
+    <File Include="Views/Stuff/DesignationList.cshtml">
+      <publishTime>08/09/2017 16:02:52</publishTime>
+    </File>
+    <File Include="Views/Stuff/Details.cshtml">
+      <publishTime>06/22/2017 10:19:44</publishTime>
+    </File>
+    <File Include="Views/Stuff/Edit.cshtml">
+      <publishTime>06/07/2017 11:31:42</publishTime>
+    </File>
+    <File Include="Views/Stuff/EmployeeSalary.cshtml">
+      <publishTime>06/14/2017 14:37:23</publishTime>
+    </File>
+    <File Include="Views/Stuff/GetGridData.cshtml">
+      <publishTime>05/17/2016 12:56:14</publishTime>
+    </File>
+    <File Include="Views/Stuff/Index.cshtml">
+      <publishTime>08/09/2017 15:54:15</publishTime>
+    </File>
+    <File Include="Views/Stuff/Salary.cshtml">
+      <publishTime>06/14/2017 16:04:16</publishTime>
+    </File>
+    <File Include="Views/Stuff/showSalaryDetails.cshtml">
+      <publishTime>11/26/2016 13:35:58</publishTime>
+    </File>
+    <File Include="Views/Stuff/StuffAttendence.cshtml">
+      <publishTime>05/18/2016 10:58:16</publishTime>
+    </File>
+    <File Include="Views/Stuff/StuffSalary.cshtml">
+      <publishTime>05/30/2017 12:12:39</publishTime>
+    </File>
+    <File Include="Views/Stuff/stuffSalaryUpdate.cshtml">
+      <publishTime>11/24/2016 16:11:14</publishTime>
+    </File>
+    <File Include="Views/Test/Create.cshtml">
+      <publishTime>04/13/2016 10:33:12</publishTime>
+    </File>
+    <File Include="Views/Test/Delete.cshtml">
+      <publishTime>04/13/2016 10:33:14</publishTime>
+    </File>
+    <File Include="Views/Test/Details.cshtml">
+      <publishTime>04/16/2016 09:54:48</publishTime>
+    </File>
+    <File Include="Views/Test/Edit.cshtml">
+      <publishTime>04/13/2016 10:33:12</publishTime>
+    </File>
+    <File Include="Views/Test/Index.cshtml">
+      <publishTime>04/16/2016 10:03:10</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>12/12/2016 12:54:32</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>04/09/2016 13:26:10</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/24/2017 12:51:51</publishTime>
+    </File>
+    <File Include="XML/Designationxml.xml">
+      <publishTime>05/05/2016 12:38:14</publishTime>
+    </File>
+    <File Include="XML/PaymentType.xml">
+      <publishTime>05/09/2016 15:54:00</publishTime>
+    </File>
+    <File Include="XML/SubjectXML.xml">
+      <publishTime>05/05/2016 10:37:24</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

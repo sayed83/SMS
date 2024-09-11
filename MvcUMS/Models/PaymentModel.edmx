@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchoolNewDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MonthlyPaymentSetupDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymenSetupId" Type="int" />
+          <Property Name="PaymentTypeId" Type="int" />
+          <Property Name="PayMonth" Type="int" />
+        </EntityType>
+        <EntityType Name="MonthlyStudentPaymentSetup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SemesterId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="MonthId" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <EntityType Name="Months">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MonthName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PaymentDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentTypeID" Type="int" />
+          <Property Name="Fees" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PayAmount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PaymentsId" Type="uniqueidentifier" />
+          <Property Name="PayMonth" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MethodName" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="GrandTotal" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PaidAmount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Due" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PaymentMethodId" Type="int" />
+          <Property Name="BankId" Type="int" />
+          <Property Name="CheckNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckDate" Type="datetime" />
+          <Property Name="StudentId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentType" Type="nvarchar" MaxLength="20" />
+          <Property Name="Amount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="StudentInvoiceList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalAmount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PaidAmount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="DueAmount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="StudentId" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="MonthlyPaymentSetupId" Type="int" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="MonthId" Type="int" />
+          <Property Name="PreviousDue" Type="decimal" Precision="16" Scale="2" />
+        </EntityType>
+        <EntityType Name="StudentPaymentAmount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PaymentTypeId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentPaymentCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="StudentInvoiceId" Type="int" />
+          <Property Name="PaymentMethodId" Type="int" />
+          <Property Name="BankId" Type="int" />
+          <Property Name="CheckNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StudentPaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK_MonthlyPaymentSetupDetails_StudentInvoiceList">
+          <End Role="StudentInvoiceList" Type="Self.StudentInvoiceList" Multiplicity="0..1" />
+          <End Role="MonthlyPaymentSetupDetails" Type="Self.MonthlyPaymentSetupDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInvoiceList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthlyPaymentSetupDetails">
+              <PropertyRef Name="PaymenSetupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonthlyPaymentSetupDetails_StudentPaymentType">
+          <End Role="StudentPaymentType" Type="Self.StudentPaymentType" Multiplicity="0..1" />
+          <End Role="MonthlyPaymentSetupDetails" Type="Self.MonthlyPaymentSetupDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentPaymentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthlyPaymentSetupDetails">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_Payments">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="PaymentsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="PaymentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="PaymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInvoiceList_MonthlyStudentPaymentSetup">
+          <End Role="MonthlyStudentPaymentSetup" Type="Self.MonthlyStudentPaymentSetup" Multiplicity="0..1" />
+          <End Role="StudentInvoiceList" Type="Self.StudentInvoiceList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonthlyStudentPaymentSetup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentInvoiceList">
+              <PropertyRef Name="MonthlyPaymentSetupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPaymentCollection_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
+          <End Role="StudentPaymentCollection" Type="Self.StudentPaymentCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPaymentCollection">
+              <PropertyRef Name="PaymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPaymentCollection_StudentInvoiceList">
+          <End Role="StudentInvoiceList" Type="Self.StudentInvoiceList" Multiplicity="0..1" />
+          <End Role="StudentPaymentCollection" Type="Self.StudentPaymentCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInvoiceList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPaymentCollection">
+              <PropertyRef Name="StudentInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetPaymentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetStdPaymentDueList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dept" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="semesterId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="section" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetStudentPaymentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="courseId" Type="int" Mode="In" />
+          <Parameter Name="semesterId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StudentMarkInput" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseId" Type="int" Mode="In" />
+          <Parameter Name="strSmt" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SchoolNewDBModelStoreContainer">
+          <EntitySet Name="BankList" EntityType="Self.BankList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyPaymentSetupDetails" EntityType="Self.MonthlyPaymentSetupDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyStudentPaymentSetup" EntityType="Self.MonthlyStudentPaymentSetup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Months" EntityType="Self.Months" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentInvoiceList" EntityType="Self.StudentInvoiceList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentPaymentAmount" EntityType="Self.StudentPaymentAmount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentPaymentCollection" EntityType="Self.StudentPaymentCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentPaymentType" EntityType="Self.StudentPaymentType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MonthlyPaymentSetupDetails_StudentInvoiceList" Association="Self.FK_MonthlyPaymentSetupDetails_StudentInvoiceList">
+            <End Role="StudentInvoiceList" EntitySet="StudentInvoiceList" />
+            <End Role="MonthlyPaymentSetupDetails" EntitySet="MonthlyPaymentSetupDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonthlyPaymentSetupDetails_StudentPaymentType" Association="Self.FK_MonthlyPaymentSetupDetails_StudentPaymentType">
+            <End Role="StudentPaymentType" EntitySet="StudentPaymentType" />
+            <End Role="MonthlyPaymentSetupDetails" EntitySet="MonthlyPaymentSetupDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_Payments" Association="Self.FK_PaymentDetails_Payments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_PaymentTypes" Association="Self.FK_PaymentDetails_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_PaymentMethod" Association="Self.FK_Payments_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInvoiceList_MonthlyStudentPaymentSetup" Association="Self.FK_StudentInvoiceList_MonthlyStudentPaymentSetup">
+            <End Role="MonthlyStudentPaymentSetup" EntitySet="MonthlyStudentPaymentSetup" />
+            <End Role="StudentInvoiceList" EntitySet="StudentInvoiceList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPaymentCollection_PaymentMethod" Association="Self.FK_StudentPaymentCollection_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="StudentPaymentCollection" EntitySet="StudentPaymentCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPaymentCollection_StudentInvoiceList" Association="Self.FK_StudentPaymentCollection_StudentInvoiceList">
+            <End Role="StudentInvoiceList" EntitySet="StudentInvoiceList" />
+            <End Role="StudentPaymentCollection" EntitySet="StudentPaymentCollection" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolNewDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MonthName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PaymentDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentTypeID" Type="Int32" />
+          <Property Name="Fees" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PayAmount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PaymentsId" Type="Guid" />
+          <Property Name="PayMonth" Type="Int32" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_PaymentDetails_Payments" FromRole="PaymentDetails" ToRole="Payments" />
+          <NavigationProperty Name="PaymentType" Relationship="Self.FK_PaymentDetails_PaymentTypes" FromRole="PaymentDetails" ToRole="PaymentTypes" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MethodName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_PaymentMethod" FromRole="PaymentMethod" ToRole="Payments" />
+          <NavigationProperty Name="StudentPaymentCollections" Relationship="SchoolNewDBModel.FK_StudentPaymentCollection_PaymentMethod" FromRole="PaymentMethod" ToRole="StudentPaymentCollection" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudentId" Type="Guid" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Due" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentMethodId" Type="Int32" />
+          <Property Name="BankId" Type="Int32" />
+          <Property Name="CheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_Payments" FromRole="Payments" ToRole="PaymentDetails" />
+          <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_Payments_PaymentMethod" FromRole="Payments" ToRole="PaymentMethod" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentType1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_PaymentTypes" FromRole="PaymentTypes" ToRole="PaymentDetails" />
+        </EntityType>
+        <Association Name="FK_PaymentDetails_Payments">
+          <End Role="Payments" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="PaymentsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentType" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="PaymentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="PaymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolNewDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Months" EntityType="Self.Month" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetail" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <AssociationSet Name="FK_PaymentDetails_Payments" Association="Self.FK_PaymentDetails_Payments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_PaymentTypes" Association="Self.FK_PaymentDetails_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_PaymentMethod" Association="Self.FK_Payments_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <FunctionImport Name="GetPaymentDetails">
+          <Parameter Name="StudentId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetStdPaymentDueList">
+            <Parameter Name="dept" Mode="In" Type="String" />
+            <Parameter Name="semesterId" Mode="In" Type="String" />
+            <Parameter Name="section" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentPaymentList">
+            <Parameter Name="courseId" Mode="In" Type="Int32" />
+            <Parameter Name="semesterId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="BankLists" EntityType="SchoolNewDBModel.BankList" />
+          <FunctionImport Name="StudentMarkInput">
+            <Parameter Name="CourseId" Mode="In" Type="Int32" />
+            <Parameter Name="strSmt" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="MonthlyStudentPaymentSetups" EntityType="SchoolNewDBModel.MonthlyStudentPaymentSetup" />
+          <EntitySet Name="StudentPaymentAmounts" EntityType="SchoolNewDBModel.StudentPaymentAmount" />
+          <EntitySet Name="StudentPaymentTypes" EntityType="SchoolNewDBModel.StudentPaymentType" />
+          <EntitySet Name="StudentInvoiceLists" EntityType="SchoolNewDBModel.StudentInvoiceList" />
+          <EntitySet Name="StudentPaymentCollections" EntityType="SchoolNewDBModel.StudentPaymentCollection" />
+          <AssociationSet Name="FK_StudentInvoiceList_MonthlyStudentPaymentSetup" Association="SchoolNewDBModel.FK_StudentInvoiceList_MonthlyStudentPaymentSetup">
+            <End Role="MonthlyStudentPaymentSetup" EntitySet="MonthlyStudentPaymentSetups" />
+            <End Role="StudentInvoiceList" EntitySet="StudentInvoiceLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPaymentCollection_PaymentMethod" Association="SchoolNewDBModel.FK_StudentPaymentCollection_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+            <End Role="StudentPaymentCollection" EntitySet="StudentPaymentCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPaymentCollection_StudentInvoiceList" Association="SchoolNewDBModel.FK_StudentPaymentCollection_StudentInvoiceList">
+            <End Role="StudentInvoiceList" EntitySet="StudentInvoiceLists" />
+            <End Role="StudentPaymentCollection" EntitySet="StudentPaymentCollections" />
+          </AssociationSet>
+          <EntitySet Name="MonthlyPaymentSetupDetails" EntityType="SchoolNewDBModel.MonthlyPaymentSetupDetail" />
+          <AssociationSet Name="FK_MonthlyPaymentSetupDetails_StudentInvoiceList" Association="SchoolNewDBModel.FK_MonthlyPaymentSetupDetails_StudentInvoiceList">
+            <End Role="StudentInvoiceList" EntitySet="StudentInvoiceLists" />
+            <End Role="MonthlyPaymentSetupDetail" EntitySet="MonthlyPaymentSetupDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonthlyPaymentSetupDetails_StudentPaymentType" Association="SchoolNewDBModel.FK_MonthlyPaymentSetupDetails_StudentPaymentType">
+            <End Role="StudentPaymentType" EntitySet="StudentPaymentTypes" />
+            <End Role="MonthlyPaymentSetupDetail" EntitySet="MonthlyPaymentSetupDetails" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="BankList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MonthlyStudentPaymentSetup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SemesterId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="MonthId" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Year" Type="Int32" />
+          <NavigationProperty Name="StudentInvoiceLists" Relationship="SchoolNewDBModel.FK_StudentInvoiceList_MonthlyStudentPaymentSetup" FromRole="MonthlyStudentPaymentSetup" ToRole="StudentInvoiceList" />
+        </EntityType>
+        <EntityType Name="StudentPaymentAmount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PaymentTypeId" Type="Int32" />
+          <Property Name="SemesterId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StudentPaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="MonthlyPaymentSetupDetails" Relationship="SchoolNewDBModel.FK_MonthlyPaymentSetupDetails_StudentPaymentType" FromRole="StudentPaymentType" ToRole="MonthlyPaymentSetupDetail" />
+        </EntityType>
+        <EntityType Name="StudentInvoiceList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="DueAmount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="StudentId" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="MonthlyPaymentSetupId" Type="Int32" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MonthlyStudentPaymentSetup" Relationship="SchoolNewDBModel.FK_StudentInvoiceList_MonthlyStudentPaymentSetup" FromRole="StudentInvoiceList" ToRole="MonthlyStudentPaymentSetup" />
+          <NavigationProperty Name="StudentPaymentCollections" Relationship="SchoolNewDBModel.FK_StudentPaymentCollection_StudentInvoiceList" FromRole="StudentInvoiceList" ToRole="StudentPaymentCollection" />
+          <NavigationProperty Name="MonthlyPaymentSetupDetails" Relationship="SchoolNewDBModel.FK_MonthlyPaymentSetupDetails_StudentInvoiceList" FromRole="StudentInvoiceList" ToRole="MonthlyPaymentSetupDetail" />
+          <Property Name="MonthId" Type="Int32" />
+          <Property Name="PreviousDue" Type="Decimal" Precision="16" Scale="2" />
+        </EntityType>
+        <EntityType Name="StudentPaymentCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="StudentInvoiceId" Type="Int32" />
+          <Property Name="PaymentMethodId" Type="Int32" />
+          <Property Name="BankId" Type="Int32" />
+          <Property Name="CheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PaymentMethod" Relationship="SchoolNewDBModel.FK_StudentPaymentCollection_PaymentMethod" FromRole="StudentPaymentCollection" ToRole="PaymentMethod" />
+          <NavigationProperty Name="StudentInvoiceList" Relationship="SchoolNewDBModel.FK_StudentPaymentCollection_StudentInvoiceList" FromRole="StudentPaymentCollection" ToRole="StudentInvoiceList" />
+        </EntityType>
+        <Association Name="FK_StudentInvoiceList_MonthlyStudentPaymentSetup">
+          <End Type="SchoolNewDBModel.MonthlyStudentPaymentSetup" Role="MonthlyStudentPaymentSetup" Multiplicity="0..1" />
+          <End Type="SchoolNewDBModel.StudentInvoiceList" Role="StudentInvoiceList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonthlyStudentPaymentSetup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentInvoiceList">
+              <PropertyRef Name="MonthlyPaymentSetupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPaymentCollection_PaymentMethod">
+          <End Type="SchoolNewDBModel.PaymentMethod" Role="PaymentMethod" Multiplicity="0..1" />
+          <End Type="SchoolNewDBModel.StudentPaymentCollection" Role="StudentPaymentCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPaymentCollection">
+              <PropertyRef Name="PaymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPaymentCollection_StudentInvoiceList">
+          <End Type="SchoolNewDBModel.StudentInvoiceList" Role="StudentInvoiceList" Multiplicity="0..1" />
+          <End Type="SchoolNewDBModel.StudentPaymentCollection" Role="StudentPaymentCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInvoiceList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPaymentCollection">
+              <PropertyRef Name="StudentInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MonthlyPaymentSetupDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymenSetupId" Type="Int32" />
+          <Property Name="PaymentTypeId" Type="Int32" />
+          <Property Name="PayMonth" Type="Int32" />
+          <NavigationProperty Name="StudentInvoiceList" Relationship="SchoolNewDBModel.FK_MonthlyPaymentSetupDetails_StudentInvoiceList" FromRole="MonthlyPaymentSetupDetail" ToRole="StudentInvoiceList" />
+          <NavigationProperty Name="StudentPaymentType" Relationship="SchoolNewDBModel.FK_MonthlyPaymentSetupDetails_StudentPaymentType" FromRole="MonthlyPaymentSetupDetail" ToRole="StudentPaymentType" />
+        </EntityType>
+        <Association Name="FK_MonthlyPaymentSetupDetails_StudentInvoiceList">
+          <End Type="SchoolNewDBModel.StudentInvoiceList" Role="StudentInvoiceList" Multiplicity="0..1" />
+          <End Type="SchoolNewDBModel.MonthlyPaymentSetupDetail" Role="MonthlyPaymentSetupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInvoiceList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthlyPaymentSetupDetail">
+              <PropertyRef Name="PaymenSetupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonthlyPaymentSetupDetails_StudentPaymentType">
+          <End Type="SchoolNewDBModel.StudentPaymentType" Role="StudentPaymentType" Multiplicity="0..1" />
+          <End Type="SchoolNewDBModel.MonthlyPaymentSetupDetail" Role="MonthlyPaymentSetupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentPaymentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthlyPaymentSetupDetail">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolNewDBModelStoreContainer" CdmEntityContainer="SchoolNewDBEntities">
+          <EntitySetMapping Name="Months">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.Month">
+              <MappingFragment StoreEntitySet="Months">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentDetails">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.PaymentDetail">
+              <MappingFragment StoreEntitySet="PaymentDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="PaymentsId" ColumnName="PaymentsId" />
+                <ScalarProperty Name="PayMonth" ColumnName="PayMonth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.PaymentMethod">
+              <MappingFragment StoreEntitySet="PaymentMethod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="Due" ColumnName="Due" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentType1" ColumnName="PaymentType" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPaymentDetails" FunctionName="SchoolNewDBModel.Store.GetPaymentDetails" />
+          <FunctionImportMapping FunctionImportName="GetStdPaymentDueList" FunctionName="SchoolNewDBModel.Store.GetStdPaymentDueList" />
+          <FunctionImportMapping FunctionImportName="GetStudentPaymentList" FunctionName="SchoolNewDBModel.Store.GetStudentPaymentList" />
+          <EntitySetMapping Name="BankLists">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.BankList">
+              <MappingFragment StoreEntitySet="BankList">
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="StudentMarkInput" FunctionName="SchoolNewDBModel.Store.StudentMarkInput" />
+          <EntitySetMapping Name="MonthlyStudentPaymentSetups">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.MonthlyStudentPaymentSetup">
+              <MappingFragment StoreEntitySet="MonthlyStudentPaymentSetup">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentPaymentAmounts">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.StudentPaymentAmount">
+              <MappingFragment StoreEntitySet="StudentPaymentAmount">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentPaymentTypes">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.StudentPaymentType">
+              <MappingFragment StoreEntitySet="StudentPaymentType">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentInvoiceLists">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.StudentInvoiceList">
+              <MappingFragment StoreEntitySet="StudentInvoiceList">
+                <ScalarProperty Name="PreviousDue" ColumnName="PreviousDue" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="MonthlyPaymentSetupId" ColumnName="MonthlyPaymentSetupId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentPaymentCollections">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.StudentPaymentCollection">
+              <MappingFragment StoreEntitySet="StudentPaymentCollection">
+                <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
+                <ScalarProperty Name="StudentInvoiceId" ColumnName="StudentInvoiceId" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyPaymentSetupDetails">
+            <EntityTypeMapping TypeName="SchoolNewDBModel.MonthlyPaymentSetupDetail">
+              <MappingFragment StoreEntitySet="MonthlyPaymentSetupDetails">
+                <ScalarProperty Name="PayMonth" ColumnName="PayMonth" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="PaymenSetupId" ColumnName="PaymenSetupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

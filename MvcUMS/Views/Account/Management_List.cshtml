@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MvcEnergyPac.Models.ManagementProfile>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Search Result <span class="pull-right">@Html.ActionLink("Add Member","Management_Create",null,new{@class="btn btn-primary btn-sm"}) </span></h5>
+
+    </div>
+    <table class="table datatable-basic table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>SL/N</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Cell/Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@i</td>
+                    <td>@item.Name</td>
+                    <td>@item.Designation</td>
+                    <td>@item.Phone</td>
+                    <td>
+                    @Html.ActionLink("Details", "ManagementDetails", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Edit", "Management_Edit" , new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    @Html.ActionLink("Delete", "Management_Delete", new { id = item.Id }, new { @class = "btn btn-primary btn-sm", onclick= "return confirm('Are You Sure Want To Delete?')" })
+                    </td>
+                </tr>
+                i++;
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+@section scripts{
+    
+<script type="text/javascript" language="javascript">
+    
+</script>
+}

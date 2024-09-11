@@ -1,0 +1,247 @@
+﻿@model IEnumerable<MvcUMS.Models.Course>
+
+@{
+    ViewBag.Title = "CourseList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var t = 1;
+}
+
+@*<style>
+        .dataTables_length {
+            float: right;
+            display: inline-block;
+            margin: 15px 20px 20px 20px !important;
+        }
+
+        .dataTables_filter {
+            position: relative;
+            display: block;
+            float: left;
+            margin: 15px 0 20px 20px !important;
+        }
+
+        .dataTables_info {
+            float: left;
+            padding: 8px 20px !important;
+            margin-bottom: 20px;
+        }
+
+        .panel > .dataTables_wrapper .table-bordered {
+            border-top: 1px solid #ddd !important;
+            border-bottom: 1px solid #ddd !important;
+            margin-bottom: 10px;
+        }
+
+
+        .dataTables_filter input {
+            margin-left: 8px;
+        }
+    </style>*@
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">
+                Course List
+            </h5>
+            <div class="heading-elements">
+                <a href="@Url.Action("NewCourseEntry","MasterEntry")" class="btn btn-primary btn-sm"><i class="icon icon-add"></i> Add New Course</a>
+            </div>
+        </div>
+        <div class="panel-body">
+        </div>
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Class Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @t
+                        </td>
+                        <td>
+                            @item.CourseId
+                        </td>
+                        <td>
+                            @item.CourseTitle
+                        </td>
+                        <td>
+                            @item.Semester
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "CourseEdit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" })
+                            @Html.ActionLink("Delete", "CourseDelete", new { id = item.CourseId }, new { @class = "btn btn-xs btn-danger", onclick = "return confirm(' you want to delete?');" })
+                        </td>
+                    </tr>
+                    t++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else if (User.IsInRole("Student"))
+{
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">
+                Course List
+            </h5>
+        </div>
+        <table class="table datatable-button-print-basic table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        SL
+                    </th>
+                    <th>
+                        Course Code
+                    </th>
+                    <th>
+                        Course Title
+                    </th>
+                    <th>
+                        Class Name
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @t
+                        </td>
+                        <td>
+                            @item.CourseId
+                        </td>
+                        <td>
+                            @item.CourseTitle
+                        </td>
+                        <td>
+                            @item.Semester
+                        </td>
+                    </tr>
+                    t++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@{
+    var message = TempData["success"] ?? string.Empty;
+}
+
+@section Scripts {
+    <script type="text/javascript">
+    
+        $("#tmarks,#pmarks").keypress(function (event) {
+
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                if (event.keyCode !== 8 && event.keyCode !== 46) { //exception
+                    event.preventDefault();
+                }
+            }
+            if (($(this).val().indexOf('.') != -1) && ($(this).val().substring($(this).val().indexOf('.'), $(this).val().indexOf('.').length).length > 2)) {
+                if (event.keyCode !== 8 && event.keyCode !== 46) { //exception
+                    event.preventDefault();
+                }
+            }
+
+        });
+
+    </script>
+
+
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#groupDiv").hide();
+            $('#txt_Search').keyup(function (event) {
+                var searchKey = $(this).val().toLowerCase();
+                var tot = 0;
+                $("#MyTable tr td:nth-child(2)").each(function () {
+                    var cellText = $(this).text().toLowerCase();
+                    if (cellText.indexOf(searchKey) >= 0) {
+                        $(this).parent().show();
+                        tot = tot + 1;
+                    }
+                    else {
+                        $(this).parent().hide();
+                    }
+                });
+
+                $("#MyTable tr td:nth-child(3)").each(function () {
+                    var cellText = $(this).text().toLowerCase();
+                    if (cellText.indexOf(searchKey) >= 0 && $(this).parent().is(":hidden")) {
+                        $(this).parent().show();
+                        tot = tot + 1;
+                    }
+                });
+                $("#MyTable tr td:nth-child(4)").each(function () {
+                    var cellText = $(this).text().toLowerCase();
+                    if (cellText.indexOf(searchKey) >= 0 && $(this).parent().is(":hidden")) {
+                        $(this).parent().show();
+                        tot = tot + 1;
+                    }
+                });
+
+                $('#nav').html('')
+                $('#p').html('<div><span>Total :' + tot + '</span></div>')
+            });
+
+            $('#CourseId').keyup(function (event) {
+                if ($(this).val().length > 0) {
+                    var searchKey = $(this).val().trim().toLowerCase();
+                    var k = 0;
+                    $("#MyTable tr td:nth-child(2)").each(function () {
+                        var cellText = $(this).text().trim().toLowerCase();
+                        if (cellText == searchKey) {
+                            k++;
+                        }
+                    });
+                    if (k != 0) {
+                        $("#Massages").html(" Already Exist");
+                        $("#btnSubmit").attr("disabled", true);
+                    }
+                    else {
+                        $("#Massages").html('');
+                        $("#btnSubmit").attr("disabled", false);
+                    }
+                }
+                else {
+                    $("#Massages").html('');
+                    $("#btnSubmit").attr("disabled", true);
+                }
+            });
+        });
+
+        $("#Semester").change(function () {
+            var p = $(this).val();
+            if (p == 'Nine' || p == 'Ten') {
+                $("#groupDiv").show(100);
+            }
+            else {
+                $("#groupDiv").hide();
+            }
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        var message = '';
+        if (message)
+            alert(message);
+    </script>
+
+@Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,124 @@
+﻿ #PaymentStatement > .table > tbody > tr > th,
+  #PaymentStatement > .table > tfoot > tr > th,
+  #PaymentStatement > .table > thead > tr > td, 
+  #PaymentStatement >.table > tbody > tr > td, 
+  #PaymentStatement >.table > tfoot > tr > td {
+    padding: 3px 10px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+
+ #Partial > .table > thead > tr > th{
+     padding:5px 6px;
+ }
+
+  #Partial > .table > tbody > tr:last-child,  #Partial > .table > tbody > tr > td:last-child{
+     background:#f3f3f3;
+     color:#000;
+ }
+
+.navbar-brand > img {
+    margin-top: -7px;
+    height: 35px;
+}
+
+.std-attentance-info{
+    margin-left:4px;
+    margin-right:20px;
+}
+
+.form-inline > .btn-group {
+    width: 200px;
+}
+
+  .ui-datepicker {
+        z-index: 9999 !important;
+    }
+
+  .validation-error{
+      color:red;
+  }
+
+  /*.panel-body>.no-border-top-1{
+      border-top:0!important;
+  }*/
+
+  /*.table-bordered > thead > tr > th{
+    border-bottom: 0;
+}
+
+  th.pad-top-10 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+    th.pad-left-10 {
+    position: relative;
+    left: 85px;
+}
+
+    .school-info {
+    position: relative;
+}
+
+    .std-personal-info {
+    position: absolute;
+    top: 110px;
+    left: 0;
+}
+
+    .std-exam-info{
+        float:right;
+        margin-top:-100px;
+    }*/
+
+  /*.table-xxs > thead > tr > th, .table-xxs > tbody > tr > th, .table-xxs > tfoot > tr > th, .table-xxs > thead > tr > td, .table-xxs > tbody > tr > td, .table-xxs > tfoot > tr > td {
+   padding: 0 !important;
+        text-align:center;
+}*/
+
+
+   
+
+  .std-personal-info > .table-xxs > tbody > tr > td, .table-xxs > tbody > tr > th,.std-exam-info > .table-xxs > tbody > tr > td, .table-xxs > tbody > tr > th {
+        padding: 0 !important;
+    }
+
+     .table-gpa> tbody > tr > td,.table-result > tbody > tr > td,.table-gpa> thead > tr > th {
+        padding: 0 !important;
+        text-align:center;
+    }
+
+
+     .school-info >h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+     .school-info p {
+    margin-bottom: 0;
+}
+
+     table.table.table-xxs.table-gpa.table-bordered,.school-logo {
+    margin-top: -20px;
+font-size: 8px;
+    font-weight: bold;
+}
+
+ .logo-text p {
+    margin-bottom: 0!important;
+    font-weight: 700;
+    border-bottom: 3px solid;
+    width: 151px;
+    margin: 0 auto;
+}
+
+     img.school-logo {
+    margin-top: -10px;
+}
+
+    

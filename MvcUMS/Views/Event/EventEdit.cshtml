@@ -1,0 +1,135 @@
+﻿@model MvcUMS.Models.Events
+@{
+    ViewBag.Title = "Event Edit";
+
+    Layout = null;
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Edit Event</h5>
+
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("EventEdit", "Event", FormMethod.Post, new
+            {
+                @class = "form-horizontal",
+                enctype = "multipart/form-data"
+            }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Event Name:</label>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(model => model.EventName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EventName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Event For:</label>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(x => Model.EventFor, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EventFor)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Date:</label>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(model => model.OrganizeDate, "{0:MM/dd/yyyy}", new { @class = "form-control datepicker", id = "eventDate" })
+                    @Html.ValidationMessageFor(model => model.OrganizeDate)
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Description:</label>
+                <div class="col-lg-9">
+
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description)
+
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="text-semibold col-md-3 control-label">Your Photo:</label>
+                <div class="media no-margin-top col-md-9">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="~/uploads/@Html.DisplayFor(model => model.Image)" height="130" width="100" id="ImgPrv" />
+                        </div>
+                        <div class="col-md-7">
+                            <div class="media-body">
+                                <div class="uploader bg-warning">
+                                    <span class="filename" style="user-select: none;">
+                                            @Html.TextBoxFor(model => model.Image, new { id = "IMGTxt", placeholder = "Image Path", readOnly = "true" })
+                                    </span>
+                                    <span class="action" style="user-select: none;">
+                                        @Html.TextBoxFor(model => model.picture, new { @class = "file-styled", type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })<i class="icon-googleplus5"></i>
+                                    </span>
+                                </div>
+                                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="text-right">
+
+                <button type="submit" id="btnUpdate" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+
+
+
+        }
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#eventDate").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true
+        });
+
+       
+
+    });
+
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files[0].size < 1048576) {
+                    $("#ImgPrv").prop('src', e.target.result)
+                   .width(100)
+                   .height(100);
+                    $("#IMGTxt").val(input.value);
+                }
+                else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                    alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                }
+                else {
+                    alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                }
+
+
+
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

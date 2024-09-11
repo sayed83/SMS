@@ -1,0 +1,128 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.StudentInvoiceListViewModel>
+@{
+    ViewBag.Title = "Payment Amount Details";
+    Layout = null;
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Invoice List
+        </h5>
+        <div class="heading-elements">
+            <a href="@Url.Action("MonthlyPaymentSetup", "Payment")" class="btn btn-success btn-xs">Create Invoice</a>
+            <button type="submit" id="btnSentPaymentSms" class="btn bg-blue-300  pull-right"><strong>Send SMS</strong> <i class="icon-arrow-right14"></i></button>
+        </div>
+    </div>
+    <table class="table datatable-button-print-basic table-striped" id="paymentList">
+        <thead>
+            <tr class="table_header">
+                <th>Invoice No</th>
+                <th>Student</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Month</th>
+                <th>Due</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <a href="@Url.Action("InvoiceView", "Payment", new { id = item.Id})">
+                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+                        </a>
+
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.StudentName)</td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidAmount)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Month)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DueAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DueDate)
+                    </td>
+                    <td>
+                        <span class="label @("bg-" + (item.Status == "Paid" ? "blue" : "danger"))">@Html.DisplayFor(modelItem => item.Status)</span>
+                    </td>
+                    <td>
+                        <a href='#' data-toggle='modal' class="btn btn-xs" data-target='#PaymentCollectionDialog' onclick='GetPaymentCollection("@item.Id")'><i class="icon-add"></i>Collection</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
+<div id="PaymentCollectionDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="PaymentCollectionPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $("#btnSentPaymentSms").click(function () {
+        $.ajax({
+            type: "POST",
+            data: {  },
+            url: '@Url.Action("SendPaymentSMS", "Payment")',
+            success: function (d) {
+                alert('Successfully Send.');
+            }
+        });
+    });
+
+    function GetPaymentCollection(Id) {
+        $.ajax({
+            type: "GET",
+            data: { id: Id },
+            url: '@Url.Action("PaymentCollection", "Payment")',
+
+            success: function (result) {
+                $('#PaymentCollectionPartial').html(result);
+
+            }
+        });
+    }
+
+
+</script>

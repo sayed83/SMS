@@ -1,0 +1,379 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.MarksheetViewModel>
+    @{
+        Layout = null;
+    }
+
+    <style media="print">
+        @@page {
+            size: A4 portrait;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        img.eidgah-school-logo {
+            display: inline;
+            position: relative;
+            top: 15px;
+            right: 0;
+            width: 120px !important;
+            height: 120px !important;
+            left: 10px !important;
+        }
+    </style>
+
+
+    <style>
+        img.display-block {
+            visibility: hidden;
+        }
+
+        .signature h6 {
+            width: 110px;
+            text-align: center;
+            margin-top: 305px !important;
+        }
+
+
+
+        #hide-signature {
+            display: none;
+        }
+
+        .col-sm-offset-1 {
+            margin-left: 4.33333%;
+        }
+
+        img.eidgah-school-logo {
+            display: inline;
+            position: relative;
+            top: 15px;
+            right: 0;
+            left: 70px;
+        }
+    </style>
+    <link href="~/Content/Custom.css" rel="stylesheet" />
+    <link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">
+                MarkSheet
+            </h5>
+            <div class="heading-elements">
+                <button type="button" id="EidgahPrintMarksheet" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+            </div>
+        </div>
+
+        <div id="EidgahHalfMarkSheetPrint">
+
+
+            @foreach (var item in Model)
+            {
+                <div id="eidgah-body-border">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <img src="~/uploads/@item.SchoolViewModel.Logo" class="eidgah-school-logo" alt="School Logo" width="100" height="100" />
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="school-info text-center">
+                                <h1 class="eidgah-school-title">
+
+                                    @item.SchoolViewModel.SchoolName
+                                </h1>
+                                <p class="eidgah-address">@item.SchoolViewModel.Address</p>
+                                <p>@item.SchoolViewModel.City</p>
+                                @{
+                                    if (item.StudentDetailsForMarksheetViewModel != null)
+                                    {
+                                        <h1 class="result-title">Result of Half Yearly Examination @item.StudentDetailsForMarksheetViewModel.Session </h1>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 std-personal-info">
+                            @{
+                                if (item.StudentDetailsForMarksheetViewModel != null)
+                                {
+                                    <table class="table table-xxs table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>Class</th>
+                                                <td>@item.StudentDetailsForMarksheetViewModel.Class</td>
+                                                <th>Section</th>
+                                                <td>@item.StudentDetailsForMarksheetViewModel.Section</td>
+                                                <th>Group</th>
+                                                <td width="10%">@item.StudentDetailsForMarksheetViewModel.Group</td>
+                                                <th>Roll No</th>
+                                                <td>@item.StudentDetailsForMarksheetViewModel.Roll</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-xxs table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th width="20%">Student's Name</th>
+                                                <td><strong>@item.StudentDetailsForMarksheetViewModel.Name</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="20%">Father's Name</th>
+                                                <td><strong>@item.StudentDetailsForMarksheetViewModel.FatherName</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="20%">Mother's Name</th>
+                                                <td><strong>@item.StudentDetailsForMarksheetViewModel.MotherName</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                }
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <h4 class="text-center eidgah-sup-title">Subject Wise Grade/Marks</h4>
+                            <table class="table table-result table-xxs table-bordered table-advance">
+                                <thead>
+
+                                    <tr>
+                                        <th class="col-sm-2">Subject Code</th>
+                                        <th class="col-sm-5">Subject Name</th>
+                                        <th class="col-sm-1">Number</th>
+                                        <th class="col-sm-1">Grade</th>
+                                        <th class="col-sm-1">GPA</th>
+                                        <th class="col-sm-2">Merit Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var bangla = new[] { "101", "102" };
+                                        var english = new[] { "107", "108" };
+                                        var bm = item.SubjectMarksCourses.Where(x => bangla.Contains(x.c.CourseId)).Select(x => x.ssm.TotalMarks).Sum() / 2;
+                                        var em = item.SubjectMarksCourses.Where(x => english.Contains(x.c.CourseId)).Select(x => x.ssm.TotalMarks).Sum() / 2;
+                                        var blg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(bm);
+                                        var elg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(em);
+                                        var bgp = MvcUMS.Models.EntityManager.ResultManager.getGP(bm);
+                                        var egp = MvcUMS.Models.EntityManager.ResultManager.getGP(em);
+                                        var totalGP = 0m;
+                                        int lp = 1;
+                                        int subjectCount = 0;
+
+                                    }
+
+                                    @foreach (var calGp in item.SubjectMarksCourses.Select((x, i) => new { Data = x, Index = i + 1 }).OrderByDescending(a => a.Data.TotalObMarks))
+                                    {
+                                        if (calGp.Data.c.CourseId == "101")
+                                        {
+                                            totalGP += bgp;
+                                            subjectCount++;
+
+                                        }
+                                        else if (calGp.Data.c.CourseId == "107")
+                                        {
+                                            totalGP += egp;
+                                            subjectCount++;
+                                        }
+                                        else if (calGp.Data.c.CourseId == "102" || calGp.Data.c.CourseId == "108")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            totalGP += calGp.Data.ssm.GradePoint;
+                                            subjectCount++;
+                                        }
+
+                                        if (calGp.Data.c.IsOptional == true)
+                                        {
+                                            totalGP -= 2;
+                                            subjectCount--;
+                                        }
+                                    }
+
+                                    @foreach (var sitem in item.SubjectMarksCourses.Select((x, i) => new { Data = x, Index = i + 1 }).OrderByDescending(a => a.Data.TotalObMarks))
+                                    {
+
+                                        @*<tr>
+                                                <td>@sitem.c.CourseId</td>
+                                                <td>
+                                                    @sitem.c.CourseTitle
+                                                </td>
+                                                <td>
+                                                    @sitem.ssm.TotalMarks
+                                                </td>
+                                                @if (sitem.c.CourseId == "101" || sitem.c.CourseId == "107")
+                                                {
+                                                    <td rowspan="2">
+                                                        @(sitem.c.CourseId == "101" ? blg : elg)
+
+                                                    </td>
+                                                }
+
+                                                <td rowspan="14">
+                                                    @sitem.ssm.GradePoint
+                                                </td>
+                                                <td rowspan="14">
+                                                    4th
+                                                </td>
+                                            </tr>*@
+
+
+
+
+
+
+                                        if (lp == 1)
+                                        {
+                                            <tr>
+                                                <td> @sitem.Data.c.CourseId </td>
+                                                <td class="text-left">
+                                                    @sitem.Data.c.CourseTitle
+                                                </td>
+                                                <td>
+                                                    @sitem.Data.ssm.TotalMarks
+                                                </td>
+                                                @if (sitem.Data.c.CourseId == "101" || sitem.Data.c.CourseId == "107")
+                                                {
+                                                    <td rowspan="2">
+                                                        @(sitem.Data.c.CourseId == "101" ? blg : elg)
+
+                                                    </td>
+                                                }
+                                                else if (sitem.Data.c.CourseId == "102" || sitem.Data.c.CourseId == "108")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        @sitem.Data.ssm.LetterGrade
+
+                                                    </td>
+                                                }
+
+                                                <td rowspan="@item.SubjectMarksCourses.Count()">
+                                                    @{
+
+
+
+
+                                                        var agp = 0m;
+                                                        agp = (totalGP / subjectCount);
+                                                        if (item.SubjectMarksCourses.Where(x => "F".Contains(x.ssm.LetterGrade)).Any() == true)
+                                                        {
+                                                            @("0.0")
+                                                        }
+                                                        else
+                                                        {
+                                                            @(string.Format("{0:n2}", agp))
+                                                        }
+                                                    }
+                                                </td>
+                                                <td rowspan="@item.SubjectMarksCourses.Count()">
+                                                    1st
+                                                </td>
+                                            </tr>
+                                        }
+                                        else if (lp > 1)
+                                        {
+                                            <tr>
+                                                <td>@sitem.Data.c.CourseId</td>
+                                                <td>
+                                                    @sitem.Data.c.CourseTitle
+                                                </td>
+                                                <td>
+                                                    @sitem.Data.ssm.TotalMarks
+                                                </td>
+                                                @if (sitem.Data.c.CourseId == "101" || sitem.Data.c.CourseId == "107")
+                                                {
+                                                    <td rowspan="2">
+                                                        @(sitem.Data.c.CourseId == "101" ? blg : elg)
+
+                                                    </td>
+                                                }
+                                                else if (sitem.Data.c.CourseId == "102" || sitem.Data.c.CourseId == "108")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        @sitem.Data.ssm.LetterGrade
+
+                                                    </td>
+                                                }
+
+                                            </tr>
+                                        }
+
+                                        lp++;
+
+
+                                    }
+
+
+                                </tbody>
+                                @*<tfoot>
+                                        @{
+                                            var agp = 0m;
+                                            agp = (totalGP - 2) / 8;
+                                        }
+                                        <tr>
+
+
+                                            <td>
+
+                                                @(agp > 0 ? string.Format("{0:n2}", agp) : string.Format("{0:n0}", agp))
+                                            </td>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row" id="hide-signature">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div class="signature col-sm-4">
+                                <div class="content-group">
+
+                                    <div class="mb-15 mt-15">
+                                        <img src="@Url.Content("~/Content/dashboard_template")/assets/images/signature.png" class="display-block" style="width: 150px;" alt="">
+                                    </div>
+                                    <h6>Class Teacher</h6>
+                                </div>
+                            </div>
+                            <div class="signature col-sm-offset-4 col-sm-4">
+                                <div class="content-group">
+
+                                    <div class="mb-15 mt-15">
+                                        <img src="@Url.Content("~/Content/dashboard_template")/assets/images/signature.png" class="display-block" style="width: 150px;" alt="">
+                                    </div>
+                                    <h6>Headmaster</h6>
+                                </div>
+                            </div>
+                            <p>@*Powered By:Zencon Technology Ltd*@</p>
+                        </div>
+                    </div>
+                </div>
+                @*<p>Powered By:Zencon Technology Ltd</p>*@
+                <div class="pagebreak"> </div>
+            }
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#EidgahPrintMarksheet").click(function () {
+                $("#EidgahHalfMarkSheetPrint").printThis();
+            });
+        });
+    </script>
+
+

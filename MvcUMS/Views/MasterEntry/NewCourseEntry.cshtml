@@ -1,0 +1,143 @@
+﻿@model MvcUMS.Models.CourseMarkTypeViewModel
+
+@{
+    ViewBag.Title = "CourseList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">New Course Info</h5>
+        <div class="heading-elements">
+            <a href="@Url.Action("CourseList","MasterEntry")" class="btn btn-primary btn-sm"><i class="icon icon-list"></i> Course List</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("NewCourseEntry", "MasterEntry", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+        {
+        <fieldset>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Course Code:</label>
+                <div class="col-lg-9">
+                    @Html.TextBox("CourseId", null, new { @class = "form-control", placeholder = "Course Code", required = true, data_bind = "value: courseId" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Course Name:</label>
+                <div class="col-lg-9">
+                    @Html.TextBox("CourseTitle", null, new { @class = "form-control", placeholder = "Course Title", required = true, data_bind = "value: title" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Class:</label>
+                <div class="col-lg-9">
+                    @Html.DropDownList("Semester", ViewBag.Semester as SelectList, "Select", new { @class = "form-control", required = true, data_bind = "value: semester" })
+                </div>
+            </div>
+
+            <div class="form-group" id="groupDiv" style="display:none">
+                <label class="col-lg-3 control-label">Group:</label>
+                <div class="col-lg-9">
+                    @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control", data_bind = "value: dept" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Is Optional:</label>
+                <div class="col-lg-9">
+                    @Html.CheckBoxFor(x => x.IsOptional, new { data_bind = "value: isOpt" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Exclude From Result:</label>
+                <div class="col-lg-9">
+                    @Html.CheckBoxFor(x => x.ExcludeFromResult, new { data_bind = "value: excludeFromResult" })
+                </div>
+            </div>
+        </fieldset>
+            <fieldset>
+                <legend>Setup Course Marks</legend>
+                @Html.EditorFor(model => model.MarkTypes)
+                <br />
+                <button class="btn btn-success btn-xs" data-bind="click: addPosition">Add</button>
+            </fieldset>
+            <div class="text-right">
+                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Save</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        function createViewModel() {
+            var createPosition = function () {
+                return {
+                    mark: ko.observable(),
+                    total: ko.observable(),
+                    pass: ko.observable()
+                };
+            };
+
+            var addPosition = function () {
+                markTypes.push(createPosition());
+            };
+
+            var removePosition = function () {
+                markTypes.pop();
+            };
+
+            var courseId = ko.observable();
+            var title = ko.observable();
+            var semester = ko.observable();
+            var dept = ko.observable();
+            var isOpt = ko.observable();
+            var excludeFromResult = ko.observable();
+            var totalMarks = ko.observable();
+            var passMarks = ko.observable();
+            var markTypes = ko.observableArray([createPosition()]);
+
+            return {
+                courseId: courseId,
+                title: title,
+                semester: semester,
+                dept: dept,
+                isOpt: isOpt,
+                excludeFromResult: excludeFromResult,
+                totalMarks: totalMarks,
+                passMarks: passMarks,
+                markTypes: markTypes,
+                addPosition: addPosition,
+                removePosition: removePosition
+            };
+        }
+
+        $(document).ready(function () {
+            var viewModel = createViewModel();
+            ko.applyBindings(viewModel);
+
+
+           
+
+        });
+
+        $(document).ready(function () {
+            $('#Semester').change(function () {
+
+                var s1 = $('#Semester').val();
+                if (s1 == 'Nine' || s1 == 'Ten' || s1 == 'Eleven' || s1 == 'Twelve') {
+                    $('#groupDiv').show();
+                }
+                else {
+                    $('#groupDiv').hide();
+                }
+
+            });
+        });
+    </script>
+}

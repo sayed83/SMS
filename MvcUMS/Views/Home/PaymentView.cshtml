@@ -1,0 +1,155 @@
+﻿
+@model PagedList.IPagedList<MvcUMS.Models.StudentPaytypeStuff>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "PaymentView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12" style="margin-top:50px">
+        <p style="text-align:center;font-size:x-large">Payment Details</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <p style="text-align:center;font-size:x-large"/>
+                    </div>
+
+        <div class="col-md-8" style="background-color:#e2eeec;border-radius:10px">
+
+            <p>
+                @Html.ActionLink("Back", "StudentPayment")
+            </p>
+            <p style="text-align:right">
+                @Html.ActionLink("Print", "StudentPaymentPrint",new {Id= @TempData["studentid"]} ,new { @class = "btn btn-info" })
+            </p>
+       
+                <table class="table table-bordered table-condensed table-hover">
+
+                    <tr class="success">
+                        <td style="text-align:right;width:300px"><b>Student Name</b></td>
+                        <td style="width:5px"><b>:</b></td>
+                        <td>@TempData["studentname"]</td>
+                    </tr>
+                    <tr class="danger">
+                        <td style="text-align: right;width:300px"><b>Student Id</b></td>
+                        <td style="width:5px"><b>:</b></td>
+                        <td>@TempData["studentid"]</td>
+                    </tr>
+                    <tr class="success">
+                        <td style="text-align: right; width:300px"><b>Department</b></td>
+                        <td style="width:5px"><b>:</b></td>
+                        <td>@TempData["Department"]</td>
+                    </tr>
+
+                    <tr class="info">
+                        <td style="text-align: right; width:300px"><b>Semester</b></td>
+                        <td style="width:5px"><b>:</b></td>
+                        <td>@TempData["Semester"]</td>
+                    </tr>
+                    <tr class="danger">
+                        <td style="text-align: right; width:300px"><b>Section</b></td>
+                        <td style="width:5px"><b>:</b></td>
+                        <td>@TempData["Section"]</td>
+                    </tr>
+                    <tr class="success">
+                        <td style="text-align: right; width:300px"><b>
+                            @{
+                                if (@TempData["amount"]!=null)
+                                {
+                                    @TempData["type"]
+                                }
+                        }</b></td>
+                        <td style="width:5px"><b></b></td>
+                        <td>@{
+    if (@TempData["type"] != null)
+    {
+          @TempData["amount"] 
+    } 
+}</td>
+                    </tr>
+
+                  
+                 
+
+                </table>
+                
+                            
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%"  id="tablesorter" style="background-color:white">
+                    <tr style="background-color:#bbb795">
+                        <th style="text-align:center">
+                            Date
+                        </th>
+                        <th style="text-align:center">
+                            Payment Type
+                        </th>
+
+                        <th style="text-align:center">
+                            Pay Amount
+                        </th>
+                        <th style="text-align:center">
+                            Amount
+                        </th>
+                        <th style="text-align:center">
+                            Due Amount
+                        </th>
+
+
+                    </tr>
+                    @{
+                        decimal totaldue = 0;
+                        decimal totalpay = 0;
+                        decimal totalamount = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align:center">
+                                @item.studentpayment.Date.ToShortDateString()
+
+                            </td>
+                            <td style="text-align:center">
+                                @item.paymenttype.TypeName
+                            </td>
+                            <td style="text-align:center">
+                                @{var payamount = (@item.studentpayment.PayAnount).ToString();
+                                totalpay = totalpay + Convert.ToDecimal(payamount);
+                                }@payamount Tk
+                            </td>
+
+                            <td style="text-align:center">
+                                @{var amount = (@item.studentpayment.Amount).ToString();
+                                totalamount = totalamount + Convert.ToDecimal(amount);
+                                }@amount Tk
+
+                            </td>
+                            <td style="text-align:center">
+                                @{ var value = (@item.studentpayment.PayAnount - @item.studentpayment.Amount).ToString();
+                                 totaldue = totaldue + Convert.ToDecimal(value);
+                                }@value  Tk
+                            </td>
+
+                        </tr>
+                    }
+                    <tr style="padding-left:90%;background-color:#bbb795">
+                        <td style="text-align:right"></td>
+                        <td style="text-align:right"></td>
+                        <td style="text-align:center">@totalpay Tk</td>
+                        <td style="text-align:center">@totalamount Tk</td>
+                        <td style="text-align:center">@totaldue Tk</td>
+                    </tr>
+                </table>
+             <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, Page_No => Url.Action("PaymentView",
+            new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+           
+          </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@*@model MvcUMS.Models.Book*@
+@{
+    ViewBag.Title = "GetNewBook";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@*<script type="text/javascript">
+            $(function () {
+             
+                $("#modalBtn").click(function (e) {
+                    var tex = jQuery.trim($("#pass").val());
+                    if ('@TempData["Password"]' != tex) {
+                        $("#mass").html("Your password is wrong");
+
+                    }
+                   
+                });
+            });
+    </script>*@
+
+
+@using (Html.BeginForm("BookActive", "Library", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+
+
+                <h5 class="text-center" id="mass" style="color:#ff0000"></h5>
+                  @TempData["mass"]
+                <h3 class="text-center" style="color:#50b14f">Please enter your password</h3>
+                <br /> @Html.Hidden("p",TempData["Password"])
+               
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <table>
+                            <tr>
+                                <td>@Html.TextBox("pass", null, new { type = "password", @class = "form-control" })</td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:20px"><input type="submit" id="modalBtn" class="btn btn-info" value="Submit" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            
+}
+

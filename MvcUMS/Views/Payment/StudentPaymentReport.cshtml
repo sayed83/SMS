@@ -1,0 +1,145 @@
+﻿@model List<MvcUMS.Models.Sp_StdAdvanceSearc_Result>
+
+@{
+    ViewBag.Title = "Student Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student  Payment</h5>
+    </div>
+
+    <div class="panel-body">
+        <span class="error-info text-semibold">@TempData["error"]</span>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Class:</label>
+                    @Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-3" style="display:none" id="group">
+                <div class="form-group">
+                    <label>Group:</label>
+                    @Html.DropDownList("Department", null, "Select", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group" id="a">
+                    <label>Section:</label>
+                    <select id="Section" class="form-control"><option value=""></option></select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <label style="margin-bottom:20px"></label>
+                <div class="text-left">
+                    <button type="submit" id="btnSearch" class="btn bg-slate-700"><strong>Search</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<div id="partial"></div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+
+        });
+
+
+        $(document).ready(function () {
+            $('#showdata').click(function () {
+                var url = $('#Modalpopup').data('url');
+
+                $.get(url, function (data) {
+                    $('#popupcontainer').html(data);
+
+                    $('#Modalpopup').modal('show');
+                });
+            });
+        });
+
+        $("#Semester").change(function () {
+            var sem = $(this).val();
+            var url = "/Home/GetCourse/";
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+        $("#Section").change(function () {
+            if ($(this).val() != '') {
+                $("#RollNo").attr("readOnly", false)
+            }
+            else {
+                $("#RollNo").attr("readOnly", true)
+            }
+        });
+
+        $(function () {
+            $('#btnSearch').click(function () {
+                $('#partials').html("");
+                var dep = $('#Department').val();
+                var sem = $('#Semester').val();
+                var sec = $('#Section').val();
+                var sta = $('#Status').val();
+                $.ajax({
+                    type: "POST",
+                    data: { Department: dep, Semester: sem, Section: sec },
+                    url: '@Url.Action("StudentPaymentReportList", "Payment")',
+                    success: function (result) {
+                        $('#partial').html(result);
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ('@Session["transectionid"]' != '') {
+                var id = '@Session["transectionid"]';
+                var url = '/Accounting/PaymentPrint/' + id;
+                window.open(url, '_blank');
+            }
+        })
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

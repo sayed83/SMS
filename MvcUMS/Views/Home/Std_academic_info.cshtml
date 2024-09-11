@@ -1,0 +1,142 @@
+﻿@model MvcUMS.Models.CurrentAcademicInfo
+@{
+    Layout = null;
+}
+
+		<!-- Both borders -->
+@if (User.IsInRole("Admin"))
+{
+    <div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student Current Academic Information</h5>
+    </div>
+
+    <div class="panel-body">
+        
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Reg No:</th>
+                    <th>Class</th>
+                    <th>Group</th>
+                    <th>Section</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="well text-center">
+                    <td>@Html.DisplayFor(model => model.RollNo)</td>
+                    <td>@Html.DisplayFor(model => model.RegNo)</td>
+                    <td>@Html.DisplayFor(model => model.Semester)</td>
+                    <td>@Html.DisplayFor(model => model.Department)</td>
+                    <td>@Html.DisplayFor(model => model.Section)</td>
+                    <td>@Html.DisplayFor(model => model.Status)</td>
+                    <td>
+                        @if (TempData["create"] == "Yes")
+                        {
+                            if (Model.RollNo != 0)
+                            {
+                                @Html.ActionLink("Pass", "StudentPass", new { id = Model.Std_id }, new { @class = "btn btn-info", data_toggle = "modal", data_target = "#StudentPassDialog", id = "btnPass" })
+                                @Html.ActionLink("Edit", "EditProximateId", new { id = Model.Std_id }, new { @class = "btn btn-success", style = "margin-left:5px", data_toggle = "modal", data_target = "#EditProximateIdDialog", id = "btnpId" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Promotion", "ChangeCurentAcaInfo", new { id = Model.Std_id }, new { @class = "btn btn-info", data_toggle = "modal", data_target = "#stdudentPromotion", id = "btnPromotion" })
+                                @Html.ActionLink("Edit", "EditProximateId", new { id = Model.Std_id }, new { @class = "btn btn-success", style = "margin-left:5px", data_toggle = "modal", data_target = "#EditProximateIdDialog", id = "btnPid" })
+                            
+                            }
+                            
+                        }
+                        
+                        
+                      
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+}
+
+else
+{
+    <div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student Current Academic Information</h5>
+       
+    </div>
+
+    <div class="panel-body">
+        
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Reg No:</th>
+                    <th>Class</th>
+                    <th>Group</th>
+                    <th>Section</th>
+                    <th>Status</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="well text-center">
+                    <td>@Html.DisplayFor(model => model.RollNo)</td>
+                    <td>@Html.DisplayFor(model => model.RegNo)</td>
+                    <td>@Html.DisplayFor(model => model.Semester)</td>
+                    <td>@Html.DisplayFor(model => model.Department)</td>
+                    <td>@Html.DisplayFor(model => model.Section)</td>
+                    <td>@Html.DisplayFor(model => model.Status)</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+}
+
+
+
+
+<div id="StudentPassDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+</div>
+
+<div id="stdudentPromotion" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+
+    </div>
+</div>
+
+<div id="EditProximateIdDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+@*<div id="stdudentPromotion" title="Student Promotion Information">
+
+</div>*@
+
+
+<!-- /both borders -->
+

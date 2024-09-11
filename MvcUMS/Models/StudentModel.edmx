@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Student_info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Std_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="Std_FName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Std_MName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Std_LName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Father_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mother_Nmae" Type="nvarchar" MaxLength="50" />
+          <Property Name="Parmenent_address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Present_address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birth_date" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+          <Property Name="Contact_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admission_date" Type="date" />
+          <Property Name="Entry_date" Type="datetime" />
+          <Property Name="status" Type="nchar" MaxLength="10" />
+          <Property Name="GardianName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GardianMobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="GardianOccupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="GurdianRelation" Type="nvarchar" MaxLength="50" />
+          <Property Name="BeforeSchool" Type="nvarchar" MaxLength="250" />
+          <Property Name="BeforeClass" Type="nvarchar" MaxLength="15" />
+          <Property Name="BeforeGpa" Type="nvarchar" MaxLength="5" />
+          <Property Name="ProximateID" Type="int" />
+          <Property Name="SchoolId" Type="int" />
+        </EntityType>
+        <EntityContainer Name="UMSModelStoreContainer">
+          <EntitySet Name="Student_info" EntityType="Self.Student_info" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UMSEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Student_info" EntityType="UMSModel.Student_info" />
+        </EntityContainer>
+        <EntityType Name="Student_info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Std_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Std_FName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Std_MName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Std_LName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Father_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mother_Nmae" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Parmenent_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Present_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birth_date" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admission_date" Type="DateTime" Precision="0" />
+          <Property Name="Entry_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GardianName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GardianMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GardianOccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GurdianRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BeforeSchool" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BeforeClass" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="BeforeGpa" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ProximateID" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UMSModelStoreContainer" CdmEntityContainer="UMSEntities1">
+          <EntitySetMapping Name="Student_info">
+            <EntityTypeMapping TypeName="UMSModel.Student_info">
+              <MappingFragment StoreEntitySet="Student_info">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="ProximateID" ColumnName="ProximateID" />
+                <ScalarProperty Name="BeforeGpa" ColumnName="BeforeGpa" />
+                <ScalarProperty Name="BeforeClass" ColumnName="BeforeClass" />
+                <ScalarProperty Name="BeforeSchool" ColumnName="BeforeSchool" />
+                <ScalarProperty Name="GurdianRelation" ColumnName="GurdianRelation" />
+                <ScalarProperty Name="GardianOccupation" ColumnName="GardianOccupation" />
+                <ScalarProperty Name="GardianMobile" ColumnName="GardianMobile" />
+                <ScalarProperty Name="GardianName" ColumnName="GardianName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Entry_date" ColumnName="Entry_date" />
+                <ScalarProperty Name="Admission_date" ColumnName="Admission_date" />
+                <ScalarProperty Name="Email_id" ColumnName="Email_id" />
+                <ScalarProperty Name="Contact_no" ColumnName="Contact_no" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Present_address" ColumnName="Present_address" />
+                <ScalarProperty Name="Parmenent_address" ColumnName="Parmenent_address" />
+                <ScalarProperty Name="Mother_Nmae" ColumnName="Mother_Nmae" />
+                <ScalarProperty Name="Father_Name" ColumnName="Father_Name" />
+                <ScalarProperty Name="Std_LName" ColumnName="Std_LName" />
+                <ScalarProperty Name="Std_MName" ColumnName="Std_MName" />
+                <ScalarProperty Name="Std_FName" ColumnName="Std_FName" />
+                <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

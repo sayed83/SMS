@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MvcUMS.Models.TimeShedule>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .dataTables_length {
+        float: right;
+        display: inline-block;
+        margin: 15px 20px 20px 20px !important;
+    }
+
+    .dataTables_filter {
+        position: relative;
+        display: block;
+        float: left;
+        margin: 15px 0 20px 20px !important;
+    }
+
+    .dataTables_info {
+        float: left;
+        padding: 8px 20px !important;
+        margin-bottom: 20px;
+    }
+
+    .panel > .dataTables_wrapper .table-bordered {
+        border-top: 1px solid #ddd !important;
+        border-bottom: 1px solid #ddd !important;
+        margin-bottom: 10px;
+    }
+
+
+    .dataTables_filter input {
+        margin-left: 8px;
+    }
+</style>
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading">
+        <h5 class="panel-title">Time Scheduling List
+            
+        </h5>
+
+    </div>
+
+    <table class="table table-bordered table-striped datatable-time">
+        <thead>
+
+            <tr>
+
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.StartTime</td>
+                    <td>@item.EndTime</td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "TimeEdit", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
+                        @Html.ActionLink("Delete", "TimeDelete", new { id = item.Id }, new { @class = "btn btn-primary btn-xs", onclick = "return confirm('Are You Sure To Delete?')" })
+
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $('.datatable-time').DataTable();
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

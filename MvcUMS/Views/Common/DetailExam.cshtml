@@ -1,0 +1,146 @@
+﻿@model MvcUMS.Models.ExamAndType
+
+@{
+    ViewBag.Title = "Exam";
+    Layout = null;
+}
+
+@*<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+</div>
+
+<div class="modal-body">
+
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">Exam Details</h5>
+
+        </div>
+        @Html.HiddenFor(model => model.ex.Id)
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td><b>Course ID</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.ex.CourseId)
+
+                </td>
+            <tr>
+            <tr>
+                <td><b>Course Name </b></td>
+                <td>
+                    @Html.DisplayFor(model => model.co.CourseTitle)
+
+                </td>
+            <tr>
+            <tr>
+                <td><b>Exam Date</b></td>
+                <td>
+
+                    @Html.DisplayFor(model => model.ex.Date)
+
+                </td>
+            <tr>
+                <td><b>Start Time</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.ex.StartTime)
+
+                </td>
+            </tr>
+            <tr>
+                <td><b>End Time</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.ex.EndTime)
+
+                </td>
+            </tr>
+            <tr>
+                <td><b>Type</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.ex.Type)
+
+                </td>
+            </tr>
+            <tr>
+                <td><b>Exam Type</b></td>
+                <td>
+                    @Html.DisplayFor(model => model.et.Examtype)
+
+                </td>
+            </tr>
+
+
+        </table>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+</div>
+
+@*<fieldset>
+
+    <legend>Exam Detail</legend>
+    @Html.HiddenFor(model => model.ex.Id)
+    <table style="width:100%">
+        <tr>
+            <td style="padding:20px"><b>Course Code </b></td>
+            <td>
+                @Html.DisplayFor(model => model.ex.CourseCode)
+
+            </td>
+        <tr>
+        <tr>
+            <td style="padding:20px"><b>Course Name </b></td>
+            <td>
+                @Html.DisplayFor(model => model.co.CourseTitle)
+
+            </td>
+        <tr>
+<tr>
+            <td style="padding:20px"><b>Exam Date</b></td>
+            <td>
+            
+                @Html.DisplayFor(model => model.ex.Date)
+
+            </td>
+        <tr>
+            <td style="padding:20px"><b>Start Time</b></td>
+            <td>
+                @Html.DisplayFor(model => model.ex.StartTime)
+
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:20px"><b>End Time</b></td>
+            <td>
+                @Html.DisplayFor(model => model.ex.EndTime)
+
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:20px"><b>Type</b></td>
+            <td>
+                @Html.DisplayFor(model => model.ex.Type)
+
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:20px"><b>Exam Type</b></td>
+            <td>
+                @Html.DisplayFor(model => model.et.Examtype)
+
+            </td>
+        </tr>
+
+
+    </table>
+</fieldset>*@
+

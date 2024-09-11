@@ -1,0 +1,160 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.StudentInvoiceListViewModel>
+
+@{
+    ViewBag.Title = "Student Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student  Invoice Search</h5>
+    </div>
+
+    <div class="panel-body">
+        <span class="error-info text-semibold">@TempData["error"]</span>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label>Student ID:</label>
+                    @Html.TextBox("Std_id", null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label>Class:</label>
+                    @Html.DropDownList("SemesterId", ViewBag.Semester as SelectList, "Select", new { @class = "form-control", id = "SemesterId" })
+                </div>
+            </div>
+            <div class="col-lg-2" style="display:none" id="group">
+                <div class="form-group">
+                    <label>Group:</label>
+                    @Html.DropDownList("Department", null, "Select", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-horizontal">
+                    <label>Months:</label>
+                    @Html.DropDownList("MonthId", ViewBag.MonthList as SelectList, "Select", new { @class = "form-control", id = "month" })
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <label style="margin-bottom:20px"></label>
+                <div class="text-left">
+                    <button type="submit" id="btnSearch" class="btn bg-slate-700"><strong>Search</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<div id="partial"></div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+
+        });
+
+
+        $(document).ready(function () {
+            $('#showdata').click(function () {
+                var url = $('#Modalpopup').data('url');
+
+                $.get(url, function (data) {
+                    $('#popupcontainer').html(data);
+
+                    $('#Modalpopup').modal('show');
+                });
+            });
+        });
+
+        $(function () {
+
+
+
+            $("#Std_id").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/getData",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Std_id, value: item.Std_id };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        });
+
+
+
+        $("#Section").change(function () {
+            if ($(this).val() != '') {
+                $("#RollNo").attr("readOnly", false)
+            }
+            else {
+                $("#RollNo").attr("readOnly", true)
+            }
+        });
+
+        $(function () {
+            $('#btnSearch').click(function () {
+                $('#partials').html("");
+                var dep = $('#Department').val();
+                var sem = $('#SemesterId').val();
+                var month = $('#month').val();
+                //var roll = $("#RollNo").val();
+                //var Sample = $("#Sample").val();
+                var _Stdid = $("#Std_id").val();
+                $.ajax({
+                    type: "POST",
+                    data: { Std_id: _Stdid, SemesterId: sem, MonthId: month },
+                    url: '@Url.Action("InvoiceList", "Payment")',
+                    success: function (result) {
+                        $('#partial').html(result);
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ('@Session["transectionid"]' != '') {
+                var id = '@Session["transectionid"]';
+                var url = '/Accounting/PaymentPrint/' + id;
+                window.open(url, '_blank');
+            }
+        })
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

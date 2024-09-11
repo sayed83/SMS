@@ -1,0 +1,16 @@
+﻿@model MvcUMS.Models.ViewModels.SchoolViewModel
+@{
+    ViewBag.Title = "School List";
+    Layout = null;
+}
+<link href="~/Content/print.css" rel="stylesheet" media="print"/>
+
+
+    <div class="school-info text-center">
+        <h3>@Model.SchoolName</h3>
+        <p>@Model.Address</p>
+        <img src="~/uploads/@Model.Logo" alt="School Logo" height="80" width="80" />
+        <p>ACADEMIC TRANSCRIPT</p>
+    </div>
+
+

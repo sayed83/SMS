@@ -1,0 +1,21 @@
+User Info
+-----------
+Admin User
+----------
+user: admin
+pass: 1
+
+super Admin
+-----------
+user: sayed.it83@gmail.com
+pass: Sayed#4245
+
+Teacher User
+------------
+user:mdsayed@gmail.com
+pass: Sayed#4245
+
+Stape for Teacher Entry
+-------------------------
+1. need to add stuff for teacher create.
+2. stuff email user for register as teacher 

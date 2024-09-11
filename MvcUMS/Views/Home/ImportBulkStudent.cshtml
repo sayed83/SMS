@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <form id="upload" enctype="multipart/form-data" action="@Url.Action("Import", "Home")" method="POST">
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Class:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Semester", null, "Select", new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessage("Semester")
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="sec">
+                        <label class="col-lg-3 control-label">Section:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Section", ViewBag.Section as SelectList, "Select", new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessage("Section")
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="group" style="display:none">
+                        <label class="col-lg-3 control-label">Group:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessage("Department")
+                        </div>
+                    </div>
+                    <div class="form-group GenerateCSV">
+                        <p id="error"></p>
+                        <label class="col-lg-3 control-label"></label>
+                        <div class="text-left col-lg-9">
+                            <input type="submit" class="btn btn-success" id="btnSearch" formaction="DownloadCsv" value="GenerateCSV" />
+                        </div>
+                    </div>
+                    <div class="import-group">
+
+                        <div class="form-group" id="f">
+                            <span>@TempData["MessageError"]</span>
+                            <label class="col-lg-3 control-label">Select File:</label>
+                            <div class="col-lg-9">
+                                <input name="FileUpload" id="FileUpload" onchange="checkfile()" class="file-styled" type="file" accept=".csv" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label"></label>
+                            <div class="text-left col-lg-9">
+                                <input id="btnUpload" class="btn btn-primary" type="submit" formaction="Import" value="Import CSV" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @*<script src="@Url.Content("~/Scripts/csv.functions.js")" type="text/javascript"></script>*@
+
+    <script type="text/javascript">
+        
+            function checkfile() {
+                var FileName = $("#FileUpload").val();
+                var extension = FileName.split('.');
+                if (extension[1] != "csv") {
+                    $("#FileUpload").val('');
+                    alert("Please choose a .csv file");
+                    return;
+                }
+            }
+
+            $(function () {
+                var s = $('#Semester').val();
+
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+
+            $("#Semester").change(function () {
+                var sem = $(this).val();
+                var url = "/Home/GetCourse/";
+                $.ajax({
+                    url: "/MasterEntry/GetSection/",
+                    data: { sem: sem },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value=''>Select</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#Section").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+
+            });
+
+            $('#Semester').change(function () {
+
+                var s1 = $('#Semester').val();
+                if (s1 == 'Nine' || s1 == 'Ten' || s1 == 'Eleven' || s1 == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+
+
+            $('#btnSearch').click(function (e) {
+
+
+                if (!$("input[name=Semester]").valid() && !$("input[name=Section]").valid()) {
+                    e.preventDefault();
+                }
+                // do some stuff
+                $('#partials').html("");
+                var dep = $('#Department').val();
+                var sem = $('#Semester').val();
+                var sec = $('#Section').val();
+                var getUrl = '@Url.Action("DownloadCsv", "Home")?Semester=' + sem + '&Section=' + sec;
+
+                $.ajax({
+                    type: "POST",
+                    data: { Semester: sem, Section: sec },
+                    url: '@Url.Action("DownloadCsv", "Home")',
+                    success: function (d) {
+                        window.location.href = getUrl;
+                    }
+                });
+
+            });
+
+
+            $('#btnUpload').submit(function (e) {
+
+                e.preventDefault(); // stop the standard form submission
+                var datas = new FormData(this);
+                var Updep = $('#Department').val();
+                var Upsem = $('#Semester').val();
+                var Upsec = $('#Section').val();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: { FileUpload: datas, Semester: Upsem, Section: Upsec },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log('file(s) uploaded successfully');
+                    },
+                    error: function (xhr, error, status) {
+                        console.log(error, status);
+                    }
+                });
+
+            });
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

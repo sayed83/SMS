@@ -1,0 +1,210 @@
+﻿@model List<MvcUMS.Models.Sp_StdAdvanceSearc_Result>
+
+@{
+    ViewBag.Title = "Student Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        <div class="form-horizontal">
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Student  Payment</h5>
+                </div>
+
+                <div class="panel-body">
+
+
+                 
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Student ID:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Std_id", null, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Class:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none" id="group">
+                        <label class="col-lg-3 control-label">Group:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Department", null, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                   
+                    
+                    <div class="form-group" id="a">
+                        <label class="col-lg-3 control-label">Section:</label>
+                        <div class="col-lg-9">
+                            <select id="Section" class="form-control"><option value=""></option></select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Roll No:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("RollNo", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Advance/Due:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Sample", new[] {
+                                                                new SelectListItem() { Text = "Advance Pay", Value = "1"},
+                                                                new SelectListItem() { Text = "Due Pay", Value = "2" }
+                                                               }, "Choose an option", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+
+                        <button type="submit" id="btnSearch" class="btn bg-slate-700"><strong>Search</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+   
+
+<div id="partial"></div>
+
+
+@section Scripts {
+
+<script type="text/javascript">
+    
+    $(function () {
+
+        $('#Semester').change(function () {
+
+            var s = $('#Semester').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $('#group').hide();
+            }
+
+        });
+
+    });
+
+
+    $(document).ready(function () {
+        $('#showdata').click(function () {
+            var url = $('#Modalpopup').data('url');
+
+            $.get(url, function (data) {
+                $('#popupcontainer').html(data);
+
+                $('#Modalpopup').modal('show');
+            });
+        });
+    });
+
+    $(function () {
+
+        $("#Std_id").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/getData",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Std_id, value: item.Std_id };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+
+
+    $("#Semester").change(function () {
+        var sem = $(this).val();
+        var url = "/Home/GetCourse/";
+        $.ajax({
+            url: "/MasterEntry/GetSection/",
+            data: { sem: sem },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option value=''>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#Section").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    });
+
+    $(function () {
+        $('#btnSearch').click(function () {
+            $('#partials').html("");
+            var dep = $('#Department').val();
+            var sem = $('#Semester').val();
+            var sec = $('#Section').val();
+            var sta = $('#Status').val();
+            var roll = $("#RollNo").val();
+            var Sample = $("#Sample").val();
+            var Std_id = $("#Std_id").val();
+            $.ajax({
+                type: "POST",
+                data: { Std_id: Std_id, Department: dep, Semester: sem, Section: sec, roll: roll, Sample: Sample },
+                url: '@Url.Action("SearchStudentPaymentList", "Home")',
+                success: function (result) {
+                    $('#partial').html(result);
+                }
+            });
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        if ('@Session["transectionid"]' != '')
+        {
+            var id = '@Session["transectionid"]';
+            var url = '/Accounting/PaymentPrint/' + id;
+            window.open(url, '_blank');
+        }
+    })
+</script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

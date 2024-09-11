@@ -1,0 +1,385 @@
+﻿@{
+    ViewBag.Title = "Get Book From Library";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+       @using (Html.BeginForm("SearchStudentEmployeeList", "Library", FormMethod.Post, new {
+
+           @class = "form-horizontal"
+            
+       }))
+        {
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Issued Book From Library</h5>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Select Type:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Sample", new[] {
+                                    new SelectListItem() { Text = "Student", Value = "1"},
+                                    new SelectListItem() { Text = "Stuff", Value = "2" }
+                                    }, "Choose an option", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="st" style="display:none">
+                        <label class="col-lg-3 control-label">Staff Type:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("StuffList", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="se">
+                        <label class="col-lg-3 control-label">Class:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Semester", null, "Select" , new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="dn" style="display:none">
+                        <label class="col-lg-3 control-label">Group:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Department", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="sec">
+                        <label class="col-lg-3 control-label">Section:</label>
+                        <div class="col-lg-9">
+                            <select id="Section" class="form-control"><option value=""></option></select>
+                            @*@Html.DropDownList("Section", null, new { @class = "form-control" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="sid">
+                        <label class="col-lg-3 control-label">Student ID:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Std_id", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="si">
+                        <label class="col-lg-3 control-label">Staff ID:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Stuffid", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Submit form <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+       }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+   
+
+
+
+    @{
+        if (TempData["list"] != null && TempData["emp"] == null)
+        {
+            <div class="row">
+
+                <div class="col-md-12">
+                    @{
+            Html.RenderAction("StudentDetails", "Library");
+                    }
+                </div>
+            </div>
+        }
+        else if (TempData["emp"] != null && TempData["list"] == null)
+        {
+            <div class="row">
+
+                <div class="col-md-12">
+                    @{
+            Html.RenderAction("EmployeeDetails", "Library");
+                    }
+                </div>
+            </div>
+        }
+    }
+
+
+    @section Scripts {
+<script src="/Scripts/jquery-1.8.2.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#Stuffid").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Library/getStuffIdData",
+                    type: "POST",
+                    dataType: "json",
+
+                    data: { term: request.term, dep: $("#StuffList").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.MemberCode, value: item.MemberCode };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+        $("#Std_id").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/getStudentIdData",
+                    type: "POST",
+                    dataType: "json",
+
+                    data: { term: request.term, dep: $("#Department").val(), sem: $("#Semester").val(), sec: $("#Section").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Std_id, value: item.Std_id };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+
+
+    });
+
+    $('#btnSearch').click(function () {
+        var tex = $('#Std_id');
+        var DFtex = $('#DFrom');
+        var DTtex = $('#DTo');
+        if (tex.val() != null && tex.val() != '')
+            return true;
+        if (DFtex.val() != null && DFtex.val() != '' && DTtex.val() == '') {
+            alert('Please enter admission date to')
+            return false;
+        }
+        else if (DTtex.val() != null && DTtex.val() != '' && DFtex.val() == '') {
+            alert('Please enter admission date from')
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    });
+
+    $('#Semester').change(function () {
+
+        var s = $('#Semester').val();
+        if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+            $('#dn').show();
+        }
+        else {
+            $('#dn').hide();
+        }
+
+    });
+
+    $("#Semester").change(function () {
+        var sem = $(this).val();
+
+        $.ajax({
+            url: "/MasterEntry/GetSection/",
+            data: { sem: sem },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option value=''>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#Section").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    });
+
+
+    $('#Sample').change(function () {
+        var val = $(this).val();
+        if (val == '1') {
+
+            $('#st').hide();
+            $('#si').hide();
+            $('#sid').show();
+            $('#sec').show();
+
+            $('#se').show();
+            $('#dn').show();
+        } else {
+            $('#st').show();
+            $('#si').show();
+            $('#sid').hide();
+            $('#sec').hide();
+
+            $('#se').hide();
+            $('#dn').hide();
+        }
+    });
+
+    $('#showdata').click(function () {
+        var url = $('#Modalpopup').data('url');
+
+        $.get(url, function (data) {
+            $('#popupcontainer').html(data);
+
+            $('#Modalpopup').modal('show');
+        });
+    });
+
+
+</script>
+
+
+
+        <script type="text/javascript">
+
+            $(function () {
+                $("#Stuffid").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Library/getStuffIdData",
+                            type: "POST",
+                            dataType: "json",
+
+                            data: { term: request.term, dep: $("#StuffList").val() },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.MemberCode, value: item.MemberCode };
+                                }))
+
+                            }
+                        })
+                    },
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+            })
+        </script>
+
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#showdata').click(function () {
+                    var url = $('#Modalpopup').data('url');
+
+                    $.get(url, function (data) {
+                        $('#popupcontainer').html(data);
+
+                        $('#Modalpopup').modal('show');
+                    });
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            $(function () {
+                $("#Std_id").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Home/getStudentIdData",
+                            type: "POST",
+                            dataType: "json",
+
+                            data: { term: request.term, dep: $("#Department").val(), sem: $("#Semester").val(), sec: $("#Section").val() },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.Std_id, value: item.Std_id };
+                                }))
+
+                            }
+                        })
+                    },
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+            })
+        </script>
+        <script>
+            $(function () {
+                $('#btnSearch').click(function () {
+                    var tex = $('#Std_id');
+                    var DFtex = $('#DFrom');
+                    var DTtex = $('#DTo');
+                    if (tex.val() != null && tex.val() != '')
+                        return true;
+                    if (DFtex.val() != null && DFtex.val() != '' && DTtex.val() == '') {
+                        alert('Please enter admission date to')
+                        return false;
+                    }
+                    else if (DTtex.val() != null && DTtex.val() != '' && DFtex.val() == '') {
+                        alert('Please enter admission date from')
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+
+                });
+               
+            });
+
+
+            $(function () {
+
+                $('.datatable-button-print-columns').DataTable({
+                    columnDefs: [{
+                        targets: -1, // Hide actions column
+                        visible: false
+                    }],
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: '<i class="icon-printer position-left"></i> Print table',
+                            className: 'btn btn-default',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'colvis',
+                            text: '<i class="icon-three-bars"></i> <span class="caret"></span>',
+                            className: 'btn btn-default btn-icon'
+                        }
+                    ]
+                });
+
+
+            });
+
+        </script>
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>
+        @Scripts.Render("~/bundles/jqueryval")
+    }

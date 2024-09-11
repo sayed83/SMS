@@ -1,0 +1,93 @@
+﻿@model MvcUMS.Models.SchoolSetup
+@{
+    ViewBag.Title = "School";
+
+    Layout = null;
+}
+
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Edit School</h5>
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("SchoolEdit", "Common", FormMethod.Post, new
+        {
+            enctype = "multipart/form-data"
+
+        }))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">School Name:</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(m => m.SchoolName, null, new { @class = "form-control", required = true })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Address:</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(m => m.Address, null, new { @class = "form-control", required = true })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">City:</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(m => m.City, null, new { @class = "form-control", required = true })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Country:</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(m => m.Country, null, new { @class = "form-control", required = true })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="width: 29%; text-align: right; ">
+                        <b>Upload Picture :</b>
+                    </div>
+                    <div class="col-md-4">@Html.TextBoxFor(model => model.Logo, new { id = "IMGTxt", placeholder = "Image Path", readOnly = "true" })</div>
+                    <div class="col-md-4"> @Html.TextBoxFor(model => model.picture, new { type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })</div>
+                </div><br />
+
+                <div class="col-md-3"><img src="~/uploads/@Html.DisplayFor(model => model.Logo)" height="130" width="100" id="ImgPrv" /></div>
+                @Html.HiddenFor(model => model.Id)
+                <div class="text-right">
+                    <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<script>
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files[0].size < 1048576) {
+                    $("#ImgPrv").prop('src', e.target.result)
+                        .width(100)
+                        .height(100);
+                    $("#IMGTxt").val(input.value);
+                }
+                else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                    alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                }
+                else {
+                    alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                }
+
+
+
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

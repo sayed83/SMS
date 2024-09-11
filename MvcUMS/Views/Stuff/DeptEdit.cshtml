@@ -1,0 +1,36 @@
+﻿@model MvcUMS.Models.StuffDepartment
+@{
+    ViewBag.Title = "Stuff Department";
+
+    Layout = null;
+}
+
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Edit Department</h5>
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("DeptEdit", "Stuff", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+        {
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Designation Name:</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(m=>m.DepartmentName, null, new { @class = "form-control", placeholder = "Department Name", required = true })
+                    </div>
+                </div>
+
+            @Html.HiddenFor(model => model.DepartmentId)
+            <div class="text-right">
+                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+
+        }
+    </div>
+</div>

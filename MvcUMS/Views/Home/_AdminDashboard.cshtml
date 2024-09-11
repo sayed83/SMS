@@ -1,0 +1,210 @@
+﻿<!-- Quick stats boxes -->
+<div class="row">
+
+    <div class="col-lg-3">
+
+        <!-- Current server load -->
+        <div class="panel bg-teal-400">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li>
+                            <a href="#"><i class="icon-office"></i></a>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <h2 class="no-margin">@ViewBag.classes</h2>
+                <span class="cst">Classes</span>
+
+            </div>
+
+            <div id="server-load"></div>
+        </div>
+        <!-- /current server load -->
+
+    </div>
+
+    <div class="col-lg-3">
+
+        <!-- Current server load -->
+        <div class="panel bg-pink-400">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li>
+                            <a href="#"><i class="icon-users4"></i></a>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <h2 class="no-margin">@ViewBag.students</h2>
+                <span class="cst">Students</span>
+
+            </div>
+
+            <div id="server-load"></div>
+        </div>
+        <!-- /current server load -->
+
+    </div>
+
+    <div class="col-lg-3">
+
+        <!-- Current server load -->
+        <div class="panel bg-blue-400">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li>
+                            <a href="#"><i class="icon-users2"></i></a>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <h2 class="no-margin">@ViewBag.teachers</h2>
+                <span class="cst">Teachers</span>
+
+            </div>
+
+            <div id="server-load"></div>
+        </div>
+        <!-- /current server load -->
+
+    </div>
+
+    <div class="col-lg-3">
+
+        <!-- Current server load -->
+        <div class="panel bg-brown-400">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li>
+                            <a href="#"><i class="icon-user-tie"></i></a>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <h2 class="no-margin">@ViewBag.Management</h2>
+                <span class="cst">Executive Members</span>
+
+            </div>
+
+            <div id="server-load"></div>
+        </div>
+        <!-- /current server load -->
+
+    </div>
+
+</div>
+<!-- /quick stats boxes -->
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-body border-top-primary text-center">
+            <div class="btn-group">
+                <button type="button" class="btn bg-teal-400 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> Student <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("Student_entry", "Home")"><i class="icon-enter"></i> Student Admission</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("Student_list", "Home")"><i class="icon-list"></i> Student List</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-body border-top-primary text-center">
+            <div class="btn-group">
+                <button type="button" class="btn bg-purple-300 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> Teacher&Stuff <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("Create", "Stuff")"><i class="icon-enter"></i> New Employee Entry</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("Index", "Stuff")"><i class="icon-list"></i> Employee List</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-body border-top-primary text-center">
+            <div class="btn-group">
+                <button type="button" class="btn bg-blue-400 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> Attendance <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("std_attendence", "Home")"><i class="icon-enter"></i> Manual Attendance</a></li>
+                    <li><a href="@Url.Action("ManualAttendenceSearch", "Home")"><i class="icon-enter3"></i> Search Manual Attendance</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("showAttendence", "Home")"><i class="icon-accessibility"></i> Search Attendance</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-body border-top-primary text-center">
+            <div class="btn-group">
+                <button type="button" class="btn bg-brown-300 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> Payment <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("PaymentType", "Common")"><i class="icon-add-to-list"></i> Payment Type</a></li>
+                    <li><a href="@Url.Action("PaymentCreate", "Common")"><i class="icon-toggle"></i> Payment Amount</a></li>
+                    <li><a href="@Url.Action("MonthlyPaymentSetup", "Payment")"><i class="icon-new"></i> Create Invoice</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("SearchInvoiceList", "Payment")"><i class="icon-list3"></i> Invoice List</a></li>
+                    <li><a href="@Url.Action("SearchDueList", "Payment")"><i class="icon-list2"></i> Due List</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-md-4">
+        <div class="panel panel-body border-top-primary text-center">
+            <div class="btn-group">
+                <button type="button" class="btn bg-grey-400 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> Routine <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("SearchRutine", "Event")"><i class="icon-clapboard"></i> Class Routine</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("SearchExamRutine", "Event")"><i class="icon-xing"></i> Exam Routine</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-body border-top-primary text-center">
+            <div class="btn-group">
+                <button type="button" class="btn bg-slate-700 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> Result <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("SubjectMark", "Result")"><i class="icon-add-to-list"></i> Number Distribution</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("ShowResult", "Result")"><i class="icon-list3"></i> Generate Marksheet</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @*<div class="col-md-7">
+            <!-- Event colors -->
+            <div class="panel panel-flat">
+
+                <div class="panel-body">
+
+                    <div class="fullcalendar-event-colors"></div>
+                </div>
+            </div>
+            <!-- /event colors -->
+        </div>*@
+
+    <div class="col-md-12 attendance-chart" style="background-color:none">
+        <div class="panel panel-default">
+
+            <div id="visualization" style="height:400px"></div>
+
+        </div>
+    </div>
+</div>

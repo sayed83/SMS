@@ -1,0 +1,173 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.StudentInvoiceListViewModel>
+@{
+    ViewBag.Title = "Payment Amount Details";
+    Layout = null;
+    var totalDue = 0m;
+}
+<link href=" https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Due List
+        </h5>
+        <div class="heading-elements">
+            <a href="@Url.Action("MonthlyPaymentSetup", "Payment")" class="btn btn-success btn-xs">Create Invoice</a>
+        </div>
+    </div>
+    <table class="table datatable-button-print-basic table-bordered table-striped" id="paymentList" cellspacing="0">
+        <thead>
+            <tr class="table_header">
+                <th>Invoice No</th>
+                <th>Student</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Month</th>
+                <th>Due</th>
+                <th class="noExport">Status</th>
+                <th class="noExport">Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <a href="@Url.Action("InvoiceView", "Payment", new { id = item.Id})">
+                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+                        </a>
+
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.StudentName)</td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidAmount)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Month)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DueAmount)
+                        @{
+                totalDue += item.DueAmount;
+                        }
+                    </td>
+                    <td>
+                        <span class="label @("bg-" + (item.Status == "Paid" ? "blue" : "danger"))">@Html.DisplayFor(modelItem => item.Status)</span>
+                    </td>
+                    <td>
+                        <a href='#' data-toggle='modal' class="btn btn-xs" data-target='#PaymentCollectionDialog' onclick='GetPaymentCollection("@item.Id")'><i class="icon-add"></i>Collection</a>
+                    </td>
+                </tr>
+
+            }
+
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="col-sm-2"></th>
+                <th class="col-sm-2"></th>
+                <th class="col-sm-2"></th>
+                <th class="col-sm-2"></th>
+                <th class="col-sm-2">Total</th>
+                <th class="col-sm-2">@totalDue</th>
+                <th class="col-sm-2"></th>
+                <th class="col-sm-2"></th>
+            </tr>
+        </tfoot>
+
+    </table>
+
+
+
+
+
+</div>
+
+<div id="PaymentCollectionDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="PaymentCollectionPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $('.datatable-button-print-basic').DataTable({
+
+            buttons: [
+                {
+                    extend: 'print',
+                    text: '<i class="icon-printer position-left"></i> Print',
+                    className: 'btn bg-blue',
+                    title: 'Student List',
+                    autoPrint: true,
+                    footer: true,
+                    customize: function (win) {
+
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ]
+        });
+
+
+    });
+
+    function GetPaymentCollection(Id) {
+        $.ajax({
+            type: "GET",
+            data: { id: Id },
+            url: '@Url.Action("PaymentCollection", "Payment")',
+
+            success: function (result) {
+                $('#PaymentCollectionPartial').html(result);
+
+            }
+        });
+    }
+
+
+</script>

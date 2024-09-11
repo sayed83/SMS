@@ -1,0 +1,156 @@
+﻿@model IEnumerable<MvcUMS.Models.Sp_StdAdvanceSearc_Result>
+
+@{
+    ViewBag.Title = "AdvanceSearchPartial";
+    Layout = null;
+    var p = 1;
+}
+<style>
+</style>
+
+
+<!-- State saving -->
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Search Result</h5>
+
+    </div>
+
+
+    <table class="table datatable-button-print-basic-2 table-bordered table-striped table-hover">
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Class</th>
+                <th>Group</th>
+                <th>Section</th>
+                <th>Roll</th>
+                <th class="noExport">Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Std_id</td>
+                    <td>@item.Std_FName &nbsp; @item.Std_MName &nbsp; @item.Std_LName</td>
+                    <td>@item.Contact_no</td>
+                    <td>@item.Semester</td>
+                    <td>@item.Department</td>
+                    <td>@item.Section</td>
+                    <td>@item.RollNo</td>
+                    <td>
+                        @Html.ActionLink("View Profile", "StudentDetals", new { id = item.Id }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+<div id="StudentPassDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+</div>
+
+<div id="stdudentPromotion" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+</div>
+
+@*<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>*@
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#Table').after('<div id="nav"></div>');
+        var rowsShown = 10;
+        var rowsTotal = $('#Table tbody tr').length;
+        var numPages = rowsTotal / rowsShown;
+        for (i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<a href="#" class="btn btn-xs btn-default" rel="' + i + '">' + pageNum + '</a> ');
+        }
+        $('#Table tbody tr').hide();
+        $('#Table tbody tr').slice(0, rowsShown).show();
+        $('#nav a:first').addClass('active');
+        $('#nav a').bind('click', function () {
+
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#Table tbody tr').hide().slice(startItem, endItem).
+                css('display', 'table-row').animate({ opacity: 1 }, 300);
+        });
+    });
+
+    //$('.datatable-basic').DataTable({
+    //    autoWidth: false,
+    //    dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+    //    language: {
+    //        search: '<span>Filter:</span> _INPUT_',
+    //        lengthMenu: '<span>Show:</span> _MENU_',
+    //        paginate: { 'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←' }
+    //    },
+    //    drawCallback: function () {
+    //        $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+    //    },
+    //    preDrawCallback: function () {
+    //        $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+    //    }
+    //});
+
+    $(function () {
+
+        $('.datatable-button-print-basic-2').DataTable({
+
+            buttons: [
+                {
+                    extend: 'print',
+                    text: '<i class="icon-printer position-left"></i> Print',
+                    className: 'btn bg-blue',
+                    title: 'Student List',
+                    autoPrint: true,
+                    customize: function (win) {
+
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ]
+        });
+
+
+    });
+
+
+</script>
+

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FullResultDataSet" targetNamespace="http://tempuri.org/FullResultDataSet.xsd" xmlns:mstns="http://tempuri.org/FullResultDataSet.xsd" xmlns="http://tempuri.org/FullResultDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FullResultDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="FullResultDataSet" msprop:Generator_UserDSName="FullResultDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FullResult" msprop:Generator_TableClassName="FullResultDataTable" msprop:Generator_TableVarName="tableFullResult" msprop:Generator_TablePropName="FullResult" msprop:Generator_RowDeletingName="FullResultRowDeleting" msprop:Generator_RowChangingName="FullResultRowChanging" msprop:Generator_RowEvHandlerName="FullResultRowChangeEventHandler" msprop:Generator_RowDeletedName="FullResultRowDeleted" msprop:Generator_UserTableName="FullResult" msprop:Generator_RowChangedName="FullResultRowChanged" msprop:Generator_RowEvArgName="FullResultRowChangeEvent" msprop:Generator_RowClassName="FullResultRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SubjectCode" msprop:Generator_ColumnVarNameInTable="columnSubjectCode" msprop:Generator_ColumnPropNameInRow="SubjectCode" msprop:Generator_ColumnPropNameInTable="SubjectCodeColumn" msprop:Generator_UserColumnName="SubjectCode" type="xs:string" minOccurs="0" />
+              <xs:element name="SubjectTitle" msprop:Generator_ColumnVarNameInTable="columnSubjectTitle" msprop:Generator_ColumnPropNameInRow="SubjectTitle" msprop:Generator_ColumnPropNameInTable="SubjectTitleColumn" msprop:Generator_UserColumnName="SubjectTitle" type="xs:string" minOccurs="0" />
+              <xs:element name="fullmarks" msprop:Generator_ColumnVarNameInTable="columnfullmarks" msprop:Generator_ColumnPropNameInRow="fullmarks" msprop:Generator_ColumnPropNameInTable="fullmarksColumn" msprop:Generator_UserColumnName="fullmarks" type="xs:string" minOccurs="0" />
+              <xs:element name="passmarks" msprop:Generator_ColumnVarNameInTable="columnpassmarks" msprop:Generator_ColumnPropNameInRow="passmarks" msprop:Generator_ColumnPropNameInTable="passmarksColumn" msprop:Generator_UserColumnName="passmarks" type="xs:string" minOccurs="0" />
+              <xs:element name="classtest" msprop:Generator_ColumnVarNameInTable="columnclasstest" msprop:Generator_ColumnPropNameInRow="classtest" msprop:Generator_ColumnPropNameInTable="classtestColumn" msprop:Generator_UserColumnName="classtest" type="xs:string" minOccurs="0" />
+              <xs:element name="subjective" msprop:Generator_ColumnVarNameInTable="columnsubjective" msprop:Generator_ColumnPropNameInRow="subjective" msprop:Generator_ColumnPropNameInTable="subjectiveColumn" msprop:Generator_UserColumnName="subjective" type="xs:string" minOccurs="0" />
+              <xs:element name="objective" msprop:Generator_ColumnVarNameInTable="columnobjective" msprop:Generator_ColumnPropNameInRow="objective" msprop:Generator_ColumnPropNameInTable="objectiveColumn" msprop:Generator_UserColumnName="objective" type="xs:string" minOccurs="0" />
+              <xs:element name="practical" msprop:Generator_ColumnVarNameInTable="columnpractical" msprop:Generator_ColumnPropNameInRow="practical" msprop:Generator_ColumnPropNameInTable="practicalColumn" msprop:Generator_UserColumnName="practical" type="xs:string" minOccurs="0" />
+              <xs:element name="totalmarks" msprop:Generator_ColumnVarNameInTable="columntotalmarks" msprop:Generator_ColumnPropNameInRow="totalmarks" msprop:Generator_ColumnPropNameInTable="totalmarksColumn" msprop:Generator_UserColumnName="totalmarks" type="xs:string" minOccurs="0" />
+              <xs:element name="gradepoint" msprop:Generator_ColumnVarNameInTable="columngradepoint" msprop:Generator_ColumnPropNameInRow="gradepoint" msprop:Generator_ColumnPropNameInTable="gradepointColumn" msprop:Generator_UserColumnName="gradepoint" type="xs:string" minOccurs="0" />
+              <xs:element name="lettergrade" msprop:Generator_ColumnVarNameInTable="columnlettergrade" msprop:Generator_ColumnPropNameInRow="lettergrade" msprop:Generator_ColumnPropNameInTable="lettergradeColumn" msprop:Generator_UserColumnName="lettergrade" type="xs:string" minOccurs="0" />
+              <xs:element name="hightestmarks" msprop:Generator_ColumnVarNameInTable="columnhightestmarks" msprop:Generator_ColumnPropNameInRow="hightestmarks" msprop:Generator_ColumnPropNameInTable="hightestmarksColumn" msprop:Generator_UserColumnName="hightestmarks" type="xs:string" minOccurs="0" />
+              <xs:element name="fclasstest" msprop:Generator_ColumnVarNameInTable="columnfclasstest" msprop:Generator_ColumnPropNameInRow="fclasstest" msprop:Generator_ColumnPropNameInTable="fclasstestColumn" msprop:Generator_UserColumnName="fclasstest" type="xs:string" minOccurs="0" />
+              <xs:element name="fsubjective" msprop:Generator_ColumnVarNameInTable="columnfsubjective" msprop:Generator_ColumnPropNameInRow="fsubjective" msprop:Generator_ColumnPropNameInTable="fsubjectiveColumn" msprop:Generator_UserColumnName="fsubjective" type="xs:string" minOccurs="0" />
+              <xs:element name="fobjective" msprop:Generator_ColumnVarNameInTable="columnfobjective" msprop:Generator_ColumnPropNameInRow="fobjective" msprop:Generator_ColumnPropNameInTable="fobjectiveColumn" msprop:Generator_UserColumnName="fobjective" type="xs:string" minOccurs="0" />
+              <xs:element name="fpractical" msprop:Generator_ColumnVarNameInTable="columnfpractical" msprop:Generator_ColumnPropNameInRow="fpractical" msprop:Generator_ColumnPropNameInTable="fpracticalColumn" msprop:Generator_UserColumnName="fpractical" type="xs:string" minOccurs="0" />
+              <xs:element name="ftotalmarks" msprop:Generator_ColumnVarNameInTable="columnftotalmarks" msprop:Generator_ColumnPropNameInRow="ftotalmarks" msprop:Generator_ColumnPropNameInTable="ftotalmarksColumn" msprop:Generator_UserColumnName="ftotalmarks" type="xs:string" minOccurs="0" />
+              <xs:element name="fgradepoint" msprop:Generator_ColumnVarNameInTable="columnfgradepoint" msprop:Generator_ColumnPropNameInRow="fgradepoint" msprop:Generator_ColumnPropNameInTable="fgradepointColumn" msprop:Generator_UserColumnName="fgradepoint" type="xs:string" minOccurs="0" />
+              <xs:element name="flettergrade" msprop:Generator_ColumnVarNameInTable="columnflettergrade" msprop:Generator_ColumnPropNameInRow="flettergrade" msprop:Generator_ColumnPropNameInTable="flettergradeColumn" msprop:Generator_UserColumnName="flettergrade" type="xs:string" minOccurs="0" />
+              <xs:element name="fhightestmarks" msprop:Generator_ColumnVarNameInTable="columnfhightestmarks" msprop:Generator_ColumnPropNameInRow="fhightestmarks" msprop:Generator_ColumnPropNameInTable="fhightestmarksColumn" msprop:Generator_UserColumnName="fhightestmarks" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

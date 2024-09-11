@@ -1,0 +1,374 @@
+﻿#PaymentStatement > .table > tbody > tr > th,
+#PaymentStatement > .table > tfoot > tr > th,
+#PaymentStatement > .table > thead > tr > td,
+#PaymentStatement > .table > tbody > tr > td,
+#PaymentStatement > .table > tfoot > tr > td {
+    padding: 3px 10px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+
+#Partial > .table > thead > tr > th {
+    padding: 5px 6px;
+}
+
+#Partial > .table > tbody > tr:last-child, #Partial > .table > tbody > tr > td:last-child {
+    background: #f3f3f3;
+    color: #000;
+}
+
+.navbar-brand > img {
+    margin-top: -7px;
+    height: 35px;
+}
+
+.std-attentance-info {
+    margin-left: 4px;
+    margin-right: 20px;
+}
+
+.form-inline > .btn-group {
+    width: 200px;
+}
+
+.ui-datepicker {
+    z-index: 9999 !important;
+}
+
+
+
+.validation-error, .field-validation-error {
+    color: red;
+}
+
+/*.panel-body>.no-border-top-1{
+      border-top:0!important;
+  }*/
+
+/*.table-bordered > thead > tr > th{
+    border-bottom: 0;
+}
+
+  th.pad-top-10 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+    th.pad-left-10 {
+    position: relative;
+    left: 85px;
+}
+
+    .school-info {
+    position: relative;
+}
+
+    .std-personal-info {
+    position: absolute;
+    top: 110px;
+    left: 0;
+}
+
+    .std-exam-info{
+        float:right;
+        margin-top:-100px;
+    }*/
+
+/*.table-xxs > thead > tr > th, .table-xxs > tbody > tr > th, .table-xxs > tfoot > tr > th, .table-xxs > thead > tr > td, .table-xxs > tbody > tr > td, .table-xxs > tfoot > tr > td {
+   padding: 0 !important;
+        text-align:center;
+}*/
+
+
+
+
+
+.school-info > h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.school-info p {
+    margin-bottom: 0;
+}
+
+
+
+.logo-text p {
+    margin-bottom: 0 !important;
+    font-weight: 700;
+    margin: 0 auto;
+}
+
+img.school-logo {
+    margin-top: -10px;
+}
+
+
+
+.std-personal-info > .table-xxs > tbody > tr > td, .table-xxs > tbody > tr > th, .std-exam-info > .table-xxs > tbody > tr > td, .table-xxs > tbody > tr > th {
+    padding:1px !important;
+}
+
+
+.table-responsive.responsiv-table.std-personal-profile {
+    margin-top: 8px;
+    margin-left: 5px;
+}
+
+.std-personal-profile > .table-xxs > tbody > tr > td {
+    padding: 2px 0px 0px 10px !important;
+}
+
+.table-gpa > tbody > tr > td,
+.table-result > tbody > tr > td,
+.table-gpa > thead > tr > th,
+.table-result > tfoot > tr > th,
+.table-result > tfoot > tr > td,
+.table-grand-result > tbody > tr > td,
+.table-grand-result > thead > tr > th,
+.table-xxs > thead > tr > th {
+    padding: 0 3px !important;
+    text-align: center!important;
+}
+
+
+
+
+    .table-result > tbody > tr > td:nth-child(2), .table-result > tfoot > tr > th {
+        padding-left: 2px !important;
+        text-align: left !important;
+    }
+
+table.table.table-xxs.table-gpa.table-bordered, .school-logo {
+    margin-top: -20px;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.table-result > tbody > tr > td:first-child, .table-result > tfoot > tr > th {
+    padding-left: 2px !important;
+    text-align: center !important;
+}
+
+
+
+/*.signature h6 {
+    border-top: 1px solid #222;
+    text-align: center;
+    position: fixed;
+    bottom: 150px;
+}*/
+
+/*#hide-signature {
+        margin-top: 20px;
+    }*/
+
+/*#HalfMarkSheetPrint {
+    border: 2px solid;
+    height: 842px;
+}*/
+
+
+
+img.display-block {
+    visibility: hidden;
+}
+
+.school-info.text-center {
+    margin-top: 10px;
+}
+
+img.school-logo.pull-left {
+    position: relative;
+    left: 44px;
+    top: 10px;
+}
+
+.m-top-10 {
+    margin-top: 10px !important;
+}
+
+
+
+
+
+
+/*Begin Invoice part */
+
+/*.invoice {
+    margin: 0 auto;
+    border: 2px solid;
+    width: 794px;
+}*/
+
+.duplicate {
+    display: none;
+}
+
+.invoice-heading {
+    text-align: center;
+}
+
+    .invoice-heading h2, .invoice-heading p, .std-info p, .invoice table, .invoice .invoice-block .amounts {
+        margin: 0;
+    }
+
+    .invoice-heading h2 {
+        font-size: 17px;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    .invoice-heading p {
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+div#InvicePrintArea {
+    padding: 10px;
+}
+
+.invoice-sl {
+    display: inline;
+    position: absolute;
+    top: 45px;
+    left: 11px;
+    background: #ddd;
+    padding: 4px 2px 2px 5px;
+    width: 145px;
+}
+
+.invoice-date {
+    display: inline;
+    position: absolute;
+    top: 45px;
+    background: #ddd;
+    padding: 2px 0px 2px 5px;
+    width: 125px;
+    right: 10px;
+}
+
+.invoice-stdName, .std-info {
+    background: #ddd;
+    padding: 2px 10px 2px 5px;
+    margin: 8px 0 5px 0;
+}
+
+.invoice table > tbody > tr > td, .invoice .table > thead > tr > th {
+    padding: 1px 8px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/*.authorize-student {
+    text-align: center;
+    border-top: 1px solid #000;
+    margin-top: 40px;
+    font-weight: bold;
+    float: left;
+    width: 25%;
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 20px;
+    margin-bottom: 2px;
+}*/
+
+/*.authorize {
+    text-align: center;
+    border-top: 1px solid #000;
+    margin-top: 40px;
+    font-weight: bold;
+    float: left;
+    width: 30%;
+    font-size: 12px;
+    line-height: 12px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+}*/
+
+.invoice .invoice-logo-space {
+    margin-top: 0;
+    padding-top: 8px;
+}
+
+.invoice .invoice-block {
+    position: relative;
+}
+
+.printed-by {
+    text-align: left;
+    margin: 0 0px 5px 12px;
+    padding: 0;
+    /* width: 63%; */
+    /*position: absolute;*/
+    font-size: 12px;
+    left: 10px;
+    top: 117px;
+}
+
+.in-words {
+    border: 2px solid;
+    border-left: 0;
+    border-right: 0;
+    text-align: left;
+    padding: 0;
+    margin: 0px;
+    clear: both;
+}
+
+/* End Invoice part */
+
+
+/*Eidgah Marksheet Style*/
+
+.eidgah-school-title {
+    font-weight: 800;
+    padding: 0;
+    font-size: 40px;
+    margin: 0;
+}
+
+.eidgah-address{
+    font-weight:800;
+    font-size:20px;
+    margin-top:-11px;
+}
+
+
+
+h1.result-title {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.eidgah-sup-title {
+    margin: 20px 0 0px 0;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+
+
+/*End Eidgah Marksheet Style*/
+/* Start Semester Report part */
+#Partial > .table > tbody > tr > td {
+    padding: 8px;
+    line-height: 0.42857;
+    vertical-align: top;
+    border-top: 1px solid #e7ecf1;
+}
+
+.p-Hide {
+    display: none;
+}
+
+
+.compact {
+    border-top: 1px solid #222 !important;
+}

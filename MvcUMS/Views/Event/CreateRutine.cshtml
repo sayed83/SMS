@@ -1,0 +1,285 @@
+﻿@model MvcUMS.Models.Rutine
+
+@{
+    ViewBag.Title = "CreateRutine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #corsetitle {
+        width: 90%;
+        height: 30px;
+    }
+
+   #timeid {
+        width: 6;
+        height: 30px;
+    }
+  
+</style>
+<br />
+<h1 style="text-align:center">Routine Management</h1>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well">
+        @using (Html.BeginForm("CreateRutine", "Event", FormMethod.Post, new { id = "submitForm" }))
+        {
+            <table class="table table-bordered table-condensed table-hover">
+                <tr class="info">
+                    <td><b>Class</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })</td>
+                </tr>
+
+                <tr class="danger" style="display:none" id="group">
+                    <td><b>Department</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("Department", null, "Select", new { @class = "form-control" })</td>
+                </tr>
+               
+                <tr class="success">
+                    <td><b>Section</b></td>
+                    <td><b>:</b></td>
+                    <td><select id="Section" class="form-control"><option value=""></option></select></td>
+                </tr>
+                <tr class="info">
+                    <td><b>Teacher </b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.DropDownListFor(model => model.TeacherId, new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control", id = "teacher" })
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.TeacherId) </p>
+
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td><b>Course Code</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.DropDownListFor(model => model.SubjectTeacherId, new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control", id = "subject" })
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.SubjectTeacherId) </p>
+                    </td>
+                </tr>
+              
+                <tr class="danger">
+                    <td><b>Day</b></td>
+                    <td><b>:</b></td>
+
+                    <td>@Html.DropDownListFor(model => model.WeekId, ViewBag.Week as SelectList, "Select", new { @class = "form-control" })</td>
+                </tr>
+                <tr class="success">
+                    <td><b>Time</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.DropDownListFor(model => model.timeId, ViewBag.starttime as SelectList, "Select", new { @class = "form-control", id = "timeid", style = "font-size:medium" })
+
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.timeId) </p>
+                    </td>
+                </tr>
+                <tr class="info">
+                    <td style="text-align:left"></td>
+                    <td></td>
+                    <td><input type="submit" id="btncreate" name="Command" class="btn btn-success" value="Create" /></td>
+                </tr>
+
+            </table>
+            <p style="text-align:right"> @Html.ActionLink("Search Routine", "SearchRutine")</p>
+            <p style="color:red"> @TempData["error"]</p>
+        }
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        @*@{
+
+               Html.RenderAction("CourseList", "Common", new { Department = TempData["Department"], Semester = TempData["Semester"] });
+            }*@
+    </div>
+</div>
+
+@section Scripts {
+
+    <link href="~/Scripts/src/clockpicker.css" rel="stylesheet" />
+    <script src="~/Scripts/src/clockpicker.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#Semester').change(function () {
+
+            var s = $('#Semester').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $('#group').hide();
+            }
+
+        });
+
+    });
+</script>
+
+    <script type="text/javascript">
+
+        $('#timetext,#time').clockpicker({
+            placement: 'bottom',
+            align: 'left',
+            donetext: 'Done',
+            autoclose: 'true'
+        });
+
+    </script>
+
+<script type="text/javascript">
+    $("#Semester").change(function () {
+        var sem = $(this).val();
+        var url = "/Home/GetCourse/";
+        $.ajax({
+            url: "/MasterEntry/GetSection/",
+            data: { sem: sem },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option value=''>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#Section").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    });
+    $("#Section").change(function () {
+
+        $.ajax({
+
+            type: 'POST',
+
+            url: '@Url.Action("GetTeacherCode")',
+
+            dataType: 'json',
+
+            data: { idd: $("#Semester").val(), id: $("#Department").val(), sec: $("#Section").val() },
+
+            success: function (Data) {
+                var markups = "<option value='0'>Select</option>";
+
+                for (var x = 0; x < Data.length; x++) {
+                    markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                }
+                $("#teacher").html(markups).show();
+            },
+
+            error: function (ex) {
+
+                alert('Failed to retrieve Teacher.' + ex);
+
+            }
+
+        });
+
+        return false;
+
+    })
+</script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+
+        $("#teacher").change(function () {
+
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("GetSubjectCode")',
+
+                dataType: 'json',
+
+                data: { id: $("#teacher").val(), ids: $("#Semester").val(), idd: $("#Department").val(), sec: $("#Section").val() },
+
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#subject").html(markups).show();
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve Subject.' + ex);
+
+                }
+
+            });
+
+            return false;
+
+        })
+
+    });
+
+</script>
+
+    @*<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+
+        $("#Semester").change(function () {
+
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("GetSubjectCode")',
+
+                dataType: 'json',
+
+                data: { idd: $("#Semester").val(), id: $("#Department").val() },
+
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#subject").html(markups).show();
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve Subject.' + ex);
+
+                }
+
+            });
+
+            return false;
+
+        })
+
+    });
+
+    </script>*@
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

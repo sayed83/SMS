@@ -1,0 +1,326 @@
+﻿@model MvcUMS.Models.Student_info
+
+@{
+    ViewBag.Title = "Student_entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />
+<style>
+    #Std_id1 {
+        height: 30px;
+        width:25%;
+    }
+
+    #text-box, #DBTxt-box, #ADMtext-box, #IMGTxt, #gtextbox, #gmtextbox, #grtextbox, #gotextbox {
+        height: 30px;
+        width: 180px;
+    }
+    #psih {
+        display: none;
+        text-decoration: none;
+        margin-left: 100px;
+    }
+
+    #gl {
+        display: none;
+        text-decoration: none;
+    }
+
+    #gls {
+        text-decoration: none;
+    }
+
+
+    #psi {
+        text-decoration: none;
+        margin-left: 100px;
+    }
+    #addtext-box {
+        height: 30px;
+        width: 380px;
+    }
+
+    #schtextbox {
+        width: 400px;
+        height: 30px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Student Information</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-2 alert alert-info" style="width:20%"><b>Student Update</b></div>
+            <div class="col-md-10 alert alert-success form-inline" style="height: 54px; width: 80%">
+                @using (@Html.BeginForm("StudentSearch", "Home", FormMethod.Post))
+                {
+                    <b><a href="@Url.Action("Student_entry", "Home")">Create New</a> &nbsp;&nbsp; |&nbsp;&nbsp;<a href="@Url.Action("AdvanceSearch", "Home")">Advance Search</a>&nbsp;&nbsp; |&nbsp;&nbsp; Search Student &nbsp;&nbsp; @Html.TextBox("Std_id1", null, new { placeholder = "Enter Student Id" })    <input type="submit" value="Search" id="btnSubmitSe" /></b>
+                }
+
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-center" style="color:green"> @TempData["saved"]</h4>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            @using (Html.BeginForm("Student_update", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <span style="color:red">@Html.ValidationSummary(true)</span>
+                @Html.HiddenFor(x=>x.Id)
+                <fieldset>
+                    <div class="col-md-12 alert alert-warning">
+                        <div class="row">
+                            <div class="col-md-3" style="width:21%"><b>Admission Date <span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                            <div class="col-md-3" style="width:25%">  <span style="color:red">@Html.ValidationMessageFor(model => model.Admission_date)</span> @Html.TextBoxFor(model => model.Admission_date, new { @class = "form-control", id = "ADMtext-box", placeholder = "Admission Date" })</div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-3" style="width: 21%; text-align: right; "><b>Student Name  <span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                            <div class="col-md-3" style="width:25%"><span style="color:red">@Html.ValidationMessageFor(model => model.Std_FName)</span>@Html.TextBoxFor(model => model.Std_FName, new { @class = "form-control", placeholder = "First Name", id = "text-box" })</div>
+
+                            <div class="col-md-3" style="width:25%">@Html.TextBoxFor(model => model.Std_MName, new { @class = "form-control", placeholder = "Mid Name", id = "text-box" })</div>
+                            <div class="col-md-3" style="width:26%">   @Html.TextBoxFor(model => model.Std_LName, new { @class = "form-control", placeholder = "Last Name", id = "text-box" })</div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-3" style="width: 21%; text-align: right; "><b>Father Name <span style="color:Red;font-size:15px">&nbsp*</span>&nbsp;:</b></div>
+                            <div class="col-md-3" style="width:28%"><span style="color:red">@Html.ValidationMessageFor(model => model.Father_Name)</span>@Html.TextBoxFor(model => model.Father_Name, new { @class = "form-control", id = "text-box", placeholder = "Father Name" })</div>
+
+                            <div class="col-md-3" style="width:21%"><b>Mother Name <span style="color:Red;font-size:15px">&nbsp*</span>&nbsp;:</b></div>
+                            <div class="col-md-3" style="width:28%">   <span style="color:red">@Html.ValidationMessageFor(model => model.Mother_Nmae)</span>@Html.TextBoxFor(model => model.Mother_Nmae, new { @class = "form-control", id = "text-box", placeholder = "Mother Name" })       </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-4" style="width: 30%; text-align: right; ">
+                                        <b>Present Address :</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="color:red">@Html.ValidationMessageFor(model => model.Present_address)</span>@Html.TextBoxFor(model => model.Present_address, new { @class = "form-control", id = "addtext-box", placeholder = "Parmenent Address" })
+                                    </div>
+                                </div><br />
+                                <div class="row">
+                                    <div class="col-md-4" style="width: 30%; text-align: right; ">
+                                        <b>Permenent Address <span style="color:Red;font-size:15px">&nbsp*</span>&nbsp;:</b>
+                                    </div>
+                                    <div class="col-md-8"><span style="color:red">@Html.ValidationMessageFor(model => model.Parmenent_address)</span>@Html.TextBoxFor(model => model.Parmenent_address, new { @class = "form-control", id = "addtext-box", placeholder = "Present Address" })</div>
+                                </div><br />
+                                <div class="row">
+                                    <div class="col-md-4" style="width: 29%; text-align: right; ">
+                                        <b>Upload Picture :</b>
+                                    </div>
+                                    <div class="col-md-4">@Html.TextBoxFor(model => model.Picture, new { id = "IMGTxt", placeholder = "Image Path", readOnly = "true" })</div>
+                                    <div class="col-md-4"> @Html.TextBoxFor(model => model.image, new { type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })</div>
+                                </div><br />
+                            </div>
+                            <div class="col-md-3"><img src="~/uploads/@Html.DisplayFor(model => model.Picture)" height="130" width="100" id="ImgPrv" /></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3" style="width: 21%; text-align: right;"><b>Date of Birth :</b></div>
+                            <div class="col-md-3" style="width:28%"><span style="color:red">@Html.ValidationMessageFor(model => model.Birth_date)</span>@Html.TextBoxFor(model => model.Birth_date, new { @class = "form-control", id = "DBTxt-box", placeholder = "Date Of Birth" })</div>
+                            <div class="col-md-3" style="width:21%">
+                                <b>Gender <span style="color:Red;font-size:15px">&nbsp*</span>&nbsp;:</b>
+                            </div>
+                            <div class="col-md-3"><span style="color:red">@Html.ValidationMessageFor(model => model.Gender)</span>@Html.RadioButtonFor(model => model.Gender, "Male")<b> Male&emsp;&emsp;</b>@Html.RadioButtonFor(model => model.Gender, "Female")<b> Female</b></div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-3" style="width: 21%; text-align: right;"><b>Contact No :</b></div>
+                            <div class="col-md-3" style="width:27%">@Html.TextBoxFor(model => model.Contact_no, new { @class = "form-control", id = "text-box", placeholder = "Contact No" })<span style="color:red">@Html.ValidationMessageFor(model => model.Contact_no)</span></div>
+
+                            
+                        </div><br />
+
+                        <div class="row">
+                            <div class="col-md-10 alert alert-success form-inline" style="height:45px; width:95%;margin-left:18px">
+                                <a href="#" id="gls">Gardian Detail</a> @*<a href="#" id="gl" style="display:none">Hide Gardian</a>*@ <a href="#" id="psi">Privious School Information</a> <a href="#" id="psih">Privious School Information</a>
+                            </div>
+                        </div>
+                        <div id="gardian">
+
+                            <div class="row">
+                                <div class="col-md-3" style="width: 21%; text-align: right;"><b>Gardian Name </b></div>
+                                <div class="col-md-3" style="width:27%">@Html.TextBoxFor(model => model.GardianName, new { @class = "form-control", id = "gtextbox", placeholder = "Gardian Name" })<span style="color:red">@Html.ValidationMessageFor(model => model.GardianName)</span></div>
+
+                                <div class="col-md-3" style="width:22%"><b>Contact Number </b></div>
+                                <div class="col-md-3" style="width:27%">@Html.TextBoxFor(model => model.GardianMobile, new { @class = "form-control", id = "gmtextbox", placeholder = "Gardian Mobile" })<span style="color:red">@Html.ValidationMessageFor(model => model.GardianMobile)</span></div>
+                            </div><br />
+
+
+                            <div class="row">
+                                <div class="col-md-3" style="width: 21%; text-align: right;"><b>Relation </b></div>
+                                <div class="col-md-3" style="width:27%">@Html.TextBoxFor(model => model.GurdianRelation, new { @class = "form-control", id = "grtextbox", placeholder = "Relation" })<span style="color:red">@Html.ValidationMessageFor(model => model.GurdianRelation)</span></div>
+
+                                <div class="col-md-3" style="width:22%"><b>Gardian Occupation </b></div>
+                                <div class="col-md-3" style="width:27%">@Html.TextBoxFor(model => model.GardianOccupation, new { @class = "form-control", id = "gotextbox", placeholder = "Gardian Occupation" })<span style="color:red">@Html.ValidationMessageFor(model => model.GardianOccupation)</span></div>
+                            </div><br />
+                        </div>
+
+
+                        <div id="psinfo" style="display:none">
+
+                            <div class="row">
+                                <div class="col-md-3" style="width: 21%; text-align: right;"><b>School Name :</b></div>
+                                <div class="col-md-8" style="width:40%">@Html.TextBoxFor(model => model.BeforeSchool, new { @class = "form-control", id = "schtextbox", placeholder = "School Name" })<span style="color:red">@Html.ValidationMessageFor(model => model.BeforeSchool)</span></div>
+
+
+                            </div><br />
+
+
+                            <div class="row">
+                                <div class="col-md-3" style="width: 21%; text-align: right;"><b>Class :</b></div>
+                                <div class="col-md-3" style="width:28%">@Html.TextBoxFor(model => model.BeforeClass, new { @class = "form-control", id = "gotextbox", placeholder = "Class" })<span style="color:red">@Html.ValidationMessageFor(model => model.BeforeClass)</span></div>
+                                <div class="col-md-3" style="width:21%"><b>GPA :</b></div>
+                                <div class="col-md-3" style="width:27%">@Html.TextBoxFor(model => model.BeforeGpa, new { @class = "form-control", id = "grtextbox", placeholder = "GPA" })<span style="color:red">@Html.ValidationMessageFor(model => model.BeforeGpa)</span></div>
+
+
+                            </div><br />
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-5"> </div>
+                            <div class="col-md-2"><input type="submit" class="btn btn-info" value="Update" /> </div>
+                            <div class="col-md-5"> </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Student_list")
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-1"></div>
+</div>
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#ADMtext-box,#DBTxt-box").datepicker(
+                {
+                    dateFormat: 'yy/mm/dd',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-30:+5"
+                });
+        });
+
+        function ShowImagePreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                    if (input.files[0].size < 1048576) {
+                        $("#ImgPrv").prop('src', e.target.result)
+                       .width(100)
+                       .height(100);
+                        $("#IMGTxt").val(input.value);
+                    }
+                    else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                        alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                    }
+                    else {
+                        alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                    }
+
+
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Std_id1").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/getData",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Std_id, value: item.Std_id };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+    </script>
+<script>
+    $(function () {
+        $('#btnSubmitSe').click(function () {
+            var txt = $('#Std_id1');
+            if (txt.val() != null && txt.val() != '') {
+                return true;
+            }
+            else {
+                alert('Please enter text')
+                return false;
+            }
+        })
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#gls").click(function () {
+            $("#gardian").show();
+            //$("#gl").show();
+            //$("#gls").hide();
+
+        });
+        //$("#gl").click(function () {
+        //    $("#gardian").hide();
+
+        //    $("#gls").show();
+        //    $("#gl").hide();
+        //});
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#psi").click(function () {
+            $("#psinfo").show();
+            $("#psih").show();
+            $("#psi").hide();
+
+        });
+        $("#psih").click(function () {
+            $("#psinfo").hide();
+
+            $("#psi").show();
+            $("#psih").hide();
+        });
+    });
+</script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

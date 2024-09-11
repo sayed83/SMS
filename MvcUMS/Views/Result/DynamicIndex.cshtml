@@ -1,0 +1,34 @@
+﻿@model List<Dictionary<string, object>>
+@{
+    ViewBag.Title = "DynamicIndex";
+    Layout = null;
+}
+<h2>Dynamic Data</h2>
+@using (Html.BeginForm("MarkStudentLists", "Result", new { CourseId = ViewBag.subject, Semester = ViewBag.semester, ExamId = ViewBag.examnameid }, FormMethod.Post))
+{
+    <input type="hidden" name="CourseId" id="CourseId" value="@ViewBag.subject" />
+    <input type="hidden" name="ExamId" id="ExamId" value="@ViewBag.examnameid" />
+    <table class="table table-bordered">
+        @foreach (var row in Model.FirstOrDefault())
+        {
+            <th>@row.Key</th>
+        }
+        @foreach (var row in Model)
+        {
+            <tr>
+
+                    @foreach (var column in row)
+                    {
+                        <td>@Html.TextBoxFor(m=>column.Value)</td>
+                    }
+
+                    @*<td>@column.Value</td>*@
+                
+            </tr>
+        }
+
+    </table>
+    <div class="text-left">
+        <input type="submit" class="btn btn-primary" value="Save" />
+    </div>
+}

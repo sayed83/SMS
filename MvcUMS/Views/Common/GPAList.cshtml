@@ -1,0 +1,66 @@
+﻿
+@model PagedList.IPagedList<MvcUMS.Models.GPAType>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "GPAList";
+    Layout = null;
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            GPA List
+        </h5>
+
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="gpaList">
+                <thead>
+                    <tr>
+                        <th>Mark</th>
+                        <th>GPA</th>
+                        <th>Grade Point</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align:center">
+                                @item.Startmark - @item.endmark
+                            </td>
+
+                            <td style="text-align: center">
+                                @item.GPA
+                            </td>
+                            <td>
+                                @item.GradePoint
+                            </td>
+                            <td>
+                                <ul class="icons-list">
+                                    <li><a href="@Url.Action("EditGPA", "result", new { id=item.Id })" class="btn btn-xs"><i class="icon-pencil7"></i></a></li>
+                                    <li>
+                                        <a href="@Url.Action("DeleteGPA", "result", new { id = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm('Are you want to delete?');"><i class="icon-trash"></i></a>
+                                    </li>
+
+                                </ul>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
