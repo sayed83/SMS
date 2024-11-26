@@ -755,7 +755,7 @@ namespace MvcUMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchExamRutine(int ExamType, string Semester,string Department)
+        public ActionResult SearchExamRutine(int? ExamType, string Semester,string Department)
         {
             ViewBag.ExamType = new SelectList(et.ExamType, "Id", "Examtype");
             ViewBag.Semester = new SelectList(sdb.Semester, "Semester_name", "Semester_name");

@@ -233,6 +233,14 @@ namespace MvcUMS.Controllers
         public ActionResult Edit(Guid id)
         {
             Stuff stuff = db.Stuff.Find(id);
+            if (stuff == null) return HttpNotFound();
+            
+            if (string.IsNullOrWhiteSpace(stuff.UserName))
+            {
+                stuff.UserName = stuff.Email;
+            }
+
+            
             stuff.PrvUserName = stuff.UserName;
             ViewBag.password="1";
             ViewBag.Cpassword = "1";
@@ -243,10 +251,7 @@ namespace MvcUMS.Controllers
             ViewBag.ZIPList = new SelectList(zipdb.ZIP, "Id", "ZIPCode");
             ViewBag.UpzilaList = new SelectList(citydb.Upazila, "Id", "UpazilaName");
 
-            if (stuff == null)
-            {
-                return HttpNotFound();
-            }
+           
             return View(stuff);
         }
 
