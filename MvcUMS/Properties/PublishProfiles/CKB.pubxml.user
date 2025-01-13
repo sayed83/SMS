@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>D:\Publish Project\School</_PublishTargetUrl>
-    <History>True|2024-07-29T04:02:46.9267858Z||;</History>
+    <History>False|2024-12-08T04:22:32.8426151Z||;False|2024-12-08T10:22:02.8677919+06:00||;True|2024-07-29T10:02:46.9267858+06:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
