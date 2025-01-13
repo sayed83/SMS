@@ -1,0 +1,182 @@
+﻿@model List<MvcUMS.Models.Course>
+@{
+    ViewBag.Title = "CourseAsignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #Department, #Semester, #Section {
+        width: 60%;
+        height: 30px;
+    }
+   #TeacherList {
+        width: 80%;
+        height: 30px;
+    }
+
+
+     .webgrid-table {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #ddd;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #caccc5;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        font-size: 14px;
+        background-color: #bebfb9;
+        color: black;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h2>Course Asignment</h2>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well">
+        @using (Html.BeginForm("CourseAsignment", "Common", FormMethod.Post, new { id = "submitForm" }))
+        {
+            <table class="table table-bordered table-condensed table-hover">
+
+                <tr class="info">
+                    <td><b>Class</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })</td>
+                </tr>
+                <tr class="danger" style="display:none" id="group">
+                    <td><b>Department</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("Department", null, "Select", new { @class = "form-control" })</td>
+                </tr>
+             
+                <tr class="success">
+                    <td><b>Section</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                      @Html.DropDownList("Section", null, "Select", new { @class = "form-control" })
+                    </td>
+               </tr>
+
+                <tr class="info">
+                    <td><b>Teacher</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("TeacherList", null, "Select", new { @class = "form-control" })</td>
+                </tr>
+                <tr class="info">
+                    <td style="text-align:left"></td>
+                    <td></td>
+                    <td><input type="submit" id="btncreate" name="Command" class="btn btn-success" value="Search" /></td>
+                </tr>
+            </table>
+
+        }
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+@using (Html.BeginForm("TeacherSubject", "Common", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              
+                <input type="hidden" name="teacherId" id="teacherId" value="@ViewBag.teacherid" />
+                <input type="hidden" name="section" id="section" value="@ViewBag.sec" />
+                
+                <table class="table table-bordered table-responsive pagesize webgrid-table " id="tablesorter">
+                    <tr class="webgrid-header">
+                        <th style="text-align:center">
+
+                            Subject Id
+                        </th>
+                        <th style="text-align:center">
+                            Subject Name
+                        </th>
+                       
+                        <th></th>
+
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align:center">
+                                @item.CourseId
+                            </td>
+                            <td style="text-align:center">
+                                @item.CourseTitle
+                            </td>
+                          
+                            <td style="text-align:center"><input type="checkbox" value="@item.CourseId" name="ids" /><input type="hidden" name="Id" value="@ViewBag.teacherid" id="Id" /> </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+    </div>
+    <div id="ap" style="display:none;text-align:center" class="row">
+         <input type="submit" id="btnS" class="btn btn-success" value="Submit" />
+    </div>
+
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+        $('#Semester').change(function () {
+
+            var s = $('#Semester').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $('#group').hide();
+            }
+
+        });
+
+    });
+</script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                var res = '@ViewBag.Visibility';
+                if (res == "true") {
+                    $('#ap').css("display","block");
+                }
+                if (res == "false") {
+                    $('#ap').hide();
+                }
+            });
+    </script>
+}

@@ -1,0 +1,93 @@
+﻿@model MvcUMS.Models.ViewModels.StudentDetailsForMarksheetViewModel
+@{
+    Layout = null;
+}
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+
+<div class=" col-sm-5 std-personal-info">
+    <table class="table table-xxs table-borderless">
+        <tbody>
+            <tr>
+                <td>
+                    <img src="~/uploads/@Model.Photo" alt="School Logo" height="100" width="80" />
+                </td>
+            </tr>
+            <tr>
+                <th>Student's Name</th>
+                <td>:</td>
+                <td><strong>@Model.Name</strong></td>
+            </tr>
+            <tr>
+                <th>Father's Name</th>
+                <td>:</td>
+                <td><strong>@Model.FatherName</strong></td>
+            </tr>
+            <tr>
+                <th>Mother's Name</th>
+                <td>:</td>
+                <td><strong>@Model.MotherName</strong></td>
+            </tr>
+            <tr>
+                <th>Student's ID</th>
+                <td>:</td>
+                <td><strong>@Model.StdId</strong> </td>
+            </tr>
+            <tr>
+                <th>Class</th>
+                <td>:</td>
+                <td><strong>@Model.Class</strong> </td>
+            </tr>
+            <tr>
+                <th>Roll No</th>
+                <td>:</td>
+                <td><strong>@Model.Roll</strong> </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class=" col-sm-offset-3 col-sm-4 std-exam-info">
+    <table class="table table-xxs table-borderless">
+        <tbody>
+            <tr>
+                <th>&nbsp;</th>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <th>Exam:</th>
+                <td>@Model.Exam</td>
+            </tr>
+            <tr>
+                <th>Year/Session:</th>
+                <td>2018</td>
+            </tr>
+            <tr>
+                <th>Group:</th>
+                <td>@Model.Group</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+@*<div class="col-sm-12">
+    <div class="content-group">
+
+        
+
+    </div>
+</div>*@

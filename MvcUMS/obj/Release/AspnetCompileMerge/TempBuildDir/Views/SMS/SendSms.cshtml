@@ -1,0 +1,52 @@
+﻿@model MvcUMS.Models.SMS
+@{
+    ViewBag.Title = "SendSms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+        @using (Html.BeginForm("SendSms", "SMS", FormMethod.Post,
+            new { 
+                @class = "form-horizontal"
+            }))
+        {
+           
+        <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Send SMS</div>
+                </div>
+                <div class="panel-body">
+                    <span class="text-danger">@TempData["success"]</span>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Contact No:</label>
+                        <div class="col-lg-9">
+
+                            @Html.TextBoxFor(model => model.phone, new { @class = "form-control", id = "text", placeholder = "Enter Mobile Number" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Message:</label>
+                        <div class="col-lg-9">
+
+                            @Html.TextAreaFor(model => model.Text, new { @class = "form-control", id = "text", placeholder = "Enter Message" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <input type="submit" id="btnSearch" class="btn btn-success" value="Send" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        }
+        
+
+
+

@@ -1,0 +1,148 @@
+﻿@model MvcUMS.Models.User_Registration
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />
+<style>
+    /*#Std_id1 {
+        height: 30px;
+        width: 25%;
+    }*/
+
+    #text-box,#IMGTxt, #email, #conpass,#password {
+        height: 30px;
+        width: 180px;
+    }
+
+    #addtext-box {
+        height: 30px;
+        width: 380px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+<div class="row">
+<div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("UserCreation", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>User Registration</legend>
+                <div class="col-md-12 alert alert-link" style="background-color:#dce2e2;border-radius:10px">
+                    <div class=" row">
+                    <div class="col-md-4"><b>Email<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                    <div class="col-md-8">
+
+                        @Html.TextBoxFor(model => model.Email_Id, new { placeholder = "Email", id ="email" })
+                        <span style="color:red">@Html.ValidationMessageFor(model => model.Email_Id)</span>
+                    </div>
+
+                </div>
+                    @*<div class="row">
+                        <div class="col-md-4"><b>Employee Code <span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                        <div class="col-md-8">
+                           
+                            @Html.TextBoxFor(model => model.EmployeeID, new { placeholder = "Employee Code", id = "text-box" })
+                            <span style="color:red">@Html.ValidationMessageFor(model => model.EmployeeID)</span>
+                        </div>
+
+                    </div>*@
+                    <div class="row">
+                        <div class="col-md-4"><b>User Name<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                        <div class="col-md-8">
+                        
+                            @Html.TextBoxFor(model => model.UserName, new { placeholder = "UserName", id = "text-box" })
+                            <span style="color:red">@Html.ValidationMessageFor(model => model.UserName)</span>
+                        </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><b>Password<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                        <div class="col-md-8">
+                        
+                            @Html.PasswordFor(model => model.Password,new { id = "password" }) 
+                            <span style="color:red">
+                            @Html.ValidationMessageFor(model => model.Password)</span>
+                        </div>
+
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-4"><b>Confirm Password<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                        <div class="col-md-8">
+                          
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { id = "conpass" })
+                            <span style="color:red">@Html.ValidationMessageFor(model => model.ConfirmPassword)</span>
+                        </div>
+
+                    </div>
+ 
+                    </div>
+            
+                    <p>
+                        <input type="submit" value="Create" />
+                    </p>
+</fieldset>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+<div class="col-md-3"></div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>
+    <script src="~/Scripts/combodate.js"></script>
+    <script src="~/Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.8.1.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+$(function() {
+    $('#email').change(function () {
+        $.ajax({
+            url: '@Url.Action("GetData", "Account")',
+            type: 'GET',
+            cache: false,
+            data: { email: $('#email').val() },
+            success: function (result) {
+                if (result == "1")
+                {
+                    $("#text-box").prop('disabled', false);
+                    $("#conpass").prop('disabled', false);
+                    $("#password").prop('disabled', false);
+                
+                }
+                else
+                {
+                   
+                    $("#text-box").prop('disabled', true);
+                    $("#conpass").prop('disabled', true);
+                    $("#password").prop('disabled', true);
+                    alert("You are not register employee.");
+                }
+
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+
+            }
+        });
+        return false;
+    });
+});
+
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+}

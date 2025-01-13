@@ -1,0 +1,311 @@
+﻿
+@model PagedList.IPagedList<MvcUMS.Models.BookList>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "BookSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Book List</h5>
+
+    </div>
+
+ 
+    <table class="table datatable-button-print-basic table-striped">
+        <thead>
+
+            <tr class="table_header">
+
+                <th>Book ID</th>
+                <th>Name</th>
+                <th>Auther</th>
+                <th>Price</th>
+                <th>Book Copy</th>
+                <th>Issued Book</th>
+                <th>Tolal Book</th>
+                <th class="noExport">Action</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @{
+
+                decimal totalbook = 0;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @item.BookId
+                    </td>
+                    <td>
+
+                        @item.BookName
+                    </td>
+                    <td>
+
+                        @item.authername
+                    </td>
+                    <td>
+                        @item.Prise
+
+                    </td>
+                    <td>
+
+                        @item.BookCopy
+                    </td>
+                    <td>
+                        @{
+                var getbook = 0;
+
+                        }
+                        @{ if (@item.Id != "")
+                         {
+                            @item.GetBook;
+
+                         }
+                         else
+                         {
+
+                            @getbook
+                         }
+
+                        }
+
+                    </td>
+                    <td>
+                        @{ if (@item.Id != "")
+                         {
+                             var value = (@item.BookCopy - @item.GetBook).ToString();
+                             totalbook = totalbook + Convert.ToDecimal(value);
+                            @value
+
+                         }
+                         else
+                         {
+
+                             var value = (@item.BookCopy - 0).ToString();
+                             totalbook = totalbook + Convert.ToDecimal(value);
+                            @value
+                         }
+
+                        }
+                        Copies
+                    </td>
+                    <td>
+
+                        @{
+                if (@item.isactive == true)
+                {
+                    @Html.ActionLink("Deactive", "BookActive", new { id = @item.BookId }, new { @class = "btn btn-danger btn-xs", data_toggle = "modal", data_target = "#ConfirmeDialog" })@*btn btn-danger*@
+                }
+                else
+                {
+                    @Html.ActionLink("Active", "BookActive", new { id = @item.BookId }, new { @class = "btn btn-success btn-xs", data_toggle = "modal", data_target = "#ConfirmeDialog" })  @*btn btn-success*@
+                }
+                        }
+
+
+                        @{
+                if (@item.isactive == true)
+                {
+                    @Html.ActionLink("GetBook", "PurchaseBook", new { id = @item.BookId }, new { @class = "btn btn-success btn-xs", data_toggle = "modal", data_target = "#EditBookDialog" } @*new { @class = "btn btn-success" }*@)
+                }
+
+                        }
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+ 
+</div>
+
+<!-- Basic modal -->
+<div id="ConfirmeDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">User Varification Dialog</h5>
+
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.TextBox("pass", null, new { type = "password", @class = "form-control" })
+                            <input type="submit" id="modalBtn" class="btn btn-info" value="submit" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /basic modal -->
+
+<!-- Basic modal -->
+<div id="EditBookDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">User Varification Dialog</h5>
+
+                    </div>
+
+                    <div class="panel-body">
+                        <div id="partial"></div>
+                    </div>
+
+                    <table class="table datatable-save-state datatable-tbllandlord">
+                        <thead>
+
+                            <tr>
+                                <td>@Html.TextBox("pass", null, new { type = "password", @class = "form-control" })</td>
+                                <td><input type="submit" id="modalBtn" class="btn btn-info" value="Submit" /></td>
+
+                            </tr>
+
+                        </thead>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+  
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#BookCatagory").change(function () {
+            if ($("#BookCatagory option:selected").val() == '')
+            {
+                $("#Auther").empty();
+                return false;
+            }
+            else {
+                //$("#city").empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetAuther", "Library")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#BookCatagory").val() },
+
+                    success: function (Data) {
+
+                        var markup = "<option value='0'>Select Auther</option>";
+                        for (var x = 0; x < Data.length; x++) {
+                            markup += "<option Value='" + Data[x].Value + "'>" + Data[x].Text + "</option>";
+                        }
+
+                        $("#Auther").html(markup).show();
+
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve Autheir.' + ex);
+
+                    }
+
+                });
+            }
+
+        });
+
+        $(function () {
+
+            $('.datatable-button-print-basic').DataTable({
+
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: '<i class="icon-printer position-left"></i> Print table',
+                        className: 'btn bg-blue',
+                        title: 'Book List',
+                        customize: function (win) {
+
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        },
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
+                    }
+                ]
+            });
+
+
+        });
+
+    });
+
+</script>
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+    }

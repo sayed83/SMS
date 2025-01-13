@@ -1,0 +1,266 @@
+﻿@{
+    ViewBag.Title = "Advance Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="advance-search">
+    <div class="panel panel-white">
+        <div class="panel-heading text-center">
+            <h3>Advanced Search</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row">
+
+
+                <div class="col-md-3">
+                    <fieldset>
+                        <div class="form-group">
+                            <label>Student ID:</label>
+                            @Html.TextBox("Std_id", null, new { @class = "form-control" })
+
+                        </div>
+
+
+
+                    </fieldset>
+                </div>
+
+                <div class="col-md-3">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label>Class:</label>
+
+
+                            @Html.DropDownList("Semester", ViewBag.Semester as SelectList, "Select", new { @class = "form-control" })
+
+                        </div>
+
+                    </fieldset>
+                </div>
+
+                <div class="col-md-3" id="group">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label>Group:</label>
+
+                            @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="col-md-3" id="sec">
+
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label>Section:</label>
+
+                            <select id="Section" class="form-control"><option value=""></option></select>
+
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Admission Date From:</label>
+
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+
+                            @Html.TextBox("DFrom", null, new { @class = "form-control datepicker", placeholder = "Admission Date From" })
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Admission Date To:</label>
+
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+
+                            @Html.TextBox("DTo", null, new { @class = "form-control datepicker", placeholder = "Admission Date To" })
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label>Roll:</label>
+
+
+                            @Html.TextBox("RollNo", null, new { readOnly = true, @class = "form-control", placeholder = "Roll No" })
+
+                        </div>
+
+                    </fieldset>
+                </div>
+
+
+                <div class="col-md-3">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label>Status:</label>
+
+                            @Html.DropDownList("Status", ViewBag.Status as SelectList, "Select", new { @class = "form-control" })
+
+                        </div>
+
+                    </fieldset>
+                </div>
+
+            </div>
+            <div class="text-center">
+
+                <input type="submit" class="btn btn-primary" id="btnSearch" value="Search" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="partial"></div>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+                debugger;
+
+            });
+        });
+        $("#Semester").change(function () {
+            var sem = $(this).val();
+            var url = "/Home/GetCourse/";
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+        $("#Section").change(function () {
+            if ($(this).val() != '') {
+                $("#RollNo").attr("readOnly", false)
+            }
+            else {
+                $("#RollNo").attr("readOnly", true)
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#DFrom,#DTo").datepicker(
+                {
+                    dateFormat: 'yy/mm/dd',
+                    changeMonth: true,
+                    changeYear: true
+                });
+        });
+
+        $(function () {
+            $("#Std_id").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/getData",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Std_id, value: item.Std_id };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#btnSearch').click(function () {
+                var tex = $('#Std_id').val();
+                var DFtex = $('#DFrom').val();
+                var DTtex = $('#DTo').val();
+                if (DFtex != null && DFtex != '' && DTtex == '') {
+                    alert('Please enter admission date to')
+                }
+                else if (DTtex != null && DTtex != '' && DFtex == '') {
+                    alert('Please enter admission date from')
+                }
+                else {
+                    $('#partials').html("");
+                    var dep = $('#Department').val();
+                    var sem = $('#Semester').val();
+                    var sec = $('#Section').val();
+                    var sta = $('#Status').val();
+                    var roll = $("#RollNo").val();
+                    $.ajax({
+                        type: "POST",
+                        data: { Std_id: tex, DFrom: DFtex, DTo: DTtex, Department: dep, Semester: sem, Section: sec, roll: roll, Status: sta },
+                        url: '@Url.Action("AdvanceSearchPartial", "Home")',
+                        success: function (result) {
+                            $('#partial').html(result);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

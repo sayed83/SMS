@@ -1,0 +1,183 @@
+﻿/*#navl {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}*/
+#navl,#navl ul {
+    background-color: #8899AA;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+#navl {
+    display: block;
+    padding: 5px;
+    position: relative;
+    width: 182px;
+
+    -moz-perspective: 200px;
+    -ms-perspective: 200px;
+    -webkit-perspective: 200px;
+    -o-perspective: 200px;
+    perspective: 200px;
+}
+#navl ul {
+    left: -9999px;
+    opacity:0;
+    overflow: hidden;
+    padding: 5px;
+    position: absolute;
+    top: -9999px;
+
+    -moz-transform: rotateY(70deg);
+    -ms-transform: rotateY(70deg);
+    -o-transform: rotateY(70deg);
+    -webkit-transform: rotateY(70deg);
+    transform: rotateY(70deg);
+
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+
+    -moz-transition: -moz-transform 0.3s linear, opacity 0.3s linear;
+    -ms-transition: -ms-transform 0.3s linear, opacity 0.3s linear;
+    -o-transition: -o-transform 0.3s linear, opacity 0.3s linear;
+    -webkit-transition: -webkit-transform 0.3s linear, opacity 0.3s linear;
+    transition: transform 0.3s linear, opacity 0.3s linear;
+}
+#navl li {
+    /*background-color: #FFFFFF;*/
+    position: relative;
+}
+#navl > li {
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#navl li a {
+  background-color: #aabbcc;
+  border-color: #dddddd #555555 #555555 #dddddd;
+  border-style: solid;
+  border-width: 1px;
+  color: #000000;
+  display: block;
+  font-size: 14px;
+  padding: 10px 10px 8px 5px;
+  text-decoration: none;
+  transition: all 0.2s linear 0s;
+  width: 174px;
+}
+#navl li:hover > a {
+    background-color: #8899AA;
+    border-color: #8899AA;
+    color: #FFFFFF;
+    display:block;
+}
+#navl li:hover ul.subs {
+    left: 172px;
+    opacity:1;
+    top: 0;
+    display:block;
+
+    -moz-transition-delay: 0.3s;
+    -ms-transition-delay: 0.3s;
+    -o-transition-delay: 0.3s;
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    z-index:9999;
+}
+#navl ul li {
+    width: 100%;
+}
+
+.subs a {
+  font-size: 13px !important;
+  padding: 4px 0 !important;
+  width: 178px !important;
+}
+
+/* colors */
+.colorScheme {
+    list-style: none outside none;
+    overflow: hidden;
+    width: 120px;
+}
+.colorScheme a {
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    margin: 0 5px 5px;
+    width: 30px;
+}
+.colorScheme .clr1 {
+    background-color: #8899AA;
+}
+.colorScheme .clr2 {
+    background-color: #aa889e;
+}
+.colorScheme .clr3 {
+    background-color: #8f88aa;
+}
+.colorScheme .clr4 {
+    background-color: #88aaaa;
+}
+.colorScheme .clr5 {
+    background-color: #88aa8a;
+}
+.colorScheme .clr6 {
+    background-color: #aaa188;
+}
+
+#clr1:target ~ #navl, #clr1:target ~ #navl ul {
+    background-color: #8899AA;
+}
+#clr2:target ~ #navl, #clr2:target ~ #navl ul {
+    background-color: #aa889e;
+}
+#clr3:target ~ #navl, #clr3:target ~ #navl ul {
+    background-color: #8f88aa;
+}
+#clr4:target ~ #navl, #clr4:target ~ #navl ul {
+    background-color: #88aaaa;
+}
+#clr5:target ~ #navl, #clr5:target ~ #navl ul {
+    background-color: #88aa8a;
+}
+#clr6:target ~ #navl, #clr6:target ~ #navl ul {
+    background-color: #aaa188;
+}
+
+#clr1:target ~ #navl li:hover > a {
+    background-color: #8899AA;
+    border-color: #8899AA;
+}
+#clr2:target ~ #navl li:hover > a {
+    background-color: #aa889e;
+    border-color: #aa889e;
+}
+#clr3:target ~ #navl li:hover > a {
+    background-color: #8f88aa;
+    border-color: #8f88aa;
+}
+#clr4:target ~ #navl li:hover > a {
+    background-color: #88aaaa;
+    border-color: #88aaaa;
+}
+#clr5:target ~ #navl li:hover > a {
+    background-color: #88aa8a;
+    border-color: #88aa8a;
+}
+#clr6:target ~ #navl li:hover > a {
+    background-color: #aaa188;
+    border-color: #aaa188;
+}

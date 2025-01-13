@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="UMSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Student_info" EntityType="UMSModel.Student_info" />
+  </EntityContainer>
+  <EntityType Name="Student_info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Std_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Std_FName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Std_MName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Std_LName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Father_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mother_Nmae" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Parmenent_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Present_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Birth_date" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Admission_date" Type="DateTime" Precision="0" />
+    <Property Name="Entry_date" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="GardianName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GardianMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GardianOccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GurdianRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BeforeSchool" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BeforeClass" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="BeforeGpa" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ProximateID" Type="Int32" />
+    <Property Name="SchoolId" Type="Int32" />
+  </EntityType>
+</Schema>

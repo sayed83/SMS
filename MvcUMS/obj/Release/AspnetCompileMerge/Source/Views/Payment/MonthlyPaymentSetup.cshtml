@@ -1,0 +1,127 @@
+﻿@model MvcUMS.Models.ViewModels.MonthlyStudentPaymentSetupViewModel
+
+@{
+    ViewBag.Title = "PaymentCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .error-info {
+        display: inline-block;
+        padding: 4px 110px;
+        color: red;
+    }
+</style>
+
+@*@{
+        var message = TempData["saved"] ?? string.Empty;
+    }*@
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            @using (Html.BeginForm("MonthlyPaymentSetup", "Payment", FormMethod.Post))
+            {
+                <div class="panel-heading">
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label>Class:</label>
+                            @Html.DropDownListFor(x => Model.SemesterId, ViewBag.SemesterList as SelectList, "Select", new { @class = "form-control", id = "Semester" })
+                        </div>
+                        <div class="form-group" id="group" style="display:none">
+                            <label>Group:</label>
+                            @Html.DropDownListFor(x => Model.DepartmentId, ViewBag.DepartmentList as SelectList, "Select", new { @class = "form-control", id = "Department" })
+                        </div>
+                        <div class="form-group">
+                            <label>Months:</label>
+                            @Html.DropDownListFor(x => Model.MonthId, ViewBag.MonthList as SelectList, "Select", new { @class = "form-control", id = "month" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Year:</label>
+                            @Html.TextBoxFor(model => model.Year, new { @class = "form-control  form-filter input-sm yearselect" })
+                        </div>
+                        <input type="submit" class="btn bg-slate-700" value="submit" />
+                    </div>
+                    <div class="heading-elements">
+                        <a href="@Url.Action("SearchInvoiceList", "Payment")" class="btn btn-success btn-xs">Invoice List</a>
+                    </div>
+                </div>
+                <div class="panel-body no-padding">
+
+                    <!-- Basic layout-->
+
+                    <div class="col-md-12">
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div id="partial"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="StdListPartial"></div>
+                    </div>
+
+
+
+
+                </div>
+            }
+        </div>
+        <!-- /basic layout -->
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+        $(function () {
+
+            $('.yearselect').yearselect();
+
+            $('#Semester').change(function () {
+                var s = $("#Semester option:selected").text();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+        });
+
+        $("#Semester").change(function () {
+            $('#partials').html("");
+            var sem = $("#Semester option:selected").text();
+            var dep = $("#Department option:selected").text();
+
+            $.ajax({
+                type: "POST",
+                data: { sem: sem },
+                url: '@Url.Action("StudentPaymentType", "Payment")',
+                success: function (result) {
+                    $('#partial').html(result);
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                data: { sem: sem },
+                url: '@Url.Action("StudentListForPayment", "Payment")',
+                success: function (result) {
+                    $('#StdListPartial').html(result);
+                }
+            });
+
+        });
+
+    </script>
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

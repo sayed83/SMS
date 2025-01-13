@@ -1,0 +1,403 @@
+﻿@{
+    ViewBag.Title = "Search Student Attendence";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="searchByDate">
+    <div class="col-md-offset-3 col-md-7">
+
+        <!-- Basic layout-->
+        <div class="form-horizontal">
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Search Attendance</h5>
+                </div>
+
+                <div class="panel-body">
+
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Search Attendance For:</label>
+                        <div class="col-lg-8">
+                            @Html.DropDownList("text", new List<SelectListItem>
+                       {
+                           new SelectListItem{ Text="Student", Value="std"},
+                            new SelectListItem{ Text="Teacher", Value="teacher"}
+                       }, "Select", new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="cls" style="display:none">
+                        <label class="col-lg-4 control-label">Class:</label>
+                        <div class="col-lg-8">
+                            @Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="group" style="display:none">
+                        <label class="col-lg-4 control-label">Group:</label>
+                        <div class="col-lg-8">
+                            @Html.DropDownList("Department", null, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="a" style="display:none">
+                        <label class="col-lg-4 control-label">Section:</label>
+                        <div class="col-lg-8">
+                            <select id="Section" name="Section" class="form-control" required><option value=""></option></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="attDate" style="display:none">
+                        <label class="col-lg-4 control-label">Attendance Date:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBox("ADate", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <div class="btn-group">
+                            @*<button type="submit" id="btnSearchManualAttendance" class="btn bg-green-300"><strong>Search Manual Attendance</strong> <i class="icon-arrow-right14 position-right"></i></button>*@
+                            <button type="submit" id="btnSearchAttendance" class="btn bg-slate-700"><strong>Search Attendance</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                            @*<button type="submit" id="btnSearchAbsence" class="btn bg-blue-300"><strong>Search Absence</strong> <i class="icon-arrow-right14 position-right"></i></button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div id="partialAttendance"></div>
+</div>
+
+<div class="col-lg-6">
+    <div id="partialAbsence"></div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        
+
+        $(function () {
+
+            $('#text').change(function () {
+
+                var s = $('#text').val();
+                if (s == 'std') {
+                    $('#cls,#a,#attDate').show();
+                }
+                else if (s == 'teacher') {
+                    $('#attDate').show();
+                    $('#cls,#a,#groups').hide();
+                }
+                else {
+                    $('#cls,#a').hide();
+                }
+
+            });
+
+            $('#SemesterM').change(function () {
+
+                var s = $('#SemesterM').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#groups').show();
+                }
+                else {
+                    $('#groups').hide();
+                }
+
+            });
+
+            $("#ADate").datepicker(
+               {
+                   dateFormat: 'yy/mm/dd',
+                   changeMonth: true,
+                   changeYear: true
+               });
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+
+        });
+    </script>
+    <script language="javascript" type="text/javascript">
+        $("#Semester").change(function () {
+            var sem = $(this).val();
+            var dep = $('#Department').val();
+            var url = "/Home/GetCourse/";
+
+            $.ajax({
+                url: url,
+                data: { dep: dep, sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value='0'>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Course").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+        $("#Department").change(function () {
+            var sem = $('#Semester').val();
+            var dep = $(this).val();
+            var url = "/Home/GetCourse/";
+
+            $.ajax({
+                url: url,
+                data: { dep: dep, sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value='0'>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Course").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+        $("#SemesterM").change(function () {
+            if ($("#SemesterM option:selected").val() != '') {
+
+                var sem = $(this).val();
+                var dep = $('#DepartmentM').val();
+
+                $.ajax({
+                    url: '@Url.Action("GetCourse", "Home")',
+                    data: { dep: dep, sem: sem },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#CourseM").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+                $.ajax({
+                    url: "/MasterEntry/GetSection/",
+                    data: { sem: sem },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value=''>Select</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#SectionM").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+                $("#DepartmentM").change(function () {
+                    var sem = $('#SemesterM').val();
+                    var dep = $(this).val();
+                    var url = "/Home/GetCourse/";
+
+                    $.ajax({
+                        url: url,
+                        data: { dep: dep, sem: sem },
+                        cache: false,
+                        type: "POST",
+                        success: function (data) {
+                            var markup = "<option value='0'>Select</option>";
+                            for (var x = 0; x < data.length; x++) {
+                                markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            }
+                            $("#CourseM").html(markup).show();
+                        },
+                        error: function (reponse) {
+                            alert("error : " + reponse);
+                        }
+                    });
+
+                });
+
+            }
+
+                //}
+            else {
+                $("#CourseM").empty();
+                $("#SectionM").empty();
+            }
+
+
+        });
+        $(function () {
+            $('#AMonth').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-10:+0",
+                showButtonPanel: true,
+                dateFormat: 'MM yy',
+                onClose: function (dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                }
+
+            });
+
+        });
+
+    </script>
+    <script language="javascript" type="text/javascript">
+        $("#btnSearchAttendance").click(function () {
+            $('#partialAttendance').html("");
+            $('#partialAbsence').html("");
+            var dep = $('#Department').val();
+            var sem = $('#Semester').val();
+            var sec = $('#Section').val();
+            //var cor = $('#Course').val();
+            var ADate = $('#ADate').val();
+            var text = $("#text").val();
+            $.ajax({
+                type: "POST",
+                data: { Department: dep, Semester: sem, Section: sec, ADate: ADate, text: text },
+                url: '@Url.Action("ShowAttendanceAbsenceList", "Home")',
+                success: function (result) {
+                    //var chunkSeparator = "---|||---";
+                    //var chunks = result.split(chunkSeparator);
+                    $("#partialAttendance").html(result.totalValuesPartialView);
+                    $("#partialAbsence").html(result.summaryValuesPartialView);
+                    //$('#partial').html(result);
+                }
+            });
+        });
+    </script>
+    <script language="javascript" type="text/javascript">
+        $("#btnMSearch").click(function () {
+            $('#partials').html("");
+            var dep = $('#DepartmentM').val();
+            var sem = $('#SemesterM').val();
+            var sec = $('#SectionM').val();
+            //var cor = $('#CourseM').val();
+            var ADate = $('#AMonth').val();
+            $.ajax({
+                type: "POST",
+                data: { Department: dep, Semester: sem, Section: sec, ADate: ADate, text: 'a' },
+                url: '@Url.Action("ShowAttendanceList", "Home")',
+                success: function (result) {
+                    $('#partial').html(result);
+                }
+            });
+        });
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        $("#btnSearchAbsence").click(function () {
+            $('#partial').html("");
+            var dep = $('#Department').val();
+            var sem = $('#Semester').val();
+            var sec = $('#Section').val();
+            //var cor = $('#Course').val();
+            var ADate = $('#ADate').val();
+            $.ajax({
+                type: "POST",
+                data: { Department: dep, Semester: sem, Section: sec, ADate: ADate, text: 'sd' },
+                url: '@Url.Action("ShowAbsenceList", "Home")',
+                success: function (result) {
+                    $('#partial').html(result);
+                }
+            });
+        });
+    </script>
+
+
+    <script language="javascript" type="text/javascript">
+        $("#btnMSearch").click(function () {
+            $('#partials').html("");
+            var dep = $('#DepartmentM').val();
+            var sem = $('#SemesterM').val();
+            var sec = $('#SectionM').val();
+            //var cor = $('#CourseM').val();
+            var ADate = $('#AMonth').val();
+            $.ajax({
+                type: "POST",
+                data: { Department: dep, Semester: sem, Section: sec, ADate: ADate, text: 'a' },
+                url: '@Url.Action("ShowAbsenceList", "Home")',
+                success: function (result) {
+                    $('#partial').html(result);
+                }
+            });
+        });
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        $("#btnSearchManualAttendance").click(function () {
+            $('#partial').html("");
+            var dep = $('#Department').val();
+            var sem = $('#Semester').val();
+            var sec = $('#Section').val();
+            //var cor = $('#Course').val();
+            var ADate = $('#ADate').val();
+            $.ajax({
+                type: "POST",
+                data: { Department: dep, Semester: sem, Section: sec, ADate: ADate, text: 'sd' },
+                url: '@Url.Action("ShowManualAttendanceList", "Home")',
+                success: function (result) {
+                    $('#partial').html(result);
+                }
+            });
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

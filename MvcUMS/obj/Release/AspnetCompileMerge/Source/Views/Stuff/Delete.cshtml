@@ -1,0 +1,166 @@
+﻿@model MvcUMS.Models.Stuff
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Stuff</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FatherName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FatherName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MotherName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MotherName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Designation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Designation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.JoinDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JoinDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GraduationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GraduationDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DOB)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DOB)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Gender)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gender)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Image)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Image)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StateDetils)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StateDetils)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ZIPId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ZIPId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CityId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CityId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CountryId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CountryId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.active)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Subject)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Subject)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberCode)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

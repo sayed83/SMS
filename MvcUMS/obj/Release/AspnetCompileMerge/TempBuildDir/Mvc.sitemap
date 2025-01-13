@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Dashboard" controller="Home" action="Index">
+    
+    <mvcSiteMapNode title="Student Entry"  controller="Home" action="Student_entry"/>
+    <mvcSiteMapNode title="Student List"  controller="Home" action="Student_list"/>
+    <mvcSiteMapNode title="Student Search"  controller="Home" action="AdvanceSearch"/>
+
+    <mvcSiteMapNode title="Event"  controller="Event" action="Index"/>
+    <mvcSiteMapNode title="Create Event"  controller="Event" action="Create"/>
+
+    <mvcSiteMapNode title="Stuff Create"  controller="Stuff" action="Create"/>
+    <mvcSiteMapNode title="Stuff List"  controller="Stuff" action="Index"/>
+
+
+    <mvcSiteMapNode title="Search Book Code"  controller="Library" action="SearchBookCode"/>
+    <mvcSiteMapNode title="Enter Book"  controller="Library" action="CreateBook"/>
+    <mvcSiteMapNode title="Book List"  controller="Library" action="BookSearch"/>
+    <mvcSiteMapNode title="Submit Book"  controller="Library" action="LibraryBookSummaryForStudent"/>
+    <mvcSiteMapNode title="Book Issue"  controller="Library" action="SearchStudentEmployeeList"/>
+    <mvcSiteMapNode title="SearchIssuedBook"  controller="Library" action="SearchIssuedBook"/>
+
+    <mvcSiteMapNode title="PaymentType"  controller="Common" action="PaymentType"/>
+    <mvcSiteMapNode title="PaymentCreate"  controller="Common" action="PaymentCreate"/>
+    <mvcSiteMapNode title="Expense Type"  controller="Common" action="Expacncetype"/>
+    <mvcSiteMapNode title="Scholarship"  controller="Common" action="ScolarShipType"/>
+    <mvcSiteMapNode title="Bank"  controller="Common" action="BankCreation"/>
+    <mvcSiteMapNode title="Event"  controller="Event" action="TimeShedule"/>
+    <mvcSiteMapNode title="Result"  controller="Result" action="GPAType"/>
+    <mvcSiteMapNode title="Exam Type"  controller="Common" action="Examtype"/>
+    <mvcSiteMapNode title="Exam"  controller="Common" action="Exam"/>
+    <mvcSiteMapNode title="School Information"  controller="Common" action="SchoolCreate"/>
+    <mvcSiteMapNode title="Auther Create"  controller="Library" action="AutherCreatin"/>
+    <mvcSiteMapNode title="Catagory Create"  controller="Library" action="CatagoryCreatin"/>
+
+    
+    <mvcSiteMapNode title="Result"  controller="Result" action="SubjectMark"/>
+    <mvcSiteMapNode title="Show Result"  controller="Result" action="ShowResult"/>
+
+    <mvcSiteMapNode title="OpenningBalance"  controller="Accounting" action="OpenningBalance"/>
+    <mvcSiteMapNode title="Donation"  controller="Event" action="DonationIndex"/>
+
+    <mvcSiteMapNode title="AdmissionReport"  controller="Report" action="AdmissionReport"/>
+    <mvcSiteMapNode title="Payment Report"  controller="Report" action="PaymentReport"/>
+
+
+    <mvcSiteMapNode title="Expense Search"  controller="Expance" action="ExpanceSearch"/>
+    <mvcSiteMapNode title="Purchase Report"  controller="Inventory" action="PurchaseReport"/>
+    <mvcSiteMapNode title="Purchase Report"  controller="Report" action="Report"/>
+
+    <mvcSiteMapNode title="Scholarship"  controller="Event" action="Scolarship"/>
+    <mvcSiteMapNode title="Scholarship List"  controller="Event" action="ScholarshipList"/>
+
+    
+    <mvcSiteMapNode title="Search Rutine"  controller="Event" action="SearchRutine"/>
+    <mvcSiteMapNode title="Search Exam Rutine"  controller="Event" action="SearchExamRutine"/>
+
+
+    <mvcSiteMapNode title="CourseList"  controller="MasterEntry" action="CourseList"/>
+    <mvcSiteMapNode title="Course AssignList"  controller="MasterEntry" action="CourseAssignList"/>
+
+
+    <mvcSiteMapNode title="Student Attendencet"  controller="Home" action="std_attendence"/>
+
+    
+
+    <mvcSiteMapNode title="Show Attendencet"  controller="Home" action="showAttendence"/>
+
+    
+    <mvcSiteMapNode title="Student Payment"  controller="Home" action="StudentPayment"/>
+
+
+    <mvcSiteMapNode title="Expense List"  controller="Expance" action="Expandature"/>
+
+
+    <mvcSiteMapNode title="Employee Salary"  controller="Stuff" action="EmployeeSalary"/>
+
+    <mvcSiteMapNode title="Inventory Create"  controller="Inventory" action="InventoryCreate"/>
+
+
+
+
+  </mvcSiteMapNode>
+
+
+  
+</mvcSiteMap>

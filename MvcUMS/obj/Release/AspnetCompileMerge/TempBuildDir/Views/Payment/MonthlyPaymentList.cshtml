@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.MonthlyStudentPaymentListViewModel>
+@{
+    ViewBag.Title = "Payment Amount Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Add <span style="text-align:right"> @Html.ActionLink("Create New", "PaymentCreate", null, new { @class = "btn btn-success pull-right" })</span>
+        </h5>
+    </div>
+    <table class="table datatable-button-print-basic table-striped" id="paymentList">
+        <thead>
+            <tr class="table_header">
+                <th>Class</th>
+                @if(Model.Select(m=>m.DepartmentId > 0).FirstOrDefault())
+                {
+                    <th>Department</th>
+                }
+                <th>Month</th>
+                <th>Year</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Semester)
+                    </td>
+                    @if (item.DepartmentId > 0)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department)
+                        </td>
+                    }
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Month)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>

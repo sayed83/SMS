@@ -1,0 +1,299 @@
+﻿@model MvcUMS.Models.Stuff
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /*#HWrow {
+        height: 50px;
+        width: 25%;
+    }
+    #bodystyle {
+    border-radius:10px;
+
+    }*/
+
+
+    .bio-table {
+        width: 75%;
+        border: 0px solid;
+    }
+
+        .bio-table td {
+            text-transform: capitalize;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .bio-table > tbody > tr > td {
+            border: 0px solid;
+            text-transform: capitalize;
+            color: rgb(0, 4, 51);
+            font-size: 15px;
+        }
+
+    .responsiv-table {
+        border: 0px solid;
+    }
+
+</style>
+
+
+@if (User.IsInRole("Admin"))
+{
+    
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                
+                <h2>Stuff Details</h2>
+
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                
+                                
+                                @*<tr>
+                                    <td>Member Code</td>
+                                    <td>:@Html.DisplayFor(model => model.MemberCode)</td>
+                                </tr>*@
+                                <tr>
+                                    <td>Employee Name</td>
+                                    <td>:@Html.DisplayFor(model => model.FirstName) &emsp;@Html.DisplayFor(model => model.LastName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Father Name</td>
+                                    <td>:@Html.DisplayFor(model => model.FatherName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Mother Name</td>
+                                    <td>:@Html.DisplayFor(model => model.MotherName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Date of birth</td>
+                                    <td>:@Html.DisplayFor(model => model.DOB)</td>
+                                </tr>
+                                <tr>
+
+                                    <td>NID</td>
+                                    <td>:@Html.DisplayFor(model => model.Gender)</td>
+                                </tr>
+                                <tr>
+                                    <td>Permanent Address</td>
+                                    <td>:@Html.DisplayFor(model => model.StateDetils)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                <tr>
+                                    <td>Photo</td>
+                                    <td><img src="~/uploads/@Html.DisplayFor(model => model.Image)" alt="Student Image" height="120" width="100" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Department</td>
+                                    <td>:@TempData["Department"]</td>
+                                </tr>
+                               
+                               
+
+                                <tr>
+
+                                    <td>Email</td>
+                                    <td>:@Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+
+                                    <td>Contact</td>
+                                    <td>:@Html.DisplayFor(model => model.ContactNo)</td>
+                                </tr>
+                                <tr>
+                                    <td>NID</td>
+                                    <td>:@Html.DisplayFor(model => model.NID)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    
+                    <button type="button" id="show" class="btn btn-primary btn-sm">Show Salary Deatils</button>
+                    <button type="button" id="Hide" class="btn btn-primary btn-sm" style="visibility:hidden">Hide Salary Deatils</button>
+                    @*<a href="#" id="show" class="btn bg-green">Show Salary Deatils</a>*@
+                    @*<a href="#" id="Hide" class="btn bg-green" style="visibility:hidden">Hide Salary Deatils</a>*@
+                </div>
+                
+                <div class="col-md-3">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
+
+                </div>
+                <div class="col-md-3">
+                     @Html.TextBoxFor(model => model.Id, new { style = "visibility:hidden", id = "stuffId" })
+                   
+                </div>
+                <div class="col-md-3">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Change Password", "ResetPassword", "Account", new {  id=Model.Id }, new { @class = "btn btn-info" })
+
+                    }
+                   @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-success" })
+                    
+                </div>
+             </div>
+            <div class="row">
+                
+                <div id="partial"></div>
+               
+            </div>
+           
+           
+        </div>
+}
+
+else if (User.IsInRole("Teacher") || User.IsInRole("Management"))
+{
+    
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                
+                <h2>Stuff Details</h2>
+
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                
+                                
+                                @*<tr>
+                                    <td>Member Code</td>
+                                    <td>:@Html.DisplayFor(model => model.MemberCode)</td>
+                                </tr>*@
+                                <tr>
+                                    <td>Employee Name</td>
+                                    <td>:@Html.DisplayFor(model => model.FirstName) &emsp;@Html.DisplayFor(model => model.LastName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Father Name</td>
+                                    <td>:@Html.DisplayFor(model => model.FatherName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Mother Name</td>
+                                    <td>:@Html.DisplayFor(model => model.MotherName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Date of birth</td>
+                                    <td>:@Html.DisplayFor(model => model.DOB)</td>
+                                </tr>
+                                <tr>
+
+                                    <td>NID</td>
+                                    <td>:@Html.DisplayFor(model => model.Gender)</td>
+                                </tr>
+                                <tr>
+                                    <td>Permanent Address</td>
+                                    <td>:@Html.DisplayFor(model => model.StateDetils)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                <tr>
+                                    <td>Photo</td>
+                                    <td><img src="~/uploads/@Html.DisplayFor(model => model.Image)" alt="Student Image" height="120" width="100" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Department</td>
+                                    <td>:@TempData["Department"]</td>
+                                </tr>
+                               
+                               
+
+                                <tr>
+
+                                    <td>Email</td>
+                                    <td>:@Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+
+                                    <td>Contact</td>
+                                    <td>:@Html.DisplayFor(model => model.ContactNo)</td>
+                                </tr>
+                                <tr>
+
+                                    <td>NID</td>
+                                    <td>:@Html.DisplayFor(model => model.NID)</td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            
+           
+           
+        </div>
+}
+
+
+@section Scripts {
+    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+<script language="javascript" type="text/javascript">
+    $("#show").click(function () {
+        $('#partial').hide();
+            var id = $('#stuffId').val();
+            $.ajax({
+                type: "POST",
+                data: { id: id },
+                url: '@Url.Action("showSalaryDetails", "Stuff")',
+                success: function (result) {
+                    $("#Hide").css("visibility", "visible");
+                    $("#show").css("visibility", "hidden");
+                    $('#partial').html(result);
+                    $('#partial').show(1000);
+                }
+            });
+    });
+    $("#Hide").click(function () {
+        $("#Hide").css("visibility", "hidden");
+        $("#show").css("visibility", "visible");
+        $('#partial').hide();
+    });
+</script>
+
+@Scripts.Render("~/bundles/jqueryval")
+}

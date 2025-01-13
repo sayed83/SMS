@@ -1,0 +1,54 @@
+﻿@model MvcUMS.Models.GPAType
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Edit GPA</h5>
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("EditGPA", "Result", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+        {
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Marks From:</label>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(m => m.Startmark, null, new { @class = "form-control", placeholder = "Marks From", required = true })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Marks To:</label>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(m => m.endmark, null, new { @class = "form-control", placeholder = "Marks To", required = true })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label">GPA:</label>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(m => m.GPA, null, new { @class = "form-control", placeholder = "Marks From", required = true })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Points:</label>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(m => m.GradePoint, null, new { @class = "form-control", placeholder = "Marks From", required = true })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Id)
+            <div class="text-right">
+                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+
+        }
+    </div>
+</div>
+

@@ -1,0 +1,35 @@
+﻿<ul class="navigation navigation-main navigation-accordion">
+
+    <!-- Main -->
+    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+    <li class="active"><a href="@Url.Action("Index", "Home")"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+    <li>
+        <a href="#"><i class="icon-droplet2"></i> <span>Events</span></a>
+        <ul>
+            <li><a href="@Url.Action("Index", "Event")">Events List</a></li>
+        </ul>
+    </li>
+    <li class=""><a href="@Url.Action("Noticeboard", "Event")"><i class="icon-home4"></i> <span>Noticeboard</span></a></li>
+    <li>
+        <a href="#"><i class="icon-spell-check"></i> <span>Result</span></a>
+        <ul>
+            <li><a href="@Url.Action("SubjectMark", "Result")">Number Distribution</a></li>
+            
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="icon-grid"></i> <span>Routine</span></a>
+        <ul>
+            <li><a href="@Url.Action("SearchRutine", "Event")">Search Class Routine</a></li>
+            <li><a href="@Url.Action("SearchExamRutine", "Event")">Search Exam Routine</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="icon-gift"></i> <span>Attendance</span></a>
+        <ul>
+            <li><a href="@Url.Action("std_attendence", "Home")">Student Attendance</a></li>
+            <li><a href="@Url.Action("showAttendence", "Home")">Search Student Attendance</a></li>
+
+        </ul>
+    </li>
+</ul>

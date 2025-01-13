@@ -1,0 +1,127 @@
+﻿@model MvcUMS.Models.StudentScholarship
+@{
+    ViewBag.Title = "Scolarship";
+    Layout = null;
+}
+@*<script src="~/Scripts/jquery-1.7.1.min.js"></script>*@
+@*<script src="~/Scripts/jquery.validate.min.js"></script>*@
+@*<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+</div>
+
+<div class="modal-body">
+
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">Update Scholarship</h5>
+
+        </div>
+
+        <div class="panel-body">
+
+
+
+            @using (Html.BeginForm("UpdateSchlership", "Event", FormMethod.Post, new
+            {
+                @class = "form-horizontal"
+            }))
+            {
+                @Html.ValidationSummary(true)
+
+
+
+               @Html.HiddenFor(model => model.StudentId)
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Scholarship Type:</label>
+                    <div class="col-lg-9">
+                        @Html.DropDownList("scolershiptype", null, "Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ScholarshipTypeId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Amount:</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Amount)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Remarks:</label>
+                    <div class="col-lg-9">
+                        @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Remarks)
+                    </div>
+                </div>
+
+
+                <div class="text-right">
+
+                    <button type="submit" id="btnUpdate" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+
+               
+
+            }
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+</div>
+
+
+@*@using (Html.BeginForm("UpdateSchlership", "Event", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <legend>Scolarship</legend>
+        @Html.HiddenFor(model => model.StudentId)
+        <table style="width:100%">
+            <tr>
+                <td style="padding:20px;"><b>Scholarship Type</b></td>
+                <td>
+                   @Html.DropDownList("scolershiptype", "Select")
+                    @Html.ValidationMessageFor(model => model.ScholarshipTypeId)
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">@Html.LabelFor(model => model.Amount)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.Amount)
+                   <p style="color:red"> @Html.ValidationMessageFor(model => model.Amount)</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding:20px">@Html.LabelFor(model => model.Remarks)</td>
+                <td>
+                    @Html.TextAreaFor(model => model.Remarks)
+                    @Html.ValidationMessageFor(model => model.Remarks)
+                </td>
+            </tr>
+
+            <tr>
+
+                <td colspan="2" style="text-align:center;padding:20px">
+                    <button type="submit" id="btnUpdate" name="Command" value="Create" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <span class="ui-button-text">Create</span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}*@
+

@@ -1,0 +1,139 @@
+﻿@model MvcUMS.Models.ViewModels.InvoiceDetailsViewModel
+@{
+    ViewBag.Title = "Payment Collection";
+
+    Layout = null;
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Payment Collection</h5>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <div class="content-group">
+                
+                <table class="table table-xxs table-borderless">
+                    <tbody>
+                        <tr>
+                            <th>Total:</th>
+                            <td>@Model.TotalAmount</td>
+                        </tr>
+                        <tr>
+                            <th>Paid:</th>
+                            <td class="text-right">@Model.PaidAmount</td>
+                        </tr>
+                        <tr>
+                            <th>TotalDue:</th>
+                            <td class="text-right">@Model.DueAmount</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        @using (Html.BeginForm("PaymentCollection", "Payment", FormMethod.Post, new
+            {
+                @class = "form-horizontal",
+                enctype = "multipart/form-data"
+            }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => model.Id)
+
+    <table class="table table-xxs table-borderless">
+        <tr>
+            <th>Payment Amount</th>
+            <td>
+                @Html.TextBox("Amount", null, new { @class = "form-control Numeric InvQty", id = "InvQty1" })
+                @Html.ValidationMessage("Amount", new { @class = "validation-error", id = "errmsg" })
+            </td>
+        </tr>
+        <tr>
+            <th>Payment Method</th>
+            <td> @Html.DropDownList("PaymentMethodId", ViewBag.PaymentMethodList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control form-filter input-sm", required = "Required" })</td>
+        </tr>
+        <tr class="bankInfo" style="display:none">
+            <th>Bank Name</th>
+            <td> @Html.DropDownList("BankId", ViewBag.BankList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control form-filter input-sm" })</td>
+        </tr>
+        <tr class="bankInfo" style="display:none">
+            <th>Check No</th>
+            <td>@Html.TextBox("CheckNo", null, new { @class = "form-control Numeric", placeholder = "Enter Check Number" })</td>
+        </tr>
+        <tr class="bankInfo" style="display:none">
+            <th>Check Date</th>
+            <td>@Html.TextBox("CheckDate", null, new { @class = "form-control", placeholder = "Enter Check Date" })</td>
+        </tr>
+        <tr>
+            <th>Payment Date</th>
+            <td>@Html.TextBox("PayDate", null, new { @class = "form-control", required = "Required" })</td>
+        </tr>
+    </table>
+
+
+
+
+            <div class="text-right">
+
+                <button type="submit" id="btnUpdate" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+
+
+
+        }
+    </div>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#PayDate,#CheckDate").datepicker({
+            dateFormat: "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+        //$('#Amount').keypress(function (e) {
+        //    var regex = /^-?\d+(\.\d{0,2})?$/g;
+        //    if (!regex.test(this.value)) {
+        //        this.value = '';
+        //    }
+        //});
+
+        $('#Amount').keypress(function (e) {
+            $(this).val(function (i, val) { return parseFloat(val, 10).toFixed(2) });
+        });
+
+        //$("#Amount").keypress(function (e) {
+        //    //if not numeric, then it don't let you type
+        //    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //        //display error message
+        //        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+        //        return false;
+        //    }
+        //});
+
+    });
+
+
+    $('#PaymentMethodId').change(function () {
+        var optionSelected = $(this).find("option:selected");
+        var valueSelected = optionSelected.val();
+        if (valueSelected == 1) {
+            $(".bankInfo").hide();
+        }
+        else {
+            $(".bankInfo").show();
+        }
+    });
+</script>
+
+@Scripts.Render("~/bundles/jqueryval")  

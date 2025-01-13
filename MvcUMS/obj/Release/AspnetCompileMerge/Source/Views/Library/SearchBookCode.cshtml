@@ -1,0 +1,158 @@
+﻿@*@model List<MvcUMS.Models.bookid>*@
+@*@model PagedList.IPagedList<MvcUMS.Models.bookid>*@
+@*@using PagedList.Mvc;*@
+@{
+    ViewBag.Title = "Search BookCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+
+
+<div class="panel panel-white">
+
+    <div class="panel-heading">
+
+        <h5 class="panel-title">Search Book using Code</h5>
+
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("SearchBookCode", "Library", FormMethod.Post , new
+        {
+            @class = "form-horizontal"
+        }))
+        {
+
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Book ID:</label>
+                            <div class="col-lg-9">
+
+                                @Html.TextBox("bookid", ViewBag.FilterValue as string, null, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-3">
+
+                    <div class="text-center">
+                        @*<button type="submit" class="btn btn-primary">Search <i class="icon-arrow-right14 position-right"></i></button>*@
+                        <input type="submit" value="Search" class="btn btn-success" />
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        }
+
+
+    </div>
+
+</div>
+
+<div class="panel panel-flat">
+
+    <table class="table datatable-button-print-basic table-striped" id="bookcode">
+        <thead>
+
+            <tr>
+                <th>Book ID</th>
+                <th>Book Code</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.BookId
+                    </td>
+                    <td>
+                        @item.BookCode
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+     
+        $(function () {
+            $("#bookid").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Library/getBookCode",
+                        type: "POST",
+                        dataType: "json",
+
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.BookId, value: item.BookId };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+        });
+
+        $(function () {
+
+            $('.datatable-button-print-basic').DataTable({
+
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: '<i class="icon-printer position-left"></i> Print table',
+                        className: 'btn bg-blue',
+                        title: 'Book Code List',
+                        customize: function (win) {
+
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        },
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
+                    }
+                ]
+            });
+
+
+        });
+
+
+
+    </script>
+
+ 
+}

@@ -1,0 +1,37 @@
+﻿@model MvcEnergyPac.Models.ManagementProfile
+@{
+    ViewBag.Title = "Management details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5>Management Details  <span class="pull-right">@Html.ActionLink("Back To List", "Management_List", null, new { @class="btn btn-success btn-sm" }) @Html.ActionLink("Edit", "Management_Edit", new { id = Model.Id }, new { @class = "btn btn-danger btn-sm" })</span></h5>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive responsiv-table">
+                <table class="table bio-table table-striped table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>:@Html.DisplayFor(model => model.Name)</td>
+                        </tr>
+                        <tr>
+                            <td>Designation</td>
+                            <td>:@Html.DisplayFor(model => model.Designation)</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>:@Html.DisplayFor(model => model.Phone)</td>
+                        </tr>
+                        <tr>
+                            <td>Image</td>
+                            <td><img src="~/uploads/@Html.DisplayFor(model => model.Photo)" alt="Student Image" height="120" width="100" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>

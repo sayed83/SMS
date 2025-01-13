@@ -1,0 +1,47 @@
+﻿@model MvcUMS.Models.Book
+@{
+    ViewBag.Title = "GetNewBook";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("UpdateBook", "Library", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <legend>Purchase Book</legend>
+        @Html.HiddenFor(model => model.BookId)
+        <table style="width:100%">
+            <tr>
+                <td style="padding:20px">@Html.LabelFor(model => model.BookId)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.BookId, new { @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.BookId)
+                </td>
+            <tr>
+                <td style="padding:20px">@Html.LabelFor(model => model.BookCopy)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.BookCopy)
+                    @Html.ValidationMessageFor(model => model.BookCopy)
+                </td>
+            </tr>
+
+
+        <tr>
+            
+            <td colspan="2" style="text-align:center;padding:20px">
+                <button type="submit" id="btnUpdate" name="Command" value="Update" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+        <span class="ui-button-text">Update</span>
+    </button>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+    
+}
+

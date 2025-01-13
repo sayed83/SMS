@@ -1,0 +1,150 @@
+﻿@model MvcUMS.Models.PaymentSatup
+
+@{
+    ViewBag.Title = "StudentPaymentEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var t = 1;
+    if (Model == null)
+    {
+        t = 0;
+    }
+}
+<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 well">
+        <h2 class="text-center">Update Student Payment Setup</h2>
+        @Html.Action("StudentDetailsForPayment", "Home", new { StdId = Model.Std_id });
+            @using (Html.BeginForm("UpdatePaymentSetup", "Home", FormMethod.Post))
+            {
+                <span style="color:red;font-size:12px">
+                 @Html.AntiForgeryToken()
+                 @Html.ValidationSummary()
+                </span>
+                @Html.HiddenFor(a=>a.Std_id)
+                @Html.HiddenFor(a=>a.Id)
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Session Start Month</th>
+                                <td>@Html.TextBoxFor(a => a.SessionStartMonth, "{0:MMMM yyyy}", new { @class = "form-control" })</td>
+                            </tr>
+                            <tr>
+                                <th>Number of month</th>
+                                <td>@Html.TextBoxFor(a => a.NoMonth, new { @class = "form-control Numeric isKeyprass" })</td>
+                            </tr>
+                            <tr>
+                                <th>Tution fee per month</th>
+                                <td>@Html.TextBoxFor(a => a.TutionFeePerMonth, new { @class = "form-control isKeyprass Numeric" })</td>
+                            </tr>
+                            <tr>
+                                <th>Lab fee</th>
+                                <td>@Html.TextBoxFor(a => a.LabFee, new { @class = "form-control isKeyprass Numeric" })</td>
+                            </tr>
+                            <tr>
+                                <th>Admission fee</th>
+                                <td>@Html.TextBoxFor(a => a.AdmissionFee, new { @class = "form-control isKeyprass Numeric"})</td>
+                            </tr>
+                            <tr>
+                                <th>Exam fee</th>
+                                <td>@Html.TextBoxFor(a => a.ExamFee, new { @class = "form-control isKeyprass Numeric" })</td>
+                            </tr>
+                            <tr>
+                                <th>No. of Exam</th>
+                                <td>@Html.TextBoxFor(a => a.NoExam, new { @class = "form-control isKeyprass Numeric" })</td>
+                            </tr>
+                            <tr>
+                                <th>Library fee</th>
+                                <td>@Html.TextBoxFor(a => a.LibraryFee, new { @class = "form-control isKeyprass Numeric" })</td>
+                            </tr>
+                            <tr>
+                                <th>Others fee</th>
+                                <td>@Html.TextBoxFor(a => a.Other, new { @class = "form-control isKeyprass Numeric"})</td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <td>@Html.TextBoxFor(a => a.Total, new { @class = "form-control Numeric", readOnly = true })</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding-left:40%"><input type="submit" value="Save" class="btn btn-info" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/CustomValidation.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script>
+        $(function () {
+            $("#SessionStartMonth").datepicker({
+                dateFormat: 'MM yy',
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+
+                onClose: function (dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+                }
+            });
+
+            $("#SessionStartMonth").focus(function () {
+                $(".ui-datepicker-calendar").hide();
+                $("#ui-datepicker-div").position({
+                    my: "center top",
+                    at: "center bottom",
+                    of: $(this)
+                });
+            });
+        });
+        $(".isKeyprass").focusin(function () {
+            if (parseFloat($(this).val()) == 0) {
+                $(this).val("")
+            }
+        })
+        $(".isKeyprass").focusout(function () {
+            if ($(this).val().length < 1) {
+                $(this).val(0)
+            }
+            var k = $("#NoMonth").val();
+            if (k.length > 0) {
+                var n = parseInt($("#NoMonth").val());
+                var t = parseFloat($("#TutionFeePerMonth").val());
+                var l = parseFloat($("#LabFee").val());
+                var a = parseFloat($("#AdmissionFee").val());
+                var e = parseFloat($("#ExamFee").val());
+                var li = parseFloat($("#LibraryFee").val());
+                var o = parseFloat($("#Other").val());
+                var nE = parseFloat($("#NoExam").val());
+                var total = (n * t) + l + a + (nE * e) + li + o;
+                $("#Total").val(total)
+
+            }
+        })
+
+        //$(".isKeyprass").keyup(function () {
+        //    var k = $("#NoMonth").val();
+        //    if (k.length > 0)
+        //    {
+        //        var n =parseInt($("#NoMonth").val());
+        //        var t = parseFloat($("#TutionFeePerMonth").val());
+        //        var l = parseFloat($("#LabFee").val());
+        //        var a = parseFloat($("#AdmissionFee").val());
+        //        var e = parseFloat($("#ExamFee").val());
+        //        var li = parseFloat($("#LibraryFee").val());
+        //        var o = parseFloat($("#Other").val());
+        //        var total = (n * t) + l + a + e + li + o;
+        //        $("#Total").val(total)
+
+        //    }
+        //})
+
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,338 @@
+﻿@{
+    ViewBag.Title = "dashboard";
+    Layout = null;
+}
+
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/plugins/pickers/daterangepicker.js"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/pages/dashboard.js"></script>
+
+   <!-- Main navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <img src="@Url.Content("~/Content/dashboard_template/")assets/images/ims_logo_2.png" alt="">
+        </a>
+
+        <ul class="nav navbar-nav visible-xs-block">
+            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-mobile">
+        <ul class="nav navbar-nav">
+            <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+
+        </ul>
+
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-bubbles4"></i>
+                    <span class="visible-xs-inline-block position-right">Messages</span>
+                    <span class="badge bg-warning-400">2</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-content width-350">
+                    <div class="dropdown-content-heading">
+                        Messages
+                        <ul class="icons-list">
+                            <li><a href="#"><i class="icon-compose"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <ul class="media-list dropdown-content-body">
+                        <li class="media">
+                            <div class="media-left">
+                                <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder.jpg" class="img-circle img-sm" alt="">
+                                <span class="badge bg-danger-400 media-badge">5</span>
+                            </div>
+
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">James Alexander</span>
+                                    <span class="media-annotation pull-right">04:58</span>
+                                </a>
+
+                                <span class="text-muted">who knows, maybe that would be the best thing for me...</span>
+                            </div>
+                        </li>
+
+                        <li class="media">
+                            <div class="media-left">
+                                <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder.jpg" class="img-circle img-sm" alt="">
+                                <span class="badge bg-danger-400 media-badge">4</span>
+                            </div>
+
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">Margo Baker</span>
+                                    <span class="media-annotation pull-right">12:16</span>
+                                </a>
+
+                                <span class="text-muted">That was something he was unable to do because...</span>
+                            </div>
+                        </li>
+
+                        <li class="media">
+                            <div class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></div>
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">Jeremy Victorino</span>
+                                    <span class="media-annotation pull-right">22:48</span>
+                                </a>
+
+                                <span class="text-muted">But that would be extremely strained and suspicious...</span>
+                            </div>
+                        </li>
+
+                        <li class="media">
+                            <div class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></div>
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">Beatrix Diaz</span>
+                                    <span class="media-annotation pull-right">Tue</span>
+                                </a>
+
+                                <span class="text-muted">What a strenuous career it is that I've chosen...</span>
+                            </div>
+                        </li>
+
+                        <li class="media">
+                            <div class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></div>
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">Richard Vango</span>
+                                    <span class="media-annotation pull-right">Mon</span>
+                                </a>
+
+                                <span class="text-muted">Other travelling salesmen live a life of luxury...</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="dropdown-content-footer">
+                        <a href="#" data-popup="tooltip" title="All messages"><i class="icon-menu display-block"></i></a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="dropdown dropdown-user">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="assets/images/placeholder.jpg" alt="">
+                    <span>@User.Identity.Name</span>
+                    <i class="caret"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
+                    <li><a href="#"><i class="icon-coins"></i> My balance</a></li>
+                    <li><a href="#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
+                    <li>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new
+                            {
+                                id = "logoutForm"
+
+                            }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-switch2"></i> Sign Out</a>
+                        }
+
+
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /main navbar -->
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-main">
+            <div class="sidebar-content">
+
+                <!-- Main navigation -->
+                <div class="sidebar-category sidebar-category-visible">
+                    <div class="category-content no-padding">
+                        <ul class="navigation navigation-main navigation-accordion">
+
+                            <!-- Main -->
+                            <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                            <li class="active"><a href="@Url.Action("Index", "Home")"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                            <li>
+                                <a href="#"><i class="icon-stack2"></i> <span>Admission</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("Student_entry", "Home")">Student Admission</a></li>
+                                    <li><a href="@Url.Action("AdvanceSearch", "Home")">Student Search</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-copy"></i> <span>Guardians</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("Index", "Gardian")" id="layout1">Gurdian List</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-droplet2"></i> <span>Events</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("Index", "Event")">Events List</a></li>
+                                    <li><a href="@Url.Action("Create","Event")">Events Create</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-stack"></i> <span>Teacher And Stuffs</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("Create", "Stuff")">New Employee Entry</a></li>
+                                    <li><a href="@Url.Action("Index", "Stuff")">Employee List</a></li>
+                                    <li><a href="@Url.Action("Index", "Stuff")">Employee Search</a></li>
+
+                                </ul>
+                            </li>
+
+                            <!-- /main -->
+                            <!-- Forms -->
+
+                            <li>
+                                <a href="#"><i class="icon-pencil3"></i> <span>Library</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("SearchBookCode", "Library")">Book Code</a></li>
+                                    <li><a href="@Url.Action("CreateBook", "Library")">New Book Entry</a></li>
+                                    <li><a href="@Url.Action("BookSearch", "Library")">Books List</a></li>
+                                    <li><a href="@Url.Action("LibraryBookSummaryForStudent", "Library")">Book Submission</a></li>
+                                    <li><a href="@Url.Action("SearchStudentEmployeeList", "Library")">Issue Book</a></li>
+                                    <li><a href="@Url.Action("SearchIssuedBook", "Library")">Search Issued Book</a></li>
+
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-footprint"></i> <span>Setting</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("PaymentType", "Common")">Payment Type</a></li>
+                                    <li><a href="@Url.Action("PaymentCreate", "Common")">Payment Amount</a></li>
+                                    <li><a href="@Url.Action("Expacncetype", "Common")">Expense Type</a></li>
+                                    <li><a href="@Url.Action("ScolarShipType", "Common")">Scholarship Type</a></li>
+                                    <li><a href="@Url.Action("BankCreation", "Common")">Bank</a></li>
+                                    <li><a href="@Url.Action("TimeShedule", "Event")">Time Schedule</a></li>
+                                    <li><a href="@Url.Action("GPAType", "Result")">GPA Setting</a></li>
+                                    <li><a href="@Url.Action("Examtype", "Common")">Exam type</a></li>
+                                    <li><a href="@Url.Action("Exam", "Common")">Exam Routine</a></li>
+                                    <li><a href="@Url.Action("SchoolCreate", "Common")">School Creation</a></li>
+                                    <li><a href="@Url.Action("AutherCreatin", "Library")">Author Creation</a></li>
+                                    <li><a href="@Url.Action("CatagoryCreatin", "Library")">Book Catagory Creation</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-spell-check"></i> <span>Result</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("SubjectMark", "Result")">Number Distribution</a></li>
+                                    <li><a href="@Url.Action("ShowResult", "Result")">View Result</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-select2"></i> <span>Accounting</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("OpenningBalance", "Accounting")">Openning Balance</a></li>
+                                    <li><a href="@Url.Action("DonationIndex", "Event")">Donation</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-insert-template"></i> <span>Reports</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("AdmissionReport", "Report")">Admission Report</a></li>
+                                    <li><a href="@Url.Action("PaymentReport", "Report")">Fees Report</a></li>
+                                    <li><a href="@Url.Action("ExpanceSearch", "Expance")">Expenditure Report</a></li>
+                                    <li><a href="@Url.Action("PurchaseReport", "Inventory")">Purchase Report</a></li>
+                                    <li><a href="@Url.Action("Report", "Report")">Income Statement</a></li>
+                                </ul>
+                            </li>
+                            <!-- /forms -->
+                            <!-- Appearance -->
+                            <li class="navigation-header"><span>Appearance</span> <i class="icon-menu" title="Appearance"></i></li>
+                            <li class=""><a href="@Url.Action("Scolarship", "Event")"><i class="icon-home4"></i> <span>Scholarship</span></a></li>
+                            <li>
+                                <a href="#"><i class="icon-grid"></i> <span>Routine</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("CreateRutine", "Event")">Class Routine</a></li>
+                                    <li><a href="@Url.Action("SearchRutine", "Event")">Search Class Routine</a></li>
+                                    <li><a href="@Url.Action("SearchExamRutine", "Event")">Search Exam Routine</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-puzzle2"></i> <span>Course</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("CourseList", "MasterEntry")">Course Management</a></li>
+                                    <li><a href="@Url.Action("CourseAssignList", "MasterEntry")">Course Asignment</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-gift"></i> <span>Attendance</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("std_attendence", "Home")">Student Attendance</a></li>
+                                    <li><a href="@Url.Action("showAttendence", "Home")">Search Student Attendance</a></li>
+
+                                </ul>
+                            </li>
+                            <li class=""><a href="@Url.Action("StudentPayment", "Home")"><i class="icon-home4"></i> <span>Student Payment</span></a></li>
+                            <li>
+                                <a href="#"><i class="icon-spinner2 spinner"></i> <span>Expense</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("Expandature", "Expance")">Expense</a></li>
+                                    <li><a href="@Url.Action("EmployeeSalary", "Stuff")">Employee Salary</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li class=""><a href="@Url.Action("InventoryCreate", "Inventory")"><i class="icon-home4"></i> <span>Inventory</span></a></li>
+
+                            <!-- /appearance -->
+
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- /main navigation -->
+
+            </div>
+        </div>
+        <!-- /main sidebar -->
+        @RenderSection("featured", required: false)
+        @RenderBody()
+
+
+
+
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

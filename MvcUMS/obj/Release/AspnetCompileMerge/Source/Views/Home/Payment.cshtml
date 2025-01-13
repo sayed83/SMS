@@ -1,0 +1,917 @@
+﻿@model MvcUMS.Models.StudentPayment
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />*@
+@*<style>
+
+    #stextbox, #duelable, #duelable, #stextbox, #paytextbox, #text-box, #atextbox, #dtextbox, #ltextbox, #trstextbox, #smstextbox, #labtextbox, #amt, #advancepay {
+        height: 30px;
+        width: 80px;
+    }
+    #DBTxt-box, #ADMtext-box, #dobbox, #IMGTxt, #joindatetext-box, #nid, #email{
+        height: 30px;
+        width: 180px;
+    }
+
+    #addtext-box {
+        height: 30px;
+        width: 380px;
+    }
+    #totaltextbox, #cashtextbox, #banktextbox, #remarkstextbox, #banktextbox {
+        height: 30px;
+        width: 180px;
+    }
+</style>*@
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Payment</h2>
+    </div>
+</div>
+@{
+    var message = TempData["saved"] ?? string.Empty;
+}
+
+
+
+<!-- Basic layout-->
+
+@using (Html.BeginForm("Payment", "Home", FormMethod.Post, new { @class="form-horizontal" , enctype = "multipart/form-data", target = "_blank" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+           
+        <div class="panel panel-white">
+
+            <div class="panel-heading">
+                        
+                <a href="#" class="btn btn-success" id="gls">Pay</a> 
+                <a href="#" class="btn btn-success" id="psi">Admission</a>
+               
+            </div>
+
+            <div class="panel-body">
+                
+
+                    <div id="pay">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Payment Type:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.TypeId)
+                                        @Html.DropDownListFor(x => Model.TypeId, ViewBag.PaymentTypeList as SelectList, "Select PaymentType", new { @class = "form-control", id = "paymenttype" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                @{
+                                if (@TempData["amount"] != null)
+                                {
+                                    var s = " Scolarship";
+                            @TempData["type"] @s;
+                                }
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                @{
+                                if (@TempData["type"] != null)
+                                {
+                                    var s = " Tk";
+                                                        @Html.TextBox("amt", TempData["amount"], new { @readonly = "readonly" })@s;
+                                }
+                                }
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Amount:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.Amount)
+                                        @Html.TextBoxFor(model => model.Amount, new { @readonly = "readonly", @class = "form-control", id = "text-box" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Due Amount:</label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.DueAnount, new { @readonly = "readonly", @class = "form-control", id = "duelable" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="ckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:10px">Late Fine</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.fineAnount, new { @class = "form-control", id = "stextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Advance Pay:</label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.advancepay, new { @readonly = "readonly", @class = "form-control", id = "advancepay" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Total Amount:</label>
+                                    <div class="col-lg-9">
+                                        @Html.ValidationMessageFor(model => model.TotalAnount)
+                                        @Html.TextBoxFor(model => model.TotalAnount, new { @readonly = "readonly", @class = "form-control", id = "paytextbox" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="psinfo" style="display:none">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="Ackbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Adminssion Fee</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.AdmissionFee, new { @class = "form-control", id = "atextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="Dckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Development Fee</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.DevelopmentFee, new { @class = "form-control", id = "dtextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="Lckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Library Fee</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.LibraryFee, new { @class = "form-control", id = "ltextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="labckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Lab Fee</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.LabFee, new { @class = "form-control", id = "labtextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="trsckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Transport Fee</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.TransportFee, new { @class = "form-control", id = "trstextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="smsckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">SMS Fee</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.SMSAlartFee, new { @class = "form-control", id = "smstextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        Total Amount
+                                    </label>
+                                    <div class="col-lg-9">
+                                        <input type="text" id="totaltextbox" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="nonam">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="cashckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">CashPay Amount</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.CashPay, new { @class = "form-control", id = "cashtextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        <input id="bankpayckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">BankPay Amount</b>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.BankPay, new { @class = "form-control", id = "banktextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        Remarks
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control", id = "remarkstextbox", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">
+                                        Bank Name
+                                    </label>
+                                    <div class="col-lg-9">
+                                        @Html.TextBoxFor(model => model.bankname, new { @class = "form-control", id = "banktextboxe", style = "display: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="stpay" style="display:none">
+                        <div class="text-center">
+                            @using (Html.BeginForm("Payment", "Home", new { id = Model.StudentId, text = 'a', target = "_blank" }))
+                            {
+                            <button class="btn btn-info"  type="submit">Pay</button>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <div id="cpay">
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-info" value="Pay" />
+                        </div>
+
+                    </div>
+
+
+
+           </div>
+
+        </div>
+    }
+
+<!-- /basic layout -->
+
+
+
+@*<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row">
+          @using (Html.BeginForm("Payment", "Home", FormMethod.Post, new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    @Html.AntiForgeryToken()
+    <span style="color:red">@Html.ValidationSummary(true)</span>
+                <fieldset>
+                    <div class="col-md-12 alert alert-link" style="background-color:#dce2e2">
+
+                        <div class="row">
+                            <div class="col-md-10 alert alert-success form-inline" style="height:45px; width:95%;margin-left:18px">
+                                <a href="#" id="gls" style="text-decoration:none;font-size:large">Pay</a>  <a href="#" id="psi" style="text-decoration:none;margin-left:100px;font-size:large">Admission</a>
+                            </div>
+                        </div>
+                      
+                        <div id="pay">
+
+                            <div class="row">
+                                <div class="col-md-3" style="width: 21%; text-align: right">
+                                    <b>Payment Type<span style="color:Red;">&nbsp*</span>&nbsp;:</b>
+                                </div>
+                                <div class="col-md-3" style="width:28%">
+                                    <span style="color:red">@Html.ValidationMessageFor(model => model.TypeId)</span>
+                                    @Html.DropDownListFor(x => Model.TypeId, ViewBag.PaymentTypeList as SelectList, "Select PaymentType", new { @class = "form-control", id = "paymenttype" })
+
+                                </div>
+                                <div class="col-md-3">
+                                    @{
+                                        if (@TempData["amount"] != null)
+                                        {
+                                            var s = " Scolarship";
+                                            @TempData["type"] @s;
+                                        }
+                                    }                               
+                               </div>
+                                <div class="col-md-3">
+                                    @{
+                                        if (@TempData["type"] != null)
+                                        {
+                                            var s=" Tk";
+                                            @Html.TextBox("amt", TempData["amount"], new { @readonly = "readonly" })@s;
+                                        } 
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3" style="width:21%"><b>Amount<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                                <div class="col-md-3" style="width:28%">
+                                    <span style="color:red">@Html.ValidationMessageFor(model => model.Amount)</span>
+                                    @Html.TextBoxFor(model => model.Amount, new { @readonly = "readonly", @class = "form-control", id = "text-box", style = "width:120px", })
+                                </div>
+
+                                <div class="col-md-3">Due Amount</div>
+                                <div class="col-md-3">@Html.TextBoxFor(model => model.DueAnount, new { @readonly = "readonly", @class = "form-control", style = "width:120px", id = "duelable" })</div>
+                            </div>
+                            
+                            <div class="row" style="margin-top:15px">
+                                    <div class="col-md-3" style="width:21%">
+                                        <input id="ckbox"
+                                               name="Checkbox"
+                                               type="checkbox"
+                                               value="false" /><b style="margin-left:10px">Late Fine</b>
+                                    </div>
+                                    <div class="col-md-3" style="width:28%">@Html.TextBoxFor(model => model.fineAnount, new { @class = "form-control", id = "stextbox", style = "display: none;" })</div>
+                                   
+                                    <div class="col-md-3">Advance Pay</div>
+                                    <div class="col-md-3">@Html.TextBoxFor(model => model.advancepay, new { @readonly = "readonly",style="width:120px", @class = "form-control", id = "advancepay" })</div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3" style="width:21%"><b>Total Amount<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                                    <div class="col-md-3" style="width:28%">
+                                        <span style="color:red">@Html.ValidationMessageFor(model => model.TotalAnount)</span>
+                                        @Html.TextBoxFor(model => model.TotalAnount, new { @readonly = "readonly", style = "width:120px", @class = "form-control", id = "paytextbox" })
+                                    </div>
+                                    <div class="col-md-5">@Html.HiddenFor(model => model.StudentId, new { @class = "form-control", id = "stuid" }) </div>
+                                </div>
+
+                        </div>
+
+
+                        <div id="psinfo" style="display:none">
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 26%; margin-left: 5px">
+                                    <input id="Ackbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Adminssion Fee</b>
+                                </div>
+                                <div class="col-md-3" style="width:20%;">@Html.TextBoxFor(model => model.AdmissionFee, new { @class = "form-control", id = "atextbox", style = "display: none;" })</div>
+                                <div class="col-md-3" style="width:26%">
+                                    <input id="Dckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Development Fee</b>
+                                </div>
+                                <div class="col-md-3" style="width:20%">@Html.TextBoxFor(model => model.DevelopmentFee, new { @class = "form-control", id = "dtextbox", style = "display: none;" })</div>
+
+                            </div>
+
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 26%; margin-left: 5px">
+                                    <input id="Lckbox" 
+                                           name="Checkbox"
+                                           type="checkbox"
+                                           value="false" /><b style="margin-left:5px">Library Fee</b>
+                                </div>
+                                <div class="col-md-3" style="width:20%">@Html.TextBoxFor(model => model.LibraryFee, new { @class = "form-control", id = "ltextbox", style = "display: none;" })</div>
+                                <div class="col-md-3" style="width: 26%; ">
+                                    <input id="labckbox"
+                                           name="Checkbox"
+                                           type="checkbox"
+                                           value="false" /><b style="margin-left:5px">Lab Fee</b>
+                                </div>
+                                <div class="col-md-3" style="width:20%">@Html.TextBoxFor(model => model.LabFee, new { @class = "form-control", id = "labtextbox", style = "display: none;" })</div>
+
+                            </div>
+
+
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 26%; margin-left: 5px">
+                                    <input id="trsckbox"
+                                           name="Checkbox"
+                                           type="checkbox"
+                                           value="false" /><b style="margin-left:5px">Transport Fee</b>
+                                </div>
+                                <div class="col-md-3" style="width:20%">@Html.TextBoxFor(model => model.TransportFee, new { @class = "form-control", id = "trstextbox", style = "display: none;" })</div>
+                                <div class="col-md-3" style="width:26%">
+                                    <input id="smsckbox"
+                                           name="Checkbox"
+                                           type="checkbox"
+                                           value="false" /><b style="margin-left:5px">SMS alart Fee</b>
+                                </div>
+                                <div class="col-md-3" style="width:20%">@Html.TextBoxFor(model => model.SMSAlartFee, new { @class = "form-control", id = "smstextbox", style = "display: none;" })</div>
+
+                            </div>
+
+
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 26%; margin-left: 5px">
+                                    <b>Total Amount</b>
+                                </div>
+                                <div class="col-md-4" style="width:28%"><input type="text" id="totaltextbox" class="form-control" /></div>
+                                <div class="col-md-4"> </div>
+                            </div>
+
+
+                         </div>
+
+                        <div>
+
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width:23%;margin-left:5px">
+                                    <input id="cashckbox"
+                                           name="Checkbox"
+                                           type="checkbox"
+                                           value="false" /><b style="margin-left:5px">CashPay Amount</b>
+
+                                </div>
+                                <div class="col-md-4" style="width:28%">@Html.TextBoxFor(model => model.CashPay, new { @class = "form-control", id = "cashtextbox", style = "display: none;" })</div>
+                                <div class="col-md-4"> </div>
+                            </div>
+                           
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 23%; margin-left: 5px">
+                                    <input id="bankpayckbox"
+                                           name="Checkbox"
+                                           type="checkbox"
+                                           value="false" /><b style="margin-left:5px">BankPay Amount</b>
+
+                                </div>
+                                <div class="col-md-4" style="width:28%">@Html.TextBoxFor(model => model.BankPay, new { @class = "form-control", id = "banktextbox", style = "display: none;" })</div>
+                                <div class="col-md-4"> </div>
+                            </div>
+
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 23%; margin-left: 5px">
+                                    <label id="ltext">Remarks</label>
+                                </div>
+                                <div class="col-md-4" style="width:28%">@Html.TextBoxFor(model => model.Remarks, new { @class = "form-control", id = "remarkstextbox", style = "display: none;" })</div>
+                                <div class="col-md-5"> </div>
+                            </div>
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-3" style="width: 23%; margin-left: 5px">
+                                    <label id="lbbank">Bank Name</label>
+                                </div>
+                                <div class="col-md-4" style="width:28%">@Html.TextBoxFor(model => model.bankname, new { @class = "form-control", id = "banktextboxe", style = "display: none;" })</div>
+                                <div class="col-md-5"> </div>
+                            </div>
+
+                        </div>
+
+                        <div id="stpay" style="display:none">
+
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                   
+                                    @using (Html.BeginForm("Payment", "Home", new { id = Model.StudentId, text = 'a',target="_blank" }))
+                                    {
+                                        <button type="submit">Pay</button>
+                                    }
+                                </div>
+                                <div class="col-md-5"> </div>
+                            </div>
+                        </div>
+                        <div id="cpay" >
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2"><input type="submit" class="btn btn-info" value="Pay" /> </div>
+                                <div class="col-md-5"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                 }
+</div>
+        </div>
+    <div class="col-md-2"></div>
+</div>*@
+
+@*<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("StudentInvoceRpt", "Home", FormMethod.Post))
+        {
+            <table class="table table-bordered table-condensed table-hover">
+                <tr class="success">
+                    <td><b>@Html.HiddenFor(model => model.StudentId, new { id = "stuid" })</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.TextBox("date", DateTime.Now.ToShortDateString(), new { type = "date" })</td>
+                </tr>
+                <tr class="info">
+                    <td colspan="3" style="padding-left:40%"><input type="submit" id="btnSearch" class="btn btn-success" value="Print" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>*@
+
+
+@section Scripts {
+<script src="/Scripts/jquery-1.8.2.js"></script>
+
+    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+    @*<script src="~/Scripts/combodate.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.8.1.js" type="text/javascript"></script>*@
+    @*<script src="~/Scripts/jquery-1.8.1.min.js" type="text/javascript"></script>*@
+    <script>
+        $(function () {
+            $('#cashtextbox').change(function () {
+
+                var s = $('#banktextbox').val();
+                var t = $('#cashtextbox').val();
+                var st = $('#duelable').val();
+                var a = $('#amt').val();
+                var sst = $('#paytextbox').val();
+                var sd = $('#advancepay').val();
+                var total = parseFloat(sst) - (parseFloat(t) + parseFloat(s));
+                if (a > 0)
+                {
+                    var to = parseFloat(a) - (parseFloat(sst) - (parseFloat(t) + parseFloat(s)));
+                    $('#amt').val(to);
+                }
+                else
+                { $('#duelable').val(total); }
+            
+               //if (total >= parseFloat(sst))
+               // {
+               //     total += parseFloat(sd);
+               //     $('#advancepay').val(total);
+               // }
+
+               // else
+               // {
+               //     total += parseFloat(st);
+               //     $('#duelable').val(total);
+               // }
+            });
+
+        });
+        $(function () {
+            $('#banktextbox').change(function () {
+
+                var s = $('#banktextbox').val();
+                var t = $('#cashtextbox').val();
+                var st = $('#duelable').val();
+                var sst = $('#paytextbox').val();
+                var sd = $('#advancepay').val();
+               var total = parseFloat(sst) - (parseFloat(t) + parseFloat(s));
+               $('#duelable').val(total);
+               //if (total >= parseFloat(sst)) {
+               //     total += parseFloat(sd);
+               //     $('#advancepay').val(total);
+               // }
+
+               // else {
+               //     total += parseFloat(st);
+               //     $('#duelable').val(total);
+               // }
+
+
+            });
+
+        });
+    </script>
+
+<script type="text/javascript">
+    $(function () {
+        
+        $('#stextbox').keypress(function (event) {
+
+            if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                return true;
+
+            else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                event.preventDefault();
+
+        });
+        $('#banktextbox').keypress(function (event) {
+
+            if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                return true;
+
+            else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                event.preventDefault();
+
+        });
+        $('#cashtextbox').keypress(function (event) {
+
+            if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                return true;
+
+            else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                event.preventDefault();
+
+        });
+       
+   
+    });
+</script>
+<script type="text/javascript">
+
+$(function() {
+    $('#paymenttype').change(function () {
+        $.ajax({
+            url: '@Url.Action("Gettypeamount", "Home")',
+            type: 'GET',
+            cache: false,
+            data: { typeid: $('#paymenttype').val(), studentid: $('#stuid').val() },
+            success: function (data) {
+                $("#text-box").val(data)
+                $("#text-box").prop('disabled', true);
+                $("#paytextbox").val(data)
+                //$("#paytextbox").prop('disabled', true);
+               
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+
+            }
+        });
+        return false;
+    });
+});
+        
+    
+
+       
+        @*$(function () {
+            $('#paytextbox').change(function () {
+                $.ajax({
+                    url: '@Url.Action("Getautocomplete", "Home")',
+                    type: 'GET',
+                    cache: false,
+                    data: { payamount: $('#paytextbox').val(), amount: $('#text-box').val() },
+                    success: function (data) {
+                        $("#duelable").val(data)
+                        
+
+                    },
+                    error: function () {
+                        alert("Failed! Please try again.");
+
+                    }
+                });
+                return false;
+            });
+        });*@
+        
+        $(document).ready(function () {
+            $('#ckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    var total = 0;
+                    var s = $('#text-box').val();
+                    var t = $('#advancepay').val();
+                    total = parseFloat(t) - parseFloat(s);
+                    $('#atextbox').show();
+                    if (parseFloat(t) > parseFloat(s)) {
+                        $('#stextbox').hide();
+
+                        $('#stextbox').val(total);
+                    }
+                    else {
+                        $('#stextbox').show();
+
+                    }
+                }
+                else {
+                    $('#stextbox').hide();
+                }
+            });
+        });
+        //$(function () {
+        //    $('#ckbox').click(function () {
+        //        if (this.checked) {
+        //            var total = 0;
+        //            var s=$('#text-box').val();
+        //            var t= $('#advancepay').val();
+        //            total = parseFloat(t) - parseFloat(s);
+        //            if (parseFloat(t) >= parseFloat(s))
+        //            {
+        //                $('#stextbox').hide();
+                       
+        //                $('#stextbox').val(total);
+        //            }
+        //            else {
+        //                $('#stextbox').show();
+                       
+        //                 }
+                  
+        //        }
+        //    });
+           
+          
+        //});
+
+     
+        $(document).ready(function () {
+            $('#Ackbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#atextbox').show();
+                }
+                else {
+                    $('#atextbox').hide();
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Dckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#dtextbox').show();
+                } else {
+                    $('#dtextbox').hide();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#Lckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#ltextbox').show();
+                } else {
+                    $('#ltextbox').hide();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#labckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#labtextbox').show();
+                } else {
+                    $('#labtextbox').hide();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#trsckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#trstextbox').show();
+                } else {
+                    $('#trstextbox').hide();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#smsckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#smstextbox').show();
+                } else {
+                    $('#smstextbox').hide();
+                }
+            });
+        });
+
+       
+        $(document).ready(function () {
+            $('#cashckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#cashtextbox').show();
+                } else {
+                    $('#cashtextbox').hide();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#bankpayckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#banktextbox').show();
+                    $('#remarkstextbox').show();
+                    $('#lbbank').show();
+                    $('#banktextboxe').show();
+                     
+                } else {
+                    $('#banktextbox').hide();
+                    $('#remarkstextbox').hide();
+                    $('#lbbank').hide();
+                    $('#banktextboxe').hide();
+                    
+                }
+
+            });
+        });
+
+        $(function () {
+            $('#stextbox').change(function () {
+
+                var total = 0;
+                var s = $('#text-box').val();
+                var t = $('#stextbox').val();
+                total = parseFloat(t) + parseFloat(s);
+                $('#paytextbox').val(total);
+
+            });
+           
+        });
+
+
+        $(function () {
+            $('#smstextbox').change(function () {
+                $.ajax({
+                    url: '@Url.Action("GetautocTotalAmount", "Home")',
+                    type: 'GET',
+                    cache: false,
+                    data: { smsamount: $('#smstextbox').val(), transport: $('#trstextbox').val(), adminssion: $('#atextbox').val(), develop: $('#dtextbox').val(), libary: $('#ltextbox').val(),lab: $('#labtextbox').val() },
+                    success: function (data) {
+                        $("#totaltextbox").val(data)
+
+                    },
+                    error: function () {
+                        alert("Failed! Please try again.");
+
+                    }
+                });
+                return false;
+            });
+        });
+
+
+    </script>
+<script>
+    $(document).ready(function () {
+        $("#gls").click(function () {
+            $("#pay").show();
+            $("#cpay").show();
+            $("#psinfo").hide();
+            $("#stpay").hide();
+            
+        });
+       
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#psi").click(function () {
+            $("#psinfo").show();
+            $("#stpay").show();
+            $("#pay").hide();
+            $("#cpay").hide();
+
+        });
+       
+    });
+</script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+}

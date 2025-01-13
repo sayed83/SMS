@@ -1,0 +1,213 @@
+﻿@model MvcUMS.Models.StuffAttendence
+
+@{
+    ViewBag.Title = "StuffAttendence";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+  
+  #datetext-box {
+        height: 30px;
+        width: 180px;
+    }
+
+</style>
+<h2>StuffAttendence</h2>
+<div class="row"></div>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>StuffAttendence</legend>
+
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.StuffId)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.StuffId)
+                @Html.ValidationMessageFor(model => model.StuffId)
+            </div>*@
+            <div class="row">
+                <div class="col-md-3" style="width:21%"><b>Stuff Type <span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                <div class="col-md-3" style="width:28%">
+                    <span style="color:red">@Html.ValidationMessageFor(model => model.stuff.Department)</span>
+                    @Html.DropDownListFor(x => x.stuff.Department, ViewBag.Department as SelectList, "Select", new { id="ddropdown"})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" style="width:21%"><b>Date<span style="color:Red;">&nbsp*</span>&nbsp;:</b></div>
+                <div class="col-md-3" style="width:28%">
+                    <span style="color:red">@Html.ValidationMessageFor(model => model.Date)</span>
+                    @Html.TextBoxFor(model => model.Date,"{0:dd-MM-yyyy}",new { id = "datetext-box", placeholder = "Date" })
+                   
+                </div>
+            </div>
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.Date)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Date)
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>*@
+
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.status)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.status)
+                @Html.ValidationMessageFor(model => model.status)
+            </div>*@
+            @*<asp:GridView ID="grdDemo" runat="server">
+                
+            </asp:GridView>*@
+            <div class="row">
+            <div class="col-md-6">
+                <div id="partial"></div>
+            </div>
+           </div>
+            @*<p>
+                <input type="submit" value="Create" />
+            </p>*@
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<div class="col-md-2"></div>
+
+
+@section Scripts {
+<script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>
+@*<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+    <script type="text/javascript">
+        //$(function () {
+        //    $("#datetext-box").datepicker(
+        //        {
+        //            dateFormat: 'yy/mm/dd',
+        //            changeMonth: true,
+        //            changeYear: true,
+        //            yearRange: "-30:+5"
+        //        });
+        //});
+    
+
+      //$(document).ready(function () {
+      //    $('#ddropdown').change(function () {
+      //        var SelectedText = $(this).find(":selected").text();
+      //        var SelectedValue = $(this).val();
+      //        $('#country').text(SelectedText);
+      //        $('#Value').text(SelectedValue);
+
+      //        BindGridView();
+
+      //    });
+        //});
+   
+
+        @*$(document).ready(function () {
+
+            //Dropdownlist Selectedchange event
+
+            $("#ddropdown").change(function () {
+
+                //$("#city").empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetGridData")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#ddropdown").val() },
+
+                    success: function (data) {
+                        $("#grdDemo").empty();
+
+                        if (data.length > 0) {
+                            $("#grdDemo").append("<tr> <th>First Name</th>  <th>Last Name</th>  <th>Contact Number</th> <th>Gender</th> <th>Image</th><th></th> </tr>");
+                            for (var i = 0; i < data.length; i++) {
+
+                                $("#grdDemo").append("<tr><td>" +
+                                data[i].FirstName + "</td> <td>" +
+                                data[i].LastName + "</td> <td>" +
+                                data[i].ContactNo + "</td> <td>" +
+                                data[i].Gender + "</td> <td>" +
+                                data[i].Image + "</td> <td>")
+                                   
+                               
+                                
+                            }
+                        }
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve states.' + ex);
+
+                    }
+
+                });
+
+                return false;
+
+            })
+
+        });*@
+        @*$(document).ready(function () {
+            $('#ddropdown').click(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetGridData")',
+                    contentType: "application/json;charset=utf-8",
+                    data: { id: $("#ddropdown").val() },
+                    dataType: "json",
+                    success: function (data) {
+
+                        $("#grdDemo").empty();
+
+                        if (data.d.length > 0) {
+                            $("#grdDemo").append("<tr> <th>Username</th> <th>Firstname</th>  <th>Lastname</th> <th>EmailID</th> </tr>");
+                            for (var i = 0; i < data.d.length; i++) {
+
+                                $("#grdDemo").append("<tr><td>" +
+                                data.d[i].Firstname + "</td> <td>" +
+                                data.d[i].Lastname + "</td> <td>" +
+                                data.d[i].Username + "</td> <td>" +
+                                data.d[i].EmailID + "</td></tr>");
+                            }
+                        }
+                    },
+                    error: function (result) {
+                        alert("Error Data Grid");
+
+                    }
+                });
+            });
+        });*@
+    
+    </script>
+<script language="javascript" type="text/javascript">
+    $("#ddropdown").change(function () {
+        var designation = $('#ddropdown').val();
+        $.ajax({
+            type: "POST",
+            data: { id: designation },
+            url: '@Url.Action("GetGridData", "Stuff")',
+            success: function (result) {
+                $('#partial').html(result);
+            }
+        });
+    });
+</script>
+        @Scripts.Render("~/bundles/jqueryval")
+  }

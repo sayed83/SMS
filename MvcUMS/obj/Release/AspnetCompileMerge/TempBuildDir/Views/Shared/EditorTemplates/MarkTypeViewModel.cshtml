@@ -1,0 +1,25 @@
+﻿@model MvcUMS.Models.MarkTypeViewModel
+
+<!-- ko foreach: markTypes -->
+<fieldset>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Marks Type</th>
+                <th>Total Marks</th>
+                <th>Pass Marks</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DropDownList("MarkTypeId", ViewBag.MarkType as SelectList, "Select", new { @class = "form-control", required = true, data_bind = "value: mark,namePath: true" })</td>
+                <td>@Html.TextBoxFor(model => model.TotalMarks, new { @class = "form-control", required = true, data_bind = "value: total,namePath: true" })</td>
+                <td>@Html.TextBoxFor(model => model.PassMarks, new { @class = "form-control", required = true, data_bind = "value: pass,namePath: true" })</td>
+                <td><button class="btn btn-danger btn-xs" data-bind="click: $root.removePosition,enable: $parent.markTypes().length > 1">Remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+<!-- /ko -->
+

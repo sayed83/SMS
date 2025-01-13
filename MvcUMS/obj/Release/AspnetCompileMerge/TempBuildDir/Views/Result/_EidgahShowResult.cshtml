@@ -1,0 +1,517 @@
+﻿@if (User.IsInRole("Admin"))
+{
+    <div class="panel panel-flat">
+
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="row">
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Student ID:</label>
+                            @Html.TextBox("Std_id", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Exam Name:</label>
+                            @Html.DropDownList("Examtypeid", ViewBag.examtypeList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                        <label style="margin-bottom:20px"></label>
+                        <div class="text-left">
+                            <button type="submit" id="btnSearchByID" class="btn bg-slate-700"><strong>Search By ID</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Class:</label>
+                            @Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group" id="a">
+                            <label>Section:</label>
+                            <select id="Section" class="form-control"><option value=""></option></select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" id="group" style="display:none">
+                        <div class="form-group">
+                            <label>Group:</label>
+                            @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Exam Name:</label>
+                            @Html.DropDownList("Examid", ViewBag.examtypeList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Roll No:</label>
+                            <select id="RollNo" class="form-control"><option value=""></option></select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                        <label style="margin-bottom:20px"></label>
+                        <div class="text-left">
+                            <button type="submit" id="btnRollSearch" class="btn bg-success-300"><strong>Search</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+
+                @*<div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Class:</label>
+                                @Html.DropDownList("Semester", null, "Select", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group" id="a">
+                                <label>Section:</label>
+                                <select id="Section" class="form-control"><option value=""></option></select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3" id="group" style="display:none">
+                            <div class="form-group">
+                                <label>Group:</label>
+                                @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Exam Name:</label>
+                                @Html.DropDownList("Examid", ViewBag.examtypeList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <label style="margin-bottom:20px"></label>
+                            <div class="text-left">
+                                <button type="submit" id="btnExamSearch" class="btn bg-success-300"><strong>Search By Class</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+                        </div>
+
+                    </div>*@
+
+            </div>
+
+
+
+        </div>
+    </div>
+}
+else if (User.IsInRole("Student"))
+{
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Student ID:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBox("Std_id", User.Identity.Name, new { @class = "form-control", @readonly = true })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Exam Name:</label>
+                    <div class="col-lg-8">
+                        @Html.DropDownList("Examid", ViewBag.examtypeList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary" id="btnSearch" value="Search" />
+            </div>
+        </div>
+    </div>
+}
+else if (User.IsInRole("Teacher"))
+{
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Student ID:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBox("teacherId", User.Identity.Name, new { @class = "form-control", @readonly = true })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Exam Name:</label>
+                    <div class="col-lg-8">
+                        @Html.DropDownList("Examid", ViewBag.examtypeList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary" id="btnSearch" value="Search" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="EidgahHalfPartial"></div>
+<div id="EidgahFullPartial"></div>
+
+
+<script type="text/javascript">
+        $(function () {
+
+            $("#Std_id").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/getData",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Std_id, value: item.Std_id };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+            var s = $('#Semester').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $('#group').hide();
+            }
+
+        });
+
+        $("#Semester").change(function () {
+            var sem = $(this).val();
+            var url = "/Home/GetCourse/";
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+
+        $("#Section").change(function () {
+            var sem = $("#Semester").val();
+            var sec = $(this).val();
+            $.ajax({
+                url: "/Result/GetAllRoll/",
+                data: { se: sem,sec:sec },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#RollNo").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+        $('#Semester').change(function () {
+
+            var s1 = $('#Semester').val();
+            if (s1 == 'Nine' || s1 == 'Ten' || s1 == 'Eleven' || s1 == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $("#Department").val('');
+                $('#group').hide();
+            }
+
+        });
+
+
+        $("#Department").change(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetAllRoll")',
+                dataType: 'json',
+                data: { id: $("#Department").val(), se: $("#Semester").val(), sec: $("#Section").val() },
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#RollNo").html(markups).show();
+                },
+                error: function (ex) {
+
+                    alert('Failed to retrieve Subject.' + ex);
+                }
+            });
+
+        return false;
+
+        });
+
+
+        $(document).ready(function () {
+
+            //Search By ID
+
+            $('#btnSearchByID').click(function () {
+                $('#EidgahHalfPartial').html("");
+                $('#EidgahFullPartial').html("");
+
+                var smtId = $('#Semester').val();
+                var secId = $('#Section').val();
+                //var stdid = $('#StudentId').val();
+                var examid = $('#Examtypeid').val();
+                var dpt = $('#Department').val();
+                var stdid = $("#Std_id").val();
+
+                if (examid == "") {
+                    alert("No data available");
+                    $('#EidgahHalfPartial').html("");
+                    $('#EidgahFullPartial').html("");
+                }
+                else {
+                    if (examid == 2) {
+
+                        $.ajax({
+                            type: "POST",
+                            data: { StudentId: stdid, Semester: smtId, Section: secId, Department: dpt, Examtypeid: examid },
+                            url: '@Url.Action("EidgahFullMarkSheet", "Result")',
+                            cache: false,
+                            dataType: "html",
+                            success: function (data, textStatus, jqXHR) {
+                                $("#EidgahFullPartial").html(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(textStatus + " - " + errorThrown);
+                            }
+                        });
+
+                    }
+
+                    else {
+
+
+                        $.ajax({
+                            type: "POST",
+                            data: { StudentId: stdid, Semester: smtId, Section: secId, Department: dpt, Examtypeid: examid },
+                            url: '@Url.Action("EidgahMarkSheet", "Result")',
+                            cache: false,
+                            dataType: "html",
+                            success: function (data, textStatus, jqXHR) {
+                                $("#EidgahHalfPartial").html(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(textStatus + " - " + errorThrown);
+                            }
+                        });
+
+                    }
+                }
+            });
+
+            //Search By Roll
+
+            $('#btnRollSearch').click(function () {
+               // debugger;
+                $('#EidgahHalfPartial').html("");
+                $('#EidgahFullPartial').html("");
+
+                var smtId = $('#Semester').val();
+                var secId = $('#Section').val();
+                //var stdid = $('#StudentId').val();
+                var examid = $('#Examid').val();
+                var dpt = $('#Department').val();
+                var stdid = $("#Std_id").val();
+                var roll = $("#RollNo").val();
+
+                if (examid == "") {
+                    alert("No data available");
+                    $('#EidgahHalfPartial').html("");
+                    $('#EidgahFullPartial').html("");
+                }
+                else {
+                    if (examid == 2) {
+
+                        $.ajax({
+                            type: "POST",
+                            data: { StudentId: stdid, Semester: smtId, Section: secId, Department: dpt, Examtypeid: examid, RollNo: roll },
+                            url: '@Url.Action("EidgahFullMarkSheet", "Result")',
+                            cache: false,
+                            dataType: "html",
+                            success: function (data, textStatus, jqXHR) {
+                                $("#EidgahFullPartial").html(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(textStatus + " - " + errorThrown);
+                            }
+                        });
+
+                    }
+
+                    else {
+
+
+                        $.ajax({
+                            type: "POST",
+                            data: { StudentId: stdid, Semester: smtId, Section: secId, Department: dpt, Examtypeid: examid, RollNo: roll },
+                            url: '@Url.Action("EidgahMarkSheet", "Result")',
+                            cache: false,
+                            dataType: "html",
+                            success: function (data, textStatus, jqXHR) {
+                                $("#EidgahHalfPartial").html(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(textStatus + " - " + errorThrown);
+                            }
+                        });
+
+                    }
+                }
+            });
+
+            $('#btnExamSearch').click(function () {
+                $('#EidgahHalfPartial').html("");
+                $('#EidgahFullPartial').html("");
+
+                var smtId = $('#Semester').val();
+                var secId = $('#Section').val();
+                //var stdid = $('#StudentId').val();
+                var examid = $('#Examid').val();
+                var dpt = $('#Department').val();
+                var stdid = $("#Std_id").val();
+
+                if (examid == "") {
+                    alert("No data available");
+                    $('#EidgahHalfPartial').html("");
+                    $('#EidgahFullPartial').html("");
+                }
+                else {
+                    if (examid == 2) {
+
+                        $.ajax({
+                            type: "POST",
+                            data: { StudentId: stdid, Semester: smtId,Section:secId, Department: dpt, Examtypeid: examid },
+                            url: '@Url.Action("EidgahFullMarkSheet", "Result")',
+                            cache: false,
+                            dataType: "html",
+                            success: function (data, textStatus, jqXHR) {
+                                $("#EidgahFullPartial").html(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(textStatus + " - " + errorThrown);
+                            }
+                        });
+
+                    }
+
+                    else {
+
+
+                        $.ajax({
+                            type: "POST",
+                            data: { StudentId: stdid, Semester: smtId, Section: secId, Department: dpt, Examtypeid: examid },
+                            url: '@Url.Action("EidgahMarkSheet", "Result")',
+                            cache: false,
+                            dataType: "html",
+                            success: function (data, textStatus, jqXHR) {
+                                $("#EidgahHalfPartial").html(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(textStatus + " - " + errorThrown);
+                            }
+                        });
+
+                    }
+                }
+            });
+        });
+
+
+</script>
+
+
+<script type="text/javascript">
+        $("#Semester").change(function () {
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("GetStudentrolllist")',
+
+                dataType: 'json',
+
+                data: { classid: $("#Semester").val() },
+
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#StudentId").html(markups).show();
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve Department.' + ex);
+
+                }
+
+            });
+
+            return false;
+
+
+        });
+</script>
+

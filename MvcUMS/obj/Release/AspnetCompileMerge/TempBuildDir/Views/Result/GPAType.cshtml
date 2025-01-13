@@ -1,0 +1,80 @@
+﻿
+@model MvcUMS.Models.GPAType
+@{
+    ViewBag.Title = "GPAType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("GPAType", "Result", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal",
+            id = "submitForm"
+        }))
+        {
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Grade Point Setting</h2>
+                </div>
+
+                <div class="panel-body">
+
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Mark From:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Startmark, new { @class = "form-control", id = "corsetitle", placeholder = "Marks" })
+                            @Html.ValidationMessageFor(model => model.Startmark)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Mark To:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.endmark, new { @class = "form-control", id = "corsetitle", placeholder = "Marks" })
+                            @Html.ValidationMessageFor(model => model.endmark)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">GPA:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.GPA, new { @class = "form-control", id = "corsetitle", placeholder = "GPA" })
+                            @Html.ValidationMessageFor(model => model.endmark)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Grade Point:</label>
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.GradePoint, new { @class = "form-control", id = "gp", placeholder = "Grade Point" })
+                            @Html.ValidationMessageFor(model => model.GradePoint)
+                        </div>
+                    </div>
+                    <div class="text-right">
+
+                        <button type="submit" id="btncreate" name="Command" class="btn bg-slate-700"><strong>Create</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+    @{
+        Html.RenderAction("GPAList", "Common");
+    }
+
+
+@section Scripts {
+    
+    @Scripts.Render("~/bundles/jqueryval")
+}

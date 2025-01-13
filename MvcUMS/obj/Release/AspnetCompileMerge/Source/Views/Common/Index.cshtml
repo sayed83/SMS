@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.StudentPaymentTypeViewModel>
+
+@{
+    ViewBag.Title = "Student Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    //grid.Pager(WebGridPagerModes.All);
+}
+
+
+
+					<!-- Bordered panel body table -->
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Payment Details
+            <span class="pull-right">
+                @*@Html.ActionLink("Create New", "PaymentType", null, new { @class = "btn bg-slate-700" })*@
+                <a href="@Url.Action("PaymentType", "Common")" class="btn bg-slate-700">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    <span>
+                        <strong>Create New</strong>
+                    </span>
+                </a>
+            </span>
+        </h5>
+       
+    </div>
+    
+    <div class="panel-body">
+        
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-framed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentType)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Common", new { id = item.Id })" class="btn btn-default">
+                                    <i class="icon-pencil5"></i>
+                                    <span>
+                                        <strong>Edit</strong>
+                                    </span>
+                                </a>
+                                <a href="@Url.Action("Delete", "Common", new { id = item.Id })" class="btn btn-default" onclick="return confirm('Are You Sure To Delete?')">
+                                    <i class="icon-folder-remove"></i>
+                                    <span>
+                                        <strong>Delete</strong>
+                                    </span>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /bordered panel body table -->
+
+

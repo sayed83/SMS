@@ -1,0 +1,107 @@
+﻿@model MvcEnergyPac.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginPartial.cshtml";
+}
+
+<style>
+    .icon-target{
+        cursor:pointer;
+    }
+    .validation-summary-errors ul {
+        list-style-type: none;
+        font-size: 12px;
+        margin-bottom: 5px;
+        padding: 0px;
+    }
+</style>
+
+<script>
+    function copy(email, password) {
+        document.getElementById("usname").value = email;
+        document.getElementById("pass").value = password;
+    }
+</script>
+
+	<!-- Page container -->
+<div class="page-container login-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Content area -->
+            <div class="content">
+
+                @using (Html.BeginForm("Login", "Account", new
+                { 
+                    ReturnUrl = ViewBag.ReturnUrl
+                },FormMethod.Post, new
+                    { 
+                        @class = "form-validate" 
+                    })) {
+                    
+                        @Html.AntiForgeryToken()
+                      
+
+                 <div class="panel panel-body login-form">
+                    <div class="text-center">
+                        <div class="icon-object border-slate-300 text-slate-300"><img src="@Url.Content("~/Content/dashboard_template/")assets/images/zencon.png" /></div>
+                        <h5 class="content-group">Login to your account <small class="display-block"></small></h5>
+                    </div>
+                     <span class="text-danger">@Html.ValidationSummary(true)</span>
+                    <div class="form-group has-feedback has-feedback-left">
+                        @Html.TextBoxFor(a => a.UserName, new { placeholder = "Username",id="usname", @class = "form-control" })
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback has-feedback-left">
+                        @Html.PasswordFor(a => a.Password, new { placeholder = "Password",id="pass", @class = "form-control" })
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                    </div>
+                    <div class="form-group login-options">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" checked="checked">
+                                    Remember
+                                </label>
+                            </div>
+
+                            <div class="col-sm-6 text-right">
+                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+                   
+                    }
+             
+                <!-- Footer -->
+                <div class="footer text-muted" style="color:#fff">
+                    &copy;@DateTime.Now.Year. <a style="color:#fff" href="#">Zencon Technology Ltd.</a>
+                </div>
+                <!-- /footer -->
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->
+
+@Scripts.Render("~/bundles/jqueryval")

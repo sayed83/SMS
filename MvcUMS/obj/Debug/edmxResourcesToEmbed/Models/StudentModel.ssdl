@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Student_info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Std_id" Type="nvarchar" MaxLength="20" />
+    <Property Name="Std_FName" Type="nvarchar" MaxLength="20" />
+    <Property Name="Std_MName" Type="nvarchar" MaxLength="20" />
+    <Property Name="Std_LName" Type="nvarchar" MaxLength="20" />
+    <Property Name="Father_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mother_Nmae" Type="nvarchar" MaxLength="50" />
+    <Property Name="Parmenent_address" Type="nvarchar" MaxLength="150" />
+    <Property Name="Present_address" Type="nvarchar" MaxLength="150" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Birth_date" Type="date" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+    <Property Name="Contact_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="Admission_date" Type="date" />
+    <Property Name="Entry_date" Type="datetime" />
+    <Property Name="status" Type="nchar" MaxLength="10" />
+    <Property Name="GardianName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GardianMobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="GardianOccupation" Type="nvarchar" MaxLength="50" />
+    <Property Name="GurdianRelation" Type="nvarchar" MaxLength="50" />
+    <Property Name="BeforeSchool" Type="nvarchar" MaxLength="250" />
+    <Property Name="BeforeClass" Type="nvarchar" MaxLength="15" />
+    <Property Name="BeforeGpa" Type="nvarchar" MaxLength="5" />
+    <Property Name="ProximateID" Type="int" />
+    <Property Name="SchoolId" Type="int" />
+  </EntityType>
+  <EntityContainer Name="UMSModelStoreContainer">
+    <EntitySet Name="Student_info" EntityType="Self.Student_info" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

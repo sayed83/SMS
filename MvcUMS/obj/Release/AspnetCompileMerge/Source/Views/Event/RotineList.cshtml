@@ -1,0 +1,418 @@
+﻿@using MvcUMS.Models;
+@model Tuple<List<RoutineView>, List<TimeShedule>>
+@if (User.IsInRole("Student"))
+{
+ViewBag.Title = "SearchRutine";
+Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    <style>
+        .thumbnail:hover .caption {
+             top: -100%;
+            
+        }
+        .thumbnail {
+            min-height: 52px!important;
+        }
+
+    </style>
+   
+}
+else if (User.IsInRole("Admin"))
+{
+Layout = null;
+     <style>
+        .thumbnail:hover .caption {
+             top: 0%;
+            
+        }
+
+    </style>
+    
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript">
+    $('#btnUpdate').on('click', function (e) {
+        e.preventDefault();
+        var resp = confirm("Do you want to delete this???");
+        if (resp == true) {
+            $.ajax({
+                url: $(this).attr('href')
+               , success: function (response) {
+                   $('#partial').html(response);
+               }
+            });
+            return false;
+        }
+        else {
+            return false
+        }
+    });
+</script>
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>
+
+    
+}
+else
+{
+    Layout = null;
+   <style>
+        .thumbnail:hover .caption {
+             top: -100%;
+            
+        }
+        .thumbnail {
+            min-height: 52px!important;
+        }
+
+    </style>
+  
+}
+@{
+var list = Model.Item1;
+var i=0;
+}
+
+<style>
+
+    .costom-style{
+        margin: 0;
+        padding: 0 !important;
+    }
+    .showCourse {
+        width: 100%;
+        min-height: 50px;
+        border: medium none;
+        background-color: #F9F9F9;
+        white-space: pre;
+        font-size:12px;
+    }
+    .showEmpty {
+        width: 100%;
+        min-height: 50px;
+        border: medium none;
+        background-color: #fff;
+    }
+
+    .thumbnail {
+        position: relative;
+        overflow: hidden;
+        background-color: #f2f3db;
+        border: 0px solid #dddddd;
+        border-radius: 0px;
+        margin-bottom: 0px !important;
+        min-height: 50px;
+        text-align: center;
+    }
+
+    .caption {
+        position: absolute;
+        top: -100%;
+        right: 0;
+        background: rgba(66, 139, 202, 0.75);
+        width: 100%;
+        height: 100%;
+        padding: 2%;
+        text-align: center;
+        color: #fff !important;
+        z-index: 2;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+    }
+
+</style>
+
+<div class="panel panel-white">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" cellspacing="0" id="tablesorter" style="background-color:white;font-size:12px;">
+            <tr style="background-color:#bbb795">
+                <th style="text-align:center">
+                    Time
+                </th>
+                <th style="text-align:center">
+                    Saturday
+                </th>
+                <th style="text-align:center">
+                    Sunday
+                </th>
+                <th style="text-align:center">
+                    Monday
+                </th>
+
+                <th style="text-align:center">
+                    Tuesday
+                </th>
+                <th style="text-align:center">
+                    Wednesday
+                </th>
+                <th style="text-align:center">
+                    Thusday
+                </th>
+
+                <th style="text-align:center">
+                    Friday
+                </th>
+
+            </tr>
+            @foreach (var item in Model.Item2)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <tr>
+                    <td>
+                        @item.StartTime - @item.EndTime
+
+                    </td>
+                    @if (list.Count() > i && list[i].timeId == item.Id)
+                    {
+                        <td class=" costom-style">
+                            @if (list[i].Saturday != null)
+                            {
+                                <div class="thumbnail" id="no-caption">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 1, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                       
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 1, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Saturday</span>
+                                </div>
+                            }
+                            else
+                            {
+                                @*<a href='#' data-toggle='modal' class="btn btn-xs" data-target='#CreateDayroutineDialog' onclick='addRoutineInfo(@item.Id)'>sat</a>*@
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 1, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty" ,data_toggle="modal" , data_target="#CreateDayroutineDialog" })
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Sunday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 2, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 2, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Sunday</span>
+                                </div>
+                            }
+                            else
+                            { 
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 2, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog"})
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Monday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 3, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 3, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Monday</span>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 3, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Tuesday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 4, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 4, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Tuesday</span>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 4, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Wednesday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 5, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 5, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Wednesday</span>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 5, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })
+                            }
+                        </td>
+                        <td class="costom-style">
+                            @if (list[i].Thusday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 6, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 6, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Thusday</span>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 6, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })
+                            }
+                        </td>
+                        <td class="costom-style">
+                            @if (list[i].Friday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 7, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 7, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Friday</span>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 7, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })
+                            }
+                        </td>
+                            i++;
+                    }
+                    else
+                    {
+                        <td class=" costom-style">
+                            @*<a href='#' data-toggle='modal' class="btn btn-xs" data-target='#CreateDayroutineDialog' onclick='addRoutineInfo(@item.Id)'>satur</a>*@
+                        @Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 1, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })
+                        </td>
+                        <td class=" costom-style">@Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 2, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })</td>
+                        <td class=" costom-style">@Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 3, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })</td>
+                        <td class=" costom-style">@Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 4, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })</td>
+                        <td class=" costom-style">@Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 5, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })</td>
+                        <td class=" costom-style">@Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 6, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })</td>
+                        <td class=" costom-style">@Html.ActionLink(" ", "CreateDayRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 7, Time = item.Id }, new { id = "btnAdd", @class = "btn showEmpty", data_toggle = "modal", data_target = "#CreateDayroutineDialog" })</td>
+                    }
+                </tr>
+                
+                }
+
+                else
+                {
+                    <tr>
+                    <td>
+                        @item.StartTime - @item.EndTime
+
+                    </td>
+                    @if (list.Count() > i && list[i].timeId == item.Id)
+                    {
+                        <td class=" costom-style">
+                            @if (list[i].Saturday != null)
+                            {
+                                <div class="thumbnail" id="no-caption">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 1, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 1, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Saturday</span>
+                                </div>
+                            }
+                            
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Sunday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 2, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 2, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Sunday</span>
+                                </div>
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Monday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 3, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 3, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Monday</span>
+                                </div>
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Tuesday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 4, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 4, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Tuesday</span>
+                                </div>
+                            }
+                        </td>
+                        <td class=" costom-style">
+                            @if (list[i].Wednesday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 5, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 5, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Wednesday</span>
+                                </div>
+                            }
+                        </td>
+                        <td class="costom-style">
+                            @if (list[i].Thusday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 6, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 6, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Thusday</span>
+                                </div>
+                            }
+                        </td>
+                        <td class="costom-style">
+                            @if (list[i].Friday != null)
+                            {
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 7, Time = item.Id })" id="btnUpdate" class="btn btn-xs btn-danger">Delete</a>
+                                        @*<a href="@Url.Action("DeleteRutine", "Event", new { Class = ViewData["Semester"], Group = ViewData["Department"], section = ViewData["Section"], Day = 7, Time = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm(' you want to delete?');">Delete</a>*@
+                                    </div>
+                                    <span style="text-align: center; white-space: pre;">@list[i].Friday</span>
+                                </div>
+                            }
+                        </td>
+                            i++;
+                    }
+                    else
+                    {
+                        <td class=" costom-style"></td>
+                        <td class=" costom-style"></td>
+                        <td class=" costom-style"></td>
+                        <td class=" costom-style"></td>
+                        <td class=" costom-style"></td>
+                        <td class=" costom-style"></td>
+                        <td class=" costom-style"></td>
+                    }
+                </tr>
+                }
+                
+            }
+        </table>
+    </div>
+</div>
+
+

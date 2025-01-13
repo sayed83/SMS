@@ -1,0 +1,47 @@
+﻿@model MvcUMS.Models.studentScholarshiptype
+@{
+    ViewBag.Title = "Student Details";
+    Layout = null;
+}
+<style>
+    #scolershiptype {
+        width: 90%;
+        height: 30px;
+    }
+</style>
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using (Html.BeginForm("UpdateSchlership", "Event", FormMethod.Post))
+{
+
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+
+            <legend>Student Details</legend>
+            <table>
+                <tr>
+                    <td>Student Name</td>
+                    <td>@Html.DisplayFor(model => model.stuinfo.Std_FName) @Html.DisplayFor(model => model.stuinfo.Std_MName) @Html.DisplayFor(model => model.stuinfo.Std_LName)  </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+
+ }

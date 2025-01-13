@@ -1,0 +1,530 @@
+﻿@model MvcUMS.Models.ViewModels.StudentProfileViewModel
+
+@{
+    ViewBag.Title = "Student details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+<style>
+    .bio-table {
+        width: 75%;
+        border: 0px solid;
+    }
+
+        .bio-table td {
+            text-transform: capitalize;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .bio-table > tbody > tr > td {
+            border: 0px solid;
+            text-transform: capitalize;
+            color: rgb(0, 4, 51);
+            font-size: 15px;
+        }
+
+    .responsiv-table {
+        border: 0px solid;
+    }
+
+    /*#StdProfilePrintDiv{
+        width:595px;
+        margin:0 auto;
+        border:1px solid #ddd;
+    }*/
+</style>
+
+<!-- Main content -->
+@if (User.IsInRole("Admin"))
+{
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            @using (@Html.BeginForm("StudentDetails", "Home", FormMethod.Post))
+            {
+                <b class="form-inline">
+                    <a href="@Url.Action("Student_entry", "Home")">Create New</a> &nbsp;&nbsp; |&nbsp;&nbsp;<a href="@Url.Action("AdvanceSearch", "Home")">Advance Search</a>&nbsp;&nbsp; |&nbsp;&nbsp; Search Student &nbsp;&nbsp; @Html.TextBox("Std_id1", null, new { @class = "form-control", placeholder = "Enter Student Id" })
+
+                    <input type="submit" class="btn btn-primary" value="Search" id="btnSubmitSe" />
+                    @if (Model.StudentInfoViewModel.Std_id != null)
+                    {
+                        <button type="button" id="printStdProfile" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+                        @*@Html.ActionLink("Print", "StudentFullProfilePrint", new { id = Model.Std_id }, new { @class = "btn bg-slate-700", target = "_blank" })*@
+                    }
+
+
+                </b>
+
+            }
+            <span class="text-danger"> @ViewBag.ErorMessage</span>
+
+        </div>
+
+        <div class="panel-body no-padding">
+            <div id="StdProfilePrintDiv">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="~/uploads/@Model.SchoolViewModel.Logo" class="school-logo pull-left" alt="School Logo" height="100" width="80" />
+                        <div class="school-info text-center">
+                            <h3>@Model.SchoolViewModel.SchoolName</h3>
+                            <p class="text-center">@Model.SchoolViewModel.Address</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 m-top-10">
+                        <h6 class="bg-purple-300 text-center">Student Profile</h6>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="table-responsive responsiv-table std-personal-profile">
+                            <table class="table table-xxs table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>Student ID</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Std_id, new { id = "stdid" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Student Name</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Std_FName) &emsp;@Html.DisplayFor(model => model.StudentInfoViewModel.Std_MName) &emsp;@Html.DisplayFor(model => model.StudentInfoViewModel.Std_LName)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Gender)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Birth</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Birth_date)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Contact_no)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        @if (Model.StudentInfoViewModel.Picture != null)
+                        {
+                            <img src="~/uploads/@Html.DisplayFor(model => model.StudentInfoViewModel.Picture)" class=" pull-right pad-left-10" alt="Student Image" height="120" width="100" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" class=" pull-right pad-left-10" alt="Student Image" height="100" width="150" />
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h6 class="bg-purple-300 text-center">Others Information</h6>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="table-responsive responsiv-table">
+                            <table class="table table-xxs table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>Father Name</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Father_Name)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mother Name</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Mother_Nmae)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Permanent Address</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Parmenent_address)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Present Address</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.Present_address)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+
+                        <div class="table-responsive responsiv-table">
+                            <table class="table table-xxs table-borderless">
+                                <tbody>
+
+                                    <tr>
+                                        <td>Gurdian Name</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.GardianName)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relation</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.GurdianRelation)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Occupation</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.GardianOccupation)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile</td>
+                                        <td>:</td>
+                                        <td>@Html.DisplayFor(model => model.StudentInfoViewModel.GardianMobile)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" id="non-printable">
+                <div class="panel panel-flat border-top-primary text-center">
+
+                    <div class="btn-group btn-group-fade">
+
+                        @Html.ActionLink(" Edit  ", "Student_Edit", new { id = Model.StudentInfoViewModel.Id }, new { @class = "btn bg-slate-700" })
+
+                        @if (Model.StudentInfoViewModel.Std_id != null)
+                        {
+                            if (TempData["isActive"].ToString().Trim() == "Active")
+                            {
+                                @Html.ActionLink(" Inactive  ", "Student_Inactive", new { id = Model.StudentInfoViewModel.Std_id }, new { @class = "btn bg-teal-400", id = "openDialog" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" Active  ", "Student_Active", new { id = Model.StudentInfoViewModel.Std_id }, new { @class = "btn bg-warning-400", id = "openDialog" })
+                            }
+                        }
+
+
+                        @if (Model.StudentInfoViewModel.Std_id == null)
+                        {
+                            @Html.ActionLink("Current Academic Info   ", "CreateCurentAcaInfo", new { id = Model.StudentInfoViewModel.Id }, new { @class = "btn btn-info" })
+                        }
+                        else
+                        {
+                            @*@Html.ActionLink("Payment ", "StudentPaymentEntry", new { id = Model.Std_id }, new { @class = "btn bg-warning-400" })*@
+                            @*@Html.ActionLink("Payment", "StudentPaymentCallection", "Accounting", new { id = Model.Std_id }, new { @class = "btn bg-warning-400" })*@
+
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Change Password", "ResetPassword", "Account", new { id = Model.StudentInfoViewModel.Std_id }, new { @class = "btn btn-info" })
+
+                        }
+                        @Html.TextBoxFor(model => model.StudentInfoViewModel.Std_id, new { style = "visibility:hidden" })
+
+                    </div>
+
+                </div>
+
+
+                @Html.ActionLink("Back to List", "Student_list")
+
+                @{
+                    if (Model.StudentInfoViewModel.Std_id != null)
+                    {
+                        @*if (TempData["ProError"] !=null)
+                            {
+                                <span>@TempData["ProError"]</span>
+                            }*@
+                        Html.RenderAction("Std_academic_info", "Home", new { id = Model.StudentInfoViewModel.Std_id });
+                        Html.RenderAction("StudentPreviousHistory", "Home", new { id = Model.StudentInfoViewModel.Std_id });
+                    }
+
+
+                }
+
+                <div id="ConfirmeDialog" title="User Varification Dialog">
+
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">Please enter your password</h5>
+
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label id="mass" style="color:#ff0000"></label>
+                                @Html.TextBox("pass", null, new { type = "password", @class = "form-control" })
+
+                            </div>
+
+                            <div class="text-center">
+
+                                <input type="submit" id="modalBtn" class="btn btn-info" onclick="active()" value="Submit" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+}
+else
+{
+    <div class="panel panel-flat">
+
+
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                <tr>
+                                    <td>Student ID</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Std_id, new { id = "stdid" })</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Student Name</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Std_FName) &emsp;@Html.DisplayFor(model => model.StudentInfoViewModel.Std_MName) &emsp;@Html.DisplayFor(model => model.StudentInfoViewModel.Std_LName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Admission Date</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Admission_date)</td>
+                                </tr>
+                                <tr>
+                                    <td>Father Name</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Father_Name)</td>
+                                </tr>
+                                <tr>
+                                    <td>Mother Name</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Mother_Nmae)</td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Gender)</td>
+                                </tr>
+                                <tr>
+                                    <td>Entry Date</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Entry_date)</td>
+                                </tr>
+                                <tr>
+                                    <td>Contact No</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Contact_no)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                <tr>
+                                    <td>Photo</td>
+                                    <td><img src="~/uploads/@Html.DisplayFor(model => model.StudentInfoViewModel.Picture)" alt="Student Image" height="120" width="100" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Permenent Address</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Parmenent_address)</td>
+                                </tr>
+                                <tr>
+                                    <td>Present Address</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Present_address)</td>
+                                </tr>
+                                <tr>
+                                    <td>Date of birth</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Birth_date)</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>Email</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.Email_id)</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h6 class="bg-green">Gardian Information</h6>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                <tr>
+                                    <td>Gardian Name</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.GardianName)</td>
+                                </tr>
+                                <tr>
+                                    <td>Occupation</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.GardianOccupation)</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                        <table class="table bio-table">
+                            <tbody>
+                                <tr>
+                                    <td>Contact No</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.GardianMobile)</td>
+                                </tr>
+                                <tr>
+                                    <td>Relation</td>
+                                    <td>:@Html.DisplayFor(model => model.StudentInfoViewModel.GurdianRelation)</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+}
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $("#printStdProfile").click(function () {
+                $("#StdProfilePrintDiv").printThis();
+            });
+
+            var ErrMsg = "@(TempData["ProError"] as string)";
+            if (ErrMsg !== "") {
+                toastr.error(ErrMsg);
+            }
+
+            var SccMsg = "@(TempData["ProSuccess"] as string)";
+            if (SccMsg !== "") {
+                toastr.success(SccMsg);
+            }
+
+            if ('@Session["Stdid"]' != '') {
+                var id = '@Session["Stdid"]';
+                var url = '/Home/PrintIdCard/' + id;
+                window.open(url, '_blank');
+            }
+        })
+
+        $("#Std_id1").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/getData",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Std_id, value: item.Std_id };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+
+
+    </script>
+    <script type="text/javascript">
+        function ConfirmationDialog() {
+            $("#ConfirmeDialog").dialog({
+                width: 400,
+                modal: true
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var url = "";
+            $("#ConfirmeDialog").dialog({
+                autoOpen: false,
+                width: 400,
+                height: 280,
+                modal: true,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+            $("#openDialog").click(function (e) {
+                url = $(this).attr('href');
+                $("#ConfirmeDialog").dialog("open");
+                return false;
+            });
+            $("#modalBtn").click(function (e) {
+                var tex = jQuery.trim($("#pass").val());
+                if ('@TempData["Password"]' != tex) {
+                    $("#mass").html("Your password is wrong");
+
+                }
+                else {
+                    $("#ConfirmeDialog").dialog("close");
+                    window.location.href = url;
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#btnSubmitSe').click(function () {
+                var txt = $('#Std_id1');
+                if (txt.val() != null && txt.val() != '') {
+                    return true;
+                }
+                else {
+                    alert('Please enter text')
+                    return false;
+                }
+            })
+        });
+    </script>
+}

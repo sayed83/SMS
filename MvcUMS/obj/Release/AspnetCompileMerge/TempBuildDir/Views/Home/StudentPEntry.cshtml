@@ -1,0 +1,324 @@
+﻿@model MvcUMS.Models.PaymentSatup
+
+@{
+    ViewBag.Title = "StudentPEntry";
+    Layout = null;
+    int t = 1;
+    DateTime LPMonth = Convert.ToDateTime(TempData["lastPDate"]);
+    if (LPMonth < Model.SessionStartMonth)
+    {
+        LPMonth = Model.SessionStartMonth;
+    }
+    DateTime LastSassion = Model.SessionStartMonth.AddMonths(Model.NoMonth).AddDays(-1);
+    var diff = Enumerable.Range(0, 13).Select(a => LPMonth.AddMonths(a))
+           .TakeWhile(a => a <= LastSassion)
+           .Select(a => String.Concat(a.ToString("MMMM") + ", " + a.Year));
+}
+ @using (Html.BeginForm("StudentPEntry", "Home", FormMethod.Post))
+            {
+@Html.HiddenFor(a => a.Std_id)
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-bordered">
+            <tr>
+                <th><input type="checkbox" value="1" name="ids" id="Chetution" class="check" />Tution Fee</th>
+                <td>@Html.TextBox("Tution", null, new { @class = "form-control", readOnly = true })</td>
+            </tr>
+            <tr id="payMonth">
+                <th>Payment Month</th>
+                <td>
+                    <div style="width:100%; height:70px;background-color:#fff;overflow:auto;padding-left:15px;">
+                        @foreach (var months in diff)
+                        {
+                            var id = "c" + t;
+                            <input type="checkbox" name="month" value="@months" id="@id" /> @months<br />
+                            t++;
+                        }
+                    </div>
+                    @*<select id="CategoryId" multiple="multiple" name="CategoryId" class="form-control">
+                        @foreach (var months in diff)
+                        {
+                            <option value="@months">@months</option>
+                        }
+                    </select>*@
+                </td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="2" name="ids" class="check" />Addmision Fee</th>
+                <td>@Html.TextBox("Admision", null, new { @class = "form-control", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="3" name="ids" class="check" />Lab Fee</th>
+                <td>@Html.TextBox("Lab", null, new { @class = "form-control", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="4" name="ids" class="check" />Development Fee</th>
+                <td>@Html.TextBox("Development", null, new { @class = "form-control", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="5" name="ids" class="check" />Exam Fee</th>
+                <td>@Html.TextBox("Exam", null, new { @class = "form-control", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="6" name="ids" class="check" />Library Fee</th>
+                <td>@Html.TextBox("Library", null, new { @class = "form-control", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="7" name="ids" class="check" />Others Fee</th>
+                <td>@Html.TextBox("Others", null, new { @class = "form-control Numeric", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" value="8" name="ids" class="check" />Late Fine</th>
+                <td>@Html.TextBox("Late", null, new { @class = "form-control Numeric", readOnly = true })</td>
+            </tr>
+            <tr>
+                <th>Payment Method</th>
+                <th> &nbsp;&nbsp;<input type="checkbox" name="payM" value="cash" id="cash" checked /> Cash Pay  <input type="checkbox" name="payM" value="bank" id="bank" /> Bank Pay</th>
+            </tr>
+            <tr id="cashDiv">
+                <th>Cash Amount</th>
+                <td> @Html.TextBox("textCash", 0, new { @class = "form-control Numeric",readOnly=true })</td>
+            </tr>
+            <tr id="bankDiv">
+                <th>Bank Amount</th>
+                <td> @Html.TextBox("textBank", 0, new { @class = "form-control Numeric", readOnly = true })</td>
+            </tr>
+            <tr id="remerksDiv">
+                <th>Remarks</th>
+                <td> @Html.TextArea("Remarks", new { @class = "form-control" })</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-left:40%"><input type="submit" value="Save" id="btnStdPayment" class="btn btn-success" /></td>
+            </tr>
+        </table>
+        <a href="@Url.Action("UpdatePaymentSetup", "Home", new { std_id = Model.Std_id })" class="btn btn-xs btn-info">Update Payment Setup</a>
+    </div>
+</div>
+            }
+@*<script src="~/Scripts/CustomValidation.js"></script>*@
+@*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+<script>
+    var total = 0;
+    var SumTotal = 0;
+    $(function () {
+        $("#payMonth").hide();
+        $("#bankDiv").hide()
+        $("#remerksDiv").hide();
+    })
+    $(".check").click(function () {
+        var t = $(this).closest('tr').find('input[type="text"]');
+        var p = 0;
+        if (this.checked) {
+            if ($(this).val() == "1")
+            {
+                $("#payMonth").show(1200);
+                var CM = $("[name='month']:checked").length;
+                if (CM > 0)
+                {
+                    p = CM*'@Model.TutionFeePerMonth';
+                }
+                else
+                {
+                    p = '@Model.TutionFeePerMonth';
+                }
+            }            
+            else if ($(this).val() == "2")
+                p = '@Model.AdmissionFee';
+            else if ($(this).val() == "3")
+                p ='@Model.LabFee';
+            else if ($(this).val() == "4")
+                p = '@Model.DevelopmentFee';
+            else if ($(this).val() == "5")
+                p = '@Model.ExamFee';
+            else if ($(this).val() == "6")
+                p = '@Model.LibraryFee';
+            else if ($(this).val() == "7")
+            {
+                p = '@Model.Other';
+                if(p!=0)
+                    t.attr("readonly", false)
+                t.val(0)
+            }
+            else if ($(this).val() == "8")
+                t.attr("readonly", false)
+            if (p == 0 && $(this).val() != "8") {
+                alert("Data not setup for this. Please setup first");
+                  $(this).attr("checked", false);
+            }
+            else {
+                if ($(this).val() != "7")
+                {
+                    t.val(p);
+                    total = total + parseFloat(p);
+                    var other = 0;
+                    var late = 0;
+                    if ($("#Others").val().length > 0)
+                        other = parseFloat($("#Others").val());
+                    if ($("#Late").val().length > 0)
+                        late = parseFloat($("#Late").val());
+                    SumTotal = total + other + late;
+                    $("#textCash").val(SumTotal.toFixed(2))
+                }
+            }
+        }
+        else {
+            var q = parseFloat(t.val())
+            if ($(this).val() != "7" && $(this).val() != "8")
+            {
+                total = total - q;
+                var other = 0;
+                var late = 0;
+                if ($("#Others").val().length > 0)
+                    other = parseFloat($("#Others").val());
+                if ($("#Late").val().length > 0)
+                    late = parseFloat($("#Late").val());
+                SumTotal = total + other + late;
+            }
+            else
+            {
+                SumTotal = SumTotal - q;
+            }
+            $("#textCash").val(SumTotal.toFixed(2))
+            t.val("")
+            t.attr("readonly", true)
+            if ($(this).val() == "1") {
+                $("#payMonth").hide(500);
+            }
+        }
+    })
+
+
+    $("input[name='month']").click(function () {
+        var CM = $("[name='month']:checked").length;
+        if (CM > 0)
+        {
+            total = (total - parseFloat($("#Tution").val())) + (CM * '@Model.TutionFeePerMonth');
+            $("#Tution").val((CM * '@Model.TutionFeePerMonth').toFixed(2))
+            var other = 0;
+            var late = 0;
+            if ($("#Others").val().length > 0)
+                other = parseFloat($("#Others").val());
+            if ($("#Late").val().length > 0)
+                late = parseFloat($("#Late").val());
+            SumTotal = total + other + late;
+            $("#textCash").val(SumTotal.toFixed(2))
+        }
+        var cid = $(this).prop("id");
+        if (this.checked) {
+            if (cid != "c1") {
+                var pid = "c" + (parseInt(cid.substring(1, cid.length)) - 1);
+                if ($("#" + pid).prop('checked') == false) {
+                    $(this).attr("checked", false);
+                    alert("Please select checkbox serially");
+                }
+
+            }
+        }
+        else
+        {
+            var t=parseInt(cid.substring(1, cid.length));
+            for(var i=t;i<='@diff'.length;i++)
+            {
+                var cuid="c"+i;
+                if($("#" + cuid).prop('checked') == true)
+                {
+                    $("#" + cuid).attr("checked", false);
+                }
+            }
+        }
+    });
+
+
+    $("#Others,#Late").keyup(function () {
+        var other = 0;
+        var late = 0;
+        if ($("#Others").val().length>0)
+            other = parseFloat($("#Others").val());
+        if ($("#Late").val().length > 0)
+            late = parseFloat($("#Late").val());
+        SumTotal = total + other + late;
+        $("#textCash").val(SumTotal.toFixed(2))
+    })
+
+
+    $("#textBank").keyup(function () {
+        var val=$(this).val();
+        if (val.length<1)
+            val = 0;
+        var mt = SumTotal - parseFloat(val);
+        $("#textCash").val(mt.toFixed(2))
+    })
+    $("#textBank").focusout(function () {
+        var val = $(this).val();
+        if (val.length < 1)
+            val = 0;
+        $(this).val(val)
+    })
+    $("#Others,#Late").focusout(function () {
+        if ($(this).val().length < 1) {
+            $(this).val(0)
+        }
+    })
+
+    $("#btnStdPayment").click(function () {
+        var count_checked = $("[name='ids']:checked").length;
+        var count_payment = $("[name='payM']:checked").length;
+        if (count_checked == 0) {
+            alert("Please select any chechbox");
+            return false;
+        }
+        else if(count_payment==0)
+        {
+            alert("Please select payment method");
+            return false;
+        }
+        else
+        {
+            if($("#Chetution").prop('checked')==true)
+            {
+                var count = $("[name='month']:checked").length;
+                if(count==0)
+                {
+                    alert("Please select month")
+                    return false;
+                }
+            }
+        }
+    });
+
+    $("input[name='payM']").click(function () {
+        if ($("#cash").prop('checked') == true && $("#bank").prop('checked') == true)
+        {
+            $("#textBank").attr("readOnly", false)
+            $("#textBank").val(0)
+            $("#textCash").val(SumTotal)
+            $("#cashDiv").show();
+            $("#bankDiv").show()
+            $("#remerksDiv").show();
+        }
+        else if ($("#cash").prop('checked') == true && $("#bank").prop('checked') == false)
+        {
+            $("#textBank").attr("readOnly", true)
+            $("#textCash").val(SumTotal)
+            $("#textBank").val(0)
+            $("#cashDiv").show();
+            $("#bankDiv").hide()
+            $("#remerksDiv").hide();
+        }
+        else if ($("#cash").prop('checked') == false && $("#bank").prop('checked') == true) {
+            $("#textBank").attr("readOnly", true)
+            $("#textCash").val(0)
+            $("#textBank").val(SumTotal)
+            $("#cashDiv").hide();
+            $("#bankDiv").show()
+            $("#remerksDiv").show();
+        }
+        else
+        {
+            $("#cashDiv").hide();
+            $("#bankDiv").hide()
+            $("#remerksDiv").hide();
+        }
+    })
+
+</script>

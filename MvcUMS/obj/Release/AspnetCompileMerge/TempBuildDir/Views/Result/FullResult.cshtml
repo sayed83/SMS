@@ -1,0 +1,204 @@
+﻿@model List<MvcUMS.Models.ResultReport>
+@{
+    Layout = null;
+}
+<style>
+    .table-bordered {
+        padding-left: 0px !important;
+    }
+
+    .table-two {
+        text-align: center;
+        position: relative;
+        left: -41px;
+    }
+
+
+    .table-three {
+        text-align: center;
+        position: relative;
+        left: -82px!important;
+    }
+
+</style>
+@if(Model.Count>0)
+{
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Full Results
+        </h5>
+
+    </div>
+    <div class="panel-body">
+        <span class="pull-left">
+            @TempData["ex"]
+            @*@Html.ActionLink("Send SMS", "ExamReportSend", "SMS", new { id = @TempData["studentid"] }, new { @class = "btn btn-info" })*@
+        </span>
+        <span class="pull-right">
+            @*@Html.ActionLink("Print", "StudentResultPrint", new { Id = @TempData["studentid"], Department = @TempData["department"], Semester = @TempData["semester"] }, new { @class = "btn btn-info", TARGET = "_blank" })*@
+            @Html.ActionLink("Print", "StudentResultPrint", new { stdId = TempData["studentid"], Examtypeid = TempData["examid"] }, new { @class = "btn btn-info", TARGET = "_blank" })
+        </span>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+        
+                <tr>
+                    <td>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sl No</th>
+                                    <th>Course Title</th>
+                                    <th>Full Marks</th>
+                                    <th>Minimum Pass Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int count = 0;
+
+                                }
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @{
+                                    count += 1;
+                                            }@count
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.SubjectTitle
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.fullmarks
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.passmarks
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </td>
+                    <td class="table-two" colspan="6" style="text-align:center">Half Yearly Examination
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+
+                                    <th>CA</th>
+                                    <th>Objective</th>
+                                    <th>Subjective</th>
+                                    <th>Practical</th>
+                                    <th>Total Marks</th>
+                                    <th>G.P.</th>
+                                    <th>L.G.</th>
+                                    <th>H.M.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @item.classtest
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.objective
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.subjective
+                                        </td>
+                                       
+                                        <td style="text-align:center">
+                                            @item.practical
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.totalmarks
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.gradepoint
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.lettergrade
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.hightestmarks
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </td>
+                    <td class="table-three" colspan="6" style="text-align:center">
+                        Final Examination
+                        <table class="table table-bordered" style="padding-left: 0px;">
+                            <thead>
+                                <tr>
+
+                                    <th>CA</th>
+                                    <th>Objective</th>
+                                    <th>Subjective</th>
+                                    <th>Practical</th>
+                                    <th>Total Marks</th>
+                                    <th>G.P.</th>
+                                    <th>L.G.</th>
+                                    <th>H.M.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @item.fclasstest
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.fobjective
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.fsubjective
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.fpractical
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.ftotalmarks
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.fgradepoint
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.flettergrade
+                                        </td>
+                                        <td style="text-align:center">
+                                            @item.fhightestmarks
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </td>
+
+                </tr>
+            
+        
+        </table>
+      
+    </div>
+   
+</div>
+}
+else
+{
+    <label>No data avilable.</label>
+}
+

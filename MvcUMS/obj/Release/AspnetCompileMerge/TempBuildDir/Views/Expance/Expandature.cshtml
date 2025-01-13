@@ -1,0 +1,273 @@
+﻿@model MvcUMS.Models.Expandature
+
+@{
+    ViewBag.Title = "Expense";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />*@
+
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+   @using (Html.BeginForm("Expandature", "Expance", FormMethod.Post, new 
+   { 
+       id = "submitForm" , @class = "form-horizontal" 
+   }))
+        {
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Expense Details</h5>
+                </div>
+
+                <div class="panel-body">
+
+
+                    @*<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>*@
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Expense Type:</label>
+                        <div class="col-lg-9">
+                           @Html.DropDownList("ExpanceType", null, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-lg-3 control-label">Amount:</label>
+                        <div class="col-lg-9">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", id = "amount" })
+                                <span class="input-group-addon">Tk</span>
+                            </div>
+                        </div>
+                    </div>
+
+                        @*<div class="form-group">
+                            <label class="col-lg-3 control-label">Amount:</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", id = "amount" })Tk
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Recipient:</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(model => model.Recipant, new { @class = "form-control", id = "Recipient" })
+                                @Html.ValidationMessageFor(model => model.Recipant)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Remarks:</label>
+                            <div class="col-lg-9">
+                                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", id = "remarks", placeholder = "Remarks" })
+                                @Html.ValidationMessageFor(model => model.Remarks)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Cash Pay:<input id="Ackbox" name="Checkbox" type="checkbox" value="false" /></label>
+                            <div class="col-lg-9">
+
+                                @Html.TextBoxFor(model => model.cashpay, new { @class = "form-control", id = "atextbox", style = "display:none" })
+                                @Html.ValidationMessageFor(model => model.cashpay)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Bank Pay:<input id="bpckbox" name="Checkbox" type="checkbox" value="false" /></label>
+                            <div class="col-lg-9">
+
+                                @Html.TextBoxFor(model => model.bankpay, new { @class = "form-control", id = "bankpay", style = "display:none" })
+                                @Html.ValidationMessageFor(model => model.bankpay)
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+
+                            <button type="submit" id="btncreate" name="Command" class="btn bg-slate-700"><strong>Submit</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                        </div>
+                    </div>
+            </div>
+       
+        }
+
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well">
+        @using (Html.BeginForm("Expandature", "Expance", FormMethod.Post, new { id = "submitForm" }))
+        {
+            <table class="table table-bordered table-condensed table-hover">
+
+
+                <tr class="danger">
+                    <td><b>Expense Type</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("ExpanceType", null, "Select", new { @class = "form-control" })</td>
+                </tr>
+                <tr class="info">
+                    <td><b>Amount</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.TextBoxFor(model => model.Amount, new { @class = "form-control", id = "amount"})Tk</td>
+                </tr>
+                <tr class="success">
+                    <td><b>Recipient</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Recipant, new { @class = "form-control", id = "Recipient" })
+
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.Recipant) </p>
+                    </td>
+                <tr class="success">
+                    <td><b>Remarks</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", id = "remarks", placeholder = "Remarks" })
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.Remarks) </p>
+
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td><input id="Ackbox"
+       name="Checkbox"
+       type="checkbox"
+       value="false" /><b style="margin-left:5px">Cash Pay</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                     @Html.TextBoxFor(model => model.cashpay, new { @class = "form-control", id = "atextbox",style="display:none"})
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.cashpay) </p>
+
+                    </td>
+                </tr>
+                <tr class="info">
+                    <td>
+                        <input id="bpckbox"
+                               name="Checkbox"
+                               type="checkbox"
+                               value="false" /><b style="margin-left:5px">Bank Pay</b>
+                    </td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.TextBoxFor(model => model.bankpay, new { @class = "form-control", id = "bankpay" ,style="display:none" })
+                        <p style="color:red">  @Html.ValidationMessageFor(model => model.bankpay) </p>
+
+                    </td>
+                </tr>
+                <tr class="info">
+                    <td style="text-align:left"></td>
+                    <td></td>
+                    <td><input type="submit" id="btncreate" name="Command" class="btn btn-success" onclick="return confirm('Are you sure you want to Save?')" value="Pay" /></td>
+                </tr>
+            </table>
+
+            <p style="color:red"> @TempData["error"]</p>
+        }
+
+    </div>
+    <div class="col-md-4"></div>
+</div>*@
+
+<div class="row">
+
+    <div class="col-md-12">
+      
+    </div>
+</div>
+
+@section Scripts {
+@*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+
+    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+    @*<script src="~/Scripts/combodate.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.8.1.js" type="text/javascript"></script>*@
+    @*<script src="~/Scripts/jquery-1.8.1.min.js" type="text/javascript"></script>*@
+
+    <script type="text/javascript">
+        $(function () {
+            $("#ADMtext-box,#DBTxt-box,#dobbox,#joindatetext-box").datepicker(
+                {
+                    dateFormat: 'yy/mm/dd',
+                    changeMonth: true,
+                    changeYear: true
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $('#amount').keypress(function (event) {
+
+                if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                    return true;
+
+                else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                    event.preventDefault();
+
+            });
+            $('#atextbox').keypress(function (event) {
+
+                if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                    return true;
+
+                else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                    event.preventDefault();
+
+            });
+            $('#bankpay').keypress(function (event) {
+
+                if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                    return true;
+
+                else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                    event.preventDefault();
+
+            });
+
+        });
+
+        $(document).ready(function () {
+            $('#Ackbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#atextbox').show();
+                } else {
+                    $('#atextbox').val('');
+                    $('#atextbox').hide();
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#bpckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#bankpay').show();
+                } else {
+                    $('#bankpay').val('');
+                    $('#bankpay').hide();
+                }
+            });
+        });
+        
+    </script>
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

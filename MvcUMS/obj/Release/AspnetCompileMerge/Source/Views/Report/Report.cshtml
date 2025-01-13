@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />*@
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("Report", "Report", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+
+        }))
+        {
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Purchase  Report</h5>
+                </div>
+
+                <div class="panel-body">
+
+
+                    @*<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>*@
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Select Type:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Sample", new[] {
+                                                                new SelectListItem() { Text = "Choose an option", Value = "0"},
+                                                                new SelectListItem() { Text = "Daily Report", Value = "1"},
+                                                                new SelectListItem() { Text = "Report", Value = "2" }
+                                                               }, new  { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="fd" style="display: none;">
+                        <label class="col-lg-3 control-label">From Date:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("fdate", null, new { @class = "form-control", id = "ADMtext-box" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="td" style="display: none;">
+                        <label class="col-lg-3 control-label">Date To:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("tdate", null, new { @class = "form-control", id = "ADMtext-box" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="text-right">
+
+                        <button type="submit" name="Command" id="btnSearch" class="btn bg-slate-700"><strong>Create</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+
+
+@{
+    if (TempData["list"] != null)
+    {
+               
+        Html.RenderAction("ReportList", "Report");
+                
+          
+    }
+}
+@section Scripts {
+@*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+<script type="text/javascript">
+    $(function () {
+        $("#ADMtext-box").datepicker(
+          {
+              dateFormat: 'yy/mm/dd',
+              changeMonth: true,
+              changeYear: true
+          });
+    });
+</script>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#Sample').change(function () {
+                var val = $(this).val();
+                if (val == '1' || val==0) {
+
+                    $('#td').hide();
+                    $('#fd').hide();
+                 
+                }
+                else {
+                    $('#td').show();
+                    $('#fd').show();
+                }
+            });
+        });
+
+    </script>
+    }

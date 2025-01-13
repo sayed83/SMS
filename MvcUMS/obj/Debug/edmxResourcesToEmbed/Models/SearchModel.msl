@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchooldbModelStoreContainer" CdmEntityContainer="SchooldbEntities">
+    <FunctionImportMapping FunctionImportName="Sp_StdAdvanceSearc" FunctionName="SchooldbModel.Store.Sp_StdAdvanceSearc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SchooldbModel.Sp_StdAdvanceSearc_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+          <ScalarProperty Name="Std_FName" ColumnName="Std_FName" />
+          <ScalarProperty Name="Std_MName" ColumnName="Std_MName" />
+          <ScalarProperty Name="Std_LName" ColumnName="Std_LName" />
+          <ScalarProperty Name="Father_Name" ColumnName="Father_Name" />
+          <ScalarProperty Name="Contact_no" ColumnName="Contact_no" />
+          <ScalarProperty Name="Admission_date" ColumnName="Admission_date" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

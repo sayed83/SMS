@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "PaymentReportsShow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/print-smester-report.css" rel="stylesheet" media="print" />
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h6 class="panel-title">Payment Reports</h6>
+        <div class="heading-elements">
+            <button type="button" id="print-btn" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+        </div>
+    </div>
+    
+    <div id="PaymentStatement">
+            @Html.Action("StudentDetailsForPayment", "Home", new { StdId = TempData["std_id"] })
+        <div id="Partial"></div>
+        <p>Printed By: @ViewBag.User @DateTime.Now</p>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+        $("#print-btn").on("click", function () {
+            $('#PaymentStatement').printThis({
+                header: "<h1>Payment Report</h1>",
+                footer: $('.hidden-print-header-content')
+            });
+        });
+
+        $(document).ready(function () {
+
+           
+
+        $('#Partial').html("");
+        var std_id = '@TempData["stdid"]';
+            $.ajax({
+                type: "POST",
+                data: { id: std_id },
+               url: '@Url.Action("PaymentReports", "Payment")',
+                success: function (result) {
+                    $('#Partial').html(result);
+                }
+            });
+
+    });
+
+    </script>
+
+}
+

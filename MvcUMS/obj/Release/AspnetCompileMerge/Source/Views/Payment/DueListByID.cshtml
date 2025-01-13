@@ -1,0 +1,88 @@
+﻿@model MvcUMS.Models.ViewModels.StudentInvoiceListViewModel
+@{
+    ViewBag.Title = "Payment Amount Details";
+    Layout = null;
+}
+
+
+
+
+<tr>
+
+    <td>
+        <a href="@Url.Action("InvoiceView", "Payment", new { id = Model.Id })">
+            @Html.DisplayFor(modelItem => Model.InvoiceNo)
+        </a>
+
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => Model.TotalAmount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.PaidAmount)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => Model.Month)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.DueAmount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.DueDate)
+    </td>
+    <td>
+        <span class="label @("bg-" + (Model.Status == "Paid" ? "blue" : "danger"))">@Html.DisplayFor(modelItem => Model.Status)</span>
+    </td>
+    <td>
+        <a href='#' data-toggle='modal' class="btn btn-xs" data-target='#PaymentCollectionDialog' onclick='GetPaymentCollection("@Model.Id")'><i class="icon-add"></i>Collection</a>
+    </td>
+</tr>
+
+<div id="PaymentCollectionDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="PaymentCollectionPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+    function GetPaymentCollection(Id) {
+        $.ajax({
+            type: "GET",
+            data: { id: Id },
+            url: '@Url.Action("PaymentCollection", "Payment")',
+
+            success: function (result) {
+                $('#PaymentCollectionPartial').html(result);
+
+            }
+        });
+    }
+
+
+</script>
+
+

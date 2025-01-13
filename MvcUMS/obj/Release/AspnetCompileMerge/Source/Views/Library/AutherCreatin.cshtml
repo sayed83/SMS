@@ -1,0 +1,77 @@
+﻿@model MvcUMS.Models.Auther
+@{
+    ViewBag.Title = "Common";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("AutherCreatin", "Library", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+
+        }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Create Author</h5>
+                </div>
+
+                <div class="panel-body">
+
+
+                    @*<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>*@
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Auther Name:</label>
+                        <div class="col-lg-9">
+                           @*@Html.TextBox("authername", new  { @class = "form-control" })*@
+                            @Html.TextBoxFor(model => model.authername, new { @class = "form-control"})
+                        </div>
+                    </div>
+
+
+
+                    <div class="text-right">
+                        <span class="pull-left">
+                            @*@Html.ActionLink("Back to List", "PaymentIndex")*@
+                            @*@Html.ActionLink("Create Auter Catagory", "CatagoryautherCreatin")*@
+                            <a href="@Url.Action("CatagoryautherCreatin", "Library")" class="btn btn-default">
+                                <i class="icon-plus-circle2"></i>
+                                <span>
+                                    <strong>Create Auter Catagory</strong>
+                                </span>
+                            </a>
+                        </span>
+                        <button type="submit" id="btncreate" class="btn bg-slate-700"><strong>Create</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+
+
+@{
+
+    Html.RenderAction("AutherList", "Library");
+}
+
+@section Scripts {
+    <script>
+        $("#authorlist").DataTable();
+    </script>    
+}
+

@@ -1,0 +1,160 @@
+﻿@model IEnumerable<MvcUMS.Models.Student_info>
+
+@{
+    ViewBag.Title = "GurdianList";
+    Layout = null;
+}
+
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Send SMS</h5>
+        @Html.TextArea("txtMsg", new { @class = "form-control", @placeholder = "Write Guardian SMS" })
+        <span class="pull-right">
+            <button type="submit" id="btnSentGuardianSms" class="btn bg-blue-300  pull-right"><strong>Send SMS</strong> <i class="icon-arrow-right14"></i></button>
+        </span>
+    </div>
+    <table class="table datatable-basic table-striped compact nowrap">
+        <thead>
+            <tr class="table_header">
+                <th>Student Name</th>
+                <th>Gurdian Name</th>
+                <th>Contact No</th>
+                <th>Occupation</th>
+                <th>Relation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            var Value = "";
+                            if (@item.Std_FName != "")
+                            {
+                                Value = @item.Std_FName + " " + @item.Std_MName + " " + @item.Std_LName;
+                            } @Value
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (@item.GardianName != "")
+                            {
+                                @item.GardianName
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        @{ if (@item.GardianMobile != "")
+                             {
+                                @item.GardianMobile
+                             }
+                        }
+                    </td>
+
+                    <td>
+                        @{ if (@item.GardianOccupation != "")
+                             {
+                                @item.GardianOccupation
+                             }
+                        }
+                    </td>
+                    <td>
+                        @{ if (@item.GurdianRelation != "")
+                             {
+                                @item.GurdianRelation
+                             }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $("#btnSentGuardianSms").click(function () {
+        var txtMsg = $("#txtMsg").val();
+        $.ajax({
+            type: "POST",
+            data: { txtMsg: txtMsg },
+            url: '@Url.Action("GuardianSendSMS", "Gardian")',
+            success: function (d) {
+                alert('Successfully Send.');
+            }
+        });
+    });
+</script>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tablesorter').after('<div id="nav"></div>');
+        var rowsShown = 10;
+        var rowsTotal = $('#tablesorter tbody tr').length;
+        var numPages = rowsTotal / rowsShown;
+        for (i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<a href="#" class="btn btn-xs btn-default" rel="' + i + '">' + pageNum + '</a> ');
+        }
+        $('#tablesorter tbody tr').hide();
+        $('#tablesorter tbody tr').slice(0, rowsShown).show();
+        $('#nav a:first').addClass('active');
+        $('#nav a').bind('click', function () {
+
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#tablesorter tbody tr').hide().slice(startItem, endItem).
+                    css('display', 'table-row').animate({ opacity: 1 }, 300);
+        });
+
+        $('.datatable-basic').DataTable({
+            autoWidth: false,
+            dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+            language: {
+                search: '<span>Filter:</span> _INPUT_',
+                lengthMenu: '<span>Show:</span> _MENU_',
+                paginate: { 'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←' }
+            },
+            drawCallback: function () {
+                $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+            },
+            preDrawCallback: function () {
+                $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+            }
+        });
+    });
+
+    //$(function () {
+    //    $('.datatable-button-print-basic').DataTable({
+    //        buttons: [
+    //            {
+    //                extend: 'print',
+    //                text: '<i class="icon-printer position-left"></i> Print table',
+    //                className: 'btn bg-blue',
+    //                title: 'Gurdian List',
+    //                customize: function (win) {
+
+    //                    $(win.document.body)
+    //                        .css('font-size', '10pt')
+    //                        .prepend(
+    //                            '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+    //                        );
+
+    //                    $(win.document.body).find('table')
+    //                        .addClass('compact')
+    //                        .css('font-size', 'inherit');
+    //                },
+    //                exportOptions: {
+    //                    columns: "thead th:not(.noExport)"
+    //                }
+    //            }
+    //        ]
+    //    });
+    //});
+
+</script>

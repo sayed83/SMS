@@ -1,0 +1,513 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.MarksheetViewModel>
+@{
+    Layout = null;
+}
+
+<style>
+    img.display-block {
+        visibility: hidden;
+    }
+
+    .signature h6 {
+        width: 100px;
+        text-align: center;
+    }
+
+    #signature-hide {
+        display: none;
+    }
+
+    /*#FullMarkSheetPrint {
+        border: 2px solid;
+    }
+
+    .signature h6 {
+        width: 150px;
+        text-align: center;
+        border-top: 1px solid #222;
+    }*/
+   
+</style>
+
+<link href="~/Content/FullPrint.css" rel="stylesheet" media="print" />
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            MarkSheet
+        </h5>
+        <div class="heading-elements">
+            <button type="button" id="printMarksheet" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+        </div>
+    </div>
+
+    <div id="FullMarkSheetPrint">
+        @foreach (var item in Model)
+        {
+            <div id="body-border">
+                <div class="row">
+                    <div class="school-info text-center">
+                        <h3>@item.SchoolViewModel.SchoolName</h3>
+                        <p>@item.SchoolViewModel.Address</p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="~/uploads/@item.StudentDetailsForMarksheetViewModel.Photo" class="school-logo" alt="School Logo" height="100" width="80" />
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="logo-text text-center">
+                            @if (@item.SchoolViewModel.Logo != null)
+                            {
+                                <img src="~/uploads/@item.SchoolViewModel.Logo" alt="School Logo" height="80" width="80" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" height="80" width="80" />
+                            }
+                                
+                            <p>ACADEMIC TRANSCRIPT</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <table class="table table-xxs table-gpa table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Range</th>
+                                    <th>Grade</th>
+                                    <th>GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var gitem in item.GPAViewModels)
+                                {
+                                    <tr>
+                                        <td>@gitem.Range</td>
+                                        <td>@gitem.Grade</td>
+                                        <td>@gitem.GPA</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 std-personal-info">
+                        <table class="table table-xxs table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>Student's Name</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Name</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Father's Name</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.FatherName</strong> </td>
+                                </tr>
+                                <tr>
+                                    <th>Student's ID</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.StdId</strong> </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-sm-3 std-exam-info">
+                        <table class="table table-xxs table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>Class</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Class</strong> </td>
+                                </tr>
+                                <tr>
+                                    <th>Group</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Group</strong> </td>
+                                </tr>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Roll</strong> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-result table-xxs table-bordered table-advance">
+                            <thead>
+
+                                <tr>
+                                    <th rowspan="2" class="col-sm-3">Subject</th>
+                                    <th rowspan="2" class="col-sm-1">Full Marks</th>
+                                    <th colspan="4" class="col-sm-1 text-center">Half Yearly</th>
+                                    <th rowspan="2" class="col-sm-1">Marks</th>
+                                    <th rowspan="2" class="col-sm-1">Grade</th>
+                                    <th rowspan="2" class="col-sm-1">GPA</th>
+                                    <th colspan="4" class="col-sm-1 text-center">Annual</th>
+                                    <th rowspan="2" class="col-sm-1">Marks</th>
+                                    <th rowspan="2" class="col-sm-1">Grade</th>
+                                    <th rowspan="2" class="col-sm-1">GPA</th>
+                                </tr>
+                                <tr>
+                                    <th>MCQ</th>
+                                    <th>WR</th>
+                                    <th>PR</th>
+                                    <th>CT</th>
+                                    <th>MCQ</th>
+                                    <th>WR</th>
+                                    <th>PR</th>
+                                    <th>CT</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+                                @{
+                                var bangla = new[] { "Bangla 1st", "Bangla 2nd" };
+                                var english = new[] { "English 1st", "English 2nd" };
+                                var bm = item.ResultReport.Where(x => bangla.Contains(x.SubjectTitle)).Select(x => x.totalmarks).Sum() / 2;
+                                var em = item.ResultReport.Where(x => english.Contains(x.SubjectTitle)).Select(x => x.totalmarks).Sum() / 2;
+                                var blg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(bm);
+                                var elg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(em);
+                                var bgp = MvcUMS.Models.EntityManager.ResultManager.getGP(bm);
+                                var egp = MvcUMS.Models.EntityManager.ResultManager.getGP(em);
+                                var totalGP = 0m;
+
+                                var fbm = item.ResultReport.Where(x => bangla.Contains(x.SubjectTitle)).Select(x => x.ftotalmarks).Sum() / 2;
+                                var fem = item.ResultReport.Where(x => english.Contains(x.SubjectTitle)).Select(x => x.ftotalmarks).Sum() / 2;
+                                var fblg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(fbm);
+                                var felg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(fem);
+                                var fbgp = MvcUMS.Models.EntityManager.ResultManager.getGP(fbm);
+                                var fegp = MvcUMS.Models.EntityManager.ResultManager.getGP(fem);
+
+                                var ftotalGP = 0m;
+                                }
+
+                                @foreach (var hitem in item.ResultReport)
+                                {
+                                    if (hitem.SubjectTitle == "Bangla 1st" || hitem.SubjectTitle == "English 1st")
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @hitem.SubjectTitle
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fullmarks
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.objective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.subjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.classtest
+                                            </td>
+
+                                            <td style="text-align:center">
+                                                @hitem.practical
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.totalmarks
+                                            </td>
+
+                                            <td rowspan="2" style="text-align:center">
+                                                @(hitem.SubjectTitle == "Bangla 1st" ? blg : elg)
+                                                @*@hitem.lettergrade*@
+                                            </td>
+                                            <td rowspan="2" style="text-align:center">
+                                                @(hitem.SubjectTitle == "Bangla 1st" ? bgp : egp)
+                                                @{
+                                        if (hitem.SubjectTitle == "Bangla 1st")
+                                        {
+                                            totalGP += bgp;
+                                            totalGP += egp;
+                                        }
+
+                                                }
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fobjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fsubjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fclasstest
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fpractical
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.ftotalmarks
+                                            </td>
+                                            <td rowspan="2" style="text-align:center">
+                                                @(hitem.SubjectTitle == "Bangla 1st" ? fblg : felg)
+
+                                            </td>
+                                            <td rowspan="2" style="text-align:center">
+                                                @(hitem.SubjectTitle == "Bangla 1st" ? fbgp : fegp)
+                                                @{
+                                        if (hitem.SubjectTitle == "Bangla 1st")
+                                        {
+                                            ftotalGP += fbgp;
+                                            ftotalGP += fegp;
+                                        }
+
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                    else if (hitem.SubjectTitle == "Bangla 2nd" || hitem.SubjectTitle == "English 2nd")
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @hitem.SubjectTitle
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fullmarks
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.objective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.subjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.classtest
+                                            </td>
+
+                                            <td style="text-align:center">
+                                                @hitem.practical
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.totalmarks
+                                            </td>
+
+                                            <td style="text-align:center">
+                                                @hitem.fobjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fsubjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fclasstest
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fpractical
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.ftotalmarks
+                                            </td>
+
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @hitem.SubjectTitle
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fullmarks
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.objective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.subjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.classtest
+                                            </td>
+
+                                            <td style="text-align:center">
+                                                @hitem.practical
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.totalmarks
+                                            </td>
+
+                                            <td style="text-align:center">
+                                                @hitem.lettergrade
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.gradepoint
+                                                @{
+
+                                        totalGP += @hitem.gradepoint;
+                                                }
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fobjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fsubjective
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fclasstest
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fpractical
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.ftotalmarks
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.flettergrade
+                                            </td>
+                                            <td style="text-align:center">
+                                                @hitem.fgradepoint
+                                                @{
+
+                                        ftotalGP += @hitem.fgradepoint;
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <table class="table table-grand-result table-xxs table-bordered table-advance">
+                            <thead>
+                                <tr>
+                                    <th>Exam Name</th>
+                                    <th>Total Marks</th>
+                                    <th>GPA</th>
+                                    <th>Grade</th>
+                                    <th>Result Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                var agp = 0m;
+                                agp = (totalGP - 2) / 8;
+
+                                var fagp = 0m;
+                                fagp = (ftotalGP - 2) / 8;
+
+                                var grandTotal = (item.ResultReport.Select(s => s.HYTotalObMarks).FirstOrDefault()+
+                                    item.ResultReport.Select(s => s.ANTotalObMarks).FirstOrDefault())/2;
+
+                                var grandGPA = (agp +fagp) / 2;
+                                    
+                                var status = "";
+                                }
+                                <tr>
+                                    <td>Half Yearly</td>
+                                    <td>@item.ResultReport.Select(s => s.HYTotalObMarks).FirstOrDefault()</td>
+                                    <td>@(agp > 0 ? string.Format("{0:n2}", agp) : string.Format("{0:n0}", agp))</td>
+                                    <td>
+                                        @{
+            if (item.ResultReport.Where(x => "F".Contains(x.lettergrade)).Any() == true)
+            {
+                @("F")
+                status = "Failed";
+            }
+            else
+            {
+                @( MvcUMS.Models.EntityManager.ResultManager.GPA(agp))
+                status = "Passed";
+            }
+                                        }
+                                    </td>
+                                    <td>@status</td>
+                                </tr>
+                                <tr>
+                                    <td>Annual</td>
+                                    <td>@item.ResultReport.Select(s => s.ANTotalObMarks).FirstOrDefault()</td>
+                                    <td>@(fagp > 0 ? string.Format("{0:n2}", fagp) : string.Format("{0:n0}", fagp))</td>
+                                    <td>
+                                        @{
+            if (item.ResultReport.Where(x => "F".Contains(x.flettergrade)).Any() == true)
+            {
+                @("F")
+                status = "Failed";
+            }
+            else
+            {
+                @( MvcUMS.Models.EntityManager.ResultManager.GPA(fagp))
+                status = "Passed";
+            }
+                                        }
+                                    </td>
+                                    <td>@status</td>
+                                </tr>
+                                <tr>
+                                    <td>Grand Final</td>
+                                    <td>@grandTotal</td>
+                                    <td>@(grandGPA > 0 ? string.Format("{0:n2}", grandGPA) : string.Format("{0:n0}", grandGPA))</td>
+                                    <td>
+                                        @{
+            if (item.ResultReport.Where(x => "F".Contains(x.lettergrade)).Any() == true || item.ResultReport.Where(x => "F".Contains(x.flettergrade)).Any() == true)
+            {
+                            @("F")
+                status = "Failed";
+            }
+            else
+            {
+                            @( MvcUMS.Models.EntityManager.ResultManager.GPA(grandGPA))
+                status = "Passed";
+            }
+                                        }
+                                    </td>
+                                    <td>@status</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="signature-hide">
+                    <div class="col-sm-offset-5 signature col-sm-3">
+                        <div class="content-group">
+                            <h6>Class Teacher</h6>
+                        </div>
+                    </div>
+                    <div class="signature col-sm-3">
+                        <div class="content-group">
+                            <h6>Headmaster</h6>
+                        </div>
+                    </div>
+                    <p style="clear:both">Powered By:Zencon Technology Ltd</p>
+                </div>
+               
+            </div>
+           
+            <div class="pagebreak"> </div>
+        }
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#printMarksheet").click(function () {
+            $("#FullMarkSheetPrint").printThis();
+        });
+    });
+</script>

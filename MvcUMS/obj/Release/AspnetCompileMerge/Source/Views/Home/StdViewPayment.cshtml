@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MvcUMS.Models.StudentsPayment>
+
+@{
+    ViewBag.Title = "StdViewPayment";
+    Layout = null;
+    var t = 1;
+    decimal sum = 0;
+    decimal BankTota = 0;
+    decimal cashTotal = 0;
+}
+        <hr />
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Sl</th>
+                    <th>Date</th>
+                    <th>Admission Fee</th>
+                    <th>Exam Fee</th>
+                    <th>Tution Fee</th>
+                    <th>Others</th>
+                    <th>Khata</th>
+                    <th>Dairy</th>
+                    <th>Total</th>
+                    <th>Paid Amount</th>
+                    <th>Due Amount</th>
+                </tr>
+                @foreach(var item in Model.OrderByDescending(a=>a.PaymentDate))
+                {
+                    <tr>
+                        <td>@t</td>
+                        <td>@item.PaymentDate.ToString("dd/MM/yyyy")</td>
+                        <td>
+                           @item.AdmissionFee
+                        </td>
+                        <td>
+                            @item.ExamFee
+                        </td>
+                        <td>
+                            @item.TutionFee
+                        </td>
+                        <td>
+                            @item.OtherFee
+                        </td>
+                        <td>
+                            @item.Khata
+                        </td>
+                        <td>
+                            @item.Diary
+                        </td>
+                        <td>
+                            @{
+                               var total = item.totalfees;
+                               sum = sum + total;
+                               //cashTotal = cashTotal + item.CashPay;
+                               //BankTota = BankTota + item.BankPay;
+                            }
+                            @total Tk
+                        </td>
+                        <td>
+                           @item.Payamount Tk
+                        </td>
+                        <td>
+                           @item.Dueamount Tk
+                        </td>
+                       
+                    </tr>
+                    t++;
+                
+                }
+            </table>
+        }
+        else
+        {
+            <text>No Payment found</text>
+        }
+      
+
+

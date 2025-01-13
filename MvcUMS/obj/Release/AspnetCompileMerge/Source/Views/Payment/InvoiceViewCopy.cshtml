@@ -1,0 +1,288 @@
+﻿@model MvcUMS.Models.ViewModels.InvoiceDetailsViewModel
+@{
+    ViewBag.Title = "InvoiceView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int t = 1;
+}
+
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+
+<!-- Invoice template -->
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h6 class="panel-title">Student invoice</h6>
+        <div class="heading-elements">
+            <button type="button" id="printInvoice" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+        </div>
+    </div>
+    <div id="InvicePrintArea">
+        <div class="row">
+            <div class="col-sm-12">
+                <img src="~/uploads/@Model.SchoolViewModel.Logo" class="school-logo pull-left" alt="School Logo" height="100" width="80" />
+                <div class="school-info text-center">
+                    <h3>@Model.SchoolViewModel.SchoolName</h3>
+                    <p class="text-center">@Model.SchoolViewModel.Address</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-body no-padding-bottom">
+            <div class="row">
+                <div class="col-sm-6 content-group">
+                    <img src="assets/images/logo_demo.png" class="content-group mt-10" alt="" style="width: 120px;">
+                    <ul class="list-condensed list-unstyled">
+                        <li>2269 Elba Lane</li>
+                        <li>Paris, France</li>
+                        <li>888-555-2311</li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-6 content-group">
+                    <div class="invoice-details">
+                        <h5 class="text-uppercase text-semibold">Invoice #@Model.InvoiceNo</h5>
+                        <ul class="list-condensed list-unstyled">
+                            <li>Date: <span class="text-semibold">@DateTime.Now</span></li>
+                            <li>Due date: <span class="text-semibold">@Model.DueDate</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 content-group">
+                    <span class="text-muted">Invoice To:</span>
+                    <ul class="list-condensed list-unstyled">
+                        <li><h5>@Model.StudentName</h5></li>
+                        <li><span class="text-semibold">Normand axis LTD</span></li>
+                        <li>3 Goodman Street</li>
+                        <li>London E1 8BF</li>
+                        <li>United Kingdom</li>
+                        <li>888-555-2311</li>
+                        <li><a href="#">rebecca@normandaxis.ltd</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-6 content-group">
+                    <span class="text-muted">Payment Details:</span>
+                    <ul class="list-condensed list-unstyled invoice-payment-details">
+                        <li><h5>Total Due: <span class="text-right text-semibold">@Model.DueAmount</span></h5></li>
+                        <li>Bank name: <span class="text-semibold">Profit Bank Europe</span></li>
+                        <li>Country: <span>United Kingdom</span></li>
+                        <li>City: <span>London E1 8BF</span></li>
+                        <li>Address: <span>3 Goodman Street</span></li>
+                        <li>IBAN: <span class="text-semibold">KFH37784028476740</span></li>
+                        <li>SWIFT code: <span class="text-semibold">BPT4E</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-lg">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Month</th>
+                        <th class="col-sm-1">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pType in Model.PaymentTypeList)
+                    {
+                        <tr>
+                            <td>
+                                <h6 class="no-margin">@pType.PaymentType</h6>
+                            </td>
+                            <td>
+                                @if (pType.PayMonths != null)
+                                {
+
+                                    foreach (var item in pType.PayMonths)
+                                    {
+                                        if (item != null)
+                                        {
+                                            @item.MonthName@((pType != Model.PaymentTypeList.Last()) ? "," : "")
+
+                                        }
+
+                                    }
+
+                                }
+                            </td>
+                            <td>@pType.Amount</td>
+
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+            <div class="text-left">
+                <a href='#' data-toggle='modal' class="btn btn-primary btn-labeled" data-target='#EditPaymentTypeDialog' onclick='EditPaymentType("@Model.Id")'><i class="icon-add-to-list"></i>Add New</a>
+            </div>
+
+        </div>
+
+        <div class="panel-body">
+            <div class="row invoice-payment">
+                <div class="col-sm-7">
+                    <div class="content-group">
+                        <h6>Authorized person</h6>
+                        <div class="mb-15 mt-15">
+                            <img src="assets/images/signature.png" class="display-block" style="width: 150px;" alt="">
+                        </div>
+
+                        <ul class="list-condensed list-unstyled text-muted">
+                            <li>Eugene Kopyov</li>
+                            <li>2269 Elba Lane</li>
+                            <li>Paris, France</li>
+                            <li>888-555-2311</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="content-group">
+                        <div class="table-responsive no-border">
+                            <table class="table table-xxs table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th>Total:</th>
+                                        <td class="text-right">@Model.TotalAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Paid:</th>
+                                        <td class="text-right">@Model.PaidAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Due:</th>
+                                        <td class="text-right text-primary"><h5 class="text-semibold">@Model.DueAmount</h5></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+
+                <a href='#' data-toggle='modal' class="btn btn-success btn-labeled" data-target='#PaymentCollectionDialog' onclick='GetPaymentCollection("@Model.Id")'><i class="icon-paypal"></i>Collection</a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-lg">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th class="col-sm-3">Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var collection in Model.Collections)
+                        {
+                            <tr>
+                                <td>
+                                    <h6 class="no-margin">@collection.PayDate</h6>
+                                </td>
+                                <td>
+                                    @collection.Amount
+                                </td>
+                                <td>@collection.PaymentMehtod</td>
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /invoice template -->
+
+
+<div id="EditPaymentTypeDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="EditPaymentTypeDialogPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="PaymentCollectionDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" id="PaymentCollectionPartial">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $("#printInvoice").click(function () {
+            $("#InvicePrintArea").printThis();
+        });
+
+        function EditPaymentType(Id) {
+            $.ajax({
+                type: "GET",
+                data: { id: Id },
+                url: '@Url.Action("EditPaymentType", "Payment")',
+
+                success: function (result) {
+                    $('#EditPaymentTypeDialogPartial').html(result);
+
+                }
+            });
+        }
+
+        function GetPaymentCollection(Id) {
+            $.ajax({
+                type: "GET",
+                data: { id: Id },
+                url: '@Url.Action("PaymentCollection", "Payment")',
+
+                success: function (result) {
+                    $('#PaymentCollectionPartial').html(result);
+
+                }
+            });
+        }
+    </script>
+}

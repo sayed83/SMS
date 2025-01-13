@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MvcUMS.Models.ShowStdAttendence>
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Attendance List
+            <span class="std-attentance-info">Total Student:<strong>@ViewBag.Total</strong></span>
+            <span class="std-attentance-info">Total Present:<strong>@ViewBag.TotalPresent</strong></span>
+            <span class="std-attentance-info">Total Absent:<strong>@ViewBag.TotalAbsent</strong></span>
+        </h5>
+
+    </div>
+
+    <div class="table-responsive">
+        <table class="table datatable-save-state datatable-basic">
+            <thead>
+
+                <tr>
+                    <th>Roll No</th>
+                    <th>Student Id</th>
+                    <th>Student Name</th>
+                    <th>Father Name</th>
+                    @if (TempData["test"] == null)
+                    {
+                        <th>Present / Absent</th>
+                    }
+                    else
+                    {
+                        <th>Total Present</th>
+                        <th>Total Absent</th>
+                    }
+
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }).OrderBy(a => a.Data.rollNo))
+                {
+                    <tr>
+                        <td>@item.Data.rollNo</td>
+                        <td>@item.Data.StdId</td>
+                        <td>@item.Data.StdName</td>
+                        <td>@item.Data.StdFather</td>
+                        @if (TempData["test"] == null)
+                        {
+                            <td>
+                                @if (item.Data.isPresent == true)
+                                {
+                                    <b style="color:blue">Present</b>
+                                }
+                                else
+                                {
+                                    <b style="color:red">Absent</b>
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td>@item.Data.totalPresent</td>
+                            <td>@item.Data.totalAbsent</td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

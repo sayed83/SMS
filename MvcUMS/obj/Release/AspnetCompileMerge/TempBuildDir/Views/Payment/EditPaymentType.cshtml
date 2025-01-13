@@ -1,0 +1,31 @@
+﻿@model MvcUMS.Models.ViewModels.InvoiceDetailsViewModel
+@{
+    ViewBag.Title = "Payment Collection";
+
+    Layout = null;
+}
+@using (Html.BeginForm("EditPaymentType", "Payment", FormMethod.Post, new
+            {
+                @class = "form-horizontal"
+            }))
+        {
+    
+     @Html.HiddenFor(model => model.Id)
+<div id="partial"></div>
+<input type="submit" class="btn bg-slate-700" value="Update" />
+}
+<script>
+
+$('#partials').html("");
+            var sem = "One";
+            var id="@Model.Id";
+            $.ajax({
+                type: "POST",
+                data: { sem: sem ,id:id},
+                url: '@Url.Action("StudentPaymentType", "Payment")',
+                success: function (result) {
+                $('#partial').html(result);
+                }
+            });
+
+    </script>

@@ -1,0 +1,357 @@
+﻿@{
+    ViewBag.Title = "IncomeExapance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .righttd
+    {
+        text-align:right;
+    }
+    .bcl
+    {
+        background-color:#808080
+    }
+    .data-table-container {
+        padding: 10px;
+    }
+
+    .dt-buttons .btn {
+        margin-right: 3px;
+    }
+
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.print.min.js"></script>
+<script src="~/Scripts/TableTools.nightly.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#examplein').DataTable({
+            paging: true,
+            columnDefs: [{
+                targets: 'no-sort',
+                orderable: false
+            }],
+            dom: 'Bfrtip',
+       
+            fixedHeader: {
+                header: true
+            },
+            buttons: {
+                buttons: [{
+                    extend: 'print',
+                    text: '<i class="icon-printer"></i> Print',
+                    title: $('#intext').text(),
+                    exportOptions: {
+                        columns: ':not(.no-print)'
+                    },
+                    footer: true,
+                    autoPrint: true
+                }, {
+                    extend: 'pdf',
+                    text: '<i class="icon-file-pdf"></i> PDF',
+                    title: $('#intext').text(),
+                    exportOptions: {
+                        columns: ':not(.no-print)'
+                    },
+                    footer: true
+                }],
+                dom: {
+                    container: {
+                        className: 'dt-buttons'
+                    },
+                    button: {
+                        className: 'btn btn-info'
+                    }
+                }
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('#exampleex').DataTable({
+            paging: true,
+            columnDefs: [{
+                targets: 'no-sort',
+                orderable: false
+            }],
+            dom: 'Bfrtip',
+
+            fixedHeader: {
+                header: true
+            },
+            buttons: {
+                buttons: [{
+                    extend: 'print',
+                    text: '<i class="icon-printer"></i> Print',
+                    title: $('#extext').text(),
+                    exportOptions: {
+                        columns: ':not(.no-print)'
+                    },
+                    footer: true,
+                    autoPrint: true
+                }, {
+                    extend: 'pdf',
+                    text: '<i class="icon-file-pdf"></i> PDF',
+                    title: $('#extext').text(),
+                    exportOptions: {
+                        columns: ':not(.no-print)'
+                    },
+                    footer: true
+                }],
+                dom: {
+                    container: {
+                        className: 'dt-buttons'
+                    },
+                    button: {
+                        className: 'btn btn-info'
+                    }
+                }
+            }
+        });
+
+    });
+
+   
+    
+
+</script>
+<div class="panel panel-white">
+    <div class="panel-heading text-center">
+        <h3>Cash Book </h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("IncomeExapance", "Accounting", FormMethod.Post))
+        {
+            <div class="row">
+
+                <div class="col-md-3" >
+                    <div class="form-group">
+                        <label>Form Date:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+
+                            @Html.TextBox("fdate", null, new { @class = "form-control datepicker", placeholder = " Date From",required=true })
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>To Date:</label>
+
+                        <div class="input-group ">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+
+                            @Html.TextBox("tdate", null, new { @class = "form-control datepicker", placeholder = " Date To", required = true })
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                  
+                    <div class="form-group">
+                        <label>    </label>
+                        <div class="input-group">
+                          
+                            <input type="submit" class="btn btn-primary" id="btnSearch" value="Search" />
+
+                        </div>
+
+                    </div>
+
+                           
+
+                   
+
+                 
+                </div>
+
+            </div>
+         
+        }
+    </div>
+</div>
+@*<div id="printarea">
+    <input type='button' id='btn' value='Print'>*@
+    @{
+        decimal totalincome = 0;
+        decimal bankincome = 0;
+        decimal cashincome = 0;
+
+    }
+
+    @if (Enumerable.Count(ViewBag.expancelist) > 0 || Enumerable.Count(ViewBag.incomelist) > 0)
+    {
+
+        <div class="row">
+
+            @*id="a" display*@
+            <div class="col-md-6">
+                <table class="table table-bordered"  id="examplein">
+
+                    <thead>
+                        <tr class="bcl">
+                            <td colspan="5" id="intext"> Income Cash Book</td>
+                        </tr>
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Particulars</th>
+                            <th>Cash  Pay</th>
+                            <th>Bank Pay</th>
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var item in ViewBag.incomelist)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @item.date.ToShortDateString()
+                                </td>
+                                <td style="text-align:center">
+                                    @item.particulars
+                                </td>
+                                <td style="text-align:center">
+                                    @item.cashpay
+                                    @{cashincome += item.cashpay;}
+                                </td>
+                                <td style="text-align:center">
+                                    @item.bankpay
+                                    @{bankincome += item.bankpay;}
+                                </td>
+                                <td style="text-align:center">
+                                    @item.totalamount
+                                    @{totalincome += item.totalamount;}
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="bcl">
+
+                        <tr>
+
+                            <th></th>
+                            <th>Total</th>
+                            <th>@cashincome</th>
+                            <th>@bankincome</th>
+                            <th>@totalincome</th>
+                        </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+            
+            <div class="col-md-6">
+                @*id="exampleex"*@
+                <table class="table table-bordered" id="exampleex">
+
+                    <thead>
+                        <tr class="bcl">
+                            <th colspan="5" id="extext"> Expense Cash Book</th>
+                        </tr>
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Particulars</th>
+                            <th>Cash  Pay</th>
+                            <th>Bank Pay</th>
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+                    @{
+                        decimal totalexpense = 0;
+                        decimal bankexpense = 0;
+                        decimal cashexpense = 0;
+
+                    }
+                    <tbody>
+                        @foreach (var item in ViewBag.expancelist)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @item.date.ToShortDateString()
+                                </td>
+                                <td style="text-align:center">
+                                    @item.particulars
+                                </td>
+                                <td style="text-align:center">
+                                    @item.cashpay
+                                    @{cashexpense += item.cashpay;}
+                                </td>
+                                <td style="text-align:center">
+                                    @item.bankpay
+                                    @{bankexpense += item.bankpay;}
+                                </td>
+                                <td style="text-align:center">
+                                    @item.totalamount
+                                    @{totalexpense += item.totalamount;}
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                    <tfoot>
+                        <tr class="bcl">
+
+                            <td></td>
+                            <td class="righttd">Total</td>
+                            <td class="center">@cashexpense</td>
+                            <td class="center">@bankexpense</td>
+                            <td class="center">@totalexpense</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    }
+@*</div>*@
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $("#btn").click(function () {
+            //Hide all other elements other than printarea.
+            $("#printarea").show();
+            window.print();
+        });
+   
+        $(function () {
+            $("#fdate,#tdate").datepicker({
+                dateFormat: 'yy/mm/dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-30:+90",
+
+            });
+        });
+
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.GPAViewModel>
+@{
+    Layout = null;
+}
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+
+ <table class="table table-xxs table-advance table-bordered">
+        <thead>
+            <tr>
+                <th>Range</th>
+                <th>Grade</th>
+                <th>GPA</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Range</td>
+                    <td>@item.Grade</td>
+                    <td>@item.GPA</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+

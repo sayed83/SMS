@@ -1,0 +1,60 @@
+﻿@model MvcUMS.Models.ViewModels.StudentPaymentTypeViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("Edit", "Common", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+
+        }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Edit Payment Type</h5>
+                </div>
+
+                <div class="panel-body">
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">@Html.LabelFor(model => model.PaymentType):</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.PaymentType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PaymentType)
+                        </div>
+                    </div>
+
+
+                    <div class="text-right">
+                        <span class="pull-left">
+                            <a href="@Url.Action("Index", "Common")" class="btn btn-default">
+                                <i class="icon-arrow-left13 position-left"></i>
+                                <span>
+                                    <strong>Back to List</strong>
+                                </span>
+                            </a>
+                        </span>
+                        <button type="submit" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

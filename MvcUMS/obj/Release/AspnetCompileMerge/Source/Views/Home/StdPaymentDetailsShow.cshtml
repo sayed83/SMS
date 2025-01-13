@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "StdPaymentDetailsShow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />*@
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student Profile</h5>
+
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 well">
+        <h2 class="text-center">View Student Payment</h2>
+        @Html.Action("StudentDetailsForPayment", "Home", new { StdId = TempData["std_id"] })
+        <br />
+        <table class="table table-bordered" > 
+            <tr>
+            <th style="padding-left:15%">Date From</th>
+            <td>@Html.TextBox("SDate", "", new {@class="form-control" })</td>
+             <th>Date From</th>
+            <td>@Html.TextBox("EDate", "", new {@class="form-control" })</td>
+            <td style="padding-right:15%"><input type="button" value="Search" class="btn btn-sm btn-success" id="btnSearch" /></td>
+            </tr>
+        </table>
+        <div id="partial">
+
+        </div>
+     </div>
+ </div>
+
+@section Scripts {
+
+<script>
+
+    $(function () {
+        $("#SDate,#EDate").datepicker(
+          {
+              dateFormat: 'yy/mm/dd',
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "-30:+5"
+          });
+        $('#partial').html("");
+        var std_id = '@TempData["std_id"]';
+        var StartDate = $('#SDate').val();
+        var EndDate = $("#EDate").val();
+        $.ajax({
+            type: "POST",
+            data: { std_id: std_id, StartDate: StartDate, EndDate: EndDate },
+            url: '@Url.Action("StdViewPayment", "Home")',
+            success: function (result) {
+                $('#partial').html(result);
+            }
+        });
+    });
+    $("#btnSearch").click(function () {
+        $('#partial').html("");
+        var std_id = '@TempData["std_id"]';
+        var StartDate = $('#SDate').val();
+        var EndDate = $("#EDate").val();
+        $.ajax({
+            type: "POST",
+            data: { std_id: std_id, StartDate: StartDate, EndDate: EndDate },
+            url: '@Url.Action("StdViewPayment", "Home")',
+            success: function (result) {
+                $('#partial').html(result);
+            }
+        });
+    })
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+}

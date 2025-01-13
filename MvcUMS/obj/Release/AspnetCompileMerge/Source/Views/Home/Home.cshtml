@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h4 style="color:#00ffff">Wellcome to <b>ZTL-ERP</b></h4>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+       <a href="@Url.Action("Student_list", "Home")"><img src="~/Images/student.png" height="150" width="150" /><p style="font-size: 17px; color: #ff00dc; text-align: center">Students</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href=""> <img src="~/Images/Guardians.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Guairdians</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href="@Url.Action("Index", "Stuff")"><img src="~/Images/Teachers.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Teachers & Staff</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href=""><img src="~/Images/Events.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Events</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href=""><img src="~/Images/Courses.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Coures</p></a>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <a href=""><img src="~/Images/Sections.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Sections</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href=""><img src="~/Images/Accounts.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Accounts</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href=""><img src="~/Images/Uploads.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Uploads</p></a>
+    </div>
+    <div class="col-md-2">
+        <a href=""><img src="~/Images/Pre-admission.png" height="150" width="150" /><p style="font-size:17px;color:#ff00dc;text-align:center">Pre Admission</p></a>
+    </div>
+</div>

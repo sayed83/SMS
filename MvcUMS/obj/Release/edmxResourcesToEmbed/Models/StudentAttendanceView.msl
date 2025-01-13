@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UMSModel2StoreContainer" CdmEntityContainer="UMSEntities2">
+    <FunctionImportMapping FunctionImportName="Sp_studentAttendance" FunctionName="UMSModel2.Store.Sp_studentAttendance">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UMSModel2.Sp_studentAttendance_Result">
+          <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+          <ScalarProperty Name="Std_FName" ColumnName="Std_FName" />
+          <ScalarProperty Name="Std_MName" ColumnName="Std_MName" />
+          <ScalarProperty Name="Std_LName" ColumnName="Std_LName" />
+          <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MvcUMS.Models.TutionFees>
+
+@{
+    ViewBag.Title = "ViewTutionMonth";
+    Layout =null;
+    var d = 1;
+}
+
+(
+@foreach (var item in Model) {
+   <text> @item.PayMonth.ToString("Y") </text>
+    if(d!=Model.Count())
+    {
+        <text>,</text>
+    }
+    d++;
+}
+)

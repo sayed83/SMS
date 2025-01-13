@@ -1,0 +1,153 @@
+﻿@model MvcUMS.Models.SchoolSetup
+@{
+    ViewBag.Title = "Schoool";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+       @using (Html.BeginForm("SchoolCreate", "Common", FormMethod.Post, 
+           new 
+            { 
+                enctype = "multipart/form-data",
+                @class = "form-horizontal"
+           }))
+            {
+                 @Html.AntiForgeryToken()
+                 @Html.ValidationSummary(true)
+           
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">School Information <br/><span style="text-align:right;color:red"> @TempData["error"]</span></h5>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">School Name:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.SchoolName, new { @class = "form-control", placeholder = "School Name" })
+
+                            @Html.ValidationMessageFor(model => model.SchoolName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Address:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Address Detail " })
+
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Post Code:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.PostCode, new { @class = "form-control", placeholder = "PostCode" })
+                            @Html.ValidationMessageFor(model => model.PostCode)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">City:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.City, new { @class = "form-control", placeholder = "City" })
+                            @Html.ValidationMessageFor(model => model.City)
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Country:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Country, new { @class = "form-control", placeholder = "Country" })
+                            @Html.ValidationMessageFor(model => model.Country)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Opening Date:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control", id = "date", placeholder = "School Opening Date" })
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Attach Photo:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.picture, new { @class = "file-styled", type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Preview Photo:</label>
+                        <div class="col-lg-9">
+                            <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" id="ImgPrv" />
+                        </div>
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <span class="pull-left">@Html.ActionLink("School List", "SchoolList", null, new { @class = "btn btn-success btn-sm" })</span>
+                        <span class="pull-right"><button type="submit" class="btn bg-slate-700"><strong>Create</strong> <i class="icon-arrow-right14 position-right"></i></button></span>
+                    </div>
+                </div>
+            </div>
+       }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+
+
+    @section Scripts {
+        
+        <script type="text/javascript">
+            $(function () {
+                $("#date").datepicker(
+                    {
+                        dateFormat: 'yy/mm/dd',
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: "-30:+5"
+                    });
+            });
+            function ShowImagePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                        if (input.files[0].size < 1048576) {
+                            $("#ImgPrv").prop('src', e.target.result)
+                           .width(100)
+                           .height(100);
+                            $("#IMGTxt").val(input.value);
+                        }
+                        else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                            alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                        }
+                        else {
+                            alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                        }
+
+
+
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+        </script>
+        @Scripts.Render("~/bundles/jqueryval")
+    }

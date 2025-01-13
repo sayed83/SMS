@@ -1,0 +1,442 @@
+﻿
+@{
+    ViewBag.Title = "GetboookFromLibrary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<style>
+    #BookCatagory,#Auther {
+        width: 90%;
+        height: 30px;
+    }
+    #bookcode ,#copy{
+        width:120px;
+        height:30px;
+        text-align:center;
+    }
+ </style>*@
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />*@
+
+@*<p style="text-align:center;font-size:xx-large;margin-top:20px">Issued Book From Library</p>*@
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("GetboookFromLibrary", "Library", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+
+        }))
+        {
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Issued Book From Library</h5>
+                </div>
+
+                <div class="panel-body">
+                    <span>@Html.Hidden("studentid", TempData["studentid"])</span>
+                    <span>@TempData["text"]</span>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Book Catagory:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("BookCatagory", null, "Select" , new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Author Name:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Auther", new SelectList(string.Empty, "Value", "Text"), "Select a Auther", new { @class = "form-control", id = "Auther" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Book ID:</label>
+                        <div class="col-lg-9">
+                           @Html.DropDownList("book", new SelectList(string.Empty, "Value", "Text"), "Select a BookId", new { @class = "form-control", id = "book" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Book Code:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("bookname", null, new { @class = "form-control", placeholder = "Book Code" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Sumission Date:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Date" , null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="sid">
+                        <label class="col-lg-3 control-label">Book Code:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("bookcode" ,  null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="si">
+                        <label class="col-lg-3 control-label">Book Copy:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("copy", null, new { @class = "form-control" })
+                           
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" id="btnSearch" class="btn btn-primary">Submit<i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-5 well">
+        @using (Html.BeginForm("GetboookFromLibrary", "Library", FormMethod.Post))
+        {
+            <table class="table table-bordered table-condensed table-hover">
+
+                <tr class="success">
+                    <td><b>Book Catagory</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownList("BookCatagory", "Select") </td>
+                </tr>
+                <tr class="info">
+                    <td><b>Auther Name</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.DropDownList("Auther", new SelectList(string.Empty, "Value", "Text"), "Select a Auther", new { @class = "form-control", id = "Auther" })
+
+                    </td>
+                </tr>
+                <tr class="danger">
+                        <td><b>Book Id</b></td>
+                        <td><b>:</b></td>
+                        <td>
+                            @Html.DropDownList("book", new SelectList(string.Empty, "Value", "Text"), "Select a BookId", new { @class = "form-control", id = "book" })
+                           @Html.TextBox("bookname", null,new {@class = "form-control", placeholder = "Book Code" })
+                 
+                        </td>
+                    </tr>
+                <tr class="info">
+                    <td><b>Book Code</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                        @Html.TextBox("bookname", null, new { @class = "form-control", placeholder = "Book Code" })
+                        @Html.TextBox("bookId", null, new { @class = "form-control", placeholder = "Book Code" })
+
+                    @*</td>
+                </tr>
+                <tr class="success">
+                          <td><b>Submission Date</b></td>
+                          <td><b>:</b></td>
+                          <td>@Html.TextBox("Date")</td>
+                    </tr>
+
+                <tr class="danger">
+                    <td><b>@Html.TextBox("bookcode")</b></td>
+                    <td><b>:</b></td>
+                    <td>
+                     @Html.TextBox("copy")  
+
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td>@Html.Hidden("studentid", TempData["studentid"])</td>
+                </tr>
+                <tr class="info">
+
+                    <td colspan="3" style="text-align:center;color:red">@TempData["text"]</td>
+                </tr>
+              
+
+                <tr class="info">
+                    <td colspan="3" style="padding-left:40%"><input type="submit" id="btnSearch" class="btn btn-success" value="Add" /></td>
+                </tr>
+            </table>
+         
+        }
+    </div>
+    <div class="col-md-4"></div>
+</div>*@
+
+@{
+    if (TempData["list"] != null && TempData["emp"] == null)
+    {
+        <div class="row">
+
+            <div class="col-md-12">
+                @{
+                     Html.RenderAction("GetList", "Library");
+                }
+            </div>
+        </div>
+    }
+    else if (TempData["emp"] != null && TempData["list"] == null)
+    {
+        <div class="row">
+
+            <div class="col-md-12">
+                @{
+                    Html.RenderAction("GetEmployeeList", "Library");
+                }
+            </div>
+        </div>
+    }
+}
+
+@section Scripts {
+@*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+
+    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+    @*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+
+<script src="~/Scripts/combodate.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#Date").datepicker(
+            {
+                dateFormat: 'yy/mm/dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-30:+5"
+            });
+    });
+</script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#bookname").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Library/getbookname",
+                        type: "POST",
+                        dataType: "json",
+
+                        data: { term: request.term, bc: $("#BookCatagory").val(), auth: $("#Auther").val(), bi: $("#book").val() },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.BookCode, value: item.BookCode };
+                                //$.fn.myFunction();
+                            }))
+
+                        }
+                    })
+                },
+                @*select:function(event,ui)
+                {
+                    var item = ui.item.value;
+                    $.ajax({
+                        url: '@Url.Action("GetBookNameAndCopy", "Library")',
+                        type: 'GET',
+                        cache: false,
+                        data: { bookcode: item },
+                        success: function (Data) {
+                          
+                            $('#bookcode').val(Data.BookName);
+                            $("#bookcode").prop('disabled', true);
+                            $('#copy').val(Data.Copy + " pisces");
+                            $("#copy").prop('disabled', true);
+                           
+                        },
+                        error: function () {
+                            alert("Failed! Please try again.");
+
+                        }
+                    });
+                },*@
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        });
+
+    
+
+</script>
+
+@*<script type="text/javascript">
+
+        $(function () {
+            $("#bookId").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Library/getbookId",
+                        type: "POST",
+                        dataType: "json",
+
+                        data: { term: request.term, bc: $("#BookCatagory").val(), auth: $("#Auther").val() },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.BookId, value: item.BookId };
+                                //$.fn.myFunction();
+                            }))
+
+                        }
+                    })
+                },
+              
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        });
+
+
+
+</script>*@
+
+    
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#BookCatagory").change(function () {
+            if ($("#BookCatagory option:selected").val() == '')
+            {
+                $("#Auther").empty();
+                return false;
+            }
+            else {
+                //$("#city").empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetAuther", "Library")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#BookCatagory").val() },
+
+                    success: function (Data) {
+
+                        var markup = "<option value='0'>Select Auther</option>";
+                        for (var x = 0; x < Data.length; x++) {
+                            markup += "<option Value='" + Data[x].Value + "'>" + Data[x].Text + "</option>";
+                        }
+
+                        $("#Auther").html(markup).show();
+
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve Autheir.' + ex);
+
+                    }
+
+                });
+            }
+
+        });
+
+    });
+
+</script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Auther").change(function () {
+            if ($("#Auther option:selected").val() == '')
+            {
+                $("#book").empty();
+                return false;
+            }
+            else {
+                //$("#city").empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetBookId", "Library")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#Auther").val() },
+
+                    success: function (Data) {
+
+                        var markup = "<option value='0'>Select Book Name</option>";
+                        for (var x = 0; x < Data.length; x++) {
+                            markup += "<option Value='" + Data[x].Value + "'>" + Data[x].Text + "</option>";
+                        }
+
+                        $("#book").html(markup).show();
+
+                    },
+
+                    error: function (ex) {
+
+                        alert('Failed to retrieve Autheir.' + ex);
+
+                    }
+
+                });
+            }
+
+        });
+
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#book").change(function () {
+            if ($("#book option:selected").val() == '')
+            {
+                $("#book").empty();
+                return false;
+            }
+            else {
+                //$("#city").empty();
+
+                $.ajax({
+                        url: '@Url.Action("GetBookNameAndCopy", "Library")',
+                        type: 'GET',
+                        cache: false,
+                        data: { bookcode: $("#book").val() },
+                        success: function (Data) {
+
+                            $('#bookcode').val(Data.BookName);
+                            $("#bookcode").prop('disabled', true);
+                            $('#copy').val(Data.Copy + " pisces");
+                            $("#copy").prop('disabled', true);
+
+                        },
+                        error: function () {
+                            alert("Failed! Please try again.");
+
+                        }
+                    });
+            }
+
+        });
+
+    });
+
+</script>
+
+}

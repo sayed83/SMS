@@ -1,0 +1,231 @@
+﻿        @model List<MvcUMS.Models.StudentListForPromotion>
+            @{
+                var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 60);
+                grid.Pager(WebGridPagerModes.All);
+            }
+            <style>
+                .webgrid-row-style {
+                    padding: 3px 7px 2px;
+                }
+
+                .webgrid-alternating-row {
+                    background-color: #EAF2D3;
+                    padding: 3px 7px 2px;
+                }
+            </style>
+            @using (Html.BeginForm("Promotion", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">Student List</h6>
+
+                    </div>
+
+
+
+                    <div class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label">Class:</label>
+                            <div class="col-lg-12">
+                                @Html.DropDownList("Semester", null, "Select", new { @class = "form-control", @id = "sems", @required = "required" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" id="grp" style="display:none">
+                            <label class="col-lg-12 control-label">Group:</label>
+                            <div class="col-lg-12">
+                                @Html.DropDownList("Department", null, "Select", new { @class = "form-control", @id = "Dept" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="a">
+                            <label class="col-lg-12 control-label">Section:</label>
+                            <div class="col-lg-12">
+                                <select id="Sect" name="Section" class="form-control" required><option value=""></option></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label">Academic Year:</label>
+                            <div class="col-lg-12">
+                                @Html.TextBox("AcademicYear", null, new { @class = "form-control  form-filter input-sm yearselect", @required = "required" })
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <table class="table table-striped table-bordered table-hover" id="datatable_reviews">
+                        <thead>
+                            <tr role="row" class="heading">
+
+                                <th>StdID</th>
+                                <th> Student Name</th>
+                                <th>Roll No</th>
+                                <th><input type="checkbox" id="checkAll">Select All</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(model => model[i].Std_id)
+                                        @Html.HiddenFor(model => model[i].Std_id)
+                                        @Html.HiddenFor(model => model[i].Semester)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(model => model[i].FullName)   
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.TextBoxFor(model => model[i].RollNo, null, new { @class = "form-control"}) 
+                                       
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m[i].IsPromotion, new { id = "pro_" + Model[i].Std_id, @class = "checkbox" })
+
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+
+                    <div class="panel-body">
+                        <div class="text-right">
+                            @{if (@ViewBag.c == "t")
+                                {
+                                    <input type="submit" value="Promot" id="btnSubmit" class="btn bg-slate-700" />
+                                }
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <script src="~/Scripts/year-select.js"></script>
+
+            <script language="javascript" type="text/javascript">
+                $(document).ready(function () {
+                    $('.yearselect').yearselect();
+
+                    $("#btnSubmit").on('click', function () {
+                        if (jQuery(".checkbox").is(':checked')) {
+                            return true;
+                        }
+                        else {
+                            alert("Please Select Student To Promot");
+                            return false;
+                        }
+                    });
+
+                    $("#allBox").on("click", function () {
+                        var ischecked = this.checked;
+                        $('#checkableGrid').find("input:checkbox").each(function () {
+                            this.checked = ischecked;
+                        });
+                    });
+
+
+                    //3rd click event for checkbox of each row
+                    $("input[name='ids']").click(function () {
+                        var totalRows = $("#checkableGrid td :checkbox").length;
+                        var checked = $("#checkableGrid td :checkbox:checked").length;
+
+                        if (checked == totalRows) {
+                            $("#checkableGrid").find("input:checkbox").each(function () {
+                                this.checked = true;
+                            });
+                        }
+                        else {
+                            $("#allBox").removeAttr("checked");
+                        }
+                    });
+
+                    $("#checkAll").click(function () {
+                        $('input:checkbox').not(this).prop('checked', this.checked);
+                    });
+
+                    $(function () {
+                        $('#sems').change(function () {
+
+                            var s = $('#sems').val();
+                            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                                $('#grp').show();
+                            }
+                            else {
+                                $('#grp').hide();
+                            }
+
+                        });
+
+                    });
+
+                    $("#sems").change(function () {
+
+                        var sem = $(this).val();
+                        var dep = $('#Dept').val();
+                        var url = "/Home/GetCourse/";
+
+                        $.ajax({
+                            url: url,
+                            data: { dep: dep, sem: sem },
+                            cache: false,
+                            type: "POST",
+                            success: function (data) {
+                                var markup = "<option value='0'>Select</option>";
+                                for (var x = 0; x < data.length; x++) {
+                                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                                }
+                                $("#Course").html(markup).show();
+                            },
+                            error: function (reponse) {
+                                alert("error : " + reponse);
+                            }
+                        });
+
+                        $.ajax({
+                            url: "/MasterEntry/GetSection/",
+                            data: { sem: sem },
+                            cache: false,
+                            type: "POST",
+                            success: function (data) {
+                                var markup = "<option value=''>Select</option>";
+                                for (var x = 0; x < data.length; x++) {
+                                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                                }
+                                $("#Sect").html(markup).show();
+                            },
+                            error: function (reponse) {
+                                alert("error : " + reponse);
+                            }
+                        });
+
+                    });
+
+
+
+
+                });
+            </script>
+
+
+
+
+

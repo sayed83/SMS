@@ -1,0 +1,85 @@
+﻿@model MvcUMS.Models.Course
+@{
+    ViewBag.Title = "Course";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("EditCourse", "Common", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <legend>Course Edit</legend>
+        @Html.HiddenFor(model => model.CourseId)
+        <table style="width:100%">
+            <tr>
+                <td style="padding:20px">@Html.LabelFor(model => model.CourseId)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.CourseId, new { @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.CourseId)
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:20px">@Html.LabelFor(model => model.CourseTitle)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.CourseTitle)
+                    @Html.ValidationMessageFor(model => model.CourseTitle)
+                </td>
+                </tr>
+            <tr>
+                <td style="padding:20px"><b>Class</b></td>
+                <td>
+                    @Html.DropDownListFor(x => Model.Semester, ViewBag.Semester as SelectList, "Select", new { @class = "form-control", id="class" })
+             
+                </td>
+            </tr>
+
+            <tr >
+                <td style="padding:20px"><b>Group</b></td>
+                <td>
+                 
+                    @Html.DropDownListFor(x => Model.Department, ViewBag.Department as SelectList, "Select", new { @class = "form-control",id="group" })
+                </td>
+            </tr>
+          
+            <tr>
+
+                <td colspan="2" style="text-align:center;padding:20px">
+                    <button type="submit" id="btnUpdate" name="Command" value="Update" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <span class="ui-button-text">Update</span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+     <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+     <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>
+    <script src="~/Scripts/combodate.js"></script>
+    <script src="~/Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.8.1.min.js" type="text/javascript"></script>
+    @*<script type="text/javascript">
+    $(function () {
+        $('#class').change(function () {
+
+            var s = $('#class').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#group').show();
+            }
+            else {
+                $('#group').hide();
+            }
+
+        });
+
+    });
+</script>*@
+
+}
+

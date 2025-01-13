@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<MvcUMS.Models.BookCatagory>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    Layout = null;
+}
+
+
+
+<style>
+    .dataTables_length {
+        float: right;
+        display: inline-block;
+        margin: 15px 20px 20px 20px !important;
+    }
+
+    .dataTables_filter {
+        position: relative;
+        display: block;
+        float: left;
+        margin: 15px 0 20px 20px !important;
+    }
+
+    .dataTables_info {
+        float: left;
+        padding: 8px 20px !important;
+        margin-bottom: 20px;
+    }
+
+    .panel > .dataTables_wrapper .table-bordered {
+        border-top: 1px solid #ddd !important;
+        border-bottom: 1px solid #ddd !important;
+        margin-bottom: 10px !important;
+    }
+
+
+    .dataTables_filter input {
+        margin-left: 8px;
+    }
+</style>
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Author Category Details
+        </h5>
+
+    </div>
+
+     <table class="table table-striped table-bordered" id="BookCategoryList">
+            <thead>
+                <tr>
+                    <th>Catagory Name</th>
+                    <th>Creation Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">
+                            @item.CatagoryName
+                        </td>
+                        <td style="text-align:center">
+                            @item.Date.ToShortDateString()
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+</div>

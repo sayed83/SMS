@@ -1,0 +1,91 @@
+﻿@model List<MvcUMS.Models.SubjectMarksCourse>
+@{
+    Layout = null;
+}
+
+@*<link href="~/Content/print.css" rel="stylesheet" />*@
+
+@Styles.RenderFormat(MvcUMS.BundlesFormats.PRINT, "~/Content/globalCss")
+@Styles.RenderFormat(MvcUMS.BundlesFormats.PRINT, "~/Content/themeCss")
+
+
+<div class="col-sm-12">
+    <div class="table-responsive">
+        <table class="table table-xxs table-bordered table-advance">
+            <thead>
+                <tr>
+                    <th class="pad-top-10">Subject</th>
+                    <th class="pad-top-10">Full Marks</th>
+                    <th class="pad-top-10">Highest Marks</th>
+                    <th colspan="4" class="pad-left-10">
+                        Marks Distribution
+                    </th>
+
+                    <th class="pad-top-10">Total Marks</th>
+                    <th class="pad-top-10">Letter Grade</th>
+                    <th class="pad-top-10">GP</th>
+                </tr>
+                <tr>
+                    <th class="no-border-top"></th>
+                    <th class="no-border-top"></th>
+                    <th class="no-border-top"></th>
+                    <th>MCQ</th>
+                    <th>WR</th>
+                    <th>PR</th>
+                    <th>CT</th>
+                    <th class="no-border-top"></th>
+                    <th class="no-border-top"></th>
+                    <th class="no-border-top"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @item.c.CourseTitle
+                        </td>
+                        <td>
+                            @item.c.FullMarks
+                        </td>
+                        <td>
+                            @item.highestmarks
+                        </td>
+
+                        <td>
+                            @item.ssm.MCQ
+                        </td>
+                        <td>
+                            @item.ssm.Written
+                        </td>
+                        <td>
+                            @(item.ssm.Practical != 0 ? item.ssm.Practical : 0)
+                        </td>
+                        <td>
+                            @item.ssm.ClassTest
+                        </td>
+                        <td>
+                            @item.ssm.TotalMarks
+                        </td>
+
+                        <td>
+                            @item.ssm.LetterGrade
+                        </td>
+                        <td>
+                            @item.ssm.GradePoint
+                        </td>
+                    </tr>
+
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+

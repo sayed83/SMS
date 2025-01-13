@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.StudentDueListViewModel>
+@{
+    ViewBag.Title = "Payment Amount Details";
+    Layout = null;
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Due List
+        </h5>
+        <div class="heading-elements">
+            <a href="@Url.Action("MonthlyPaymentSetup", "Payment")" class="btn btn-success btn-xs">Create Invoice</a>
+        </div>
+    </div>
+    <table class="table table-xxs table-borderless" style="margin:20px">
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>Student ID:</th>
+                        <td>@item.StdId</td>
+                    </tr>
+                    <tr>
+                        <th>Student Name:</th>
+                        <td>@item.StudentName</td>
+                    </tr>
+                    <tr>
+                        <th>Total Due:</th>
+                        <td>@item.TotalDue</td>
+                    </tr>
+
+                    if (item.StudentInvoiceList != null)
+                    {
+                        <div class="panel panel-white">
+                            <table class="table datatable-button-print-basic table-striped" id="paymentList" style="border-top:1px solid #ddd">
+                                <thead>
+                                    <tr class="table_header">
+                                        <th>Invoice No</th>
+                                        <th>Total</th>
+                                        <th>Paid</th>
+                                        <th>Month</th>
+                                        <th>Due</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var invList in item.StudentInvoiceList)
+                                    {
+                                        @Html.Partial("DueListByID", invList)
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+                    }
+                }
+            </tbody>
+        </table>
+    
+</div>
+
+
+
+
+

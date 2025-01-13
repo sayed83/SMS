@@ -1,0 +1,385 @@
+﻿@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+@using MvcUMS.Models.EntityManager
+@*@model MvcUMS.Models.Student_info*@
+@{ 
+    var school = new CommonManager().GetSchoolInfo();
+    //var image = @Model.image;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Images/cps-logo.jpg" rel="shortcut icon" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <!-- /Style files -->
+    @Styles.RenderFormat(MvcUMS.BundlesFormats.PRINT, "~/Content/globalCss")
+    @Styles.RenderFormat(MvcUMS.BundlesFormats.PRINT, "~/Content/themeCss")
+    @*@Styles.Render("~/Content/globalCss")
+    @Styles.Render("~/Content/themeCss")*@
+    <!-- /Style files -->
+    <style>
+        .login-dropdown li > .dropdown-menu > li:last-child {
+            margin-left: 16px;
+        }
+
+        .navbar-brand > img {
+            margin-top: -21px !important;
+            height: 66px;
+            background: #fff;
+        }
+    </style>
+
+
+    @Scripts.Render("~/scripts/core")
+    <!-- /core JS files -->
+    @Scripts.Render("~/scripts/themeJs")
+
+
+</head>
+<body>
+
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                @*<img src="@Url.Content("~/Content/dashboard_template/")assets/images/global_tra.png" alt="">*@
+                <img src="~/uploads/@school.Logo" class="school-logo" alt="School Logo" height="180" width="180" />
+            </a>
+
+            <ul class="nav navbar-nav visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav">
+                <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right login-dropdown">
+
+                <li class="dropdown dropdown-user">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="@Url.Content("~/Content/dashboard_template/")assets/images/Students.png" alt="">
+                        <span>@User.Identity.Name</span>
+                        <i class="caret"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        @*<li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>*@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("manage","Account")"><i class="icon-move"></i>Change Password</a></li>
+                        }
+
+                        <li class="divider"></li>
+                        <li>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new
+                            {
+                                id = "logoutForm"
+
+                            }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-switch2"></i> Sign Out</a>
+                            }
+
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /main navbar -->
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-main">
+                <div class="sidebar-content">
+
+                    <!-- Main navigation -->
+                    <div class="sidebar-category sidebar-category-visible">
+                        <div class="category-content no-padding">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <ul class="navigation navigation-main navigation-accordion">
+
+                                    <!-- Main -->
+                                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                    <li class="active"><a  href="@Url.Action("Index", "Home")" ><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                                    <li>
+                                        <a href="#"><i class="icon-footprint"></i> <span>Settings</span></a>
+                                        <ul>
+
+                                            <li><a href="@Url.Action("ScolarShipType", "Common")">Scholarship Type</a></li>
+                                            <li><a href="@Url.Action("BankCreation", "Common")">Bank</a></li>
+
+
+
+                                            <li><a href="@Url.Action("SchoolList", "Common")">School List</a></li>
+                                            @*<li><a href="@Url.Action("SchoolCreate", "Common")">School Creation</a></li>*@
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-stack2"></i> <span>Admission</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Student_entry", "Home")">Student Admission</a></li>
+                                            <li><a href="@Url.Action("Student_list", "Home")">Student List</a></li>
+                                            <li><a href="@Url.Action("stdPromotion", "Home")">Student Promotion</a></li>
+                                            @*<li><a href="@Url.Action("AdvanceSearch", "Home")">Student Search</a></li>*@
+                                            <li><a href="@Url.Action("ImportBulkStudent", "Home")">Student Bulk Admission</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-copy"></i> <span>Guardians</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Index", "Gardian")" id="layout1">Gurdian List</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-stack"></i> <span>Teacher And Stuffs</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Create", "Stuff")">New Employee Entry</a></li>
+                                            <li><a href="@Url.Action("Index", "Stuff")">Employee List</a></li>
+                                            <li><a href="@Url.Action("DeptList", "Stuff")">Department List</a></li>
+                                            <li><a href="@Url.Action("DesignationList", "Stuff")">Designation List</a></li>
+
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-sigma"></i> <span>Classes</span></a>
+                                        <ul>
+                                            <li class=""><a href="@Url.Action("ClassList", "MasterEntry")"><i class="icon-home2"></i> <span>Class List</span></a></li>
+                                            <li class=""><a href="@Url.Action("SectionList", "MasterEntry")"><i class="icon-home2"></i> <span>Section List</span></a></li>
+                                            <li class=""><a href="@Url.Action("DepartmentList", "MasterEntry")"><i class="icon-home2"></i> <span>Department List</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-puzzle2"></i> <span>Course</span></a>
+                                        <ul>
+
+
+                                            <li><a href="@Url.Action("CourseList", "MasterEntry")">Course Management</a></li>
+                                            <li><a href="@Url.Action("CourseAssignList", "MasterEntry")">Course Asignment</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-grid"></i> <span>Routine</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("TimeShedule", "Event")">Time Schedule</a></li>
+                                            <li><a href="@Url.Action("Examtype", "Common")">Exam type</a></li>
+                                            <li><a href="@Url.Action("Exam", "Common")">Exam Routine</a></li>
+                                            <li><a href="@Url.Action("SearchRutine", "Event")">Search Class Routine</a></li>
+                                            <li><a href="@Url.Action("SearchExamRutine", "Event")">Search Exam Routine</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-spell-check"></i> <span>Result</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("GPAType", "Result")">GPA Setting</a></li>
+                                            <li><a href="@Url.Action("SubjectMark", "Result")">Number Distribution</a></li>
+                                            <li><a href="@Url.Action("StdPass", "Home")">Entry Student Pass</a></li>
+                                            <li><a href="@Url.Action("StdPassSearch", "Home")">Search Student Pass</a></li>
+                                            <li><a href="@Url.Action("ShowResult", "Result")">Generate Marksheet</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-gift"></i> <span>Attendance</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("std_attendence", "Home")">Manual Attendance</a></li>
+                                            <li><a href="@Url.Action("ManualAttendenceSearch", "Home")">Search Manual Attendance</a></li>
+                                            <li><a href="@Url.Action("showAttendence", "Home")">Search Attendance</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-sigma"></i> <span>Payment</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("PaymentType", "Common")">Payment Type</a></li>
+                                            <li><a href="@Url.Action("PaymentCreate", "Common")">Payment Amount</a></li>
+                                            <li><a href="@Url.Action("MonthlyPaymentSetup", "Payment")">Create Invoice</a></li>
+                                            <li><a href="@Url.Action("SearchInvoiceList", "Payment")">Invoice List</a></li>
+                                            <li><a href="@Url.Action("SearchDueList", "Payment")">Due List</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-droplet2"></i> <span>Events</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Index", "Event")">Events List</a></li>
+                                            <li><a href="@Url.Action("Create","Event")">Events Create</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-droplet2"></i> <span>Notice</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Noticeboard", "Event")">Notice List</a></li>
+                                            <li><a href="@Url.Action("CreateNotice", "Event")">Add Notice</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+
+                                    <li>
+                                        <a href="#"><i class="icon-pencil3"></i> <span>Library</span></a>
+                                        <ul>
+
+                                            <li><a href="@Url.Action("AutherCreatin", "Library")">Author Creation</a></li>
+                                            <li><a href="@Url.Action("CatagoryCreatin", "Library")">Book Catagory Creation</a></li>
+                                            <li><a href="@Url.Action("SearchBookCode", "Library")">Book Code</a></li>
+                                            <li><a href="@Url.Action("CreateBook", "Library")">New Book Entry</a></li>
+                                            <li><a href="@Url.Action("BookSearch", "Library")">Books List</a></li>
+                                            <li><a href="@Url.Action("LibraryBookSummaryForStudent", "Library")">Book Submission</a></li>
+                                            <li><a href="@Url.Action("SearchStudentEmployeeList", "Library")">Issue Book</a></li>
+                                            <li><a href="@Url.Action("SearchIssuedBook", "Library")">Search Issued Book</a></li>
+
+
+                                        </ul>
+                                    </li>
+                                    <li class=""><a href="@Url.Action("Scolarship", "Event")"><i class="icon-home4"></i> <span>Scholarship</span></a></li>
+
+
+                                    <li>
+                                        <a href="#"><i class="icon-select2"></i> <span>Accounting</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("OpenningBalance", "Accounting")">Openning Balance</a></li>
+                                            <li><a href="@Url.Action("DonationIndex", "Event")">Donation</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-gift"></i>  <span>Expense</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Expacncetype", "Common")">Expense Type</a></li>
+                                            <li><a href="@Url.Action("Expandature", "Expance")">Expense</a></li>
+                                            <li><a href="@Url.Action("EmployeeSalary", "Stuff")">Employee Salary</a></li>
+                                            <li><a href="@Url.Action("SalarySearch", "Expance")">Salary Details</a></li>
+
+                                        </ul>
+                                    </li>
+                                    @*<li class=""><a href="@Url.Action("StudentPayment", "Home")"><i class="icon-home4"></i> <span>Student Payment</span></a></li>*@
+
+
+
+                                    <li class=""><a href="@Url.Action("InventoryCreate", "Inventory")"><i class="icon-home4"></i> <span>Inventory</span></a></li>
+                                    <li>
+                                        <a href="#"><i class="icon-insert-template"></i> <span>Reports</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("IncomeExpenseLedger", "Accounting")">Ledger Report</a></li>
+                                            <li><a href="@Url.Action("IncomeExapance", "Accounting")">Cash Book</a></li>
+                                            @*<li><a href="@Url.Action("AdmissionReport", "Report")">Admission Report</a></li>*@
+                                            <li><a href="@Url.Action("PaymentReport", "Report")">Fees Report</a></li>
+                                            <li><a href="@Url.Action("ExpanceSearch", "Expance")">Expenditure Report</a></li>
+                                            <li><a href="@Url.Action("PurchaseReport", "Inventory")">Purchase Report</a></li>
+                                            <li><a href="@Url.Action("Report", "Report")">Income Statement</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-gift"></i>  <span>Management Committee</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("management_list", "account")">Committee List</a></li>
+                                            <li><a href="@Url.Action("Management_Create", "account")">Add Member</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+
+
+                                </ul>
+                            }
+                            else if (User.IsInRole("Teacher"))
+                            {
+                                @Html.Partial("_TeacherMenu")
+                            }
+                            else if (User.IsInRole("Student"))
+                            {
+                                @Html.Partial("_StudentMenu")
+                            }
+
+                        </div>
+                    </div>
+                    <!-- /main navigation -->
+
+                </div>
+            </div>
+            <!-- /main sidebar -->
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <!-- Page header -->
+                <div class="page-header">
+                    <div class="page-header-content">
+                        <div class="page-title">
+                            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">@Html.MvcSiteMap().SiteMapTitle()</span></h4>
+                        </div>
+
+
+                    </div>
+
+                    <div class="breadcrumb-line">
+                        <ul class="breadcrumb">
+                            <li><i class="icon-home2 position-left"></i> @Html.MvcSiteMap().SiteMapPath()</li>
+
+                        </ul>
+
+
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="content">
+
+                    @RenderSection("featured", required: false)
+                    @RenderBody()
+
+                    <!-- Footer -->
+                    <div class="footer text-muted">
+                        &copy; @DateTime.Now.Year . <a href="#">Destination It Ltd.</a>
+                    </div>
+                    <!-- /footer -->
+
+
+                </div>
+                <!--  Content area -->
+
+            </div>
+            <!-- Main content -->
+
+
+
+        </div>
+        <!-- /Page content -->
+
+    </div>
+    <!-- /page container -->
+    <!-- /core JS files -->
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

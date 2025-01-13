@@ -1,0 +1,77 @@
+﻿@model List<MvcUMS.Models.Stuff>
+@{
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+}
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #d8f0f1;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #d8f0f1;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #d8f0f1;
+        color: #d8f0f1;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+@using (Html.BeginForm("StuffAttendence", "Stuff", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @MvcHtmlString.Create(
+            @grid.GetHtml(
+                    tableStyle: "webgrid-table",
+                    headerStyle: "webgrid-header",
+                    footerStyle: "webgrid-footer",
+                    alternatingRowStyle: "webgrid-alternating-row",
+                    rowStyle: "webgrid-row-style",
+                    htmlAttributes: new { id = "checkableGrid" },
+                    columns: grid.Columns(
+                    grid.Column(header: "SL", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                 
+                    grid.Column("Stuff Name", format: (item) => item.FirstName + ' ' + item.LastName),
+                     grid.Column(
+                            format: (item) =>
+                            {
+                                return Html.Raw(string.Format("<text><img src=\"{0}\" alt=\"uploads\" width='75px' height='75px'/></text>", "/uploads/" + Url.Content(@item.Image)));
+                                    }
+                                 ),
+              
+                    grid.Column(header: "{Select}", format: @<text><input type="checkbox" value="@item.Id" name="ids" /><input type="hidden" name="CourseId" value="@item.Id" id="Id" /> </text>)
+             )).ToString().Replace("{Select}", "<div class='text-center'><input type='checkbox' id='allBox' /></div>")
+    )
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <input type="submit" value="Get Selected Record" class="btn btn-info" />
+        </div>
+    </div>
+}

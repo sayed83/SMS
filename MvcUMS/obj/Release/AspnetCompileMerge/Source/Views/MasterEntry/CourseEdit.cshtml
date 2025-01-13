@@ -1,0 +1,148 @@
+﻿@model MvcUMS.Models.CourseViewModel
+
+@{
+    ViewBag.Title = "CourseList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">New Course Info</h5>
+        <div class="heading-elements">
+            <a href="@Url.Action("CourseList","MasterEntry")" class="btn btn-primary btn-sm"><i class="icon icon-list"></i> Course List</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("CourseEdit", "MasterEntry", FormMethod.Post, new
+        {
+            @class = "form-horizontal"
+        }))
+        {
+            @Html.HiddenFor(x => x.Id)
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Course Code:</label>
+                    <div class="col-lg-9">
+                        @Html.TextBox("CourseId", null, new { @class = "form-control", placeholder = "Course Code", required = true })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Course Name:</label>
+                    <div class="col-lg-9">
+                        @Html.TextBox("CourseTitle", null, new { @class = "form-control", placeholder = "Course Title", required = true })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Class:</label>
+                    <div class="col-lg-9">
+                        @Html.DropDownListFor(x => x.semester_Name, ViewBag.Semester as SelectList, "Select", new { @class = "form-control", required = true })
+                    </div>
+                </div>
+
+                <div class="form-group" id="groupDiv" style="display:none">
+                    <label class="col-lg-3 control-label">Group:</label>
+                    <div class="col-lg-9">
+                        @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Is Optional:</label>
+                    <div class="col-lg-9">
+                        @Html.CheckBoxFor(x => x.IsOptional)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Exclude From Result:</label>
+                    <div class="col-lg-9">
+                        @Html.CheckBoxFor(x => x.ExcludeFromResult)
+                    </div>
+                </div>
+
+            </fieldset>
+            <fieldset>
+                <legend>Setup Course Marks</legend>
+                <table class="table table-bordered" id="MarkList">
+                    <thead>
+                        <tr>
+                            <th>Marks Type</th>
+                            <th>Total Marks</th>
+                            <th>Pass Marks</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 0;}
+                        @foreach (var item in Model.CoourseDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(x => x.CoourseDetails[i].Id)
+                                    @Html.DropDownListFor(m=>m.CoourseDetails[i].MarkTypeId,
+                                             new SelectList(Model.AvailableMarkType,"Value","Text",Model.CoourseDetails[i].MarkTypeId),"Select Mark Type", new { @class = "form-control bff-products",id="product"+i })
+
+                                    @*@Html.DropDownListFor(x => x.CoourseDetails[i].MarkTypeId, ViewBag.MarkType as SelectList, "Select", new { @class = "form-control", required = true })*@
+                                </td>
+                                <td>@Html.TextBoxFor(x => x.CoourseDetails[i].TotalMarks, new { @class = "form-control", required = true })</td>
+                                <td>@Html.TextBoxFor(x => x.CoourseDetails[i].PassMarks, new { @class = "form-control", required = true })</td>
+                                <td>
+                                    <a href='#' class='btn red' onclick='DeleteGroup("+@Model.CoourseDetails[i].Id+")'><span class='fa fa-times'>Delete</span></a>
+                                    @*<button style="text-align: right;" class="btn btn-danger" type="button" value="Delete" onclick="deleteRow(this)">Delete</button>*@
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </fieldset>
+            <div class="text-right">
+                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+    function deleteRow(t) {
+            var a = $("#MarkList > tbody > tr").length;
+            if (1 == a) alert("There only one row you can't delete.");
+            else {
+                var e = t.parentNode.parentNode;
+                e.parentNode.removeChild(e);
+            }
+        }
+
+
+        function DeleteGroup(GroupID) {
+            var a = $("#MarkList > tbody > tr").length;
+            if (1 == a) alert("There only one row you can't delete.");
+            else {
+                var x = confirm("Are you sure you want to delete?");
+                if (x) {
+                    $.get("/MasterEntry/DeleteMarkSetup?id=" + GroupID, null, function (data) {
+                        if (data == 0) {
+                            location = location.href;
+                            window.location.reload(true);
+                        }
+                        else {
+                            window.location.replace("/MasterEntry/CourseList");
+                            window.location.reload(true);
+                        }
+                    }, 'json');
+                    return true;
+                }
+                else
+                    return false;
+            }
+
+
+        }
+     
+    </script>
+}

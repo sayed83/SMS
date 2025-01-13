@@ -1,0 +1,76 @@
+﻿@model MvcUMS.Models.ViewModels.StudentPaymentAmountViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Edit Section <span style="color:red;font-size:11px;margin-left:12px"> @TempData["error"] </span> </h5>
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("PayAmountEdit", "Common", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+        {
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Class Name:</label>
+                <div class="col-lg-9">
+                    @Html.DropDownListFor(x => Model.SemesterId, ViewBag.SemesterList as SelectList, "Select", new { @class = "form-control", id = "Semester" })
+                </div>
+            </div>
+
+            <div class="form-group" id="group" style="display:none">
+                        <label class="col-lg-3 control-label">Department:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownListFor(x => Model.DepartmentId, ViewBag.DepartmentList as SelectList, "Select", new { @class = "form-control", id = "department" })
+                        </div>
+            </div>
+            
+             <div class="form-group">
+                        <label class="col-lg-3 control-label">Type:</label>
+                        <div class="col-lg-9">
+                           @Html.DropDownListFor(x => Model.PaymentTypeId, ViewBag.PaymentTypeList as SelectList, "Select PaymentType", new { @class = "form-control", id = "paymenttype" })
+                        </div>
+             </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Amount:</label>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", placeholder = "Amount", id = "text-box" })
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.Id)
+            <div class="text-right">
+                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s >= 12) {
+                    $('#group').show();
+                }
+                else {
+                    $('#group').hide();
+                }
+
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        var jq = jQuery.noConflict();
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

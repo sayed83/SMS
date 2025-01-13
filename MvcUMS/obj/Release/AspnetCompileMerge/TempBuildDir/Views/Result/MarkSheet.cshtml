@@ -1,0 +1,398 @@
+﻿@model IEnumerable<MvcUMS.Models.ViewModels.MarksheetViewModel>
+@{
+    Layout = null;
+}
+
+<style>
+    img.display-block {
+        visibility: hidden;
+    }
+
+    .signature h6 {
+        width: 110px;
+        text-align: center;
+        margin-top: 305px !important;
+    }
+
+    
+
+    #hide-signature{
+        display:none;
+    }
+</style>
+
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            MarkSheet
+        </h5>
+        <div class="heading-elements">
+            <button type="button" id="printMarksheet" class="btn btn-default btn-xs heading-btn"><i class="icon-printer position-left"></i> Print</button>
+        </div>
+    </div>
+
+    <div id="HalfMarkSheetPrint">
+
+
+        @foreach (var item in Model)
+        {
+            <div id="body-border">
+                <div class="row">
+                    <div class="school-info text-center">
+                        <h3>@item.SchoolViewModel.SchoolName</h3>
+                        <p>@item.SchoolViewModel.Address</p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="~/uploads/@item.StudentDetailsForMarksheetViewModel.Photo" class="school-logo" alt="School Logo" height="100" width="80" />
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="logo-text text-center">
+                            @if (@item.SchoolViewModel.Logo != null)
+                            {
+                                 <img src="~/uploads/@item.SchoolViewModel.Logo" alt="School Logo" height="80" width="80" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" height="100" width="80" />
+                            }
+                           
+                            <p>ACADEMIC TRANSCRIPT</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <table class="table table-xxs table-gpa table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Range</th>
+                                    <th>Grade</th>
+                                    <th>GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var gitem in item.GPAViewModels)
+                                {
+                                    <tr>
+                                        <td>@gitem.Range</td>
+                                        <td>@gitem.Grade</td>
+                                        <td>@gitem.GPA</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class=" col-sm-5 std-personal-info">
+                        <table class="table table-xxs table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>Student's Name</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Name</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Father's Name</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.FatherName</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Mother's Name</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.MotherName</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Student's ID</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.StdId</strong> </td>
+                                </tr>
+                                <tr>
+                                    <th>Class</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Class</strong> </td>
+                                </tr>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <td>:</td>
+                                    <td><strong>@item.StudentDetailsForMarksheetViewModel.Roll</strong> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class=" col-sm-offset-2 col-sm-5 std-exam-info">
+                        <table class="table table-xxs table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <th>Exam:</th>
+                                    <td>@item.StudentDetailsForMarksheetViewModel.Exam</td>
+                                </tr>
+                                <tr>
+                                    <th>Year/Session:</th>
+                                    <td>@item.StudentDetailsForMarksheetViewModel.Session</td>
+                                </tr>
+                                <tr>
+                                    <th>Group:</th>
+                                    <td>@item.StudentDetailsForMarksheetViewModel.Group</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-result table-xxs table-bordered table-advance">
+                            <thead>
+
+                                <tr>
+                                    <th rowspan="2" class="col-sm-4">Subject</th>
+                                    <th rowspan="2" class="col-sm-1">Full Marks</th>
+                                    <th rowspan="2" class="col-sm-1">Highest Marks</th>
+                                    <th colspan="4" class="col-sm-3">Marks Distribution</th>
+                                    <th rowspan="2" class="col-sm-1">Total Marks</th>
+                                    <th rowspan="2" class="col-sm-1">Letter Grade</th>
+                                    <th rowspan="2" class="col-sm-1">GP</th>
+                                </tr>
+                                <tr>
+                                    <th>MCQ</th>
+                                    <th>WR</th>
+                                    <th>PR</th>
+                                    <th>CT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                var bangla = new[] { "Bangla 1st", "Bangla 2nd" };
+                                var english = new[] { "English 1st", "English 2nd" };
+                                var bm = item.SubjectMarksCourses.Where(x => bangla.Contains(x.c.CourseTitle)).Select(x => x.ssm.TotalMarks).Sum() / 2;
+                                var em = item.SubjectMarksCourses.Where(x => english.Contains(x.c.CourseTitle)).Select(x => x.ssm.TotalMarks).Sum() / 2;
+                                var blg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(bm);
+                                var elg = MvcUMS.Models.EntityManager.ResultManager.GPAmark(em);
+                                var bgp = MvcUMS.Models.EntityManager.ResultManager.getGP(bm);
+                                var egp = MvcUMS.Models.EntityManager.ResultManager.getGP(em);
+                                var totalGP = 0m;
+                                }
+
+                                @foreach (var sitem in item.SubjectMarksCourses)
+                                {
+
+                                    if (sitem.c.CourseTitle == "Bangla 1st" || sitem.c.CourseTitle == "English 1st")
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @sitem.c.CourseTitle
+                                            </td>
+                                            <td>
+                                                @sitem.c.FullMarks
+                                            </td>
+                                            <td>
+                                                @sitem.highestmarks
+                                            </td>
+
+                                            <td>
+                                                @sitem.ssm.MCQ
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.Written
+                                            </td>
+                                            <td>
+                                                @(sitem.ssm.Practical != 0 ? sitem.ssm.Practical.ToString() : "-".ToString())
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.ClassTest
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.TotalMarks
+                                            </td>
+
+                                            <td rowspan="2">
+                                                @(sitem.c.CourseTitle == "Bangla 1st" ? blg : elg)
+
+                                            </td>
+                                            <td rowspan="2">
+                                                @(sitem.c.CourseTitle == "Bangla 1st" ? bgp : egp)
+                                                @{
+                                        if (sitem.c.CourseTitle == "Bangla 1st")
+                                        {
+                                            totalGP += bgp;
+                                            totalGP += egp;
+                                        }
+
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+                                    else if (sitem.c.CourseTitle == "Bangla 2nd" || sitem.c.CourseTitle == "English 2nd")
+                                    {
+
+
+                                        <tr>
+                                            <td>
+                                                @sitem.c.CourseTitle
+                                            </td>
+                                            <td>
+                                                @sitem.c.FullMarks
+                                            </td>
+                                            <td>
+                                                @sitem.highestmarks
+                                            </td>
+
+                                            <td>
+                                                @sitem.ssm.MCQ
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.Written
+                                            </td>
+                                            <td>
+                                                @(sitem.ssm.Practical != 0 ? sitem.ssm.Practical.ToString() : "-".ToString())
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.ClassTest
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.TotalMarks
+                                            </td>
+
+                                        </tr>
+
+
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>
+                                                @sitem.c.CourseTitle
+                                            </td>
+                                            <td>
+                                                @sitem.c.FullMarks
+                                            </td>
+                                            <td>
+                                                @sitem.highestmarks
+                                            </td>
+
+                                            <td>
+                                                @sitem.ssm.MCQ
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.Written
+                                            </td>
+                                            <td>
+                                                @(sitem.ssm.Practical != 0 ? sitem.ssm.Practical.ToString() : "-".ToString())
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.ClassTest
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.TotalMarks
+                                            </td>
+
+                                            <td>
+                                                @sitem.ssm.LetterGrade
+                                            </td>
+                                            <td>
+                                                @sitem.ssm.GradePoint
+                                                @{
+
+                                        totalGP += sitem.ssm.GradePoint;
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                }
+
+
+                            </tbody>
+                            <tfoot>
+                                @{
+                                var agp = 0m;
+                                agp = (totalGP - 2) / 8;
+                                }
+                                <tr>
+                                    <th>Total Exam Marks</th>
+                                    <td>@item.SubjectMarksCourses.Select(s => s.TotalFullMarks).FirstOrDefault()</td>
+                                    <th colspan="5">Obtained Marks & GPA</th>
+                                    <td>@item.SubjectMarksCourses.Select(s => s.TotalObMarks).FirstOrDefault()</td>
+                                    <td>
+                                        @{
+            if (item.SubjectMarksCourses.Where(x => "F".Contains(x.ssm.LetterGrade)).Any() == true)
+            {
+                @("F")
+            }
+            else
+            {
+                @( MvcUMS.Models.EntityManager.ResultManager.GPA(agp))
+            }
+                                        }
+
+                                    </td>
+                                    <td>
+
+                                        @(agp > 0 ? string.Format("{0:n2}", agp) : string.Format("{0:n0}", agp))
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row" id="hide-signature">
+                    <div class="signature col-sm-4">
+                        <div class="content-group">
+
+                            <div class="mb-15 mt-15">
+                                <img src="@Url.Content("~/Content/dashboard_template")/assets/images/signature.png" class="display-block" style="width: 150px;" alt="">
+                            </div>
+                            <h6>Class Teacher</h6>
+                        </div>
+                    </div>
+                    <div class="signature col-sm-offset-4 col-sm-4">
+                        <div class="content-group">
+
+                            <div class="mb-15 mt-15">
+                                <img src="@Url.Content("~/Content/dashboard_template")/assets/images/signature.png" class="display-block" style="width: 150px;" alt="">
+                            </div>
+                            <h6>Headmaster</h6>
+                        </div>
+                    </div>
+                    <p>Powered By:Zencon Technology Ltd</p>
+                </div>
+            </div>
+            @*<p>Powered By:Zencon Technology Ltd</p>*@
+            <div class="pagebreak"> </div>
+        }
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#printMarksheet").click(function () {
+            $("#HalfMarkSheetPrint").printThis();
+        });
+    });
+</script>
+

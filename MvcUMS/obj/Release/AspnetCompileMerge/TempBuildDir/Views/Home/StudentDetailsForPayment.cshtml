@@ -1,0 +1,49 @@
+﻿@model MvcUMS.Models.StudentInfoForPayment
+
+@{
+    ViewBag.Title = "StudentDetailsForPayment";
+    Layout =null;
+}
+
+<style>
+    th{
+        width:10%;
+    }
+</style>
+
+<table class="table table-xs table-borderless">
+    <tr>
+        <th>Regestration Id</th>
+        <td>:</td>
+        <td>@Model.stdId</td>
+        
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td>:</td>
+        <td>@Model.FullName</td>
+    </tr>
+    <tr>
+        <th>Father Name</th>
+        <td>:</td>
+        <td>@Model.FatherName</td>
+    
+    </tr>
+    <tr>
+        <th>Class</th>
+        <td>:</td>
+        <td>@Model.Class</td>
+    </tr>
+    <tr>
+
+        <th>Section</th>
+        <td>:</td>
+        <td>@Model.Section</td>
+
+    </tr>
+    <tr>
+        <th>Roll No</th>
+        <td>:</td>
+        <td>@Model.RolNo</td>
+    </tr>
+</table>

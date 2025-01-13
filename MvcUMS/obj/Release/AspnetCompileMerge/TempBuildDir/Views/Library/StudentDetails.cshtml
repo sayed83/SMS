@@ -1,0 +1,53 @@
+﻿@model List<MvcUMS.Models.Sp_StdAdvanceSearc_Result>
+
+@{
+    Layout = null;
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+}
+<style>
+    .webgrid-table td, th {
+        border: 1px solid #caccc5;
+        padding: 3px 7px 2px;
+    }
+</style>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Student Details</h5>
+
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            @grid.GetHtml(
+                tableStyle: "datatable-button-print-basic table-striped",
+                headerStyle: "table_header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+                grid.Column(header: "Serial No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                grid.Column(columnName: "Std_id", header: "Student ID"),
+                grid.Column("Student Name", format: (item) => item.Std_FName + ' ' + item.Std_MName + ' ' + item.Std_LName),
+                grid.Column(columnName: "Father_Name", header: "Father Name"),
+                grid.Column(columnName: "Contact_no", header: "Contact No"),
+                grid.Column("Admission Date", format: (item) => item.Admission_date.ToString("dd/MM/yyyy")),
+                grid.Column(columnName: "Department", header: "Department"),
+                grid.Column(columnName: "Semester", header: "Class"),
+                grid.Column(columnName: "Section", header: "Section"),
+                grid.Column(header: "Action", style:"noExport", format: @<text>@Html.ActionLink("Get Book", "GetboookFromLibrary", new { id = item.Std_id }, new { @class = "btn btn-info btn-xs noExport" })</text>)
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                  ))
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+   
+
+@Scripts.Render("~/bundles/jqueryval")
+
+}

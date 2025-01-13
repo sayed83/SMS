@@ -1,0 +1,337 @@
+﻿@model List<MvcUMS.Models.bookbookissuestudent>
+
+@{
+    ViewBag.Title = "LibraryBookSummaryForStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+}
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("LibraryBookSummaryForStudent", "Library", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+
+        }))
+        {
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Issued Book From Library</h5>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Select Type:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Sample", new[] {
+                                    new SelectListItem() { Text = "Student", Value = "1"},
+                                    new SelectListItem() { Text = "Stuff", Value = "2" }
+                                    }, "Choose an option", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="st" style="display:none">
+                        <label class="col-lg-3 control-label">Staff Type:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("StuffList", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="se">
+                        <label class="col-lg-3 control-label">Class:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Semester", null, "Select" , new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="dn" style="display:none">
+                        <label class="col-lg-3 control-label">Group:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("Department", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="sec">
+                        <label class="col-lg-3 control-label">Section:</label>
+                        <div class="col-lg-9">
+                            @*@Html.DropDownList("Section", null, new { @class = "form-control" })*@
+                            <select id="Section" class="form-control"><option value=""></option></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="sid">
+                        <label class="col-lg-3 control-label">Student ID:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Std_id", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="si">
+                        <label class="col-lg-3 control-label">Staff ID:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBox("Stuffid", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Submit form <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+
+
+    @using (Html.BeginForm("BookSubmission", "Library", FormMethod.Post))
+    {
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h5 class="panel-title">Search Result</h5>
+
+            </div>
+
+     
+            <table class="table datatable-button-print-basic table-striped">
+                <thead>
+
+                    <tr class="table_header">
+
+                        <th>Book ID</th>
+                        <th>Book Name</th>
+
+                        <th>Submission Date</th>
+                        <th class="noExport"></th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Book.BookId
+                            </td>
+                            <td>
+                                @item.Book.BookName
+                            </td>
+                            <td>
+                                @item.BookIssue.SubmissionDate.ToShortDateString()
+                            </td>
+
+                            <td style="text-align:center"><input type="checkbox" value="@item.BookIssue.Id" name="ids" /><input type="hidden" name="CourseId" value="@item.BookIssue.Id" id="Id" /> </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+
+
+  
+
+        </div>
+    }
+
+
+
+    @section Scripts {
+        <script src="/Scripts/jquery-1.8.2.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+               
+                $("#Stuffid").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Library/getStuffIdData",
+                            type: "POST",
+                            dataType: "json",
+
+                            data: { term: request.term, dep: $("#StuffList").val() },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.MemberCode, value: item.MemberCode };
+                                }))
+
+                            }
+                        })
+                    },
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+
+                $("#Std_id").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Home/getStudentIdData",
+                            type: "POST",
+                            dataType: "json",
+
+                            data: { term: request.term, dep: $("#Department").val(), sem: $("#Semester").val(), sec: $("#Section").val() },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.Std_id, value: item.Std_id };
+                                }))
+
+                            }
+                        })
+                    },
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+
+                
+
+            });
+
+            $('#btnSearch').click(function () {
+                var tex = $('#Std_id');
+                var DFtex = $('#DFrom');
+                var DTtex = $('#DTo');
+                if (tex.val() != null && tex.val() != '')
+                    return true;
+                if (DFtex.val() != null && DFtex.val() != '' && DTtex.val() == '') {
+                    alert('Please enter admission date to')
+                    return false;
+                }
+                else if (DTtex.val() != null && DTtex.val() != '' && DFtex.val() == '') {
+                    alert('Please enter admission date from')
+                    return false;
+                }
+                else {
+                    return true;
+                }
+
+            });
+
+            $('#Semester').change(function () {
+
+                var s = $('#Semester').val();
+                if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                    $('#dn').show();
+                }
+                else {
+                    $('#dn').hide();
+                }
+
+            });
+
+            $("#Semester").change(function () {
+                var sem = $(this).val();
+
+                $.ajax({
+                    url: "/MasterEntry/GetSection/",
+                    data: { sem: sem },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value=''>Select</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#Section").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            });
+
+            $('#Sample').change(function () {
+                var val = $(this).val();
+                if (val == '1') {
+
+                    $('#st').hide();
+                    $('#si').hide();
+                    $('#sid').show();
+                    $('#sec').show();
+
+                    $('#se').show();
+                    $('#dn').show();
+                } else {
+                    $('#st').show();
+                    $('#si').show();
+                    $('#sid').hide();
+                    $('#sec').hide();
+
+                    $('#se').hide();
+                    $('#dn').hide();
+                }
+            });
+
+            $('#showdata').click(function () {
+                var url = $('#Modalpopup').data('url');
+
+                $.get(url, function (data) {
+                    $('#popupcontainer').html(data);
+
+                    $('#Modalpopup').modal('show');
+                });
+            });
+
+
+            $(function () {
+
+                $('.datatable-button-print-basic').DataTable({
+
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: '<i class="icon-printer position-left"></i> Print table',
+                            className: 'btn bg-blue',
+                            title: 'Submited Book List',
+                            customize: function (win) {
+
+                                $(win.document.body)
+                                    .css('font-size', '10pt')
+                                    .prepend(
+                                        '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                                    );
+
+                                $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                            },
+                            exportOptions: {
+                                columns: "thead th:not(.noExport)"
+                            }
+                        }
+                    ]
+                });
+
+
+            });
+
+
+        </script>
+ 
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                var res = '@ViewBag.Visibility';
+                if (res == "true") {
+                    $('#ap').css("display", "block");
+                }
+                if (res == "false") {
+                    $('#ap').hide();
+                }
+            });
+        </script>
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>
+        @Scripts.Render("~/bundles/jqueryval")
+    }

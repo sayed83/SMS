@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolNewDBModelStoreContainer" CdmEntityContainer="SchoolNewDBEntities">
+    <EntitySetMapping Name="Months">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.Month">
+        <MappingFragment StoreEntitySet="Months">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentDetails">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.PaymentDetail">
+        <MappingFragment StoreEntitySet="PaymentDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+          <ScalarProperty Name="Fees" ColumnName="Fees" />
+          <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+          <ScalarProperty Name="PaymentsId" ColumnName="PaymentsId" />
+          <ScalarProperty Name="PayMonth" ColumnName="PayMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentMethods">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.PaymentMethod">
+        <MappingFragment StoreEntitySet="PaymentMethod">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.Payment">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="Due" ColumnName="Due" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+          <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTypes">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.PaymentType">
+        <MappingFragment StoreEntitySet="PaymentTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentType1" ColumnName="PaymentType" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetPaymentDetails" FunctionName="SchoolNewDBModel.Store.GetPaymentDetails" />
+    <FunctionImportMapping FunctionImportName="GetStdPaymentDueList" FunctionName="SchoolNewDBModel.Store.GetStdPaymentDueList" />
+    <FunctionImportMapping FunctionImportName="GetStudentPaymentList" FunctionName="SchoolNewDBModel.Store.GetStudentPaymentList" />
+    <EntitySetMapping Name="BankLists">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.BankList">
+        <MappingFragment StoreEntitySet="BankList">
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="StudentMarkInput" FunctionName="SchoolNewDBModel.Store.StudentMarkInput" />
+    <EntitySetMapping Name="MonthlyStudentPaymentSetups">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.MonthlyStudentPaymentSetup">
+        <MappingFragment StoreEntitySet="MonthlyStudentPaymentSetup">
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentPaymentAmounts">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.StudentPaymentAmount">
+        <MappingFragment StoreEntitySet="StudentPaymentAmount">
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+          <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentPaymentTypes">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.StudentPaymentType">
+        <MappingFragment StoreEntitySet="StudentPaymentType">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentInvoiceLists">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.StudentInvoiceList">
+        <MappingFragment StoreEntitySet="StudentInvoiceList">
+          <ScalarProperty Name="PreviousDue" ColumnName="PreviousDue" />
+          <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="MonthlyPaymentSetupId" ColumnName="MonthlyPaymentSetupId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentPaymentCollections">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.StudentPaymentCollection">
+        <MappingFragment StoreEntitySet="StudentPaymentCollection">
+          <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+          <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
+          <ScalarProperty Name="StudentInvoiceId" ColumnName="StudentInvoiceId" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonthlyPaymentSetupDetails">
+      <EntityTypeMapping TypeName="SchoolNewDBModel.MonthlyPaymentSetupDetail">
+        <MappingFragment StoreEntitySet="MonthlyPaymentSetupDetails">
+          <ScalarProperty Name="PayMonth" ColumnName="PayMonth" />
+          <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+          <ScalarProperty Name="PaymenSetupId" ColumnName="PaymenSetupId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

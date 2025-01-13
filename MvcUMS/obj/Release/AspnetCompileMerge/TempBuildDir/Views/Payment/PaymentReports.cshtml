@@ -1,0 +1,33 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "PaymentReports";
+    Layout = null;
+}
+
+
+<table class="table table-xs table-bordered">
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Columns)
+                {
+                    <th>@col.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    @foreach (System.Data.DataColumn col in Model.Columns)
+                    {
+                        <td>@Html.TextBoxFor(m=>row[col.ColumnName])</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+

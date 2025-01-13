@@ -1,0 +1,225 @@
+﻿@model MvcUMS.Models.studentpaydetaisl
+@{
+    ViewBag.Title = "StudentPaymentCallection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Student Payment Collection</h2>
+<div class="row">
+    <table class="table table-bordered">
+        <tr>
+            <td>Student Name</td>
+            <td>@Html.DisplayFor(x => x.studentname, null, new { @class = "form-control" })</td>
+            <td>Student Id</td>
+            <td>@Html.DisplayFor(x => x.StudentId, null, new { @class = "form-control" })</td>
+            <td>Class</td>
+            <td>@Html.DisplayFor(x => x.classname, null, new { @class = "form-control" })</td>
+            <td>Roll No</td>
+            <td>@Html.DisplayFor(x => x.rollno, null, new { @class = "form-control" })</td>
+        </tr>
+     </table>
+</div>
+@using (Html.BeginForm("StudentPaymentCallection", "Accounting", FormMethod.Post))
+{
+     @Html.Hidden("control",(string)(ViewBag.control))
+  
+    @Html.HiddenFor(a => a.StudentId)
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <table class="table table-bordered">
+
+                <tr>
+                    <th><input type="checkbox" value="1" name="ids" id="Chetution" class="check" />Tution Fee</th>
+                    <td>@Html.TextBox("Tution", null, new { @class = "form-control" })</td>
+                </tr>
+                
+                <tr>
+                    <th><input type="checkbox" value="2" name="ids" id="cheAdminssion" class="check" />Addmision Fee</th>
+                    <td>@Html.TextBox("Admision", null, new { @class = "form-control" })</td>
+                </tr>
+                
+                <tr>
+                    <th><input type="checkbox" value="5" name="ids" id="cheexam" class="check" />Exam Fee</th>
+                    <td>@Html.TextBox("Exam", null, new { @class = "form-control" })</td>
+                </tr>
+              
+                <tr>
+                    <th><input type="checkbox" value="7" name="ids" id="cheother" class="check" />Others Fee</th>
+                    <td>@Html.TextBox("Others", null, new { @class = "form-control Numeric"})</td>
+                </tr>
+                <tr>
+                    <th><input type="checkbox" value="8" name="ids" id="chelatefine" class="check" />Late Fine</th>
+                    <td>@Html.TextBox("Late", null, new { @class = "form-control Numeric"})</td>
+                </tr>
+                <tr>
+                    <th><input type="checkbox" value="7" name="ids" id="cheKhata" class="check" />Khata</th>
+                    <td>@Html.TextBox("Khata", null, new { @class = "form-control Numeric" })</td>
+                </tr>
+                <tr>
+                    <th><input type="checkbox" value="8" name="ids" id="cheDiary" class="check" />Diary</th>
+                    <td>@Html.TextBox("Diary", null, new { @class = "form-control Numeric" })</td>
+                </tr>
+                <tr>
+                    <th>Previous Due</th>
+                    <td>@Html.TextBox("predue", Convert.ToDecimal((decimal)ViewBag.previosdue), new { @class = "form-control", id = "predue" })</td>
+                </tr>
+           
+                <tr>
+                    <th><input type="checkbox" id="isNews" name="isNews" class="check" />Less/Discount</th>
+                    <td>@Html.TextBox("Less", null, new { @class = "form-control"})</td>
+                </tr>
+                <tr>
+                    <th>Total Fees</th>
+                    <td> @Html.TextBoxFor(x=>x.totalfees,new { @class = "form-control Numeric",  id = "totalfees" })</td>
+                </tr>
+                <tr id="cashDiv">
+                    <th>Pay Amount</th>
+                    <td> @Html.TextBox("textCash", 0, new { @class = "form-control Numeric" })</td>
+                </tr>
+                <tr>
+                    <th>Due Amount</th>
+                    <td> @Html.TextBoxFor(x=>x.dueamount,new { @class = "form-control Numeric", id="dueamount" })</td>
+                </tr>
+               
+                <tr id="remerksDiv">
+                    <th>Remarks</th>
+                    <td> @Html.TextArea("Remarks", new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:40%"><input type="submit" value="Save" id="btnStdPayment" class="btn btn-success" onclick="return confirm('Are you sure you want to Save?')" /></td>
+                </tr>
+            </table>
+            @*<a href="@Url.Action("UpdatePaymentSetup", "Home", new { std_id = Model.Std_id })" class="btn btn-xs btn-info">Update Payment Setup</a>*@
+        </div>
+    </div>
+}
+
+@section Scripts {
+<script type="text/javascript" src="@Url.Content("~/Content/dashboard_template/")assets/js/core/libraries/jquery.min.js"></script>
+
+<script type="text/javascript">
+    var total = 0;
+    var SumTotal = 0;
+    $(function () {
+        $("#Tution,#Admision,#Exam,#Others,#Less,#Late,#predue,#Khata,#Diary").prop("disabled", true);
+        $('#Tution,#Admision,#Exam,#Others,#Less,#Late,#dueamount,#textCash,#Khata,#Diary').keypress(function (event) {
+
+            if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                return true;
+
+            else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                event.preventDefault();
+
+        });
+       
+      
+    });
+    $('#isNews').change(function () {
+
+        $("#Less").prop("disabled", !$(this).is(':checked'));
+        $("#Less").val(0);
+    });
+    $('#Chetution').change(function () {
+
+        $("#Tution").prop("disabled", !$(this).is(':checked'));
+        $("#Tution").val(0);
+    });
+    $('#cheAdminssion').change(function () {
+
+        $("#Admision").prop("disabled", !$(this).is(':checked'));
+        $("#Admision").val(0);
+    });
+    $('#cheexam').change(function () {
+
+        $("#Exam").prop("disabled", !$(this).is(':checked'));
+        $("#Exam").val(0);
+    });
+    $('#chelatefine').change(function () {
+
+        $("#Late").prop("disabled", !$(this).is(':checked'));
+        $("#Late").val(0);
+    });
+    $('#cheKhata').change(function () {
+
+        $("#Khata").prop("disabled", !$(this).is(':checked'));
+        $("#Khata").val(0);
+    });
+    $('#cheDiary').change(function () {
+
+        $("#Diary").prop("disabled", !$(this).is(':checked'));
+        $("#Diary").val(0);
+    });
+      
+    $('#cheother').change(function () {
+        var other = 0;
+        $("#Others").prop("disabled", !$(this).is(':checked'));
+        other = parseFloat($("#Others").val());
+        SumTotal = SumTotal - other;
+        $("#totalfees").val(SumTotal.toFixed(2))
+        $("#Others").val(0);
+    });
+ 
+    $("#Tution,#Admision,#Exam,#Others,#Late,#Less,#textCash,#Khata,#Diary").keyup(function () {
+        
+        var Tution = 0;
+        var Admision = 0;
+        var Exam = 0;
+        var other = 0;
+        var late = 0;
+        var Khata = 0;
+        var Diary = 0;
+        var Less = 0;
+        var dueamount=0;
+        var textCash = 0;
+        var predue = 0;
+        if ($("#Tution").val().length > 0)
+            Tution = parseFloat($("#Tution").val());
+        if ($("#Admision").val().length > 0)
+            Admision = parseFloat($("#Admision").val());
+        if ($("#Exam").val().length > 0)
+            Exam = parseFloat($("#Exam").val());
+        if ($("#Others").val().length > 0)
+            other = parseFloat($("#Others").val());
+        if ($("#Late").val().length > 0)
+            late = parseFloat($("#Late").val());
+        if ($("#Less").val().length > 0)
+            Less = parseFloat($("#Less").val());
+        if ($("#Khata").val().length > 0)
+            Khata = parseFloat($("#Khata").val());
+        if ($("#Diary").val().length > 0)
+            Diary = parseFloat($("#Diary").val());
+        if ($("#dueamount").val().length > 0)
+            dueamount = parseFloat($("#dueamount").val());
+        if ($("#textCash").val().length > 0)
+            textCash = parseFloat($("#textCash").val());
+        if ($("#predue").val().length > 0)
+            predue = parseFloat($("#predue").val());
+
+        SumTotal = total + Tution + Admision + Exam + other + late+Khata+Diary+ predue - Less;
+        if (SumTotal > 0 && textCash <= SumTotal)
+        {
+            if (textCash <= SumTotal) {
+                //$("#textCash").prop("disabled", false);
+                dueamount = SumTotal - textCash;
+            }
+            else {
+                alert("please insert valid amount");
+                $("#textCash").val(0);
+            }
+        }
+        else
+        {
+            dueamount = SumTotal - textCash;
+            //$("#textCash").prop("disabled", true);
+           
+        }
+       
+        $("#totalfees").val(SumTotal.toFixed(2))
+        $("#dueamount").val(dueamount.toFixed(2))
+    })
+</script>
+   
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>
+}

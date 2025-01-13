@@ -1,0 +1,64 @@
+﻿@model MvcUMS.Models.ExamType
+@{
+    Layout = null;
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Edit Exam Type</h5>
+    </div>
+
+    <div class="panel-body">
+        @using (Html.BeginForm("EditExamType", "Common", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+        {
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Exam Type:</label>
+                <div class="col-lg-8">
+                    @Html.TextBox("ExamType", null, new { @class = "form-control", placeholder = "Exam Type", required = true })
+                </div>
+            </div>
+            @Html.HiddenFor(model=>model.Id)
+            <div class="text-right">
+                <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

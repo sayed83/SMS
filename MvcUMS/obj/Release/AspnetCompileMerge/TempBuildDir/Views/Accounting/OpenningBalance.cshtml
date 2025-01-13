@@ -1,0 +1,441 @@
+﻿@model MvcUMS.Models.OpenningBalance
+
+@{
+    ViewBag.Title = "OpenningBalance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/CSS/jquery-ui.css" rel="stylesheet" />*@
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <!-- Basic layout-->
+        @using (Html.BeginForm("OpenningBalance", "Accounting", FormMethod.Post, new
+        {
+
+            @class = "form-horizontal"
+
+        }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Opening  Balance</h5>
+                </div>
+
+                <div class="panel-body">
+
+
+                    @*<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>*@
+                    <span class="error-info text-semibold">@TempData["error"]</span>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Payment Type:</label>
+                        <div class="col-lg-9">
+                           @Html.DropDownListFor(model => model.BalanceType, ViewBag.BalanceTypeList as SelectList, "Select", new { @class = "form-control", id = "bt" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="bid" style="display:none">
+                        <label class="col-lg-3 control-label">Select Bank:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownListFor(model => model.BankId, ViewBag.Banklist as SelectList, "Select", new { @class = "form-control", id = "bi" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Amount:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", id = "amount", placeholder = "Amount" })
+                            <br />
+                            <input type="button" class="btn btn-primary"  name="sr1" value="Show" id="btnSubmit">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Date:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control datepicker", id = "ADMtext-box" , placeholder = "Date" })
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        
+                        <button type="submit" id="btnSearch" class="btn bg-slate-700"><strong>Create</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /basic layout -->
+
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well">
+        @using (Html.BeginForm("OpenningBalance", "Accounting", FormMethod.Post))
+        {
+            <table class="table table-bordered table-condensed table-hover">
+
+                <tr class="success">
+                    <td><b>Banlance Type</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownListFor(model=>model.BalanceType,ViewBag.BalanceTypeList as SelectList,"Select", new { @class = "form-control",id="bt" }) </td>
+                </tr>
+                <tr class="success" id="bid" style="display:none">
+                    <td><b>Bank</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.DropDownListFor(model => model.BankId, ViewBag.Banklist as SelectList, "Select", new { @class = "form-control", id = "bi" }) </td>
+                </tr>
+                <tr class="info">
+                    <td><b>Amount</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.TextBoxFor(model => model.Amount, new { @class = "form-control", id = "amount", placeholder = "Amount" })<input type="button" name="sr1" value="Show"  id="btnSubmit"></td>
+                </tr>
+                <tr class="success">
+                    <td><b>Date</b></td>
+                    <td><b>:</b></td>
+                    <td>@Html.TextBoxFor(model => model.Date, new { @class = "form-control",id="date",placeholder="Date" })</td>
+                </tr>
+
+                <tr class="info">
+                    <td colspan="3" style="padding-left:40%"><input type="submit" id="btnSearch" class="btn btn-success" value="Submit" /></td>
+                </tr>
+                <tr class="success">
+                  
+                    <td colspan="3" style="color:red">@TempData["error"]</td>
+                </tr>
+            </table>
+        }
+        <div id="container" style="color:red;font-size:14px"  class="word"></div>
+    </div>
+    <div class="col-md-3"></div>
+</div>*@
+
+
+@section Scripts {
+@*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+
+ <script type="text/javascript">
+
+    $(document).ready(function () {
+      
+        $('#bt').change(function () {
+            var val = $(this).val();
+            if (val == '1') {
+
+                $('#bid').show();
+             
+            } else {
+              
+                $('#bid').hide();
+            }
+        });
+
+        $('#amount').keypress(function (event) {
+
+            if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                return true;
+
+            else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                event.preventDefault();
+
+            var txt = $("#amount").val();
+            if (txt.indexOf(".") > -1 && txt.split(".")[1].length > 1) {
+                var substr = txt.split(".")[1].substring(0, 1);
+                $("#amount").val(txt.split(".")[0] + "." + substr);
+            }
+
+            //test_skill();
+            inWords($('#amount').val());
+
+        });
+
+
+            $("#ADMtext-box").datepicker(
+                {
+                    dateFormat: 'yy/mm/dd',
+                    changeMonth: true,
+                    changeYear: true
+                });
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+        function inWords(junkVal) {
+            //var junkVal = $('#amount').val();
+            //var junkVal = document.getElementById('amount').value;
+            junkVal = Math.floor(junkVal);
+            var obStr = new String(junkVal);
+            numReversed = obStr.split("");
+            actnumber = numReversed.reverse();
+
+            if (Number(junkVal) >= 0) {
+                //do nothing
+            }
+            else {
+                alert('wrong Number cannot be converted');
+                return false;
+            }
+            if (Number(junkVal) == 0) {
+                //var str = obStr + '  ' + 'Taka Zero Only';
+                var str = 'Taka Zero Only';
+                $('#container').text(str)
+                //document.getElementById('name').innerHTML = obStr + '' + 'Taka Zero Only';
+                return false;
+            }
+            if (actnumber.length > 9) {
+                alert('Oops!!!! the Number is too big to covertes');
+                return false;
+            }
+
+            var iWords = ["Zero", " One", " Two", " Three", " Four", " Five", " Six", " Seven", " Eight", " Nine"];
+            var ePlace = ['Ten', ' Eleven', ' Twelve', ' Thirteen', ' Fourteen', ' Fifteen', ' Sixteen', ' Seventeen', ' Eighteen', ' Nineteen'];
+            var tensPlace = ['dummy', ' Ten', ' Twenty', ' Thirty', ' Forty', ' Fifty', ' Sixty', ' Seventy', ' Eighty', ' Ninety'];
+
+            var iWordsLength = numReversed.length;
+            var totalWords = "";
+            var inWords = new Array();
+            var finalWord = "";
+            j = 0;
+            for (i = 0; i < iWordsLength; i++) {
+                switch (i) {
+                    case 0:
+                        if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                            inWords[j] = '';
+                        }
+                        else {
+                            inWords[j] = iWords[actnumber[i]];
+                        }
+                        inWords[j] = inWords[j] + ' Only';
+                        break;
+                    case 1:
+                        tens_complication();
+                        break;
+                    case 2:
+                        if (actnumber[i] == 0) {
+                            inWords[j] = '';
+                        }
+                        else if (actnumber[i - 1] != 0 && actnumber[i - 2] != 0) {
+                            inWords[j] = iWords[actnumber[i]] + ' Hundred and';
+                        }
+                        else {
+                            inWords[j] = iWords[actnumber[i]] + ' Hundred';
+                        }
+                        break;
+                    case 3:
+                        if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                            inWords[j] = '';
+                        }
+                        else {
+                            inWords[j] = iWords[actnumber[i]];
+                        }
+                        if (actnumber[i + 1] != 0 || actnumber[i] > 0) {
+                            inWords[j] = inWords[j] + " Thousand";
+                        }
+                        break;
+                    case 4:
+                        tens_complication();
+                        break;
+                    case 5:
+                        if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                            inWords[j] = '';
+                        }
+                        else {
+                            inWords[j] = iWords[actnumber[i]];
+                        }
+                        if (actnumber[i + 1] != 0 || actnumber[i] > 0) {
+                            inWords[j] = inWords[j] + " Lakh";
+                        }
+                        break;
+                    case 6:
+                        tens_complication();
+                        break;
+                    case 7:
+                        if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                            inWords[j] = '';
+                        }
+                        else {
+                            inWords[j] = iWords[actnumber[i]];
+                        }
+                        inWords[j] = inWords[j] + " Crore";
+                        break;
+                    case 8:
+                        tens_complication();
+                        break;
+                    default:
+                        break;
+                }
+                j++;
+            }
+
+            function tens_complication() {
+                if (actnumber[i] == 0) {
+                    inWords[j] = '';
+                }
+                else if (actnumber[i] == 1) {
+                    inWords[j] = ePlace[actnumber[i - 1]];
+                }
+                else {
+                    inWords[j] = tensPlace[actnumber[i]];
+                }
+            }
+            inWords.reverse();
+            for (i = 0; i < inWords.length; i++) {
+                finalWord += inWords[i];
+            }
+            //var str = obStr + '  ' + finalWord;
+            var str = finalWord;
+            $('#container').text(str)
+            //document.getElementById('name').innerHTML = obStr + '  ' + finalWord;
+        }
+
+    })
+
+</script>
+<script type="text/javascript">
+
+    $('#btnSubmit').live('click', function () {
+        inWords($('#amount').val());
+    });
+    function inWords(junkVal) {
+        //var junkVal = $('#amount').val();
+    //var junkVal = document.getElementById('amount').value;
+    junkVal = Math.floor(junkVal);
+    var obStr = new String(junkVal);
+    numReversed = obStr.split("");
+    actnumber = numReversed.reverse();
+
+    if (Number(junkVal) >= 0) {
+        //do nothing
+    }
+    else {
+        alert('wrong Number cannot be converted');
+        return false;
+    }
+    if (Number(junkVal) == 0) {
+        //var str = obStr + '  ' + 'Taka Zero Only';
+        var str ='Taka Zero Only';
+        $('#container').text(str)
+        //document.getElementById('name').innerHTML = obStr + '' + 'Taka Zero Only';
+        return false;
+    }
+    if (actnumber.length > 9) {
+        alert('Oops!!!! the Number is too big to covertes');
+        return false;
+    }
+
+    var iWords = ["Zero", " One", " Two", " Three", " Four", " Five", " Six", " Seven", " Eight", " Nine"];
+    var ePlace = ['Ten', ' Eleven', ' Twelve', ' Thirteen', ' Fourteen', ' Fifteen', ' Sixteen', ' Seventeen', ' Eighteen', ' Nineteen'];
+    var tensPlace = ['dummy', ' Ten', ' Twenty', ' Thirty', ' Forty', ' Fifty', ' Sixty', ' Seventy', ' Eighty', ' Ninety'];
+
+    var iWordsLength = numReversed.length;
+    var totalWords = "";
+    var inWords = new Array();
+    var finalWord = "";
+    j = 0;
+    for (i = 0; i < iWordsLength; i++) {
+        switch (i) {
+            case 0:
+                if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                    inWords[j] = '';
+                }
+                else {
+                    inWords[j] = iWords[actnumber[i]];
+                }
+                inWords[j] = inWords[j] + ' Only';
+                break;
+            case 1:
+                tens_complication();
+                break;
+            case 2:
+                if (actnumber[i] == 0) {
+                    inWords[j] = '';
+                }
+                else if (actnumber[i - 1] != 0 && actnumber[i - 2] != 0) {
+                    inWords[j] = iWords[actnumber[i]] + ' Hundred and';
+                }
+                else {
+                    inWords[j] = iWords[actnumber[i]] + ' Hundred';
+                }
+                break;
+            case 3:
+                if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                    inWords[j] = '';
+                }
+                else {
+                    inWords[j] = iWords[actnumber[i]];
+                }
+                if (actnumber[i + 1] != 0 || actnumber[i] > 0) {
+                    inWords[j] = inWords[j] + " Thousand";
+                }
+                break;
+            case 4:
+                tens_complication();
+                break;
+            case 5:
+                if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                    inWords[j] = '';
+                }
+                else {
+                    inWords[j] = iWords[actnumber[i]];
+                }
+                if (actnumber[i + 1] != 0 || actnumber[i] > 0) {
+                    inWords[j] = inWords[j] + " Lakh";
+                }
+                break;
+            case 6:
+                tens_complication();
+                break;
+            case 7:
+                if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                    inWords[j] = '';
+                }
+                else {
+                    inWords[j] = iWords[actnumber[i]];
+                }
+                inWords[j] = inWords[j] + " Crore";
+                break;
+            case 8:
+                tens_complication();
+                break;
+            default:
+                break;
+        }
+        j++;
+    }
+
+    function tens_complication() {
+        if (actnumber[i] == 0) {
+            inWords[j] = '';
+        }
+        else if (actnumber[i] == 1) {
+            inWords[j] = ePlace[actnumber[i - 1]];
+        }
+        else {
+            inWords[j] = tensPlace[actnumber[i]];
+        }
+    }
+    inWords.reverse();
+    for (i = 0; i < inWords.length; i++) {
+        finalWord += inWords[i];
+    }
+    //var str = obStr + '  ' + finalWord;
+    var str =finalWord;
+    $('#container').text(str)
+    //document.getElementById('name').innerHTML = obStr + '  ' + finalWord;
+   }
+
+</script>
+
+}

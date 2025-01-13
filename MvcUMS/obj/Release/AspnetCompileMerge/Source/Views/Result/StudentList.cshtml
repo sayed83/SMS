@@ -1,0 +1,119 @@
+﻿@model List<MvcUMS.Models.studentsubjectmarks>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = null;
+
+}
+<script type="text/javascript">
+    $("#ct,#sm,#ot,#pc").keypress(function (event) {
+
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            if (event.keyCode !== 8 && event.keyCode !== 46) { //exception
+                event.preventDefault();
+            }
+        }
+        if (($(this).val().indexOf('.') != -1) && ($(this).val().substring($(this).val().indexOf('.'), $(this).val().indexOf('.').length).length > 2)) {
+            if (event.keyCode !== 8 && event.keyCode !== 46) { //exception
+                event.preventDefault();
+            }
+        }
+
+    });
+
+</script>
+@if (Model.Count() == 0)
+{
+    <label style="text-align:center"> No data available.</label>
+}
+else
+{
+    using (Html.BeginForm("SubjectMarks", "Result", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+        <input type="hidden" name="Subjectid" id="Subjectid" value="@ViewBag.subject" />
+        <input type="hidden" name="examtype" id="examtype" value="@ViewBag.examnameid" />
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    Student List
+                </h5>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Roll No</th>
+                            <th>Student Name</th>
+
+
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                if (i > 0)
+                                {
+                                    continue;
+                                }
+
+                                foreach (var name in Model[i].MarkNameViewModel)
+                                {
+                                    <th>@name.Name (Mark: @name.Mark )</th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(model => model[i].studentid)
+                                    @Html.HiddenFor(model => model[i].studentid)
+
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(m=>m[i].RollNo)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(model => model[i].stuentname)
+                                </td>
+                                @{int j = 0;
+                                    foreach (var score in Model[i].MarkNameViewModel)
+                                    {
+                                        @Html.HiddenFor((m => m[i].MarkNameViewModel[j].Id))
+                                        @Html.HiddenFor((m => m[i].MarkNameViewModel[j].Name))
+                                        @Html.HiddenFor((m => m[i].MarkNameViewModel[j].Mark))
+                                        @Html.HiddenFor((m => m[i].MarkNameViewModel[j].PassMark))
+
+                                        @Html.ValidationMessageFor((m => m[i].MarkNameViewModel[j].Name))
+                                        <td>
+                                            @Html.TextBoxFor(m => m[i].MarkNameViewModel[j].ObtainMark, new { @class = "form-control", id = "ct" })
+                                            @Html.ValidationMessageFor(m => m[i].MarkNameViewModel[j].ObtainMark, null, new { @class = "validation-error", id = "errmsg" })
+                                        </td>
+                                        @Html.HiddenFor((m => m[i].MarkNameViewModel[j].ObtainMark))
+                                        j++;
+                                    }
+
+                                }
+
+
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-left">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+    }
+
+}
+
+@Scripts.Render("~/bundles/jqueryval")

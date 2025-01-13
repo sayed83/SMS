@@ -1,0 +1,73 @@
+﻿@model List<MvcUMS.Models.stuffFullDetails>
+@*@model List<MvcUMS.Models.stuffbookissue>*@
+@{
+    Layout = null;
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+}
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading">
+        <h5 class="panel-title">Issued Book By Employee</h5>
+
+    </div>
+
+    <table class="table datatable-button-print-basic table-striped" id="tablesorter">
+        <thead>
+            <tr class="table_header">
+                <th>Name</th>
+                <th>Father Name</th>
+                <th>Gender</th>
+                <th>Department</th>
+                <th class="noExport">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+
+    //decimal totalbook = 0;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+
+                        @{
+                var value = (@item.Stuff.FirstName + ' ' + @item.Stuff.LastName).ToString();
+                        }@value
+                    </td>
+                    <td style="text-align:center">
+                        @item.Stuff.FatherName
+
+                    </td>
+                    <td style="text-align:center">
+                        @item.Stuff.Gender
+
+                    </td>
+
+                    <td style="text-align:center">
+                        @item.StuffDepartment.DepartmentName
+
+                    </td>
+                    <td style="text-align:center">
+                        @Html.ActionLink("Get Book", "GetboookFromLibrary", new { id = item.Stuff.MemberCode }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

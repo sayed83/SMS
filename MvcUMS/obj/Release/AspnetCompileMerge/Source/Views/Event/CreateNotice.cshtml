@@ -1,0 +1,139 @@
+﻿@model MvcUMS.Models.Notice
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("CreateNotice", "Event", FormMethod.Post,
+    new
+    {
+        @class = "form-horizontal",
+        enctype = "multipart/form-data"
+
+    }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <div class="panel-title">Create Notice</div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Title:</label>
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Notice Title" })
+
+                            @Html.ValidationMessageFor(model => model.Title)
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Description:</label>
+                        <div class="col-lg-9">
+
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description" })
+                            @Html.ValidationMessageFor(model => model.Description)
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Date:</label>
+
+                        <div class="col-lg-9">
+
+                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control  datepicker", id = "date" })
+                            @Html.ValidationMessageFor(model => model.Date)
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Notice For:</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownListFor(model=>model.NoticeFor, ViewData["noticeBoard"] as List<SelectListItem>, new { @class="select" })
+                            
+                            @Html.ValidationMessageFor(model => model.NoticeFor)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Attach Photo:</label>
+                        <div class="col-lg-9">
+
+                            @Html.TextBoxFor(model => model.picture, new { @class = "file-styled", type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Preview Photo:</label>
+                        <div class="col-lg-9">
+                            <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" id="ImgPrv" />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <input class="btn btn-success" type="submit" value="Create" />
+                        </div>
+                    </div>
+
+                    <div class="text-left">
+                        @Html.ActionLink("Back to List", "Noticeboard")
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+
+        function ShowImagePreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                    if (input.files[0].size < 1048576) {
+                        $("#ImgPrv").prop('src', e.target.result)
+                       .width(100)
+                       .height(100);
+                        $("#IMGTxt").val(input.value);
+                    }
+                    else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                        alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                    }
+                    else {
+                        alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                    }
+
+
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
+    }
+
+
+

@@ -1,0 +1,281 @@
+﻿@{
+    ViewBag.Title = "Marks Entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+    <div class="panel panel-white">
+        <div class="panel-heading text-center">
+            <h3 class="panel-title">Student Search</h3>
+        </div>
+
+        <div class="panel-body">
+            @Html.Hidden("subject", TempData["subject"])
+
+            <div class="row form-horizontal">
+                @*<div class="col-md-2">
+                    <div class="form-group">
+                        <label>Teacher:</label>
+                        @Html.DropDownList("TeacherList", null, "Select", new { @class = "form-control" })
+                    </div>
+                </div>*@
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Exam Name:</label>
+                        @Html.DropDownList("Examtypeid", ViewBag.examtypeList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Class:</label>
+                        @Html.DropDownList("Semester", ViewBag.ClassList as IEnumerable<SelectListItem>,"Select", new { @class = "form-control", id = "Semester" })
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group" id="a">
+                        <label>Section:</label>
+                        <select id="Section" class="form-control"><option value=""></option></select>
+                    </div>
+                </div>
+
+                <div class="col-md-2" id="dn" hidden>
+                    <div class="form-group">
+                        <label>Group:</label>
+                        @Html.DropDownList("Department", ViewBag.DeptList as IEnumerable<SelectListItem>, "Select", new { @class = "form-control", id = "Department" })
+                    </div>
+                </div>
+
+
+                <div class="col-md-2" id="sec">
+
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        @Html.DropDownList("Subject", ViewBag.Subject as IEnumerable<SelectListItem>, "Select", new { @class = "form-control", id = "Subject" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <input type="submit" class="btn btn-primary" id="btnSearch" value="Search For Number Distribution" />
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div id="partial"> </div>
+
+<div id="isVisibale">
+    @{
+
+        if (TempData["list"] != null)
+        {
+            Html.RenderAction("StudentList", "Result");
+        }
+    }
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+
+        @*$("#TeacherList").change(function () {
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("GetDepatment")',
+
+                dataType: 'json',
+
+                data: { idd: $("#TeacherList").val() },
+
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option Value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#Semester").html(markups).show();
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve Department.' + ex);
+
+                }
+
+            });
+
+            return false;
+
+
+        });*@
+
+
+
+        $("#Semester").change(function () {
+            var sem = $("#Semester").val();
+            if (sem == "Nine" || sem == "Ten") {
+                $("#dn").show();
+            }
+            else {
+                $("#dn").hide();
+            }
+
+
+            @*$.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("GetSemester")',
+
+                dataType: 'json',
+
+                data: { id: $("#Semester").val() },
+
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#Department").html(markups).show();
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve Semester.' + ex);
+
+                }
+
+            });*@
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetAllSubject")',
+                dataType: 'json',
+                data: { se: $("#Semester").val() },
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#Subject").html(markups).show();
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve Subject.' + ex);
+                }
+            });
+
+        });
+
+        $("#Semester").change(function () {
+            var sem = $(this).val();
+            var url = "/Home/GetCourse/";
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+
+        $("#Department").change(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetAllSubject")',
+                dataType: 'json',
+                data: { id: $("#Department").val(), se: $("#Semester").val() },
+                success: function (Data) {
+                    var markups = "<option value='0'>Select</option>";
+
+                    for (var x = 0; x < Data.length; x++) {
+                        markups += "<option value=" + Data[x].Value + ">" + Data[x].Text + "</option>";
+                    }
+                    $("#Subject").html(markups).show();
+                },
+                error: function (ex) {
+
+                    alert('Failed to retrieve Subject.' + ex);
+                }
+            });
+
+            return false;
+
+        });
+
+
+        $('#btnSearch').click(function () {
+            $('#partial').html("");
+            $("#isVisibale").remove();
+            //var tex = $('#TeacherList').val();
+            var dep = $('#Department').val();
+            var sem = $('#Semester').val();
+            var sec = $('#Section').val();
+            var subj = $('#Subject').val();
+            var exm = $('#Examtypeid').val();
+            if (exm == '' || subj == 0) {
+                $('#partial').html("");
+
+            }
+            else {
+                $.ajax({
+                    type: "GET",
+                    data: { Department: dep, Semester: sem, Section: sec, Subject: subj, Examtypeid: exm },
+                    url: '@Url.Action("StudentList", "Result")',
+                    success: function (result) {
+                        $('#partial').html(result);
+                    }
+                });
+            }
+        });
+
+        $('#btnViewRslt').click(function () {
+            $('#partial').html("");
+            $("#isVisibale").remove();
+            var tex = $('#TeacherList').val();
+            var dep = $('#Department').val();
+            var sem = $('#Semester').val();
+            var subj = $('#Subject').val();
+            var exm = $('#Examtypeid').val();
+            if (exm == '' || subj == 0) {
+                $('#partial').html("");
+
+            }
+            else {
+                $.ajax({
+                    type: "GET",
+                    data: { TeacherList: tex, Department: dep, Semester: sem, Subject: subj, Examtypeid: exm },
+                    url: '@Url.Action("TeacherDistribudedList", "Result")',
+                    success: function (result) {
+                        $('#partial').html(result);
+                    }
+                });
+            }
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

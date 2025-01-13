@@ -1,0 +1,460 @@
+﻿@model MvcUMS.Models.Student_info
+
+@{
+    ViewBag.Title = "Student_entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    var message = TempData["saved"] ?? string.Empty;
+}
+
+<!-- Theme JS files -->
+
+
+
+
+    @using (Html.BeginForm("Student_entry", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+    
+    
+
+        <!-- Input formatter -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+              
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="row">
+                       
+                        <div class="col-md-6">
+                            <div class="content-group-lg">
+                                <label>Admission Date:</label>
+                              
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        @Html.ValidationMessageFor(model => model.Admission_date)
+                                        @Html.TextBoxFor(model => model.Admission_date, new { @class = "form-control datepicker", id = "ADMtext-box", placeholder = "(mm/dd/yy)Admission Date" })
+                                       
+                                    </div>
+                                
+                             </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.Std_FName)
+
+                                    @Html.TextBoxFor(model => model.Std_FName, new { @class = "form-control", id = "text-box", placeholder = "First Name" })
+                                  
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Middle Name:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.Std_MName)
+
+                                    @Html.TextBoxFor(model => model.Std_MName, new { @class = "form-control", id = "text-box", placeholder = "Middle Name" })
+                                    
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Last Name:</label>
+
+                                @Html.ValidationMessageFor(model => model.Std_LName)
+
+                                @Html.TextBoxFor(model => model.Std_LName, new { @class = "form-control", id = "text-box", placeholder = "Last Name" })
+
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Father Name:</label>
+                               
+                                    @Html.ValidationMessageFor(model => model.Father_Name)
+
+                                    @Html.TextBoxFor(model => model.Father_Name, new { @class = "form-control", id = "text-box", placeholder = "Father Name" })
+                                    
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mother Name:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.Mother_Nmae)
+
+                                    @Html.TextBoxFor(model => model.Mother_Nmae, new { @class = "form-control", id = "text-box", placeholder = "Mother Name" })
+                                    
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Present Address:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.Present_address)
+
+                                    @Html.TextBoxFor(model => model.Present_address, new { @class = "form-control", id = "text-box", placeholder = "Present Address" })
+                                    
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>PermanentAddress:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.Parmenent_address)
+
+                                    @Html.TextBoxFor(model => model.Parmenent_address, new { @class = "form-control", id = "text-box", placeholder = "Permanent  Address" })
+                                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="content-group-lg">
+                                <label>Date of Birth:</label>
+                                
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        @Html.ValidationMessageFor(model => model.Birth_date)
+                                        @Html.TextBoxFor(model => model.Birth_date, new { @class = "form-control datepicker-menus", id = "DBTxt-box", placeholder = "(mm/dd/yy)Date of Birth", required = true })
+ 
+                                    </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label class="display-block">Gender:</label>
+
+                                <label class="radio-inline">
+                                    @Html.ValidationMessageFor(model => model.Gender)
+                                    @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "styled" })
+                                    Male
+                                </label>
+
+                                <label class="radio-inline">
+                                    @Html.ValidationMessageFor(model => model.Gender)
+                                    @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "styled" })
+                                    Female
+                                </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Contact No:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.Contact_no)
+
+                                    @Html.TextBoxFor(model => model.Contact_no, new { @class = "form-control", id = "sc", placeholder = "Phone/Mobile No" })
+                                    
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Attach Photo:</label>
+                                @Html.TextBoxFor(model => model.image, new { @class = "file-styled", type = "file", id = "text-box", onchange = "ShowImagePreview(this);" })
+
+                            </div>
+                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Preview Photo:</label>
+
+                                <img src="@Url.Content("~/Content/dashboard_template/")assets/images/placeholder-small.png" id="ImgPrv" />
+                              
+                            </div>
+                        </div>
+                      </div>
+
+                    <fieldset>
+                        <legend class="text-semibold">Guardian Details</legend>
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Guardian Name:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.GardianName)
+
+                                    @Html.TextBoxFor(model => model.GardianName, new { @class = "form-control", id = "gtextbox", placeholder = "Guardian Name" })
+                                    
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Contact No:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.GardianMobile)
+
+                                    @Html.TextBoxFor(model => model.GardianMobile, new { @class = "form-control", id = "gmtextbox", placeholder = "Phone/Mobile", required = "required" })
+                                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Relation:</label>
+                                
+                                    @Html.ValidationMessageFor(model => model.GurdianRelation)
+
+                                    @Html.TextBoxFor(model => model.GurdianRelation, new { @class = "form-control", id = "grtextbox", placeholder = "Relation with Student" })
+                                    
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Occupation:</label>
+                              
+                                    @Html.ValidationMessageFor(model => model.GardianOccupation)
+
+                                    @Html.TextBoxFor(model => model.GardianOccupation, new { @class = "form-control", id = "gotextbox", placeholder = "Occupation" })
+                                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h6 class="panel-title">Previous Student Information If Present</h6>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                   
+                                        <div class="form-group">
+                                            <label>School Name:</label>
+                                       
+                                            @Html.ValidationMessageFor(model => model.BeforeSchool)
+
+                                            @Html.TextBoxFor(model => model.BeforeSchool, new { @class = "form-control", id = "schtextbox", placeholder = "School Name" })
+                                           
+                                        </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Class:</label>
+                                            
+                                                @Html.ValidationMessageFor(model => model.BeforeClass)
+
+                                                @Html.TextBoxFor(model => model.BeforeClass, new { @class = "form-control", id = "gotextbox", placeholder = "Class" })
+                                                
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>GPA/CGPA:</label>
+                                            
+                                                @Html.ValidationMessageFor(model => model.BeforeGpa)
+
+                                                @Html.TextBoxFor(model => model.BeforeGpa, new { @class = "form-control", id = "grtextbox", placeholder = "GPA/CGPA" })
+                                               
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Create Student <i class="icon-arrow-right14"></i></button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+    }
+            <!-- /input formatter -->
+
+
+
+
+@section Scripts {
+
+
+<script type="text/javascript">
+    //$(function () {
+    //    $("#DBTxt-box").datepicker(
+    //        {
+    //            dateFormat: 'mm/dd/yy',
+    //            changeMonth: true,
+    //            changeYear: true,
+    //            yearRange: "-20:+1"
+    //        });
+    //});
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var ext = input.value.substr(input.value.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files[0].size < 1048576) {
+                    $("#ImgPrv").prop('src', e.target.result)
+                   .width(100)
+                   .height(100);
+                    $("#IMGTxt").val(input.value);
+                }
+                else if (!(ext == "jpeg" || ext == "jpg" || ext == "png")) {
+                    alert("Invalid image file, must select a *.jpeg, *.jpg, or *.png file.");
+                }
+                else
+                {
+                    alert("File is too large, must select file under 1 MB. File  Size: " + (input.files[0].size / 1048576).toFixed(1) + " MB");
+                }
+
+               
+                
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#Std_id1").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/getData",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Std_id, value: item.Std_id };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+<script type="text/javascript">
+    var message = '@message';
+    if(message)
+        alert(message);
+</script>
+<script>
+    $(function () {
+        $('#btnSubmitSe').click(function () {
+            var txt = $('#Std_id1');
+            if (txt.val() != null && txt.val() != '') {
+                return true;
+            }
+            else {
+                alert('Please enter text')
+                return false;
+            }
+        })
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#gls").click(function () {
+            $("#gardian").show();
+         
+        });
+        //$("#gl").click(function () {
+        //    $("#gardian").hide();
+           
+        //    $("#gls").show();
+        //    $("#gl").hide();
+        //});
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#psi").click(function () {
+            $("#psinfo").show();
+            $("#psih").show();
+            $("#psi").hide();
+
+        });
+        $("#psih").click(function () {
+            $("#psinfo").hide();
+
+            $("#psi").show();
+            $("#psih").hide();
+        });
+    });
+</script>
+
+    
+  <script type="text/javascript">
+    $(function () {
+
+        $('#gmtextbox,#sc').keypress(function (event) {
+
+            if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                return true;
+
+            else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                event.preventDefault();
+
+        });
+
+     
+    })
+
+</script>
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

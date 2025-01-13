@@ -1,0 +1,25 @@
+﻿@media print {
+
+    /*.pagebreak {
+        height: 0;
+        page-break-before: always;
+        margin: 0;
+        border-top: none;
+    }*/
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+
+    .eidgah-school-title {
+        background: red !important;
+    }
+
+    .table-bordered {
+        border: 0!important;
+    }
+}
+
+

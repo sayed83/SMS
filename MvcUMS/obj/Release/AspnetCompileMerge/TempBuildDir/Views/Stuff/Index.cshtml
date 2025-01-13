@@ -1,0 +1,246 @@
+﻿
+@model PagedList.IPagedList<MvcUMS.Models.stuffFullDetails>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+  
+
+<div class="panel panel-flat">
+
+     <div class="panel-heading">
+       <h5 class="panel-title">Search Result</h5>
+     </div>
+
+     <div class="panel-body">
+                
+        @using (Html.BeginForm("Index", "Stuff", FormMethod.Get, new {
+            @class = "form-horizontal"
+        }))
+        { 
+                    
+            <div class="row">
+            <div class="col-md-3">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Department:</label>
+                        <div class="col-lg-9">
+
+                            @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-md-3">
+                <fieldset>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Designation:</label>
+                        <div class="col-lg-9">
+
+                            @Html.DropDownList("Designition", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-md-3">
+                <fieldset>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Phone:</label>
+                        <div class="col-lg-9">
+
+                            @Html.TextBox("Search_Data", null, new { @class = "form-control", placeholder = "Enter Stuff Name or email or Mobile No" })
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+                    
+    </div>        
+
+
+            <div class="text-center">
+                @*<button type="submit" class="btn btn-primary">Search <i class="icon-arrow-right14 position-right"></i></button>*@
+                <input type="submit" value="Search" class="btn btn-success" />
+            </div>
+                    
+        }       
+
+            
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("New Teacher", "Create", null, new { @class = "btn btn-info" })
+</div>
+<br />
+<div class="panel panel-flat">
+
+
+    <table class="table datatable-button-print-basic table-striped">
+        <thead>
+
+            <tr class="table_header">
+                <th>SL</th>
+                <th>Stuff Name</th>
+                <th>Designition</th>
+                <th>Mobile No</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th class="noExport">Action</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+            {
+                <tr>
+                    <td>
+                        @item.Index
+                    </td>
+                    <td>@item.Data.Stuff.FirstName &nbsp;@item.Data.Stuff.LastName</td>
+                    <td>@item.Data.Designition.DesName</td>
+                    <td>@item.Data.Stuff.ContactNo</td>
+                    <td>@item.Data.Stuff.Email</td>
+                    <td>@item.Data.StuffDepartment.DepartmentName</td>
+                    <td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Data.Stuff.Id }, new { @class = "btn btn-success btn-xs" })
+                        }
+
+                        @Html.ActionLink("Details", "Details", new { id = item.Data.Stuff.Id }, new { @class = "btn btn-info btn-xs" })
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+   
+@section Scripts {
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Search_Data").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Stuff/getStuff",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item, value: item };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+
+      
+
+     
+       
+
+    });
+    $("#Department").change(function () {
+        if ($("#Department option:selected").val() == '') {
+            $("#Designition").empty();
+            return false;
+        }
+        else {
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("getDesignition")',
+
+                dataType: 'json',
+
+                data: { id: $("#Department").val() },
+
+                success: function (Data) {
+
+                    var markup = "<option value=''>Select</option>";
+                    for (var x = 0; x < Data.length; x++) {
+                        markup += "<option Value='" + Data[x].Value + "'>" + Data[x].Text + "</option>";
+                    }
+
+                    $("#Designition").html(markup).show();
+
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve cities.' + ex);
+
+                }
+
+            });
+        }
+
+    });
+
+    $(function () {
+
+        $('.datatable-button-print-basic').DataTable({
+
+            buttons: [
+                {
+                    extend: 'print',
+                    text: '<i class="icon-printer position-left"></i> Print table',
+                    className: 'btn bg-blue',
+                    title: 'Stuff List',
+                    customize: function (win) {
+
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ]
+        });
+
+
+    });
+</script>
+
+
+
+
+}

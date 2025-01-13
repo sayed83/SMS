@@ -1,0 +1,77 @@
+﻿@model MvcUMS.Models.Section
+@{
+    ViewBag.Title = "Section";
+
+    Layout = null;
+}
+
+
+
+ <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">Edit Section</h5>
+        </div>
+
+        <div class="panel-body">
+
+            @using (Html.BeginForm("SectionEdit", "MasterEntry", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+            {
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Section Name:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBoxFor(m=>m.section_name, null, new { @class = "form-control", placeholder = "Section Name", required = true })
+                                </div>
+                            </div>
+                            
+                           <div class="form-group">
+                                <label class="col-lg-4 control-label">Class:</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownListFor(m=>m.semester_Name, ViewBag.Semester as SelectList, "Select", new { @class = "form-control", required = true })
+                                </div>
+                            </div>
+                            
+                             <div class="form-group" id="editDiv">
+                                <label class="col-lg-4 control-label">Department:</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownListFor(d=>d.deparment_Name, ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+                                </div>
+                            </div>
+                @Html.HiddenFor(model=>model.id)
+                <div class="text-right">
+                    <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+
+            }
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $("#editDiv").hide();
+
+    $("#semester_Name").change(function () {
+        var p = $(this).val();
+        if (p == 'Nine' || p == 'Ten') {
+            $("#editDiv").show(100);
+        }
+        else {
+            $("#editDiv").hide();
+        }
+    })
+
+    $('#semester_Name option').each(function () {
+        if (this.selected)
+        {
+            $("#editDiv").show();
+        }
+        else
+        {
+            $("#editDiv").hide();
+        }
+            
+    });
+
+</script>
+

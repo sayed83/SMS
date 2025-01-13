@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "ShowResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (ViewBag.marksheetType == "Eidgah")
+{
+    @Html.Partial("_EidgahShowResult")
+}
+else if (ViewBag.marksheetType == "Common")
+{
+    @Html.Partial("_CommonShowResult")
+}
+
+
+
+
+
+
+
+
+
+@section Scripts {
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

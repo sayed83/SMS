@@ -1,0 +1,39 @@
+﻿@model MvcUMS.Models.Status
+@{
+    ViewBag.Title = "Status Edit";
+
+    Layout = null;
+}
+
+
+
+ <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">Edit Status</h5>
+        </div>
+
+        <div class="panel-body">
+
+            @using (Html.BeginForm("StatusEdit", "MasterEntry", FormMethod.Post, new
+                        {
+                            @class = "form-horizontal"
+                        }))
+            {
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Status Name:</label>
+                                <div class="col-lg-8">
+                                    @Html.TextBoxFor(m=>m.Std_status, null, new { @class = "form-control", placeholder = "Status Name", required = true })
+                                </div>
+                            </div>
+                            
+                @Html.HiddenFor(model=>model.id)
+                <div class="text-right">
+                    <button type="submit" id="btnSubmit" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+
+            }
+        </div>
+    </div>
+
+
+

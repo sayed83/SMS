@@ -1,0 +1,130 @@
+﻿@model List<MvcUMS.Models.PaymentStudent>
+
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Payment Details</h5>
+
+    </div>
+    @{
+        decimal Total = 0;
+    }
+    <div class="table-responsive">
+        <table class="table"  id="AdmissionReport">
+            <thead>
+
+                <tr>
+
+                    <th>Student Name</th>
+                    <th>Student Id</th>
+                    <th>Admission Date</th>
+                    <th>Admission Fee</th>
+                    <th>Development Fee</th>
+                    <th>Transport Fee</th>
+                    <th>SMSAlart Fee</th>
+                    <th>Library Fee</th>
+                    <th>Lab Fee</th>
+                    <th>Total</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">
+                            @item.student.Std_FName @item.student.Std_MName @item.student.Std_LName
+
+                        </td>
+                        <td style="text-align:center">
+                            @item.student.Std_id
+                        </td>
+                        <td style="text-align:center">
+                            @item.student.Admission_date.ToShortDateString()
+                        </td>
+
+                        <td style="text-align:center">
+                            @item.studentpayment.AdmissionFee
+                        </td>
+                        <td style="text-align:center">
+                            @item.studentpayment.DevelopmentFee
+
+                        </td>
+                        <td style="text-align:center">
+                            @item.studentpayment.TransportFee
+                        </td>
+                        <td style="text-align:center">
+                            @item.studentpayment.SMSAlartFee
+                        </td>
+                        <td style="text-align:center">
+                            @item.studentpayment.LibraryFee
+                        </td>
+                        <td style="text-align:center">
+                            @item.studentpayment.LabFee
+                        </td>
+                        <td style="text-align:center">
+                            @{var value = (@item.studentpayment.AdmissionFee + @item.studentpayment.DevelopmentFee
+                                             + @item.studentpayment.TransportFee + @item.studentpayment.SMSAlartFee + @item.studentpayment.LibraryFee + @item.studentpayment.LabFee);
+                            Total = Total + value;
+                            } @value Tk
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td colspan="9">Total</td>
+                    <td style="text-align:right">
+                        @Total Tk
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+@*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+@*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+
+<script>
+
+    $(function () {
+
+        $("#AdmissionReport").DataTable();
+
+        $("#Search_Data").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Stuff/getStuff",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item, value: item };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+        //$("#AdmissionReport").DataTable();
+
+    });
+
+</script>
+
+    }
+
+

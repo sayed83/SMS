@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UMSModelStoreContainer" CdmEntityContainer="UMSEntities1">
+    <EntitySetMapping Name="Student_info">
+      <EntityTypeMapping TypeName="UMSModel.Student_info">
+        <MappingFragment StoreEntitySet="Student_info">
+          <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+          <ScalarProperty Name="ProximateID" ColumnName="ProximateID" />
+          <ScalarProperty Name="BeforeGpa" ColumnName="BeforeGpa" />
+          <ScalarProperty Name="BeforeClass" ColumnName="BeforeClass" />
+          <ScalarProperty Name="BeforeSchool" ColumnName="BeforeSchool" />
+          <ScalarProperty Name="GurdianRelation" ColumnName="GurdianRelation" />
+          <ScalarProperty Name="GardianOccupation" ColumnName="GardianOccupation" />
+          <ScalarProperty Name="GardianMobile" ColumnName="GardianMobile" />
+          <ScalarProperty Name="GardianName" ColumnName="GardianName" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="Entry_date" ColumnName="Entry_date" />
+          <ScalarProperty Name="Admission_date" ColumnName="Admission_date" />
+          <ScalarProperty Name="Email_id" ColumnName="Email_id" />
+          <ScalarProperty Name="Contact_no" ColumnName="Contact_no" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Present_address" ColumnName="Present_address" />
+          <ScalarProperty Name="Parmenent_address" ColumnName="Parmenent_address" />
+          <ScalarProperty Name="Mother_Nmae" ColumnName="Mother_Nmae" />
+          <ScalarProperty Name="Father_Name" ColumnName="Father_Name" />
+          <ScalarProperty Name="Std_LName" ColumnName="Std_LName" />
+          <ScalarProperty Name="Std_MName" ColumnName="Std_MName" />
+          <ScalarProperty Name="Std_FName" ColumnName="Std_FName" />
+          <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

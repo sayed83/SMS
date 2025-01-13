@@ -1,0 +1,289 @@
+﻿@model MvcEnergyPac.Models.LoginModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Login</title>
+    <link href="~/Images/cps-logo.jpg" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Login/styles.css" rel="stylesheet" />
+    <style>
+        #pos-fix {
+            position: absolute;
+        }
+
+        #ani {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            color: #D22930;
+            -webkit-animation-name: example; /* Chrome, Safari, Opera */
+            -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+            animation-name: example;
+            animation-duration: 4s;
+            bottom: 10px;
+        }
+
+        #cont {
+            width: 100px;
+            height: 50px;
+            position: relative;
+            animation-timing-function: ease;
+            -webkit-animation-timing-function: ease;
+            -webkit-animation: mymove 5s; /* Chrome, Safari, Opera */
+            animation: mymove 5s;
+        }
+
+        .clearfix::after {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            line-height: 0;
+            visibility: hidden;
+        }
+
+        .login-form-header {
+            border-bottom: 1px solid #b4b4b4;
+            display: block;
+            margin: 0 auto 30px;
+            padding: 20px 0 15px;
+            width: 90%;
+        }
+
+
+            .login-form-header > h2 {
+                color: #fff;
+                display: inline;
+                font-size: 21px;
+                padding: 0 0 0 10px;
+            }
+
+            .login-form-header > .login-to {
+                color: #999;
+                float: right;
+                font-weight: 700;
+                position: relative;
+                right: 10px;
+                top: 5px;
+            }
+
+        ol, ul {
+            list-style: outside none none;
+            margin-left: 23%;
+        }
+
+        .login-form {
+            background: rgb(0, 157, 220) none repeat scroll 0 0;
+            margin: 75px auto 0;
+            max-width: 640px;
+            min-height: 360px;
+            position: relative;
+            z-index: 100;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+
+            .login-form > .login-form-inputs {
+                margin: 0 auto;
+                width: 48%;
+            }
+
+        .login-form-inputs > li {
+            margin: 25px 0 0;
+            width: 100%;
+        }
+
+        .username, .ChangedTypePass {
+            background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
+            border: 0 none;
+            border-radius: 7px;
+            color: black;
+            font-family: Arial,sans-serif;
+            font-size: 14px;
+            padding: 15px 3%;
+            width: 60%;
+            background-color: #fff;
+        }
+
+        .ie8-input-labels {
+            display: none;
+        }
+
+        .login-form-submit-container {
+            color: #c5c5c5;
+            margin: 40px auto 0;
+            padding-bottom: 10px;
+            width: 48%;
+        }
+
+        .submit-btn {
+            -moz-user-select: none;
+            background-color: #009ddc;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Proxima N W01 Reg","Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.33;
+            margin-bottom: 0;
+            margin-right: 5px;
+            margin-left: 23%;
+            padding: 10px 30px 9px;
+            position: relative;
+            text-align: center;
+            top: -2px;
+            transition: background-color 0.3s ease 0s;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .secure-icon {
+            background: rgba(0, 0, 0, 0) url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAVCAYAAACkCdXRAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpERjU0QUJGRDk4NzUxMUUyQkNENEZDNkE3NUU3Q0YwRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpERjU0QUJGRTk4NzUxMUUyQkNENEZDNkE3NUU3Q0YwRCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkRGNTRBQkZCOTg3NTExRTJCQ0Q0RkM2QTc1RTdDRjBEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkRGNTRBQkZDOTg3NTExRTJCQ0Q0RkM2QTc1RTdDRjBEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Nbw7xQAAAXlJREFUeNpi/P//PwM6iI6MMABSpUDsBsQiQPwGiHcBcffS5SsuMOAAjOiGAQ3KAVITgJgZi/q/QFwENHASQcOABoUCqVVQ7i1eHp5v4uISz16+fCH1+csXLqCYGlQuDGjgapyGAQ0CueQREEuB+Opq6lvqGht9YQqb6us337x10wfKfQbEckAD/yIbxoTENocZBHJVdGxsKor3IfxbUK4UVD0DLsMUYQwWZpZ/yioqL5AVgvggcWzqsRnGCjeMhfkPtgBGE2fFZxjFgKqGgWMTGJM2QHYLENuDBJmZmW9YmFscQFd84uQJh79//2pAuQeBuBoYo0fhwQClNwCxMDxlAjUcPXZUg4BDQBZvhOYQFG8Kk+kzYaLDTE5GliEuLg5MUxwBwSGhDO6eXmCaYsMuXYQUEJcuXaTcsFdv3kDo168pN0xFWRmSlZSUKDfsw/v3DFs2bmT4+OEDUYax4JPcf/AAWdnpH5np7B82w6aQYSBIPUrxDRBgAFSneOOcg02eAAAAAElFTkSuQmCC") no-repeat scroll 0 0;
+            bottom: 9px;
+            height: 21px;
+            position: absolute;
+            right: 6px;
+            width: 19px;
+        }
+
+        .login-footer {
+            width: 100%;
+        }
+
+        .login-footer-content {
+            font-size: 1em;
+            font-variant: normal;
+            font-weight: 400;
+            position: relative;
+            width: 100%;
+        }
+
+        .sm-icons {
+            top: 24px;
+        }
+
+        .login-footer-content > ul {
+            list-style: outside none none;
+            position: absolute;
+            right: 0;
+            width: 100%;
+        }
+
+        .sm-icons > li > a {
+            background-color: #959595;
+            background-repeat: no-repeat;
+            background-size: 320px 32px;
+            border-radius: 50%;
+            display: block;
+            height: 32px;
+            width: 32px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 0 auto;
+            width: 50%;
+        }
+    </style>
+    <script src="~/Content/Login/jquery.1.9.1.min.js"></script>
+    <script src="~/Content/Login/modernizr.js"></script>
+    <script src="~/Content/Login/platform.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="login-header-wrapper bb-top-color" style="background-color: rgb(171, 224, 250); box-shadow: 5px 5px 5px 5px; ">
+            <div class="login-header-container">
+                <div id="pos-fix" class="login-header-logo">
+
+                    <a style="margin-top:1px;" href="http://www.zencon.tech//" target="_blank" title="Zencon Technology Ltd">&nbsp;<img src="~/Content/Login/Image/logo.png" />@*<span id="ani" style="color: red;font-family: icon;font-size: 30px;font-style: italic;">PentaGems</span>*@</a>
+                </div>
+                <div class="bb-logo-image"></div>
+                <div class="login-header-contact ">
+                    <span id="cont" class="push-right-20">+88 017-62 30 16 89</span>
+                    <a href="http://www.zencon.tech//">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="login-form-container bb-bottom-color clearfix">
+
+            <div class="login-form">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="login-form-header clearfix">
+                        <h2>Login</h2>
+                        <div class="login-to bb-login-title"><span class="default" style="color:black; font-family: 'Times New Roman'">Institute Maanagement System</span></div>
+                    </div>
+                    <div id="jsBrowserDetectionTop" class="notification error" style="display: none; color: #000000"></div>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <ul class="login-form-inputs formAttributes">
+                        <li class="ie8-input-labels">@Html.LabelFor(model => model.UserName)</li>
+                        <li>
+                            @Html.TextBoxFor(model => model.UserName, new
+                               {
+                                   @class = "username",
+                                   placeholder = "User Name"
+                               })
+                            @Html.ValidationMessageFor(model => model.UserName, null, new { style = "color:black" })
+                        </li>
+
+                        <li class="ie8-input-labels">@Html.LabelFor(model => model.Password)</li>
+                        <li>
+                            @Html.PasswordFor(model => model.Password, new
+                               {
+                                   @class = "ChangedTypePass",
+                                   placeholder = "Password"
+                               })
+                            @Html.ValidationMessageFor(model => model.Password, null, new { style = "color:black" })
+                        </li>
+
+                    </ul>
+                    <div class="login-form-submit-container formAttributes">
+                        <input type="submit" class="submit-btn login-submit-btn" style="background-color: #363a97;" value="Log In" />
+                    </div>
+                    <div>
+                        <p style="margin-left: 240px; color: black; margin-top: 10px">User Name : Admin</p>
+                        <p style="margin-left:247px;color:black;margin-top:10px">PassWord     : 1</p>
+                    </div>
+                    <div id="jsBrowserDetectionBottom" style="display:none"></div>
+                    <div class="secure-icon">&nbsp;</div>
+                }
+
+                <div class="mobile-login-loader" style="display:none">
+                    <div class="mobile-login-loader-overlay">
+                    </div>
+                    <div class="mobile-login-loader-image">
+                        <img src="~/Content/Login/Image/ajax-loader.gif" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="login-footer" style="background-color: rgb(171, 224, 250);">
+            <p style="color: #3b6b37; margin-top: 20px;text-align:center">Developed By : <img src="~/Images/logo-url.jpg" /> &nbsp; &nbsp;<a href="http://www.zencon.tech//" target="_blank">Zencon Technology Ltd</a> &nbsp; &nbsp;&nbsp;<b>Contact No: +88 031 626272</b></p>
+        </div>
+
+    </div>
+
+
+    <script src="~/Content/Login/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<MvcUMS.Models.InventoryType>
+@using PagedList.Mvc;
+@{
+    Layout = null;
+  
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Purchase  Report
+            @*<span class="pull-right">@Html.ActionLink("Print", "PaymentReportPrint","Report", new { Department = ViewBag.depart, Semester = ViewBag.semes, PaymentType = ViewBag.pay }, new { @class = "btn btn-info", target = "_blank" })</span>*@
+        </h5>
+
+    </div>
+
+
+    <table class="table datatable-basic">
+            <thead>
+
+                <tr>
+
+                    <th>Type</th>
+                    <th>Accessories Name</th>
+                    <th>Voucher Number</th>
+                    <th>Purchased From</th>
+                    <th>Quantity</th>
+                    <th>Unit Prize</th>
+                    <th>Total Prize</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">
+
+                            @item.IT.Name
+                        </td>
+                        <td style="text-align:center">
+
+                            @item.I.Name
+                        </td>
+                        <td style="text-align:center">
+
+                            @item.p.BoucherNumber
+                        </td>
+                        <td style="text-align:center">
+
+                            @item.p.CompanyName
+
+                        </td>
+                        <td style="text-align:center">
+
+                            @item.p.Quantity
+                        </td>
+                        <td style="text-align:center">
+                            @item.p.Prize
+                        </td>
+                        <td style="text-align:center">
+                            @{var s = @item.p.Quantity * @item.p.Prize;}@s
+                        </td>
+
+
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+</div>
+
+
+
+
+
+

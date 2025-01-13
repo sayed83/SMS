@@ -1,0 +1,114 @@
+﻿@model MvcUMS.Models.StuffPaymentDetails
+
+
+
+<div class="panel-body">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="table-responsive responsiv-table">
+                <table class="table bio-table">
+                    <tbody>
+
+                        <tr>
+                            <td>Designation</td>
+                            <td>:@TempData["Designition"]</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Shcedule</td>
+                            <td>:@TempData["PayS"]</td>
+                        </tr>
+                        <tr>
+                            <td>Basic Salary</td>
+                            <td>:@Html.DisplayFor(model => model.BasicSalary)</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Total Salary</td>
+                            <td>:@Html.DisplayFor(model => model.TotalSalry)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="table-responsive responsiv-table">
+                <table class="table bio-table">
+                    <tbody>
+                        <tr>
+                            <td>House Rent</td>
+                            <td>:@Html.DisplayFor(model => model.HouseRent)%</td>
+                        </tr>
+                        <tr>
+                            <td>Healths</td>
+                            <td>:@Html.DisplayFor(model => model.Health)%</td>
+                        </tr>
+                        <tr>
+                            <td>Others</td>
+                            <td>:@Html.DisplayFor(model => model.Others)%</td>
+                        </tr>
+                       
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>
+
+@*<div class="well">
+    <div class="row">
+        <div class="col-md-3" style="width:23%"><b>Designation </b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px"> <b style="color:#808080">@TempData["Designition"]</b></div>
+        <div class="col-md-3" style="width:23%"><b>Payment Shcedule </b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px">
+            <b style="color:#808080">
+                @TempData["PayS"]
+            </b>
+        </div>
+    </div><br />
+    <div class="row">
+        <div class="col-md-3" style="width:23%"><b>Basic Salary</b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px"> <b style="color:#808080">@Html.DisplayFor(model => model.BasicSalary)</b></div>
+        <div class="col-md-3" style="width:23%"><b>House Rent </b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px">
+            <b style="color:#808080"> @Html.DisplayFor(model => model.HouseRent)%</b>
+        </div>
+    </div><br />
+
+    <div class="row">
+        <div class="col-md-3" style="width:23%"><b>Healths</b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px"> <b style="color:#808080">@Html.DisplayFor(model => model.Health)%</b></div>
+        <div class="col-md-3" style="width:23%"><b>Others </b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px">
+            <b style="color:#808080"> @Html.DisplayFor(model => model.Others)%</b>
+        </div>
+    </div><br />
+    <div class="row">
+        <div class="col-md-3" style="width:23%"><b>Total Salary</b></div>
+        <div class="col-md-1"><b>:</b></div>
+        <div class="col-md-2" style="margin-left:-20px"> <b style="color:#808080">@Html.DisplayFor(model => model.TotalSalry)</b></div>
+    </div><br />
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            @Html.ActionLink("Edit", "stuffSalaryUpdate", new { id = Model.StuffId }, new { @class = "btn btn-info" })
+            
+        </div>
+    </div>
+</div>*@

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchooldbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SchooldbEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="Sp_StdAdvanceSearc" ReturnType="Collection(SchooldbModel.Sp_StdAdvanceSearc_Result)" />
+  </EntityContainer>
+  <ComplexType Name="Sp_StdAdvanceSearc_Result">
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Std_id" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Std_FName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Std_MName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Std_LName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Father_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact_no" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="Admission_date" Nullable="true" />
+    <Property Type="String" Name="Department" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Section" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="RollNo" Nullable="true" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DesignationXML>
+  <Designation ID="Stuff" Name="Stuff"></Designation>
+  <Designation ID="Teacher" Name="Teacher"></Designation>
+  <Designation ID="Chairman" Name="Chairman"></Designation>
+  <Designation ID="Accounts" Name="Accounts"></Designation>
+</DesignationXML>

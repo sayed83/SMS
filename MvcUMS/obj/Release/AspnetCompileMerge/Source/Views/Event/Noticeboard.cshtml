@@ -1,0 +1,151 @@
+﻿@model IEnumerable<MvcUMS.Models.Notice>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="panel panel-flat">
+
+    <div class="panel-heading">
+        <h5 class="panel-title">NoticeBoard</h5>
+
+    </div>
+        <table class="table datatable-button-print-basic  table-hover" id="notice">
+            <thead>
+                <tr class="table_header">
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>For</th>
+                    <th class="noExport">Photo</th>
+                    <th class="noExport">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.NoticeFor</td>
+                        <td><img src="~/uploads/@Html.DisplayFor(m=>item.Image)" alt="Student Image" height="60" width="50" /></td>
+                        <td>
+                            <ul class="icons-list">
+                                <li><a href="@Url.Action("EditNotice", new { id = item.Id })" class="btn btn-sm" data-toggle="modal" data-target="#EditNoticeDialog"><i class="icon-pencil7"></i></a></li>
+                                <li>
+                                    <a href="@Url.Action("Notice_Delete", new { id = item.Id })" class="btn btn-xs btn-dange" onclick="return confirm('Are you want to delete?');"><i class="icon-trash"></i></a>
+                                </li>
+
+                            </ul>
+
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+
+</div>
+    
+}
+else
+{
+    <div class="panel panel-flat">
+
+    <div class="panel-heading">
+        <h5 class="panel-title">NoticeBoard</h5>
+
+    </div>
+        <table class="table  table-bordered table-condensed table-hover" id="notice">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>For</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.NoticeFor</td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+
+</div>
+}
+
+
+
+<div id="EditNoticeDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+
+        $(function () {
+
+            $('.datatable-button-print-basic').DataTable({
+
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: '<i class="icon-printer position-left"></i> Print table',
+                        className: 'btn bg-blue',
+                        title: 'Notice Report',
+                        customize: function (win) {
+
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        },
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
+                    }
+                ]
+            });
+
+
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+

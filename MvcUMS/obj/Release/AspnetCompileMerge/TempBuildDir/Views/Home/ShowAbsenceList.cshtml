@@ -1,0 +1,96 @@
+﻿@model IEnumerable<MvcUMS.Models.ShowStdAttendence>
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Absence List <span class="text-danger">@TempData["success"]</span>
+            <span class="pull-right">
+                <button type="submit" id="btnSentAbsenceSms" class="btn bg-blue-300  pull-right"><strong>Send SMS</strong> <i class="icon-arrow-right14"></i></button>
+            </span>
+        </h5>
+
+    </div>
+
+    <div class="table-responsive">
+        <table class="table datatable-save-state datatable-button-print-absence">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }).OrderBy(a => a.Data.rollNo))
+                {
+                    <tr>
+                        <td>@(item.Data.Type == "teacher" ? item.Index.ToString() : item.Data.StdId)</td>
+                        <td>@(item.Data.Type == "teacher" ? item.Data.StuffName : item.Data.StdName)</td>
+                        <td>@item.Data.ContactNo</td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $("#btnSentAbsenceSms").click(function (e) {
+        e.preventDefault();
+
+        if (!confirm("Are You Sure To Send SMS?")) {
+            return false;
+        }
+
+            $.ajax({
+                type: "POST",
+                data: { },
+                url: '@Url.Action("AbsenceSendSMS", "Home")',
+                success: function (d) {
+                        alert('Successfully Send.');
+                }
+            });
+    });
+
+    
+
+    $(function () {
+
+        $('.datatable-button-print-absence').DataTable({
+            
+            buttons: [
+                {
+                    extend: 'print',
+                    text: '<i class="icon-printer position-left"></i> Print',
+                    className: 'btn bg-blue',
+                    title: 'Student Absence List',
+                    autoPrint: true,
+                    customize: function (win) {
+
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="~/Content/dashboard_template/assets/images/global-soft.-2.jpg" style="position:absolute; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ],
+            columnDefs: [{ orderable: false, targets: [2] }]
+        });
+
+
+    });
+
+</script>
+

@@ -1,0 +1,177 @@
+﻿@model MvcUMS.Models.CurrentAcademicInfo
+
+@{
+    ViewBag.Title = "ChangeCurentAcaInfo";
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+</div>
+<div class="modal-body" id="SectionPartial">
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">Change Current Academic Information</h5>
+        </div>
+
+        <div class="panel-body">
+
+            @using (Html.BeginForm("ChangeCurentAcaInfo", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="row">
+
+                    <div class="col-md-12 alert alert-success well">
+                        @Html.HiddenFor(model => model.Std_id)
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Academic Year:</td>
+                                <td>
+                                    @Html.TextBoxFor(item => item.AcademicYear, new { @class = "form-control  form-filter input-sm yearselect" })
+                                    @Html.ValidationMessageFor(model => model.Semester)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Class:</td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Semester, ViewBag.Semester as SelectList, "Select", new { @class = "form-control", requred = true })
+                                    @Html.ValidationMessageFor(model => model.Semester)
+                                </td>
+                            </tr>
+
+                            <tr id="group" style="display:none">
+                                <td>Group:</td>
+                                <td colspan="2">
+                                    @Html.DropDownListFor(model => model.Department, ViewBag.Department as SelectList, "Select", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Department)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Section:</td>
+                                <td>
+                                    <select id="Section" name="Section" class="form-control" required><option value=""></option></select>
+                                    @Html.ValidationMessageFor(model => model.Section)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Roll NO:</td>
+                                <td>
+                                    @Html.TextBoxFor(model => Model.RollNo, new { @class = "form-control", requred = true })
+                                    @Html.ValidationMessageFor(model => model.RollNo)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Status:</td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Status, "Std_status", "Std_status", Model.Status), new { @class = "form-control", requred = true })
+                                    @Html.ValidationMessageFor(model => model.Status)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="submit" class="center-block" value="Save" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+
+</div>
+
+
+
+<script src="/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/year-select.js"></script>
+@*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+<script type="text/javascript">
+    $(function () {
+
+        $('.yearselect').yearselect();
+
+        $('#Semester').change(function () {
+
+            var s = $('#Semester').val();
+            if (s =='Nine' || s == 'Ten' || s=='Eleven' || s=='Twelve')
+            {
+                $('#group').show();
+            }
+            else
+            {
+                $('#group').hide();
+            }
+
+        });
+
+        $("#Section").change(function () {
+            var sem = $("#class").val();
+            var sec = $(this).val();
+
+            $.ajax({
+                url: "/Home/GetRendomRollNo/",
+                data: { sem: sem, sec: sec },
+                success: function (data) {
+                    $("#RollNo").val(data);
+                    $("#roll").val(data)
+
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+    });
+    $("#RollNo").focusout(function () {
+        var sem = $("#Semester").val();
+        var sec = $("#Section").val();
+        var term = $(this).val();
+        $.ajax({
+            url: "/Home/CheckRollNo",
+            dataType: "json",
+            data: { sem: sem, sec: sec, term: term },
+            success: function (data) {
+                if (data != 0) {
+                    $("#RollNo").val(0);
+                    $("#RollNo").focus();
+                    alert("Roll No Already Assign")
+                }
+            }
+        })
+    });
+    $("#Semester").change(function () {
+        var sem = $(this).val();
+        var url = "/Home/GetCourse/";
+        $.ajax({
+            url: "/MasterEntry/GetSection/",
+            data: { sem: sem },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option value=''>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#Section").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    });
+    </script>
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>

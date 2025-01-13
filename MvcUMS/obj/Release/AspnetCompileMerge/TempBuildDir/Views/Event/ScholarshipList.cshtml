@@ -1,0 +1,191 @@
+﻿@*@model PagedList.IPagedList<MvcUMS.Models.studentScholarshiptype>
+@using PagedList.Mvc;*@
+@{
+    ViewBag.Title = "ScholarshipList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />*@
+@*<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>*@
+@*<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>*@
+
+
+ 
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="~/Content/CSS/autocomplete.css" rel="stylesheet" />*@
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Scholarship List
+            <span class="pull-right">@Html.ActionLink("Print", "ScholarshiplistPrint", new { @class = "btn btn-success" }, new { target = "_blank" })</span>
+        </h5>
+
+    </div>
+
+ 
+    <table class="table" id="Scholarshiplist">
+            <thead>
+
+                <tr>
+
+                    <th>Student ID</th>
+                    <th>Type</th>
+                    <th>Creation Date</th>
+                    <th>Amount</th>
+                    <th>Remarks</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">
+                            @item.scholarship.StudentId
+                        </td>
+                        <td style="text-align:center">
+                            @item.type.TypeName
+                        </td>
+                        <td style="text-align:center">
+                            @item.scholarship.Date.ToShortDateString()
+                        </td>
+                        <td style="text-align:center">
+                            @item.scholarship.Amount
+                        </td>
+                        <td style="text-align:center">
+                            @item.scholarship.Remarks
+                        </td>
+
+                        @*@Html.ActionLink("View", "StudentDetails", new { id = item.scholarship.StudentId }, new { @class = "editDialog btn btn-info" })*@
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+</div>
+
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h2>ScholarshipList</h2>
+            <p style="text-align:right">@Html.ActionLink("Print", "ScholarshiplistPrint", new { @class = "btn btn-success" }, new { target = "_blank" })</p>
+            <table class="table table-bordered table-responsive pagesize webgrid-table " id="tablesorter">
+                <tr class="webgrid-header">
+                    <th style="text-align:center">
+
+                        Student Id
+                    </th>
+                    <th style="text-align:center">
+                       Type
+                    </th>
+                    <th style="text-align:center">
+                        Creation Date
+                    </th>
+                    <th style="text-align:center">
+                        Amount
+                    </th>
+                    <th style="text-align:center">
+                        Remarks
+                    </th>
+                  </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">
+                            @item.scholarship.StudentId
+                        </td>
+                        <td style="text-align:center">
+                            @item.type.TypeName
+                        </td>
+                        <td style="text-align:center">
+                            @item.scholarship.Date.ToShortDateString()
+                        </td>
+                        <td style="text-align:center">
+                            @item.scholarship.Amount
+                        </td>
+                        <td style="text-align:center">
+                            @item.scholarship.Remarks
+                        </td>
+                       
+                            
+                          
+                    @*</tr>
+                }*@
+
+            @*</table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, Page_No => Url.Action("ScholarshipList", new { Page_No }))*@
+
+
+@*<div id="dialog-edit" style="display: none">
+</div>
+<div id="dialog-detail" style="display: none">
+</div>*@
+@section Scripts {
+   
+@*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
+@*<script src="~/Scripts/jquery-ui-1.8.18.custom.min.js"></script>*@
+@*<script src="~/Scripts/combodate.js"></script>*@
+@*<script src="~/Scripts/jquery-1.8.1.js" type="text/javascript"></script>*@
+@*<script src="~/Scripts/jquery-1.8.1.min.js" type="text/javascript"></script>*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Scholarshiplist").DataTable();
+        $("#dialog-detail").dialog({
+            title: 'View User',
+            autoOpen: false,
+            resizable: false,
+            width: 400,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+                $(this).load(url);
+            },
+            buttons: {
+                "Close": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        //$(".editDialog").live("click", function (e) {
+        //    var url = $(this).attr('href');
+        //    $("#dialog-edit").dialog({
+        //        title: 'Student Detils',
+        //        autoOpen: false,
+        //        resizable: false,
+        //        height: 455,
+        //        width: 550,
+        //        show: { effect: 'drop', direction: "up" },
+        //        modal: true,
+        //        draggable: true,
+        //        open: function (event, ui) {
+        //            $(this).load(url);
+
+        //        },
+        //        close: function (event, ui) {
+        //            $(this).dialog('close');
+        //        }
+        //    });
+
+        //    $("#dialog-edit").dialog('open');
+        //    return false;
+        //});
+
+        //$("#btncancel").live("click", function (e) {
+        //    $("#dialog-edit").dialog('close');
+
+        //});
+    });
+</script>
+
+    }

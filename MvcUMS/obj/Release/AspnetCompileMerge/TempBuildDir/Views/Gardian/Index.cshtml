@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h5 class="panel-title">Advanced Search</h5>
+    </div>
+    <div class="panel-body">
+        <div class="form-inline">
+            <div class="form-group">
+                @Html.TextBox("Std_id", null, new { @class = "form-control", placeholder="Search By Id" })
+            </div>
+
+            <div class="form-group">
+                @Html.DropDownList("Semester", ViewBag.Semester as SelectList, "Select Class", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group" id="dn">
+                @Html.DropDownList("Department", ViewBag.Department as SelectList, "Select Department", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group" id="sec">
+                <select id="Section" class="form-control"><option value="">Select Section</option></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnSearch" value="Search" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="partial"></div>
+
+
+@section Scripts {
+
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $('#dn').hide();
+            $("#Std_id").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/getData",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Std_id, value: item.Std_id };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+
+        $('#Semester').change(function () {
+
+            var s = $('#Semester').val();
+            if (s == 'Nine' || s == 'Ten' || s == 'Eleven' || s == 'Twelve') {
+                $('#dn').show();
+            }
+            else {
+                $('#dn').hide();
+            }
+
+        });
+        $("#Semester").change(function () {
+            var sem = $(this).val();
+            var url = "/Home/GetCourse/";
+            $.ajax({
+                url: "/MasterEntry/GetSection/",
+                data: { sem: sem },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value=''>Select Section</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#Section").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        });
+
+        $('#btnSearch').click(function () {
+            $('#partials').html("");
+                var tex = $('#Std_id').val();
+                var dep = $('#Department').val();
+                var sem = $('#Semester').val();
+                var sec = $('#Section').val();
+                $.ajax({
+                    type: "POST",
+                    data: { Std_id: tex, Department: dep, Semester: sem, Section: sec},
+                    url: '@Url.Action("GurdianList", "Gardian")',
+                    success: function (result) {
+                        $('#partial').html(result);
+                    }
+                });
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

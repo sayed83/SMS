@@ -1,0 +1,210 @@
+﻿@model MvcUMS.Models.StuffSalary
+@{
+    ViewBag.Title = "Stuff";
+
+    Layout = null;
+}
+
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+@*<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />*@
+<style>
+    #atextbox, #bptextbox, #Bank, #ckn, #inputDue {
+        height: 30px;
+        width: 60%;
+    }
+</style>
+
+
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h5 class="panel-title">Employee Salary</h5>
+
+        </div>
+
+        <div class="panel-body">
+
+
+          @using (Html.BeginForm("Salary", "Stuff", FormMethod.Post, new { target = "_blank", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+
+
+
+                    @Html.HiddenFor(model => model.StuffId)
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Employee Name:</label>
+                    <div class="col-lg-9">
+                        @TempData["Empname"]
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-9">
+                        @TempData["Email"]
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Mobile:</label>
+                    <div class="col-lg-9">
+                        @TempData["mobile"]
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Amount:</label>
+                    <div class="col-lg-9">
+                        @TempData["amount"] Tk
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <input id="Ackbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Cash Pay</b>:
+                    </label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.cashPay, new { @class = "form-control", id = "atextbox", style = "display:none" })
+                        @Html.ValidationMessageFor(model => model.cashPay)
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <input id="bpckbox" name="Checkbox" type="checkbox" value="false" /><b style="margin-left:5px">Bank Pay</b>:
+                    </label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.bankPay, new { @class = "form-control", id = "bptextbox", style = "display:none" })
+                        @Html.ValidationMessageFor(model => model.bankPay)
+                    </div>
+                </div>
+              
+              <div class="form-group">
+                    <label class="col-lg-3 control-label">Bank Name:</label>
+                    <div class="col-lg-9">
+                        @Html.DropDownListFor(model => model.BankId, ViewBag.Bank as SelectList, "Select", new { @class = "form-control", id = "Bank", style = "display:none" })
+                    </div>
+              </div>
+              
+              <div class="form-group">
+                    <label class="col-lg-3 control-label">Check Number:</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control", id = "ckn", style = "display:none" })
+                    </div>
+              </div>
+              
+              <div class="form-group">
+                    <label class="col-lg-3 control-label">Due Amount:</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Due, new { @class = "form-control", id = "inputDue" })
+                    </div>
+              </div>
+              
+                <div class="text-right">
+                    <button type="submit" id="btnUpdate" name="Command" value="Update"  onclick="return confirm('Are you sure you want to Save?')" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <span class="ui-button-text">Pay</span>
+                    </button>
+                    @*<button type="submit" id="btnUpdate" name="Command" class="btn bg-slate-700"><strong>Update</strong> <i class="icon-arrow-right14 position-right"></i></button>*@
+                </div>
+
+              
+
+            }
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+@*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+
+    <script type="text/javascript">
+        var total = "@TempData["amount"]";
+        var SumTotal = 0;
+        $(function () {
+            $("#inputDue").prop("readOnly", true);
+            $('#atextbox').keypress(function (event) {
+
+                if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                    return true;
+
+                else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                    event.preventDefault();
+
+            });
+
+            $('#bptextbox').keypress(function (event) {
+
+                if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+                    return true;
+
+                else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+                    event.preventDefault();
+
+            });
+
+            $('#Ackbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#atextbox').show();
+                } else {
+                    $('#atextbox').val('');
+                    $('#atextbox').hide();
+                }
+            });
+
+            $('#bpckbox').click(function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#bptextbox').show();
+                    $('#Bank').show();
+                    $('#ckn').show();
+                } else {
+                    $('#bptextbox').val('');
+                    $('#bptextbox').hide();
+                    $('#Bank').hide();
+                    $('#ckn').hide();
+                }
+            });
+
+            $("#atextbox,#bptextbox").keyup(function () {
+
+                var cash = 0;
+                var bank = 0;
+                var dueamount = 0;
+                if ($("#atextbox").val().length > 0)
+                    cash = parseFloat($("#atextbox").val());
+                if ($("#bptextbox").val().length > 0)
+                    bank = parseFloat($("#bptextbox").val());
+                if ($("#inputDue").val().length > 0)
+                    dueamount = parseFloat($("#inputDue").val());
+
+                SumTotal = cash + bank;
+
+                dueamount = total - SumTotal;
+
+
+                $("#inputDue").val(dueamount.toFixed(2))
+            });
+
+            //$('#PayPartial').on('hidden.bs.modal', function () {
+            //    $(this).find('form').trigger('reset');
+            //})
+            
+
+        });
+
+        $("#btnUpdate").click(function () {
+            $('#PaySalaryDialog').modal('hide');
+        });
+
+    </script>
+
+
+
+
